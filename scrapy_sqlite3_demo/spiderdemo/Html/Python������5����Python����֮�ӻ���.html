@@ -1,0 +1,516 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python开发【第五篇】：Python基础之杂货铺 - 武沛齐 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=m_FXmwz3wxZoecUwNEK23PAzc-j9vbX_C6MblJ5ouMc1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue.css?v=jJERBFSojhmgst84aaRDal9S3q1WoO-WcNudmMzGJS81"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/133379.css?v=YSNZANkz7eBKoXq2iHYfghvodkY%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue-mobile.css?v=z0BacpCfWeLlXDCM0C158kTP_DMqMbGBapID4f-QztI1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/wupeiqi/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/wupeiqi/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/wupeiqi/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'wupeiqi', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=CPv0EEqm9L2aCgolHxaZfVYM6J-Sn5az_FJXbjzgr-o1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/wupeiqi/">Mr.Seven</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/wupeiqi/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%AD%A6%E6%B2%9B%E9%BD%90">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/wupeiqi/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/wupeiqi/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-126&nbsp;
+文章-137&nbsp;
+评论-259&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/wupeiqi/articles/5484747.html">Python开发【第五篇】：Python基础之杂货铺</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><h3>字符串格式化</h3>
+<p><span style="line-height: 1.5;">Python的字符串格式化有两种方式:&nbsp;</span><span style="line-height: 1.5;">百分号方式、</span><span style="line-height: 1.5;">format方式</span></p>
+<p>百分号的方式相对来说比较老，而format方式则是比较先进的方式，企图替换古老的方式，目前两者并存。[<a href="http://www.python.org/dev/peps/pep-3101/">PEP-3101</a>]</p>
+<p><span style="color: #888888;"><em>This PEP proposes a new system for built-in string formatting operations, intended as a replacement for the existing '%' string formatting operator.</em></span></p>
+<p><span style="font-size: 18px;"><strong>1、百分号方式</strong></span></p>
+<blockquote>
+<p>%[(name)][flags][width].[precision]typecode</p>
+</blockquote>
+<ul>
+<li>(name) &nbsp; &nbsp; &nbsp;可选，用于选择指定的key</li>
+<li>flags &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;可选，可供选择的值有:
+<ul>
+<li><span style="font-size: 12px;"><em><span style="color: #888888;">+ &nbsp; &nbsp; &nbsp; 右对齐；正数前加正好，负数前加负号；</span></em></span></li>
+<li><span style="font-size: 12px;"><em><span style="color: #888888;">- &nbsp; &nbsp; &nbsp; &nbsp;左对齐；正数前无符号，负数前加负号；</span></em></span></li>
+<li><span style="font-size: 12px;"><em><span style="color: #888888;">空格 &nbsp; &nbsp;右对齐；正数前加空格，负数前加负号；</span></em></span></li>
+<li><span style="font-size: 12px;"><em><span style="color: #888888;">0 &nbsp; &nbsp; &nbsp; &nbsp;右对齐；正数前无符号，负数前加负号；用0填充空白处</span></em></span></li>
+</ul>
+</li>
+<li>width &nbsp; &nbsp; &nbsp; &nbsp; 可选，占有宽度</li>
+<li>.precision &nbsp; 可选，小数点后保留的位数</li>
+<li>typecode &nbsp; &nbsp;必选<br />
+<ul>
+<li><span style="color: #888888; font-size: 12px;"><em>s，获取传入对象的__str__方法的返回值，并将其格式化到指定位置</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>r，获取传入对象的__repr__方法的返回值，并将其格式化到指定位置</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>c，整数：将数字转换成其unicode对应的值，10进制范围为&nbsp;0 &lt;= i &lt;= 1114111（py27则只支持0-255）；字符：将字符添加到指定位置</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>o，将整数转换成 八 &nbsp;进制表示，并将其格式化到指定位置</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>x，将整数转换成十六进制表示，并将其格式化到指定位置</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>d，将整数、浮点数转换成 十 进制表示，并将其格式化到指定位置</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>e，将整数、浮点数转换成科学计数法，并将其格式化到指定位置（小写e）</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>E，将整数、浮点数转换成科学计数法，并将其格式化到指定位置（大写E）</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>f， 将整数、浮点数转换成浮点数表示，并将其格式化到指定位置（默认保留小数点后6位）</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>F，同上</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>g，自动调整将整数、浮点数转换成 浮点型或科学计数法表示（超过6位数用科学计数法），并将其格式化到指定位置（如果是科学计数则是e；）</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>G，自动调整将整数、浮点数转换成 浮点型或科学计数法表示（超过6位数用科学计数法），并将其格式化到指定位置（如果是科学计数则是E；）</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>%，当字符串中存在格式化标志时，需要用 %%表示一个百分号</em></span></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+<p><span style="color: #888888;"><em>注：Python中百分号格式化是不存在自动将整数转换成二进制表示的方式</em></span></p>
+<p>常用格式化：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">tpl = "i am %s" % "alex"
+
+tpl = "i am %s age %d" % ("alex", 18)
+
+tpl = "i am %(name)s age %(age)d" % {"name": "alex", "age": 18}
+
+tpl = "percent %.2f" % 99.97623
+
+tpl = "i am %(pp).2f" % {"pp": 123.425556, }
+
+tpl = "i am %.2f %%" % {"pp": 123.425556, }
+</pre>
+</div>
+<p><span style="font-size: 18px;"><strong>2、Format方式</strong></span></p>
+<blockquote>
+<p>[[fill]align][sign][#][0][width][,][.precision][type]</p>
+</blockquote>
+<ul>
+<li>fill &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 【可选】空白处填充的字符</li>
+<li>align &nbsp; &nbsp; &nbsp; &nbsp;【可选】对齐方式（需配合width使用）</li>
+<ul>
+<li><span style="color: #888888; font-size: 12px;"><em>&lt;，内容左对齐</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>&gt;，内容右对齐(默认)</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>＝，内容右对齐，将符号放置在填充字符的左侧，且只对数字类型有效。 即使：符号+填充物+数字</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>^，内容居中</em></span></li>
+</ul>
+<li>sign &nbsp; &nbsp; &nbsp; &nbsp; 【可选】有无符号数字
+<ul>
+<li><span style="font-size: 12px;"><strong><span style="color: #888888;">+，正号加正，负号加负；</span></strong></span></li>
+<li><span style="font-size: 12px;"><strong><span style="color: #888888;">&nbsp;-，正号不变，负号加负；</span></strong></span></li>
+<li><span style="font-size: 12px;"><strong><span style="color: #888888;">空格 ，正号空格，负号加负；</span></strong></span></li>
+</ul>
+</li>
+<li># &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;【可选】对于二进制、八进制、十六进制，如果加上#，会显示 0b/0o/0x，否则不显示</li>
+<li>， &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;【可选】为数字添加分隔符，如：1,000,000</li>
+<li>width &nbsp; &nbsp; &nbsp; 【可选】格式化位所占宽度</li>
+<li>.precision 【可选】小数位保留精度</li>
+<li>type &nbsp; &nbsp; &nbsp; &nbsp; 【可选】格式化类型
+<ul>
+<li><span style="font-size: 12px;"><em><span style="color: #888888;">传入&rdquo; 字符串类型 &ldquo;的参数</span></em></span>
+<ul>
+<li><em><span style="color: #888888; font-size: 12px;">s，格式化字符串类型数据</span></em></li>
+<li><em><span style="color: #888888; font-size: 12px;">空白，未指定类型，则默认是None，同s</span></em></li>
+</ul>
+</li>
+<li><span style="font-size: 12px;"><em><span style="color: #888888;">传入&ldquo; 整数类型 &rdquo;的参数<br /></span></em></span>
+<ul>
+<li><span style="font-size: 12px;"><em><span style="color: #888888;">b，将10进制整数自动转换成2进制表示然后格式化</span></em></span></li>
+<li><span style="font-size: 12px;"><em><span style="color: #888888;">c，将10进制整数自动转换为其对应的unicode字符</span></em></span></li>
+<li><span style="font-size: 12px;"><em><span style="color: #888888;">d，十进制整数</span></em></span></li>
+<li><span style="font-size: 12px;"><em><span style="color: #888888;">o，将10进制整数自动转换成8进制表示然后格式化；</span></em></span></li>
+<li><span style="font-size: 12px;"><em><span style="color: #888888;">x，将10进制整数自动转换成16进制表示然后格式化（小写x）</span></em></span></li>
+<li><span style="font-size: 12px;"><em><span style="color: #888888;">X，将10进制整数自动转换成16进制表示然后格式化（大写X）</span></em></span></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</li>
+<li><span style="font-size: 12px;"><em><span style="color: #888888;">传入&ldquo; 浮点型或小数类型&nbsp;&rdquo;的参数</span></em></span>
+<ul>
+<li><span style="color: #888888; font-size: 12px;"><em>e， 转换为科学计数法（小写e）表示，然后格式化；</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>E， 转换为科学计数法（大写E）表示，然后格式化;</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>f ， 转换为浮点型（默认小数点后保留6位）表示，然后格式化；</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>F， 转换为浮点型（默认小数点后保留6位）表示，然后格式化；</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>g， 自动在e和f中切换</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>G， 自动在E和F中切换</em></span></li>
+<li><span style="color: #888888; font-size: 12px;"><em>%，显示百分比（默认显示小数点后6位）</em></span></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+<p>&nbsp;常用格式化：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">tpl = "i am {}, age {}, {}".format("seven", 18, 'alex')
+ 
+tpl = "i am {}, age {}, {}".format(*["seven", 18, 'alex'])
+ 
+tpl = "i am {0}, age {1}, really {0}".format("seven", 18)
+ 
+tpl = "i am {0}, age {1}, really {0}".format(*["seven", 18])
+ 
+tpl = "i am {name}, age {age}, really {name}".format(name="seven", age=18)
+ 
+tpl = "i am {name}, age {age}, really {name}".format(**{"name": "seven", "age": 18})
+ 
+tpl = "i am {0[0]}, age {0[1]}, really {0[2]}".format([1, 2, 3], [11, 22, 33])
+ 
+tpl = "i am {:s}, age {:d}, money {:f}".format("seven", 18, 88888.1)
+ 
+tpl = "i am {:s}, age {:d}".format(*["seven", 18])
+ 
+tpl = "i am {name:s}, age {age:d}".format(name="seven", age=18)
+ 
+tpl = "i am {name:s}, age {age:d}".format(**{"name": "seven", "age": 18})
+
+tpl = "numbers: {:b},{:o},{:d},{:x},{:X}, {:%}".format(15, 15, 15, 15, 15, 15.87623, 2)
+
+tpl = "numbers: {:b},{:o},{:d},{:x},{:X}, {:%}".format(15, 15, 15, 15, 15, 15.87623, 2)
+
+tpl = "numbers: {0:b},{0:o},{0:d},{0:x},{0:X}, {0:%}".format(15)
+
+tpl = "numbers: {num:b},{num:o},{num:d},{num:x},{num:X}, {num:%}".format(num=15)</pre>
+</div>
+<p>更多格式化操作：https://docs.python.org/3/library/string.html</p>
+<h3>迭代器和生成器</h3>
+<p><strong>1、迭代器</strong></p>
+<p>迭代器是访问集合元素的一种方式。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退，不过这也没什么，因为人们很少在迭代途中往后退。另外，迭代器的一大优点是不要求事先准备好整个迭代过程中所有的元素。迭代器仅仅在迭代到某个元素时才计算该元素，而在这之前或之后，元素可以不存在或者被销毁。这个特点使得它特别适合用于遍历一些巨大的或是无限的集合，比如几个G的文件</p>
+<p>特点：</p>
+<ol>
+<li>访问者不需要关心迭代器内部的结构，仅需通过next()方法不断去取下一个内容</li>
+<li>不能随机访问集合中的某个值 ，只能从头到尾依次访问</li>
+<li>访问到一半时不能往回退</li>
+<li>便于循环比较大的数据集合，节省内存</li>
+</ol>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">&gt;&gt;&gt; a = iter([1,2,3,4,5])
+&gt;&gt;&gt; a
+&lt;list_iterator object at 0x101402630&gt;
+&gt;&gt;&gt; a.__next__()
+1
+&gt;&gt;&gt; a.__next__()
+2
+&gt;&gt;&gt; a.__next__()
+3
+&gt;&gt;&gt; a.__next__()
+4
+&gt;&gt;&gt; a.__next__()
+5
+&gt;&gt;&gt; a.__next__()
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+StopIteration
+</pre>
+</div>
+<p><strong>2、生成器</strong></p>
+<p>一个函数调用时返回一个迭代器，那这个函数就叫做生成器（generator）；如果函数中包含yield语法，那这个函数就会变成生成器；</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">def func():
+    yield 1
+    yield 2
+    yield 3
+    yield 4
+</pre>
+</div>
+<p>上述代码中：func是函数称为生成器，当执行此函数func()时会得到一个迭代器。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">&gt;&gt;&gt; temp = func()
+&gt;&gt;&gt; temp.__next__()
+1
+&gt;&gt;&gt; temp.__next__()
+2
+&gt;&gt;&gt; temp.__next__()
+3
+&gt;&gt;&gt; temp.__next__()
+4
+&gt;&gt;&gt; temp.__next__()
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+StopIteration
+</pre>
+</div>
+<p><strong>3、实例</strong></p>
+<p>a、利用生成器自定义range</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">def nrange(num):
+    temp = -1
+    while True:
+        temp = temp + 1
+        if temp &gt;= num:
+            return
+        else:
+            yield temp
+</pre>
+</div>
+<p>b、利用迭代器访问range</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">...
+</pre>
+</div>
+<p>　　</p>
+<p>　　</p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2016-05-12 10:40</span> <a href='http://www.cnblogs.com/wupeiqi/'>武沛齐</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>) &nbsp;<a href="https://i.cnblogs.com/EditArticles.aspx?postid=5484747" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(5484747);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=133379,cb_entryId=5484747,cb_blogApp=currentBlogApp,cb_blogUserGuid='7208b24d-95c9-e111-aa3f-842b2b196315',cb_entryCreatedDate='2016/5/12 10:40:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2017 武沛齐
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

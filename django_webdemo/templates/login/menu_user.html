@@ -1,0 +1,136 @@
+{% extends 'login/menu_main.html' %}
+
+{% block css %}
+<link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src='/static/bootstrap/js/bootstrap.js'></script>
+{% endblock %}
+
+{% block javas %}
+	$.check('#form');
+{% endblock %}
+
+
+{% block myson %}
+<table class="table table-hover">
+	<thead>
+	<tr>
+        <th>ID</th>
+        <th>用户名</th>
+		<th>密码</th>
+		<th>身份证</th>
+		<th>年龄</th>
+		<th>手机</th>
+		<th>登录时间</th>
+		<th>编辑操作</th>
+    </tr>
+	</thead>
+	<tbody>
+{% for item	in user_data %}
+	<tr>
+		<th>{{item.id}}</th>
+		<td><a href={{item.id}} class="label label-info">{{item.name}}</a></td>
+		<td>{{item.passwd}}</td>
+		<td>{{item.card}}</td>
+		<td>{{item.age}}</td>
+		<td>{{item.phone}}</td>
+		<td>{{item.login_time}}</td>
+		<td><a href='#' class="label label-success">编辑</a><a href='#' class="label label-danger">删除</a></td>
+	</tr>
+{% endfor %}
+	</tbody>
+</table>
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+	
+  </ul>
+  <ul  class="pagination"><li><a href="#" data-toggle="modal" data-target="#myModal">添加用户</a></li></ul>
+</nav>
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+	按钮-点击添加用户
+</button>
+
+
+
+
+{% endblock %}
+
+{% block foot %}
+<div class="modal fade" data-backdrop="true" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <form id='form' class='form' method='post' action='/admin/adduser/'>
+		{% csrf_token %}
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    添加用户
+                </h4>
+            </div>
+            <div class="modal-body">
+		<div>
+			<input  type='hidden' id='nid' name='nid' />
+			<p>
+				<label for='user'>用户名：</label>
+			    <input type='text' id='user' name='username' />
+		    </p>
+		    <p>
+				<label for='name'>姓名：</label>
+				<input type='text' id='name' name='name' />
+			</p>
+			<p>
+				<label for='gengder'>性别：</label>
+				<span id='gender'>
+					女<input type='radio'  name='gender' value='0' text='女' />
+					男<input type='radio'  name='gender' value='1' text='男' />
+					
+				</span>
+			</p>
+			<p>
+				<label for='gender2'>性别：</label>
+				<select id='gender2' name='gender2'>
+					<option value='0' text='女'>女</option>
+					<option value='1' text='男'>男</option>
+				</select>
+			</p>
+			<p>
+			<label for='pwd'>密码：</label>
+			<input type='text' id='pwd' name='password' />
+			</p>
+			<p>
+			<label for='email'>邮箱：</label>
+			<input type='text' id='email' name='email' />
+			</p>
+		</div>                
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <input type="submit" class="btn btn-primary" value='提交更改'>
+            </div>
+           </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+{% endblock %}

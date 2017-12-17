@@ -1,0 +1,884 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python之路【第五篇】：面向对象及相关 - 武沛齐 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=m_FXmwz3wxZoecUwNEK23PAzc-j9vbX_C6MblJ5ouMc1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue.css?v=jJERBFSojhmgst84aaRDal9S3q1WoO-WcNudmMzGJS81"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/133379.css?v=YSNZANkz7eBKoXq2iHYfghvodkY%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue-mobile.css?v=z0BacpCfWeLlXDCM0C158kTP_DMqMbGBapID4f-QztI1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/wupeiqi/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/wupeiqi/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/wupeiqi/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'wupeiqi', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=CPv0EEqm9L2aCgolHxaZfVYM6J-Sn5az_FJXbjzgr-o1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/wupeiqi/">Mr.Seven</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/wupeiqi/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%AD%A6%E6%B2%9B%E9%BD%90">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/wupeiqi/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/wupeiqi/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-126&nbsp;
+文章-137&nbsp;
+评论-259&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/wupeiqi/articles/5017742.html">Python之路【第五篇】：面向对象及相关</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><h3>面向对象基础</h3>
+<p>基础内容介绍详见一下两篇博文：</p>
+<ul>
+<li><a href="http://www.cnblogs.com/wupeiqi/p/4493506.html" target="_blank">面向对象初级篇</a></li>
+<li><a href="http://www.cnblogs.com/wupeiqi/p/4766801.html" target="_blank">面向对象进阶篇</a></li>
+</ul>
+<h3>其他相关</h3>
+<p><span style="font-size: 14pt;"><strong><span style="line-height: 1.5;">一、isinstance(obj, cls)</span></strong></span></p>
+<p>&nbsp;检查是否obj是否是类 cls 的对象</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">class Foo(object):
+    pass
+
+obj = Foo()
+
+isinstance(obj, Foo)
+</pre>
+</div>
+<p><strong><span style="font-size: 14pt;">二、issubclass(sub, super)</span></strong></p>
+<p>检查sub类是否是 super 类的派生类</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">class Foo(object):
+    pass
+
+class Bar(Foo):
+    pass
+
+issubclass(Bar, Foo)
+</pre>
+</div>
+<p><strong><span style="font-size: 14pt;">三、异常处理</span></strong></p>
+<p><span style="font-size: 16px;"><strong>1、异常基础</strong></span></p>
+<p>在编程过程中为了增加友好性，在程序出现bug时一般不会将错误信息显示给用户，而是现实一个提示的页面，通俗来说就是不让用户看见大黄页！！！</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">try:
+    pass
+except Exception,ex:
+    pass
+</pre>
+</div>
+<p>需求：将用户输入的两个数字相加</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('143f1baa-3ce4-4a14-bef4-5d73b9c1baa1')"><img id="code_img_closed_143f1baa-3ce4-4a14-bef4-5d73b9c1baa1" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_143f1baa-3ce4-4a14-bef4-5d73b9c1baa1" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('143f1baa-3ce4-4a14-bef4-5d73b9c1baa1',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_143f1baa-3ce4-4a14-bef4-5d73b9c1baa1" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+    num1 </span>= raw_input(<span style="color: #800000;">'</span><span style="color: #800000;">num1:</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    num2 </span>= raw_input(<span style="color: #800000;">'</span><span style="color: #800000;">num2:</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    </span><span style="color: #0000ff;">try</span><span style="color: #000000;">:
+        num1 </span>=<span style="color: #000000;"> int(num1)
+        num2 </span>=<span style="color: #000000;"> int(num2)
+        result </span>= num1 +<span style="color: #000000;"> num2
+    </span><span style="color: #0000ff;">except</span><span style="color: #000000;"> Exception, e:
+        </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">出现异常，信息如下：</span><span style="color: #800000;">'</span>
+        <span style="color: #0000ff;">print</span> e</pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<p><span style="font-size: 16px;"><strong>2、异常种类</strong></span></p>
+<p>python中的异常种类非常多，每个异常专门用于处理某一项异常！！！</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('1c796610-392d-4281-baf1-908fc252c770')"><img id="code_img_closed_1c796610-392d-4281-baf1-908fc252c770" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_1c796610-392d-4281-baf1-908fc252c770" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('1c796610-392d-4281-baf1-908fc252c770',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_1c796610-392d-4281-baf1-908fc252c770" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">AttributeError 试图访问一个对象没有的树形，比如foo.x，但是foo没有属性x
+IOError 输入</span>/<span style="color: #000000;">输出异常；基本上是无法打开文件
+ImportError 无法引入模块或包；基本上是路径问题或名称错误
+IndentationError 语法错误（的子类） ；代码没有正确对齐
+IndexError 下标索引超出序列边界，比如当x只有三个元素，却试图访问x[</span>5<span style="color: #000000;">]
+KeyError 试图访问字典里不存在的键
+KeyboardInterrupt Ctrl</span>+<span style="color: #000000;">C被按下
+NameError 使用一个还未被赋予对象的变量
+SyntaxError Python代码非法，代码不能编译(个人认为这是语法错误，写错了）
+TypeError 传入对象类型与要求的不符合
+UnboundLocalError 试图访问一个还未被设置的局部变量，基本上是由于另有一个同名的全局变量，
+导致你以为正在访问它
+ValueError 传入一个调用者不期望的值，即使值的类型是正确的</span></pre>
+</div>
+<span class="cnblogs_code_collapse">常用异常</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('909e9eb6-7a2d-4916-9e17-6eb46384d6a1')"><img id="code_img_closed_909e9eb6-7a2d-4916-9e17-6eb46384d6a1" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_909e9eb6-7a2d-4916-9e17-6eb46384d6a1" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('909e9eb6-7a2d-4916-9e17-6eb46384d6a1',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_909e9eb6-7a2d-4916-9e17-6eb46384d6a1" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">ArithmeticError
+AssertionError
+AttributeError
+BaseException
+BufferError
+BytesWarning
+DeprecationWarning
+EnvironmentError
+EOFError
+Exception
+FloatingPointError
+FutureWarning
+GeneratorExit
+ImportError
+ImportWarning
+IndentationError
+IndexError
+IOError
+KeyboardInterrupt
+KeyError
+LookupError
+MemoryError
+NameError
+NotImplementedError
+OSError
+OverflowError
+PendingDeprecationWarning
+ReferenceError
+RuntimeError
+RuntimeWarning
+StandardError
+StopIteration
+SyntaxError
+SyntaxWarning
+SystemError
+SystemExit
+TabError
+TypeError
+UnboundLocalError
+UnicodeDecodeError
+UnicodeEncodeError
+UnicodeError
+UnicodeTranslateError
+UnicodeWarning
+UserWarning
+ValueError
+Warning
+ZeroDivisionError</span></pre>
+</div>
+<span class="cnblogs_code_collapse">更多异常</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('a2febd63-3c05-45c7-9ffc-6c4edcb3579c')"><img id="code_img_closed_a2febd63-3c05-45c7-9ffc-6c4edcb3579c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a2febd63-3c05-45c7-9ffc-6c4edcb3579c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a2febd63-3c05-45c7-9ffc-6c4edcb3579c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_a2febd63-3c05-45c7-9ffc-6c4edcb3579c" class="cnblogs_code_hide">
+<pre>dic = [<span style="color: #800000;">"</span><span style="color: #800000;">wupeiqi</span><span style="color: #800000;">"</span>, <span style="color: #800000;">'</span><span style="color: #800000;">alex</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+</span><span style="color: #0000ff;">try</span><span style="color: #000000;">:
+    dic[</span>10<span style="color: #000000;">]
+</span><span style="color: #0000ff;">except</span><span style="color: #000000;"> IndexError, e:
+    </span><span style="color: #0000ff;">print</span> e</pre>
+</div>
+<span class="cnblogs_code_collapse">实例：IndexError</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('0463b2fd-1395-40cc-b8f1-99460ed79ec9')"><img id="code_img_closed_0463b2fd-1395-40cc-b8f1-99460ed79ec9" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_0463b2fd-1395-40cc-b8f1-99460ed79ec9" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('0463b2fd-1395-40cc-b8f1-99460ed79ec9',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_0463b2fd-1395-40cc-b8f1-99460ed79ec9" class="cnblogs_code_hide">
+<pre>dic = {<span style="color: #800000;">'</span><span style="color: #800000;">k1</span><span style="color: #800000;">'</span>:<span style="color: #800000;">'</span><span style="color: #800000;">v1</span><span style="color: #800000;">'</span><span style="color: #000000;">}
+</span><span style="color: #0000ff;">try</span><span style="color: #000000;">:
+    dic[</span><span style="color: #800000;">'</span><span style="color: #800000;">k20</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+</span><span style="color: #0000ff;">except</span><span style="color: #000000;"> KeyError, e:
+    </span><span style="color: #0000ff;">print</span> e</pre>
+</div>
+<span class="cnblogs_code_collapse">实例：KeyError</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('f578ff10-f5a6-4fcd-908f-c15315a7eade')"><img id="code_img_closed_f578ff10-f5a6-4fcd-908f-c15315a7eade" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_f578ff10-f5a6-4fcd-908f-c15315a7eade" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('f578ff10-f5a6-4fcd-908f-c15315a7eade',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_f578ff10-f5a6-4fcd-908f-c15315a7eade" class="cnblogs_code_hide">
+<pre>s1 = <span style="color: #800000;">'</span><span style="color: #800000;">hello</span><span style="color: #800000;">'</span>
+<span style="color: #0000ff;">try</span><span style="color: #000000;">:
+    int(s1)
+</span><span style="color: #0000ff;">except</span><span style="color: #000000;"> ValueError, e:
+    </span><span style="color: #0000ff;">print</span> e</pre>
+</div>
+<span class="cnblogs_code_collapse">实例：ValueError</span></div>
+<p>对于上述实例，异常类只能用来处理指定的异常情况，如果非指定异常则无法处理。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 未捕获到异常，程序直接报错
+
+s1 = 'hello'
+try:
+    int(s1)
+except IndexError,e:
+    print e
+</pre>
+</div>
+<p>所以，写程序时需要考虑到try代码块中可能出现的任意异常，可以这样写：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">s1 = 'hello'
+try:
+    int(s1)
+except IndexError,e:
+    print e
+except KeyError,e:
+    print e
+except ValueError,e:
+    print e</pre>
+</div>
+<p>万能异常 在python的异常中，有一个万能异常：Exception，他可以捕获任意异常，即：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">s1 = 'hello'
+try:
+    int(s1)
+except Exception,e:
+    print e
+</pre>
+</div>
+<p>接下来你可能要问了，既然有这个万能异常，其他异常是不是就可以忽略了！</p>
+<p>答：当然不是，对于特殊处理或提醒的异常需要先定义，最后定义Exception来确保程序正常运行。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">s1 = 'hello'
+try:
+    int(s1)
+except KeyError,e:
+    print '键错误'
+except IndexError,e:
+    print '索引错误'
+except Exception, e:
+    print '错误'
+</pre>
+</div>
+<p><strong><span style="font-size: 16px;">3、异常其他结构</span></strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">try:
+    # 主代码块
+    pass
+except KeyError,e:
+    # 异常时，执行该块
+    pass
+else:
+    # 主代码块执行完，执行该块
+    pass
+finally:
+    # 无论异常与否，最终执行该块
+    pass
+</pre>
+</div>
+<p><span style="font-size: 16px;"><strong>4、主动触发异常</strong></span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">try:
+    raise Exception('错误了。。。')
+except Exception,e:
+    print e
+</pre>
+</div>
+<p><strong><span style="font-size: 15px;">5、自定义异常</span></strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">class WupeiqiException(Exception):
+
+    def __init__(self, msg):
+        self.message = msg
+
+    def __str__(self):
+        return self.message
+
+try:
+    raise WupeiqiException('我的异常')
+except WupeiqiException,e:
+    print e
+</pre>
+</div>
+<p><strong><span style="font-size: 16px;">6、断言</span></strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># assert 条件
+
+assert 1 == 1
+
+assert 1 == 2</pre>
+</div>
+<p><strong><span style="font-size: 14pt;">四、反射</span></strong></p>
+<p>python中的反射功能是由以下四个内置函数提供：hasattr、getattr、setattr、delattr，改四个函数分别用于对对象内部执行：检查是否含有某成员、获取成员、设置成员、删除成员。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">class Foo(object):
+
+    def __init__(self):
+        self.name = 'wupeiqi'
+
+    def func(self):
+        return 'func'
+
+obj = Foo()
+
+# #### 检查是否含有成员 #### 
+hasattr(obj, 'name')
+hasattr(obj, 'func')
+
+# #### 获取成员 #### 
+getattr(obj, 'name')
+getattr(obj, 'func')
+
+# #### 设置成员 #### 
+setattr(obj, 'age', 18)
+setattr(obj, 'show', lambda num: num + 1)
+
+# #### 删除成员 #### 
+delattr(obj, 'name')
+delattr(obj, 'func')</pre>
+</div>
+<blockquote>
+<p>详细解析：</p>
+<p>当我们要访问一个对象的成员时，应该是这样操作：</p>
+<div>
+<div class="cnblogs_Highlighter" style="float: left; width: 45%;">
+<pre class="brush:python;gutter:true;">class Foo(object):
+
+    def __init__(self):
+        self.name = 'alex'
+
+    def func(self):
+        return 'func'
+
+obj = Foo()
+
+# 访问字段
+obj.name
+# 执行方法
+obj.func()
+</pre>
+</div>
+<div style="float: left; width: 45%;">&nbsp;<img src="http://images2015.cnblogs.com/blog/425762/201509/425762-20150907094454965-329821364.jpg" alt="" width="466" height="276" />&nbsp;&nbsp;</div>
+<div style="clear: both;">那么问题来了？</div>
+<div style="clear: both;">a、上述访问对象成员的 name 和 func 是什么？&nbsp;</div>
+<div style="clear: both;"><em><span style="color: #888888;">答：是变量名</span></em></div>
+<div style="clear: both;">b、obj.xxx 是什么意思？&nbsp;</div>
+<div style="clear: both;"><em><span style="color: #888888;">答：obj.xxx 表示去obj中或类中寻找变量名 xxx，并获取对应内存地址中的内容。</span></em></div>
+<div style="clear: both;">c、需求：请使用其他方式获取obj对象中的name变量指向内存中的值 &ldquo;alex&rdquo;</div>
+<div style="clear: both;">
+<div class="cnblogs_code" onclick="cnblogs_code_show('5d2f011c-a154-4caa-bc4f-a0975c266dd7')"><img id="code_img_closed_5d2f011c-a154-4caa-bc4f-a0975c266dd7" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_5d2f011c-a154-4caa-bc4f-a0975c266dd7" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('5d2f011c-a154-4caa-bc4f-a0975c266dd7',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_5d2f011c-a154-4caa-bc4f-a0975c266dd7" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">class</span><span style="color: #000000;"> Foo(object):
+ 
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span><span style="color: #000000;">(self):
+        self.name </span>= <span style="color: #800000;">'</span><span style="color: #800000;">alex</span><span style="color: #800000;">'</span>
+ 
+<span style="color: #008000;">#</span><span style="color: #008000;"> 不允许使用 obj.name</span>
+obj = Foo()</pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<p><em><span style="color: #888888;">答：有两种方式，如下：</span></em></p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('4d9f3ab3-2e1b-4fa5-abc4-9c670c4e6e3f')"><img id="code_img_closed_4d9f3ab3-2e1b-4fa5-abc4-9c670c4e6e3f" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_4d9f3ab3-2e1b-4fa5-abc4-9c670c4e6e3f" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('4d9f3ab3-2e1b-4fa5-abc4-9c670c4e6e3f',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_4d9f3ab3-2e1b-4fa5-abc4-9c670c4e6e3f" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">class</span><span style="color: #000000;"> Foo(object):
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span><span style="color: #000000;">(self):
+        self.name </span>= <span style="color: #800000;">'</span><span style="color: #800000;">alex</span><span style="color: #800000;">'</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> func(self):
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800000;">'</span><span style="color: #800000;">func</span><span style="color: #800000;">'</span>
+
+<span style="color: #008000;">#</span><span style="color: #008000;"> 不允许使用 obj.name</span>
+obj =<span style="color: #000000;"> Foo()
+
+</span><span style="color: #0000ff;">print</span> obj.<span style="color: #800080;">__dict__</span>[<span style="color: #800000;">'</span><span style="color: #800000;">name</span><span style="color: #800000;">'</span>]</pre>
+</div>
+<span class="cnblogs_code_collapse">方式一</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('a6ae4c16-f513-423d-91b5-35e0e4d2bf6b')"><img id="code_img_closed_a6ae4c16-f513-423d-91b5-35e0e4d2bf6b" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a6ae4c16-f513-423d-91b5-35e0e4d2bf6b" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a6ae4c16-f513-423d-91b5-35e0e4d2bf6b',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_a6ae4c16-f513-423d-91b5-35e0e4d2bf6b" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">class</span><span style="color: #000000;"> Foo(object):
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span><span style="color: #000000;">(self):
+        self.name </span>= <span style="color: #800000;">'</span><span style="color: #800000;">alex</span><span style="color: #800000;">'</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> func(self):
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800000;">'</span><span style="color: #800000;">func</span><span style="color: #800000;">'</span>
+
+<span style="color: #008000;">#</span><span style="color: #008000;"> 不允许使用 obj.name</span>
+obj =<span style="color: #000000;"> Foo()
+
+</span><span style="color: #0000ff;">print</span> getattr(obj, <span style="color: #800000;">'</span><span style="color: #800000;">name</span><span style="color: #800000;">'</span>)</pre>
+</div>
+<span class="cnblogs_code_collapse">方式二</span></div>
+<p>d、比较三种访问方式</p>
+<ul>
+<li><span style="color: #333333;">obj.name</span></li>
+<li><span style="color: #333333;">obj.__dict__['name']</span></li>
+<li><span style="color: #333333;">getattr(obj, 'name')</span></li>
+</ul>
+</div>
+<div style="clear: both;">
+<p><em><span style="color: #808080;">答：第一种和其他种比，...</span></em><br /><em><span style="color: #808080;">&nbsp; &nbsp; &nbsp; 第二种和第三种比，...<br /></span></em></p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('3cdb3c71-1a5f-4fa1-bc26-fb3c13074a15')"><img id="code_img_closed_3cdb3c71-1a5f-4fa1-bc26-fb3c13074a15" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_3cdb3c71-1a5f-4fa1-bc26-fb3c13074a15" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('3cdb3c71-1a5f-4fa1-bc26-fb3c13074a15',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_3cdb3c71-1a5f-4fa1-bc26-fb3c13074a15" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;">coding:utf-8</span>
+<span style="color: #0000ff;">from</span> wsgiref.simple_server <span style="color: #0000ff;">import</span><span style="color: #000000;"> make_server
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Handler(object):
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> index(self):
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800000;">'</span><span style="color: #800000;">index</span><span style="color: #800000;">'</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> news(self):
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800000;">'</span><span style="color: #800000;">news</span><span style="color: #800000;">'</span>
+
+
+<span style="color: #0000ff;">def</span><span style="color: #000000;"> RunServer(environ, start_response):
+    start_response(</span><span style="color: #800000;">'</span><span style="color: #800000;">200 OK</span><span style="color: #800000;">'</span>, [(<span style="color: #800000;">'</span><span style="color: #800000;">Content-Type</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">text/html</span><span style="color: #800000;">'</span><span style="color: #000000;">)])
+    url </span>= environ[<span style="color: #800000;">'</span><span style="color: #800000;">PATH_INFO</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+    temp </span>= url.split(<span style="color: #800000;">'</span><span style="color: #800000;">/</span><span style="color: #800000;">'</span>)[1<span style="color: #000000;">]
+    obj </span>=<span style="color: #000000;"> Handler()
+    is_exist </span>=<span style="color: #000000;"> hasattr(obj, temp)
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> is_exist:
+        func </span>=<span style="color: #000000;"> getattr(obj, temp)
+        ret </span>=<span style="color: #000000;"> func()
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret
+    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800000;">'</span><span style="color: #800000;">404 not found</span><span style="color: #800000;">'</span>
+
+<span style="color: #0000ff;">if</span> <span style="color: #800080;">__name__</span> == <span style="color: #800000;">'</span><span style="color: #800000;">__main__</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+    httpd </span>= make_server(<span style="color: #800000;">''</span>, 8001<span style="color: #000000;">, RunServer)
+    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">"</span><span style="color: #800000;">Serving HTTP on port 8000...</span><span style="color: #800000;">"</span><span style="color: #000000;">
+    httpd.serve_forever()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">Web框架实例</span></div>
+</div>
+</div>
+</blockquote>
+<p><strong><span style="color: #ff0000; font-size: 14pt;">结论：</span></strong><span style="color: #333333;">反射是通过字符串的形式操作对象相关的成员。</span><strong><span style="font-size: 14pt;">一切事物都是对象！！！</span></strong></p>
+<p>&nbsp;</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('09eed9a9-1fcc-4f5e-a078-6d3083e40044')"><img id="code_img_closed_09eed9a9-1fcc-4f5e-a078-6d3083e40044" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_09eed9a9-1fcc-4f5e-a078-6d3083e40044" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('09eed9a9-1fcc-4f5e-a078-6d3083e40044',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_09eed9a9-1fcc-4f5e-a078-6d3083e40044" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> sys
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> s1():
+    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">s1</span><span style="color: #800000;">'</span>
+
+
+<span style="color: #0000ff;">def</span><span style="color: #000000;"> s2():
+    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">s2</span><span style="color: #800000;">'</span><span style="color: #000000;">
+
+
+this_module </span>= sys.modules[<span style="color: #800080;">__name__</span><span style="color: #000000;">]
+
+hasattr(this_module, </span><span style="color: #800000;">'</span><span style="color: #800000;">s1</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+getattr(this_module, </span><span style="color: #800000;">'</span><span style="color: #800000;">s2</span><span style="color: #800000;">'</span>)</pre>
+</div>
+<span class="cnblogs_code_collapse">反射当前模块成员</span></div>
+<p>&nbsp;</p>
+<p><span style="font-size: 16px;"><strong>类也是对象</strong></span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">class Foo(object):
+
+    staticField = "old boy"
+
+    def __init__(self):
+        self.name = 'wupeiqi'
+
+    def func(self):
+        return 'func'
+
+    @staticmethod
+    def bar():
+        return 'bar'
+
+print getattr(Foo, 'staticField')
+print getattr(Foo, 'func')
+print getattr(Foo, 'bar')</pre>
+</div>
+<p><strong><span style="font-size: 16px;">模块也是对象</span></strong></p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('4d9df00b-9876-49af-938d-f8bfbe71c07c')"><img id="code_img_closed_4d9df00b-9876-49af-938d-f8bfbe71c07c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_4d9df00b-9876-49af-938d-f8bfbe71c07c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('4d9df00b-9876-49af-938d-f8bfbe71c07c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_4d9df00b-9876-49af-938d-f8bfbe71c07c" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+<span style="color: #0000ff;">def</span><span style="color: #000000;"> dev():
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800000;">'</span><span style="color: #800000;">dev</span><span style="color: #800000;">'</span></pre>
+</div>
+<span class="cnblogs_code_collapse">home.py</span></div>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+"""
+程序目录：
+    home.py
+    index.py
+
+当前文件：
+    index.py
+"""
+
+
+import home as obj
+
+#obj.dev()
+
+func = getattr(obj, 'dev')
+func()&nbsp;</pre>
+</div>
+<h3>设计模式</h3>
+<p><strong><span style="font-size: 14pt;">一、单例模式</span></strong></p>
+<p>单例，顾名思义单个实例。</p>
+<blockquote>
+<p>学习单例之前，首先来回顾下面向对象的内容：</p>
+<p>python的面向对象由两个非常重要的两个&ldquo;东西&rdquo;组成：类、实例</p>
+<p><strong>面向对象场景一：</strong></p>
+<p>如：创建三个游戏人物，分别是：</p>
+<ul>
+<li>苍井井，女，18，初始战斗力1000</li>
+<li>东尼木木，男，20，初始战斗力1800</li>
+<li>波多多，女，19，初始战斗力2500</li>
+</ul>
+<div class="cnblogs_code" onclick="cnblogs_code_show('b85983ae-a1da-4894-a0d4-bd7704ddca50')"><img id="code_img_closed_b85983ae-a1da-4894-a0d4-bd7704ddca50" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_b85983ae-a1da-4894-a0d4-bd7704ddca50" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('b85983ae-a1da-4894-a0d4-bd7704ddca50',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_b85983ae-a1da-4894-a0d4-bd7704ddca50" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;"> #####################  定义类  #####################</span>
+<span style="color: #0000ff;">class</span><span style="color: #000000;"> Person:
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span><span style="color: #000000;">(self, na, gen, age, fig):
+        self.name </span>=<span style="color: #000000;"> na
+        self.gender </span>=<span style="color: #000000;"> gen
+        self.age </span>=<span style="color: #000000;"> age
+        self.fight </span>=<span style="color: #000000;">fig
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> grassland(self):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">注释：草丛战斗，消耗200战斗力</span><span style="color: #800000;">"""</span><span style="color: #000000;">
+
+        self.fight </span>= self.fight - 200
+
+<span style="color: #008000;">#</span><span style="color: #008000;"> #####################  创建实例  #####################</span>
+<span style="color: #000000;">
+cang </span>= Person(<span style="color: #800000;">'</span><span style="color: #800000;">苍井井</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">女</span><span style="color: #800000;">'</span>, 18, 1000)    <span style="color: #008000;">#</span><span style="color: #008000;"> 创建苍井井角色</span>
+dong = Person(<span style="color: #800000;">'</span><span style="color: #800000;">东尼木木</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">男</span><span style="color: #800000;">'</span>, 20, 1800)  <span style="color: #008000;">#</span><span style="color: #008000;"> 创建东尼木木角色</span>
+bo = Person(<span style="color: #800000;">'</span><span style="color: #800000;">波多多</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">女</span><span style="color: #800000;">'</span>, 19, 2500)      <span style="color: #008000;">#</span><span style="color: #008000;"> 创建波多多角色</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<p><strong>面向对象场景二：</strong></p>
+<p>如：创建对数据库操作的公共类</p>
+<ul>
+<li>增</li>
+<li>删</li>
+<li>改</li>
+<li>查</li>
+</ul>
+<div class="cnblogs_code" onclick="cnblogs_code_show('3c6f2c7f-0693-4a2e-a97b-efc4004ea891')"><img id="code_img_closed_3c6f2c7f-0693-4a2e-a97b-efc4004ea891" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_3c6f2c7f-0693-4a2e-a97b-efc4004ea891" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('3c6f2c7f-0693-4a2e-a97b-efc4004ea891',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_3c6f2c7f-0693-4a2e-a97b-efc4004ea891" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;"> #### 定义类 ####</span>
+
+<span style="color: #0000ff;">class</span><span style="color: #000000;"> DbHelper(object):
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span><span style="color: #000000;">(self):
+        self.hostname </span>= <span style="color: #800000;">'</span><span style="color: #800000;">1.1.1.1</span><span style="color: #800000;">'</span><span style="color: #000000;">
+        self.port </span>= 3306<span style="color: #000000;">
+        self.password </span>= <span style="color: #800000;">'</span><span style="color: #800000;">pwd</span><span style="color: #800000;">'</span><span style="color: #000000;">
+        self.username </span>= <span style="color: #800000;">'</span><span style="color: #800000;">root</span><span style="color: #800000;">'</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> fetch(self):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 连接数据库</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 拼接sql语句</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 操作</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> create(self):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 连接数据库</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 拼接sql语句</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 操作</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> remove(self):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 连接数据库</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 拼接sql语句</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 操作</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> modify(self):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 连接数据库</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 拼接sql语句</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 操作</span>
+        <span style="color: #0000ff;">pass</span>
+
+<span style="color: #008000;">#</span><span style="color: #008000;"> #### 操作类 ####</span>
+<span style="color: #000000;">
+db </span>=<span style="color: #000000;"> DbHelper()
+db.create()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+</blockquote>
+<p><strong><span style="font-size: 14pt;">实例：</span></strong>结合场景二实现Web应用程序</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('c62bc92d-1332-4064-aa9c-ea0ec49320e4')"><img id="code_img_closed_c62bc92d-1332-4064-aa9c-ea0ec49320e4" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_c62bc92d-1332-4064-aa9c-ea0ec49320e4" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('c62bc92d-1332-4064-aa9c-ea0ec49320e4',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_c62bc92d-1332-4064-aa9c-ea0ec49320e4" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;">coding:utf-8</span>
+<span style="color: #0000ff;">from</span> wsgiref.simple_server <span style="color: #0000ff;">import</span><span style="color: #000000;"> make_server
+
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> DbHelper(object):
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span><span style="color: #000000;">(self):
+        self.hostname </span>= <span style="color: #800000;">'</span><span style="color: #800000;">1.1.1.1</span><span style="color: #800000;">'</span><span style="color: #000000;">
+        self.port </span>= 3306<span style="color: #000000;">
+        self.password </span>= <span style="color: #800000;">'</span><span style="color: #800000;">pwd</span><span style="color: #800000;">'</span><span style="color: #000000;">
+        self.username </span>= <span style="color: #800000;">'</span><span style="color: #800000;">root</span><span style="color: #800000;">'</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> fetch(self):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 连接数据库</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 拼接sql语句</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 操作</span>
+        <span style="color: #0000ff;">return</span> <span style="color: #800000;">'</span><span style="color: #800000;">fetch</span><span style="color: #800000;">'</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> create(self):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 连接数据库</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 拼接sql语句</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 操作</span>
+        <span style="color: #0000ff;">return</span> <span style="color: #800000;">'</span><span style="color: #800000;">create</span><span style="color: #800000;">'</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> remove(self):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 连接数据库</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 拼接sql语句</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 操作</span>
+        <span style="color: #0000ff;">return</span> <span style="color: #800000;">'</span><span style="color: #800000;">remove</span><span style="color: #800000;">'</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> modify(self):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 连接数据库</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 拼接sql语句</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 操作</span>
+        <span style="color: #0000ff;">return</span> <span style="color: #800000;">'</span><span style="color: #800000;">modify</span><span style="color: #800000;">'</span>
+
+
+<span style="color: #0000ff;">class</span><span style="color: #000000;"> Handler(object):
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> index(self):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 创建对象</span>
+        db =<span style="color: #000000;"> DbHelper()
+        db.fetch()
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800000;">'</span><span style="color: #800000;">index</span><span style="color: #800000;">'</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> news(self):
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800000;">'</span><span style="color: #800000;">news</span><span style="color: #800000;">'</span>
+
+
+<span style="color: #0000ff;">def</span><span style="color: #000000;"> RunServer(environ, start_response):
+    start_response(</span><span style="color: #800000;">'</span><span style="color: #800000;">200 OK</span><span style="color: #800000;">'</span>, [(<span style="color: #800000;">'</span><span style="color: #800000;">Content-Type</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">text/html</span><span style="color: #800000;">'</span><span style="color: #000000;">)])
+    url </span>= environ[<span style="color: #800000;">'</span><span style="color: #800000;">PATH_INFO</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+    temp </span>= url.split(<span style="color: #800000;">'</span><span style="color: #800000;">/</span><span style="color: #800000;">'</span>)[1<span style="color: #000000;">]
+    obj </span>=<span style="color: #000000;"> Handler()
+    is_exist </span>=<span style="color: #000000;"> hasattr(obj, temp)
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> is_exist:
+        func </span>=<span style="color: #000000;"> getattr(obj, temp)
+        ret </span>=<span style="color: #000000;"> func()
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret
+    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800000;">'</span><span style="color: #800000;">404 not found</span><span style="color: #800000;">'</span>
+
+<span style="color: #0000ff;">if</span> <span style="color: #800080;">__name__</span> == <span style="color: #800000;">'</span><span style="color: #800000;">__main__</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+    httpd </span>= make_server(<span style="color: #800000;">''</span>, 8001<span style="color: #000000;">, RunServer)
+    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">"</span><span style="color: #800000;">Serving HTTP on port 8001...</span><span style="color: #800000;">"</span><span style="color: #000000;">
+    httpd.serve_forever()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">Web应用程序实例</span></div>
+<p>对于上述实例，每个请求到来，都需要在内存里创建一个实例，再通过该实例执行指定的方法。</p>
+<p>那么问题来了...如果并发量大的话，内存里就会存在非常多<span style="color: #ff0000;"><strong>功能上一模一样的对象</strong></span>。存在这些对象肯定会消耗内存，对于这些功能相同的对象可以在内存中仅创建一个，需要时都去调用，也是极好的！！！</p>
+<p><span style="font-size: 14pt;"><strong>铛铛 铛铛&nbsp;铛铛铛铛铛</strong></span>，单例模式出马，单例模式用来保证内存中<span style="color: #99cc00;"><strong>仅存在一个实例</strong></span>！！！</p>
+<p>通过面向对象的特性，构造出单例模式：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># ########### 单例类定义 ###########
+class Foo(object):
+
+    __instance = None
+
+    @staticmethod
+    def singleton():
+        if Foo.__instance:
+            return Foo.__instance
+        else:
+            Foo.__instance = Foo()
+            return Foo.__instance
+
+# ########### 获取实例 ###########
+obj = Foo.singleton()
+</pre>
+</div>
+<p>对于Python单例模式，创建对象时不能再直接使用：obj = Foo()，而应该调用特殊的方法：obj = Foo.singleton() 。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('6be98893-069e-48ff-9455-914ca303e65f')"><img id="code_img_closed_6be98893-069e-48ff-9455-914ca303e65f" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_6be98893-069e-48ff-9455-914ca303e65f" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('6be98893-069e-48ff-9455-914ca303e65f',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_6be98893-069e-48ff-9455-914ca303e65f" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;">coding:utf-8</span>
+<span style="color: #0000ff;">from</span> wsgiref.simple_server <span style="color: #0000ff;">import</span><span style="color: #000000;"> make_server
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> ########### 单例类定义 ###########</span>
+<span style="color: #0000ff;">class</span><span style="color: #000000;"> DbHelper(object):
+
+    </span><span style="color: #800080;">__instance</span> =<span style="color: #000000;"> None
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span><span style="color: #000000;">(self):
+        self.hostname </span>= <span style="color: #800000;">'</span><span style="color: #800000;">1.1.1.1</span><span style="color: #800000;">'</span><span style="color: #000000;">
+        self.port </span>= 3306<span style="color: #000000;">
+        self.password </span>= <span style="color: #800000;">'</span><span style="color: #800000;">pwd</span><span style="color: #800000;">'</span><span style="color: #000000;">
+        self.username </span>= <span style="color: #800000;">'</span><span style="color: #800000;">root</span><span style="color: #800000;">'</span><span style="color: #000000;">
+
+    @staticmethod
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> singleton():
+        </span><span style="color: #0000ff;">if</span> DbHelper.<span style="color: #800080;">__instance</span><span style="color: #000000;">:
+            </span><span style="color: #0000ff;">return</span> DbHelper.<span style="color: #800080;">__instance</span>
+        <span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            DbHelper.</span><span style="color: #800080;">__instance</span> =<span style="color: #000000;"> DbHelper()
+            </span><span style="color: #0000ff;">return</span> DbHelper.<span style="color: #800080;">__instance</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> fetch(self):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 连接数据库</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 拼接sql语句</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 操作</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> create(self):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 连接数据库</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 拼接sql语句</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 操作</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> remove(self):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 连接数据库</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 拼接sql语句</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 操作</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> modify(self):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 连接数据库</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 拼接sql语句</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 操作</span>
+        <span style="color: #0000ff;">pass</span>
+
+
+<span style="color: #0000ff;">class</span><span style="color: #000000;"> Handler(object):
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> index(self):
+        obj </span>=<span style="color: #000000;">  DbHelper.singleton()
+        </span><span style="color: #0000ff;">print</span><span style="color: #000000;"> id(single)
+        obj.create()
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800000;">'</span><span style="color: #800000;">index</span><span style="color: #800000;">'</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> news(self):
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800000;">'</span><span style="color: #800000;">news</span><span style="color: #800000;">'</span>
+
+
+<span style="color: #0000ff;">def</span><span style="color: #000000;"> RunServer(environ, start_response):
+    start_response(</span><span style="color: #800000;">'</span><span style="color: #800000;">200 OK</span><span style="color: #800000;">'</span>, [(<span style="color: #800000;">'</span><span style="color: #800000;">Content-Type</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">text/html</span><span style="color: #800000;">'</span><span style="color: #000000;">)])
+    url </span>= environ[<span style="color: #800000;">'</span><span style="color: #800000;">PATH_INFO</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+    temp </span>= url.split(<span style="color: #800000;">'</span><span style="color: #800000;">/</span><span style="color: #800000;">'</span>)[1<span style="color: #000000;">]
+    obj </span>=<span style="color: #000000;"> Handler()
+    is_exist </span>=<span style="color: #000000;"> hasattr(obj, temp)
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> is_exist:
+        func </span>=<span style="color: #000000;"> getattr(obj, temp)
+        ret </span>=<span style="color: #000000;"> func()
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret
+    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800000;">'</span><span style="color: #800000;">404 not found</span><span style="color: #800000;">'</span>
+
+<span style="color: #0000ff;">if</span> <span style="color: #800080;">__name__</span> == <span style="color: #800000;">'</span><span style="color: #800000;">__main__</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+    httpd </span>= make_server(<span style="color: #800000;">''</span>, 8001<span style="color: #000000;">, RunServer)
+    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">"</span><span style="color: #800000;">Serving HTTP on port 8001...</span><span style="color: #800000;">"</span><span style="color: #000000;">
+    httpd.serve_forever()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">Web应用实例-单例模式</span></div>
+<p>总结：单利模式存在的目的是保证当前内存中仅存在单个实例，避免内存浪费！！！</p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2015-12-03 21:47</span> <a href='http://www.cnblogs.com/wupeiqi/'>武沛齐</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>) &nbsp;<a href="https://i.cnblogs.com/EditArticles.aspx?postid=5017742" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(5017742);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=133379,cb_entryId=5017742,cb_blogApp=currentBlogApp,cb_blogUserGuid='7208b24d-95c9-e111-aa3f-842b2b196315',cb_entryCreatedDate='2015/12/3 21:47:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2017 武沛齐
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

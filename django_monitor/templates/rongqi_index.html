@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{%block css%}
+{%endblock%}
+
+
+
+
+
+{%block html%}
+
+
+          <h2 class="sub-header">Docker容器</h2>
+          <div class="table-responsive">
+            <table class="table table-striped table-hover table-condensed table-bordered" style="font-size:10px">
+              <thead>
+                <tr>
+                  <th>NAMES</th>
+                  <th>IMAGE</th>
+                  <th>COMMAND</th>
+                  <th>CREATED</th>
+                  <th>STATUS</th>
+                  <th>CONFIG</th>
+                  <th>LOGS</th>
+                  <th>DEL</th>
+                </tr>
+              </thead>
+              <tbody>
+				{% for server in server_list %}<!-- 倒叙循环 -->
+					{% ifequal server.State 'exited' %}
+					<tr class="info">
+					{% else %}
+					<tr>
+					{% endifequal %}
+					  <td><a href='?c=chk&d={{ server.Id }}'>{{ server.Names }}</a></td>
+					  <td>{{ server.Image }}</td>
+					  <td>{{ server.Command }}</td>
+					  <td>{{ server.Created }}</td>
+					  {% ifequal server.State 'exited' %}
+					  <td>
+					  <span style="color:red;font-size:10px">停止</span>
+					  </td>
+					  <td>
+					  <a href='?c=start&d={{ server.Id }}' class="label label-success" >START</a><!-- data-toggle="modal" data-target="#myModal" -->
+					  </td>
+					  {% else %}
+					  <td>
+					  <span style="color:green;font-size:10px">运行中</span>
+					  </td>
+					  <td>
+					  <a href='?c=stop&d={{ server.Id }}' class="label label-warning"  >&nbspSTOP&nbsp</a><!-- data-toggle="modal" data-target="#myModal" -->
+					  </td>
+					  {% endifequal %}
+					  <td>
+					  <a href='?c=logs&d={{ server.Id }}' class="label label-info">LOGS</a>
+					  </td>
+					  <td>
+					  <a href='?c=rm&d={{ server.Id }}' class="label label-danger"  >DELETE</a><!-- data-toggle="modal" data-target="#myModal" -->
+					  </td>
+					</tr>
+				{% endfor %}
+              </tbody>
+            </table>
+          </div>
+{%endblock%}
+
+
+
+{%block js%}
+
+{%endblock%}

@@ -1,0 +1,1694 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+     
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    
+<head>  
+
+            <link rel="canonical" href="http://blog.csdn.net/kkkloveyou/article/details/65531491"/> 
+ <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+
+    <title>OAuth 2.0 认证的原理与实践 - kkkloveyou
+        - 博客频道 - CSDN.NET</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="使用 OAuth 2.0 认证的的好处是显然易见的。你只需要用同一个账号密码，就能在各个网站进行访问，而免去了在每个网站都进行注册的繁琐过程。本文将介绍 OAuth 2.0 的原理，并基于 Spring Security 和  GitHub 账号，来演示 OAuth 2.0 的认证的过程。" />
+   
+    <script src="http://static.blog.csdn.net/scripts/blog_static_head.min.js" type="text/javascript"></script>
+
+    
+        <!--new top-->
+               <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/css/index.css">        <!--new top-->
+    
+      <!-- ad begin -->
+         <script language="javascript" type="text/javascript" src="http://ads.csdn.net/js/tracking.js"></script>
+    <!-- ad end-->
+
+    <link rel="Stylesheet" type="text/css" href="http://static.blog.csdn.net/skin/dark1/css/style.css?v=1.1" />
+
+    
+
+    <link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="/kkkloveyou/rss/list" />
+    <link rel="shortcut icon" href="http://c.csdnimg.cn/public/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+ 
+
+     
+    <link rel="stylesheet" href="http://static.blog.csdn.net/css/csdn_blog_detail.min.css" />
+
+</head>
+
+
+<body>
+       
+
+
+
+    <!-- 广告位开始 -->
+        
+    <!-- 广告位结束 -->
+
+    
+   
+      <!--new top-->
+    <script id="toolbar-tpl-scriptId" fixed="true" prod="blog" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/html.js" type="text/javascript"></script>
+     <!--new top-->
+    <div id="container">
+        <div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h2>
+                <a href="http://blog.csdn.net/kkkloveyou">kkkloveyou</a></h2>
+            <h3>关注Web编程的那点事</h3>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+        
+     
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg">
+    </div>
+    <div class="navigator">
+        <ul>           
+                <li id="btnContents"><a href="http://blog.csdn.net/kkkloveyou?viewmode=contents"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_mulu'])">
+                    <img src="http://static.blog.csdn.net/images/ico_list.gif">目录视图</span></a></li>
+                <li id="btnView"><a href="http://blog.csdn.net/kkkloveyou?viewmode=list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_zhaiyao'])">
+                    <img src="http://static.blog.csdn.net/images/ico_summary.gif">摘要视图</span></a></li>
+                <li id="btnRss"><a href="http://blog.csdn.net/kkkloveyou/rss/list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_RSS'])">
+                    <img src="http://static.blog.csdn.net/images/ico_rss.gif">订阅</span></a></li>                
+            
+
+            </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "kkkloveyou";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/kkkloveyou";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "";  
+</script>
+
+        <div id="body">
+            <div id="main">
+                <div class="main">
+                        <div class="ad_class">
+<div class="notice tracking-ad" data-mod='popu_3' > 
+
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/71710010">
+<font color=blue><strong>【活动】2017 CSDN博客专栏评选</strong></font></a>
+
+&nbsp;&nbsp;&nbsp;&nbsp
+
+<a href=" http://blog.csdn.net/turingbooks/article/details/72416875">
+<font color=red><strong>【5月书讯】流畅的Python，终于等到你！</strong></font></a>
+&nbsp;&nbsp;&nbsp;&nbsp
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/72638703">
+<font color=blue><strong>CSDN日报20170523 ——《技术合伙人，千万别做！》
+</strong>
+&nbsp;&nbsp;&nbsp;&nbsp
+
+
+</div>                        </div>
+                        
+
+
+
+  
+
+
+
+
+
+
+<script   type="text/javascript" src="http://static.blog.csdn.net/scripts/category.js"></script>
+
+  <script type="text/ecmascript">
+      window.quickReplyflag = true;
+           
+            var isBole = false;
+            
+      
+      var fasrc="http://my.csdn.net/my/favorite/miniadd?t=OAuth+2.0+%e8%ae%a4%e8%af%81%e7%9a%84%e5%8e%9f%e7%90%86%e4%b8%8e%e5%ae%9e%e8%b7%b5&u=http://blog.csdn.net/kkkloveyou/article/details/65531491"
+
+    </script>
+<div id="article_details" class="details">
+    <div class="article_title">   
+         <span class="ico ico_type_Original"></span>
+
+
+    <h1>
+        <span class="link_title"><a href="/kkkloveyou/article/details/65531491">
+        OAuth 2.0 认证的原理与实践            
+        </a></span>
+    </h1>
+</div>
+
+   
+
+        <div class="article_manage clearfix">
+        <div class="article_l">
+            <span class="link_categories">
+            标签：
+              <a href='http://www.csdn.net/tag/spring' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">spring</a><a href='http://www.csdn.net/tag/github' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">github</a><a href='http://www.csdn.net/tag/oauth' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">oauth</a><a href='http://www.csdn.net/tag/spring%20security' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">spring security</a>
+            </span>
+        </div>
+        <div class="article_r">
+            <span class="link_postdate">2017-03-24 01:41</span>
+            <span class="link_view" title="阅读次数">296人阅读</span>
+            <span class="link_comments" title="评论次数"> <a href="#comments" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_pinglun'])">评论</a>(0)</span>
+            <span class="link_collect tracking-ad" data-mod="popu_171"> <a href="javascript:void(0);" onclick="javascript:collectArticle('OAuth+2.0+%e8%ae%a4%e8%af%81%e7%9a%84%e5%8e%9f%e7%90%86%e4%b8%8e%e5%ae%9e%e8%b7%b5','65531491');return false;" title="收藏">收藏</a></span>
+             <span class="link_report"> <a href="#report" onclick="javascript:report(65531491,2);return false;" title="举报">举报</a></span>
+
+        </div>
+    </div>
+    <div class="embody"  style="display:none" id="embody">
+        <span class="embody_t">本文章已收录于：</span>
+        <div class="embody_c" id="lib" value="{&quot;err&quot;:0,&quot;msg&quot;:&quot;ok&quot;,&quot;data&quot;:[]}"></div>
+    </div>
+    <style type="text/css">        
+            .embody{
+                padding:10px 10px 10px;
+                margin:0 -20px;
+                border-bottom:solid 1px #ededed;                
+            }
+            .embody_b{
+                margin:0 ;
+                padding:10px 0;
+            }
+            .embody .embody_t,.embody .embody_c{
+                display: inline-block;
+                margin-right:10px;
+            }
+            .embody_t{
+                font-size: 12px;
+                color:#999;
+            }
+            .embody_c{
+                font-size: 12px;
+            }
+            .embody_c img,.embody_c em{
+                display: inline-block;
+                vertical-align: middle;               
+            }
+             .embody_c img{               
+                width:30px;
+                height:30px;
+            }
+            .embody_c em{
+                margin: 0 20px 0 10px;
+                color:#333;
+                font-style: normal;
+            }
+    </style>
+    <script  type="text/javascript">
+        $(function () {
+            try
+            {
+                var lib = eval("("+$("#lib").attr("value")+")");
+                var html = "";
+                if (lib.err == 0) {
+                    $.each(lib.data, function (i) {
+                        var obj = lib.data[i];
+                        //html += '<img src="' + obj.logo + '"/>' + obj.name + "&nbsp;&nbsp;";
+                        html += ' <a href="' + obj.url + '" target="_blank">';
+                        html += ' <img src="' + obj.logo + '">';
+                        html += ' <em><b>' + obj.name + '</b></em>';
+                        html += ' </a>';
+                    });
+                    if (html != "") {
+                        setTimeout(function () {
+                            $("#lib").html(html);                      
+                            $("#embody").show();
+                        }, 100);
+                    }
+                }      
+            } catch (err)
+            { }
+            
+        });
+    </script>
+      <div class="category clearfix">
+        <div class="category_l">
+           <img src="http://static.blog.csdn.net/images/category_icon.jpg">
+            <span>分类：</span>
+        </div>
+        <div class="category_r">
+                    <label  onclick="GetCategoryArticles('6089794','kkkloveyou','top','65531491');">
+                        <span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_fenlei']);">Web<em>（4）</em></span>
+                      <img class="arrow-down" src="http://static.blog.csdn.net/images/arrow_triangle _down.jpg" style="display:inline;">
+                      <img class="arrow-up" src="http://static.blog.csdn.net/images/arrow_triangle_up.jpg" style="display:none;">
+                        <div class="subItem">
+                            <div class="subItem_t"><a  href="http://blog.csdn.net/kkkloveyou/article/category/6089794"  target="_blank">作者同类文章</a><i class="J_close">X</i></div>
+                            <ul class="subItem_l" id="top_6089794">                            
+                            </ul>
+                        </div>
+                    </label>                    
+        </div>
+    </div>
+        <div   class="bog_copyright">         
+            <p  class="copyright_p" >版权声明：本文为博主原创文章，未经博主允许不得转载。</p>
+        </div>
+
+  
+
+  
+  
+     
+
+
+<div id="article_content" class="article_content tracking-ad" data-mod=popu_307  data-dsm = "post" >
+        <div class="markdown_views"><p>原文同步至<a href="https://waylau.com/principle-and-practice-of-oauth2/">https://waylau.com/principle-and-practice-of-oauth2/</a></p>
+
+<hr>
+
+<p>使用 OAuth 2.0 认证的的好处是显然易见的。你只需要用同一个账号密码，就能在各个网站进行访问，而免去了在每个网站都进行注册的繁琐过程。 <br>
+本文将介绍 OAuth 2.0 的原理，并基于 Spring Security 和  GitHub 账号，来演示 OAuth 2.0 的认证的过程。</p>
+
+
+
+<h2 id="什么是-oauth-20">什么是 OAuth 2.0</h2>
+
+<p>OAuth 2.0 的规范可以参考 ： <a href="http://tools.ietf.org/html/rfc6749">RFC 6749</a></p>
+
+<p>OAuth 是一个开放标准，允许用户让第三方应用访问该用户在某一网站上存储的私密的资源（如照片，视频，联系人列表），而无需将用户名和密码提供给第三方应用。目前，OAuth 的最新版本为 2.0</p>
+
+<p>OAuth 允许用户提供一个令牌，而不是用户名和密码来访问他们存放在特定服务提供者的数据。每一个令牌授权一个特定的网站（例如，视频编辑网站)在特定的时段（例如，接下来的2小时内）内访问特定的资源（例如仅仅是某一相册中的视频）。这样，OAuth 允许用户授权第三方网站访问他们存储在另外的服务提供者上的信息，而不需要分享他们的访问许可或他们数据的所有内容。</p>
+
+
+
+<h2 id="oauth-20-的核心概念">OAuth 2.0 的核心概念</h2>
+
+<p>OAuth 2.0 主要有4类角色：</p>
+
+<ul>
+<li>resource owner：资源所有者，指终端的“用户”（user）</li>
+<li>resource server：资源服务器，即服务提供商存放受保护资源。访问这些资源，需要获得访问令牌（access token）。它与认证服务器，可以是同一台服务器，也可以是不同的服务器。如果，我们访问新浪博客网站，那么如果使用新浪博客的账号来登录新浪博客网站，那么新浪博客的资源和新浪博客的认证都是同一家，可以认为是同一个服务器。如果，我们是新浪博客账号去登录了知乎，那么显然知乎的资源和新浪的认证不是一个服务器。</li>
+<li>client：客户端，代表向受保护资源进行资源请求的第三方应用程序。</li>
+<li>authorization server： 授权服务器， 在验证资源所有者并获得授权成功后，将发放访问令牌给客户端。 <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+</ul>
+
+
+
+<h2 id="oauth-20-的认证流程">OAuth 2.0 的认证流程</h2>
+
+<p>认证流程如下：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs brainfuck"> <span class="hljs-literal">+</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">+</span>                               <span class="hljs-literal">+</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">+</span>
+ <span class="hljs-comment">|</span>        <span class="hljs-comment">|</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">(A)</span><span class="hljs-literal">-</span> <span class="hljs-comment">Authorization</span> <span class="hljs-comment">Request</span> <span class="hljs-literal">-</span>&gt;<span class="hljs-comment">|</span>   <span class="hljs-comment">Resource</span>    <span class="hljs-comment">|</span>
+ <span class="hljs-comment">|</span>        <span class="hljs-comment">|</span>                               <span class="hljs-comment">|</span>     <span class="hljs-comment">Owner</span>     <span class="hljs-comment">|</span>
+ <span class="hljs-comment">|</span>        <span class="hljs-comment">|</span>&lt;<span class="hljs-literal">-</span><span class="hljs-comment">(B)</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span> <span class="hljs-comment">Authorization</span> <span class="hljs-comment">Grant</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">|</span>               <span class="hljs-comment">|</span>
+ <span class="hljs-comment">|</span>        <span class="hljs-comment">|</span>                               <span class="hljs-literal">+</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">+</span>
+ <span class="hljs-comment">|</span>        <span class="hljs-comment">|</span>
+ <span class="hljs-comment">|</span>        <span class="hljs-comment">|</span>                               <span class="hljs-literal">+</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">+</span>
+ <span class="hljs-comment">|</span>        <span class="hljs-comment">|</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">(C)</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span> <span class="hljs-comment">Authorization</span> <span class="hljs-comment">Grant</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span>&gt;<span class="hljs-comment">|</span> <span class="hljs-comment">Authorization</span> <span class="hljs-comment">|</span>
+ <span class="hljs-comment">|</span> <span class="hljs-comment">Client</span> <span class="hljs-comment">|</span>                               <span class="hljs-comment">|</span>     <span class="hljs-comment">Server</span>    <span class="hljs-comment">|</span>
+ <span class="hljs-comment">|</span>        <span class="hljs-comment">|</span>&lt;<span class="hljs-literal">-</span><span class="hljs-comment">(D)</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span> <span class="hljs-comment">Access</span> <span class="hljs-comment">Token</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">|</span>               <span class="hljs-comment">|</span>
+ <span class="hljs-comment">|</span>        <span class="hljs-comment">|</span>                               <span class="hljs-literal">+</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">+</span>
+ <span class="hljs-comment">|</span>        <span class="hljs-comment">|</span>
+ <span class="hljs-comment">|</span>        <span class="hljs-comment">|</span>                               <span class="hljs-literal">+</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">+</span>
+ <span class="hljs-comment">|</span>        <span class="hljs-comment">|</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">(E)</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span> <span class="hljs-comment">Access</span> <span class="hljs-comment">Token</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span>&gt;<span class="hljs-comment">|</span>    <span class="hljs-comment">Resource</span>   <span class="hljs-comment">|</span>
+ <span class="hljs-comment">|</span>        <span class="hljs-comment">|</span>                               <span class="hljs-comment">|</span>     <span class="hljs-comment">Server</span>    <span class="hljs-comment">|</span>
+ <span class="hljs-comment">|</span>        <span class="hljs-comment">|</span>&lt;<span class="hljs-literal">-</span><span class="hljs-comment">(F)</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span> <span class="hljs-comment">Protected</span> <span class="hljs-comment">Resource</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">|</span>               <span class="hljs-comment">|</span>
+ <span class="hljs-literal">+</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">+</span>                               <span class="hljs-literal">+</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-literal">+</span></code></pre>
+
+<ul>
+<li>（A）用户打开客户端以后，客户端请求资源所有者（用户）的授权。</li>
+<li>（B）用户同意给予客户端授权。</li>
+<li>（C）客户端使用上一步获得的授权，向认证服务器申请访问令牌。</li>
+<li>（D）认证服务器对客户端进行认证以后，确认无误，同意发放访问令牌。</li>
+<li>（E）客户端使用访问令牌，向资源服务器申请获取资源。</li>
+<li>（F）资源服务器确认令牌无误，同意向客户端开放资源。</li>
+</ul>
+
+<p>其中，用户授权有四种模式：</p>
+
+<ul>
+<li>授权码模式（authorization code）</li>
+<li>简化模式（implicit）</li>
+<li>密码模式（resource owner password credentials）</li>
+<li>客户端模式（client credentials）</li>
+</ul>
+
+
+
+<h2 id="实践-oauth-20">实践  OAuth 2.0</h2>
+
+<p>Talk is cheap！下面将演示代码。 <br>
+本例子将通过 Gradle、Spring Boot、Spring Security、 Thymeleaf、等技术来实现一个client 以及 resource server，并 通过 GitHub来给我们的应用授权。</p>
+
+
+
+<h3 id="依赖">依赖</h3>
+
+<p>本项目基于Gralde 来管理依赖，读者可以自行改成 Maven 的方式：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs scss">    <span class="hljs-comment">// 该依赖对于编译发行是必须的</span>
+    <span class="hljs-function">compile(<span class="hljs-string">'org.springframework.boot:spring-boot-starter-web'</span>)</span>
+
+    <span class="hljs-comment">// 添加 Thymeleaf 的依赖</span>
+    <span class="hljs-function">compile(<span class="hljs-string">'org.springframework.boot:spring-boot-starter-thymeleaf'</span>)</span>
+
+    <span class="hljs-comment">// 添加  Spring Security 依赖</span>
+    <span class="hljs-function">compile(<span class="hljs-string">'org.springframework.boot:spring-boot-starter-security'</span>)</span>
+
+    <span class="hljs-comment">// 添加   Thymeleaf Spring Security 依赖，与 Thymeleaf 版本一致都是 3.x</span>
+    <span class="hljs-function">compile(<span class="hljs-string">'org.thymeleaf.extras:thymeleaf-extras-springsecurity4:3.0.2.RELEASE'</span>)</span>
+
+    <span class="hljs-comment">// 添加 Spring Security OAuth2 依赖</span>
+    <span class="hljs-function">compile(<span class="hljs-string">'org.springframework.security.oauth:spring-security-oauth2:2.1.0.RELEASE'</span>)</span>
+
+    <span class="hljs-comment">// 该依赖对于编译测试是必须的，默认包含编译产品依赖和编译时依</span>
+    <span class="hljs-function">testCompile(<span class="hljs-string">'org.springframework.boot:spring-boot-starter-test'</span>)</span>
+
+    <span class="hljs-comment">// 添加 Spring Security Test 依赖</span>
+    <span class="hljs-function">testCompile(<span class="hljs-string">'org.springframework.security:spring-security-test:4.2.2.RELEASE'</span>)</span></code></pre>
+
+
+
+<h3 id="配置">配置</h3>
+
+<p>项目的核心配置如下：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs avrasm">github<span class="hljs-preprocessor">.client</span><span class="hljs-preprocessor">.clientId</span>=ad2abbc19b6c5f0ed117
+github<span class="hljs-preprocessor">.client</span><span class="hljs-preprocessor">.clientSecret</span>=<span class="hljs-number">26</span>db88a4dfc34cebaf196e68761c1294ac4ce265
+github<span class="hljs-preprocessor">.client</span><span class="hljs-preprocessor">.accessTokenUri</span>=https://github<span class="hljs-preprocessor">.com</span>/login/oauth/access_token
+github<span class="hljs-preprocessor">.client</span><span class="hljs-preprocessor">.userAuthorizationUri</span>=https://github<span class="hljs-preprocessor">.com</span>/login/oauth/authorize
+github<span class="hljs-preprocessor">.client</span><span class="hljs-preprocessor">.clientAuthenticationScheme</span>=form
+github<span class="hljs-preprocessor">.client</span><span class="hljs-preprocessor">.tokenName</span>=oauth_token
+github<span class="hljs-preprocessor">.client</span><span class="hljs-preprocessor">.authenticationScheme</span>=query
+github<span class="hljs-preprocessor">.resource</span><span class="hljs-preprocessor">.userInfoUri</span>=https://api<span class="hljs-preprocessor">.github</span><span class="hljs-preprocessor">.com</span>/user</code></pre>
+
+<p>包括了作为一个client 所需要大部分参数。其中 clientId 、 clientSecret 是在 GitHub　注册一个应用时生成的。如果读者不想注册应用，则可以直接用上面的配置即可。 <br>
+如果要注册，则文章最后有注册流程。</p>
+
+
+
+<h3 id="项目安全的配置">项目安全的配置</h3>
+
+<p>安全配置上需要加上<code>@EnableWebSecurity</code> 、 <code>@EnableOAuth2Client</code>注解，来启用Web 安全认证记忆，表明这是一个OAuth 2.0 客户端   ：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs java"><span class="hljs-annotation">@EnableWebSecurity</span>
+<span class="hljs-annotation">@EnableOAuth</span>2Client  <span class="hljs-comment">// 启用 OAuth 2.0 客户端 </span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SecurityConfig</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">WebSecurityConfigurerAdapter</span> {</span></code></pre>
+
+<p>使用 Spring Security，我们需要继承 <code>org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter</code>并重写以下 configure 方法：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs avrasm">@Override
+protected void configure(HttpSecurity http) throws Exception {
+    http<span class="hljs-preprocessor">.addFilterBefore</span>(ssoFilter(), BasicAuthenticationFilter<span class="hljs-preprocessor">.class</span>)
+        <span class="hljs-preprocessor">.antMatcher</span>(<span class="hljs-string">"/**"</span>)
+        <span class="hljs-preprocessor">.authorizeRequests</span>()
+        <span class="hljs-preprocessor">.antMatchers</span>(<span class="hljs-string">"/"</span>, <span class="hljs-string">"/index"</span>, <span class="hljs-string">"/403"</span>,<span class="hljs-string">"/css/**"</span>, <span class="hljs-string">"/js/**"</span>, <span class="hljs-string">"/fonts/**"</span>)<span class="hljs-preprocessor">.permitAll</span>() // 不设限制，都允许访问
+        <span class="hljs-preprocessor">.anyRequest</span>()
+        <span class="hljs-preprocessor">.authenticated</span>()
+        <span class="hljs-preprocessor">.and</span>()<span class="hljs-preprocessor">.logout</span>()<span class="hljs-preprocessor">.logoutSuccessUrl</span>(<span class="hljs-string">"/"</span>)<span class="hljs-preprocessor">.permitAll</span>()
+        <span class="hljs-preprocessor">.and</span>()<span class="hljs-preprocessor">.csrf</span>()<span class="hljs-preprocessor">.csrfTokenRepository</span>(CookieCsrfTokenRepository<span class="hljs-preprocessor">.withHttpOnlyFalse</span>())
+    <span class="hljs-comment">;</span>
+}</code></pre>
+
+<p>上面的配置是设置了一些过过滤策略，除了静态资源以及不需要授权的页面，我们允许访问，其他的资源，都是需要授权访问。</p>
+
+<p>其中，我们也设置了一个过滤器 ssoFilter，用于在 BasicAuthenticationFilter 之前进行拦截。如果拦截道的是<code>/login</code>，就是访问认证服务器。</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs java"><span class="hljs-keyword">private</span> Filter <span class="hljs-title">ssoFilter</span>() {
+    OAuth2ClientAuthenticationProcessingFilter githubFilter = <span class="hljs-keyword">new</span> OAuth2ClientAuthenticationProcessingFilter(<span class="hljs-string">"/login"</span>);
+    OAuth2RestTemplate githubTemplate = <span class="hljs-keyword">new</span> OAuth2RestTemplate(github(), oauth2ClientContext);
+    githubFilter.setRestTemplate(githubTemplate);
+    UserInfoTokenServices tokenServices = <span class="hljs-keyword">new</span> UserInfoTokenServices(githubResource().getUserInfoUri(), github().getClientId());
+    tokenServices.setRestTemplate(githubTemplate);
+    githubFilter.setTokenServices(tokenServices);
+    <span class="hljs-keyword">return</span> githubFilter;
+
+}
+
+<span class="hljs-annotation">@Bean</span>
+<span class="hljs-keyword">public</span> FilterRegistrationBean <span class="hljs-title">oauth2ClientFilterRegistration</span>(
+        OAuth2ClientContextFilter filter) {
+    FilterRegistrationBean registration = <span class="hljs-keyword">new</span> FilterRegistrationBean();
+    registration.setFilter(filter);
+    registration.setOrder(-<span class="hljs-number">100</span>);
+    <span class="hljs-keyword">return</span> registration;
+}
+
+<span class="hljs-annotation">@Bean</span>
+<span class="hljs-annotation">@ConfigurationProperties</span>(<span class="hljs-string">"github.client"</span>)
+<span class="hljs-keyword">public</span> AuthorizationCodeResourceDetails <span class="hljs-title">github</span>() {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> AuthorizationCodeResourceDetails();
+}
+
+<span class="hljs-annotation">@Bean</span>
+<span class="hljs-annotation">@ConfigurationProperties</span>(<span class="hljs-string">"github.resource"</span>)
+<span class="hljs-keyword">public</span> ResourceServerProperties <span class="hljs-title">githubResource</span>() {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ResourceServerProperties();
+}</code></pre>
+
+
+
+<h3 id="资源服务器">资源服务器</h3>
+
+<p>我们写了两个控制器来提供相应的资源。</p>
+
+<p>MainController.java</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-annotation">@Controller</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainController</span> {</span>
+
+    <span class="hljs-annotation">@GetMapping</span>(<span class="hljs-string">"/"</span>)
+    <span class="hljs-keyword">public</span> String <span class="hljs-title">root</span>() {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"redirect:/index"</span>;
+    }
+
+    <span class="hljs-annotation">@GetMapping</span>(<span class="hljs-string">"/index"</span>)
+    <span class="hljs-keyword">public</span> String <span class="hljs-title">index</span>(Principal principal, Model model) {
+        <span class="hljs-keyword">if</span>(principal == <span class="hljs-keyword">null</span> ){
+            <span class="hljs-keyword">return</span> <span class="hljs-string">"index"</span>;
+        }
+        System.out.println(principal.toString());
+        model.addAttribute(<span class="hljs-string">"principal"</span>, principal);
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"index"</span>;
+    }
+
+    <span class="hljs-annotation">@GetMapping</span>(<span class="hljs-string">"/403"</span>)
+    <span class="hljs-keyword">public</span> String <span class="hljs-title">accesssDenied</span>() {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"403"</span>;
+    }
+}</code></pre>
+
+<p>在index 页面，将如认证成功，将会显示一些认证信息。</p>
+
+<p>UserController.java  是用来模拟用户管理的相关资源。</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-annotation">@RestController</span>
+<span class="hljs-annotation">@RequestMapping</span>(<span class="hljs-string">"/"</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserController</span> {</span>
+    <span class="hljs-javadoc">/**
+     * 查询所用用户
+     *<span class="hljs-javadoctag"> @return</span>
+     */</span>
+    <span class="hljs-annotation">@GetMapping</span>(<span class="hljs-string">"/users"</span>)
+    <span class="hljs-annotation">@PreAuthorize</span>(<span class="hljs-string">"hasAuthority('ROLE_USER')"</span>)  <span class="hljs-comment">// 指定角色权限才能操作方法</span>
+    <span class="hljs-keyword">public</span> ModelAndView <span class="hljs-title">list</span>(Model model) {
+
+        List&lt;User&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();    <span class="hljs-comment">// 当前所在页面数据列表</span>
+        list.add(<span class="hljs-keyword">new</span> User(<span class="hljs-string">"waylau"</span>,<span class="hljs-number">29</span>));
+        list.add(<span class="hljs-keyword">new</span> User(<span class="hljs-string">"老卫"</span>,<span class="hljs-number">30</span>));
+        model.addAttribute(<span class="hljs-string">"title"</span>, <span class="hljs-string">"用户管理"</span>);
+        model.addAttribute(<span class="hljs-string">"userList"</span>, list);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ModelAndView(<span class="hljs-string">"users/list"</span>, <span class="hljs-string">"userModel"</span>, model);
+    }
+
+}</code></pre>
+
+
+
+<h3 id="前端页面">前端页面</h3>
+
+<p>页面，我主要是采用 Thymeleaf 以及Bootstrap 来编写的。</p>
+
+<p>首页用于现实用户的基本信息。</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"container"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"mt-3"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>Hello Spring Security<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">sec:authorize</span>=<span class="hljs-value">"isAuthenticated()"</span> <span class="hljs-attribute">th:if</span>=<span class="hljs-value">"${principal}"</span> <span class="hljs-attribute">th:object</span>=<span class="hljs-value">"${principal}"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>已有用户登录<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>登录的用户为: <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">sec:authentication</span>=<span class="hljs-value">"name"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>用户权限为: <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">th:text</span>=<span class="hljs-value">"*{userAuthentication.authorities}"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>用户头像为: <span class="hljs-tag">&lt;<span class="hljs-title">img</span> <span class="hljs-attribute">alt</span>=<span class="hljs-value">""</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"avatar width-full rounded-2"</span> <span class="hljs-attribute">height</span>=<span class="hljs-value">"230"</span> <span class="hljs-attribute">th:src</span>=<span class="hljs-value">"*{userAuthentication.details.avatar_url}"</span> <span class="hljs-attribute">width</span>=<span class="hljs-value">"230"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">sec:authorize</span>=<span class="hljs-value">"isAnonymous()"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>未有用户登录<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span></code></pre>
+
+<p>用户管理界面显示用户的列表：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"container"</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"mt-3"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">h2</span> <span class="hljs-attribute">th:text</span>=<span class="hljs-value">"${userModel.title}"</span>&gt;</span>Welcome to waylau.com<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">table</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table table-hover"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">thead</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span>&gt;</span>Age<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span>&gt;</span>Name<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">sec:authorize</span>=<span class="hljs-value">"hasRole('ADMIN')"</span>&gt;</span>Operation<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">thead</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">tbody</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">th:if</span>=<span class="hljs-value">"${userModel.userList.size()} eq 0"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">colspan</span>=<span class="hljs-value">"3"</span>&gt;</span>没有用户信息！！<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">th:each</span>=<span class="hljs-value">"user : ${userModel.userList}"</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">th:text</span>=<span class="hljs-value">"${user.age}"</span>&gt;</span>11<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">th:text</span>=<span class="hljs-value">"${user.name}"</span>&gt;</span>waylau<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">sec:authorize</span>=<span class="hljs-value">"hasRole('ADMIN')"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">div</span> &gt;</span>
+                    我是管理员
+                <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">tbody</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">table</span>&gt;</span>
+
+
+<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span></code></pre>
+
+
+
+<h2 id="运行效果">运行效果</h2>
+
+<p>这个是没有授权访问首页：</p>
+
+<p><img src="https://waylau.com/images/post/20170324-unlogin.jpg" alt="" title=""></p>
+
+<p>当我们点击登录，会重定向到 GitHub，登录界面并进行授权：</p>
+
+<p><img src="https://waylau.com/images/post/20170324-authorize-app.jpg" alt="" title=""></p>
+
+<p>这个是授权后的首页：</p>
+
+<p><img src="https://waylau.com/images/post/20170324-index.jpg" alt="" title=""></p>
+
+<p>授权后就能够进入用户管理界面：</p>
+
+<p><img src="https://waylau.com/images/post/20170324-users.jpg" alt="" title=""></p>
+
+
+
+<h2 id="注册github-应用">注册GitHub 应用</h2>
+
+<p>如果需要注册，请看下面的流程，来生成 Client ID 和  Client Secret</p>
+
+<p>访问<a href="https://github.com/settings/applications/new">https://github.com/settings/applications/new</a></p>
+
+<p>注册应用，生成 客户端 id 和 密码。比如：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ">Client ID ：ad2abbc19b6c5f0ed117
+Client Secret ：26db88a4dfc34cebaf196e68761c1294ac4ce265</code></pre>
+
+<p><img src="https://waylau.com/images/post/20170324-client.jpg" alt="" title=""></p>
+
+<p>客户端 id 和 密码写入程序配置即可。</p>
+
+
+
+<h2 id="源码">源码</h2>
+
+<ul>
+<li>《Spring Security 教程》：<a href="https://github.com/waylau/spring-security-tutorial">https://github.com/waylau/spring-security-tutorial</a></li>
+</ul></div>
+        <script  type="text/javascript">
+            $(function () {
+                $('pre.prettyprint code').each(function () {
+                    var lines = $(this).text().split('\n').length;
+                    var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+                    $(this).addClass('has-numbering').parent().append($numbering);
+                    for (i = 1; i <= lines; i++) {
+                        $numbering.append($('<li/>').text(i));
+                    };
+                    $numbering.fadeIn(1700);
+                });
+            });
+        </script>
+   
+</div>
+
+
+
+
+<!-- Baidu Button BEGIN -->
+
+
+
+
+<div class="bdsharebuttonbox tracking-ad" style="float: right;" data-mod="popu_172">
+<a href="#" class="bds_more" data-cmd="more" style="background-position:0 0 !important; background-image: url(http://bdimg.share.baidu.com/static/api/img/share/icons_0_16.png?v=d754dcc0.png) !important"></a>
+<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"  style="background-position:0 -52px !important"></a>
+<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"style="background-position:0 -104px !important"></a>
+<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"style="background-position:0 -260px !important"></a>
+<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"style="background-position:0 -208px !important"></a>
+<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"style="background-position:0 -1612px !important" ></a>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<!-- Baidu Button END -->
+
+   
+
+    
+<!--172.16.140.13-->
+
+<!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=1536434" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->
+
+<script type="text/javascript">
+    var fromjs = $("#fromjs");
+    if (fromjs.length > 0) {
+            $("#fromjs .markdown_views pre").addClass("prettyprint");
+            prettyPrint();
+
+            $('pre.prettyprint code').each(function () {
+                var lines = $(this).text().split('\n').length;
+                var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+                $(this).addClass('has-numbering').parent().append($numbering);
+                for (i = 1; i <= lines; i++) {
+                    $numbering.append($('<li/>').text(i));
+                };
+                $numbering.fadeIn(1700);
+            });
+
+            $('.pre-numbering li').css("color", "#999");
+        }
+
+    
+    $(".markdown_views a[target!='_blank']").attr("target", "_blank");
+
+    $(".toc a[target='_blank']").attr("target", "");
+
+
+
+</script>
+
+ 
+
+
+        <div id="digg" ArticleId="65531491" >
+            <dl id="btnDigg" class="digg digg_disable"  onclick="btndigga();">
+               
+                 <dt>顶</dt>
+                <dd>0</dd>
+            </dl>
+           
+              
+            <dl id="btnBury" class="digg digg_disable"  onclick="btnburya();">
+              
+                  <dt>踩</dt>
+                <dd>0</dd>               
+            </dl>
+            
+        </div>
+     <div class="tracking-ad" data-mod="popu_222"><a href="javascript:void(0);" >&nbsp;</a>   </div>
+    <div class="tracking-ad" data-mod="popu_223"> <a href="javascript:void(0);" >&nbsp;</a></div>
+    <script type="text/javascript">
+                function btndigga() {
+                    $(".tracking-ad[data-mod='popu_222'] a").click();
+                }
+                function btnburya() {
+                    $(".tracking-ad[data-mod='popu_223'] a").click();
+                }
+            </script>
+
+   <ul class="article_next_prev">
+                <li class="prev_article"><span  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian']);location.href='/kkkloveyou/article/details/61772522';">上一篇</span><a href="/kkkloveyou/article/details/61772522" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian'])">Spring Data + Thymeleaf 3 + Bootstrap 4 实现分页器</a></li>
+                <li class="next_article"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian']);location.href='/kkkloveyou/article/details/70164177';">下一篇</span><a href="/kkkloveyou/article/details/70164177" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian'])">分布式系统常见的事务处理机制</a></li>
+    </ul>
+
+    <div style="clear:both; height:10px;"></div>
+
+
+    <div id="articlecommend"  style="display:none"></div>
+        <div class="similar_article"   >
+                <h4></h4>
+                <div class="similar_c"style="margin:20px 0px 0px 0px">
+                    <div class="similar_c_t">
+                      &nbsp;&nbsp;相关文章推荐
+                    </div>
+                   
+                    <div class="similar_wrap tracking-ad" data-mod="popu_36"  style="max-height:195px;">                       
+                        <ul class="similar_list fl">                          
+                        </ul>
+                          <ul class="similar_list fr">                          
+                        </ul>
+                    </div>
+                </div>
+            </div>    
+      
+</div>
+
+     <div>
+           
+
+         <script type="text/javascript">
+             /*博客内容页下方Banner1-960*90，创建于2016-12-13*/
+             var cpro_id = "u2843955";
+        </script>
+        <script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js"></script>
+    </div>
+
+<div id="suggest"></div>
+         <script  language="javascript" type='text/javascript'>     
+             $(function(){
+                 $.get("/kkkloveyou/svc/GetSuggestContent/65531491",function(data){
+                     $("#suggest").html(data);
+                 });     
+             });             
+         </script>  
+
+
+<style>
+.blog-ass-articl dd {
+color: #369;
+width: 99%; /*修改行*/
+float: left;
+overflow: hidden;
+font: normal normal 12px/23px "SimSun";
+height: 23px;
+margin: 0;
+padding: 0 0 0 10px;
+margin-right: 30px;
+background: url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;
+}
+</style>
+
+ 
+<div id="relate" data-mod="popu_218"  class="tracking-ad">
+        <div class="relate_t">
+            <h3><span>参考知识库</span></h3>
+        </div>
+        <div class="relate_c">
+        </div>
+</div>
+ 
+
+<dl class="blog-ass-articl tracking-ad" id="res-relatived" data-mod="popu_84"  > 
+    <div class="embody embody_b" id="libkeyparent"  style="display:none">
+            <span class="embody_t">更多资料请参考：</span>
+            <div class="embody_c" id="libkey"></div>
+    </div>
+
+
+     <dt><span>猜你在找</span></dt>    
+
+
+   
+
+
+    <div id="adcollegedata" style="display:none"></div>
+
+    <div id="adCollege" style="width: 42%;float: left;"> 
+    </div>  
+
+    
+     <div id="resforAd"  style="width: 42%;float: left;margin-right: 30px;"></div>
+
+     <script src="http://csdnimg.cn/jobreco/job_reco.js" type="text/javascript"></script> 
+     <script type="text/javascript">
+         csdn.position.showEdu({
+             sourceType: "blog",
+             searchType: "detail",
+             searchKey: "65531491",
+                username: "",
+                recordcount: "10",
+                containerId: "adcollegedata" //容器DIV的id。 
+            });
+
+            //setEduLoc();
+
+            //function setEduLoc() {
+            //    var edus = $("#adCollege div dd a");
+            //    if (edus.length == 0) {
+            //        setTimeout(function () {
+            //            setEduLoc();
+            //        }, 500);
+            //    }
+            //    else {
+            //        var eduLoc = "?ref=blog&loc=0";
+            //        $.each(edus, function (index, item) {
+            //            var href = $(this).attr("href") + eduLoc;
+            //            $(this).attr("href", href);
+            //        });
+            //    }
+            //}
+
+
+            setTimeout(function () {
+                var adcolleges = $("#adcollegedata div dd");
+                for (var i = 0; i < adcolleges.length; i++) {
+                    if (i < 5) {
+                        $("#adCollege").append("<dd>" + $(adcolleges[i]).html() + "</dd");
+                    }
+                    else {
+                        $("#resforAd").append("<dd>" + $(adcolleges[i]).html() + "</dd");
+                    }
+                }
+            }, 1500);
+                    
+
+        </script> 
+   
+</dl>
+
+
+
+
+
+    <div id="ad_cen">        
+                <div>
+                                    <div class="J_adv" data-view="true" data-mod="ad_popu_199" data-mtp="43" data-order="114" data-con="ad_content_1843" style="width: 960px; height: 90px;">
+                                             <script type="text/javascript">
+                                                 /*博客内容页下方Banner2-960*90，创建于,2016-11-28*/
+                                                 var cpro_id = "u2831143";
+                                            </script>
+                                            <script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js"></script>
+                                   </div>
+                    </div>
+    </div>  
+
+        <!-- 广告位开始 -->
+        <!-- 广告位结束 -->
+<div class="J_adv" data-view="true" data-mod="ad_popu_72" data-mtp="62" data-order="40" data-con="ad_content_2072">
+                 <script id="popuLayer_js_q" src="http://ads.csdn.net/js/popuLayer.js" defer="defer"  type="text/javascript"></script>
+            <div id="layerd" style="position: fixed;bottom:0px;right:0px;line-height:0px;z-index:1000">
+    	            <div class="J_close layer_close" style="display:;background-color:#efefef;padding:0px;color:#333;font:12px/24px Helvetica,Tahoma,Arial,sans-serif;text-align:right;">关闭</div><!-- 广告占位容器 --><div id="cpro_u2895327"></div></div>
+            <script>  document.getElementById("popuLayer_js_q").onload=function(){      var styObjd=styObj={width:"300px","height":parseInt(250)+28};window.CSDN.Layer.PopuLayer("#layerd",{storageName:"layerd",styleObj:styObjd,total:50,expoire:1000*60});  }</script><!-- 投放代码 --><script type="text/javascript">                /*服务器频道首页置顶Banner960*90，创建于2014-7-3*/    (window.cproArray = window.cproArray || []).push({        id: "u2895327"      });  </script>  <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+     
+</div>
+
+<div class="comment_class">
+    <div id="comment_title" class="panel_head">
+        <span class="see_comment">查看评论</span><a name="comments"></a></div>
+    <div id="comment_list">
+    </div>
+    <div id="comment_bar">
+    </div>
+    <div id="comment_form">
+    </div>
+    <div class="announce">
+        * 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+</div>
+
+<script type="text/javascript">
+    var fileName = '65531491';
+    var commentscount = 0;
+    var islock = false
+</script>
+
+    <div id="ad_bot">
+    </div>
+<div id="report_dialog">
+</div>
+
+<div id="d-top"  style="bottom:60px;">
+
+        <a id="quick-reply" class="btn btn-top q-reply" title="快速回复" style="display:none;">
+            <img src="http://static.blog.csdn.net/images/blog-icon-reply.png" alt="快速回复">
+        </a>    
+    <a id="d-top-a" class="btn btn-top backtop"  style="display: none;" title="返回顶部" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_huidaodingbu'])" style="">         
+         <img src="http://static.blog.csdn.net/images/top.png" alt="TOP">
+    </a>
+</div>
+<script type="text/javascript">
+    $(function ()
+    {
+        $("#ad_frm_0").height("90px");
+        
+        setTimeout(function(){
+            $("#ad_frm_2").height("200px");
+        },1000);    
+    });
+  
+</script>
+<style type="text/css">
+    .tag_list
+    {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #D7CBC1;
+        color: #000000;
+        font-size: 12px;
+        line-height: 20px;
+        list-style: none outside none;
+        margin: 10px 2% 0 1%;
+        padding: 1px;
+    }
+    .tag_list h5
+    {
+        background: none repeat scroll 0 0 #E0DBD3;
+        color: #47381C;
+        font-size: 12px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 5px;
+        margin: 0;
+    }
+    .tag_list h5 a
+    {
+        color: #47381C;
+    }
+    .classify
+    {
+        margin: 10px 0;
+        padding: 4px 12px 8px;
+    }
+    .classify a
+    {
+        margin-right: 20px;
+        white-space: nowrap;
+    }
+</style>
+
+
+<div class="tag_list" style="display:none"></div>
+  <script  type='text/javascript'>     
+      $(function(){
+              setTimeout(function(){
+                  $.get("/kkkloveyou/svc/GetTagContent",function(data){
+                      $(".tag_list").html(data).show();
+                  });     
+              });
+          },500);                       
+ </script> 
+
+
+<div id="pop_win" style="display:none ;position: absolute; z-index: 10000; border: 1px solid rgb(220, 220, 220); top: 222.5px; left: 630px; opacity: 1; background: none 0px 0px repeat scroll rgb(255, 255, 255);">
+    
+</div>
+<div id="popup_mask"></div>
+<style>
+    #popup_mask
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        left: 0px;
+        top: 0px;
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+        display: none;
+    }
+
+</style>
+
+
+
+
+<script type="text/javascript">
+    $(function(){        
+        
+        setTimeout(function(){
+            $(".comment_body:contains('回复')").each(function(index,item){
+                var u=$(this).text().split('：')[0].toString().replace("回复","")
+                var thisComment=$(this);
+                if(u)
+                {
+                    $.getJSON("https://passport.csdn.net/get/nick?callback=?", {users: u}, function(a) {
+                        if(a!=null&&a.data!=null&&a.data.length>0)
+                        {
+                            nick=a.data[0].n; 
+                            if(u!=nick)
+                            {
+                                thisComment.text(thisComment.text().replace(u,nick));  
+                            }
+                        }       
+                    });  
+                }
+            });         
+
+        },200);  
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },5000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },10000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },15000);
+        
+        setTimeout(function(){
+            $("a img[src='http://js.tongji.linezing.com/stats.gif']").parent().css({"position":"absolute","left":"50%"});
+        },300);
+    });
+
+    function loginbox(){
+        var $logpop=$("#pop_win");
+        $logpop.html('<iframe src="https://passport.csdn.net/account/loginbox?service=http://static.blog.csdn.net/callback.htm" frameborder="0" height="600" width="400" scrolling="no"></iframe>');
+
+        $('#popup_mask').css({
+            opacity: 0.5,
+            width: $( document ).width() + 'px',
+            height:  $( document ).height() + 'px'
+        });
+        $('#popup_mask').css("display","block");
+ 
+        $logpop.css( {
+            top: ($( window ).height() - $logpop.height())/ 2  + $( window 
+       ).scrollTop() + 'px',
+            left:($( window ).width() - $logpop.width())/ 2
+        } );
+ 
+        setTimeout( function () {
+            $logpop.show();
+            $logpop.css( {
+                opacity: 1
+            } );
+        }, 200 );
+ 
+        $('#popup_mask').unbind("click");
+        $('#popup_mask').bind("click", function(){
+            $('#popup_mask').hide();
+            var $clopop = $("#pop_win");
+            $("#common_ask_div_sc").css("display","none");
+            $clopop.css( {
+                opacity: 0
+            } );
+            setTimeout( function () {
+                $clopop.hide();
+            }, 350 );
+            return false;
+        });
+    }   
+
+    var articletitle='OAuth 2.0 认证的原理与实践';
+
+</script>
+
+
+
+
+
+
+
+
+                        <div class="clear">
+                        </div>
+                    </div>                   
+                
+            </div>
+                   
+           <div id="side">
+               
+    <div class="side">
+<div id="panel_Profile" class="panel">
+<ul class="panel_head"><span>个人资料</span></ul>
+<ul class="panel_body profile">
+<div id="blog_userface">
+    <a href="http://my.csdn.net/kkkloveyou" target="_blank">
+    <img src="http://avatar.csdn.net/E/1/F/1_kkkloveyou.jpg" title="访问我的空间" style="max-width:90%"/>
+    </a>
+    <br />
+    <span><a href="http://my.csdn.net/kkkloveyou" class="user_name" target="_blank">kkkloveyou</a></span>
+</div>
+<div class="interact">
+
+    <a href="javascript:void(0);" class="attent" id="span_add_follow" title="[加关注]"></a>
+
+ <a href="javascript:void(0);" class="letter"  title="[发私信]" onclick="window.open('http://msg.csdn.net/letters/model?receiver=kkkloveyou','_blank','height=350,width=700');_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_sixin'])"></a>  
+</div>
+<div id="blog_medal">
+                       <div class="ico_expert"  onclick="javascript:location='http://blog.csdn.net/experts/rule.html'" title="CSDN认证专家" style="cursor:pointer;width:60px;height:60px;background:url('http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/bokezhuanjiamiddle.png') no-repeat" ></div>
+                <div id="bms_box">
+                                            <a  target="_blank">
+                                                    <img src="http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/zhuanlandaren.png" onmouseover="m_over_m(this,2)" onmouseout="m_out_m()" alt="1" >
+                                            </a>
+               </div>
+</div>
+<ul id="blog_rank">
+    <li>访问：<span>470664次</span></li>
+    <li>积分：<span>4967</span> </li>    
+    <li >等级： <span style="position:relative;display:inline-block;z-index:1" >
+            <img src="http://c.csdnimg.cn/jifen/images/xunzhang/jianzhang/blog5.png" alt="" style="vertical-align: middle;" id="leveImg">
+            <div id="smallTittle" style=" position: absolute;  left: -24px;  top: 25px;  text-align: center;  width: 101px;  height: 32px;  background-color: #fff;  line-height: 32px;  border: 2px #DDDDDD solid;  box-shadow: 0px 2px 2px rgba (0,0,0,0.1);  display: none;   z-index: 999;">
+            <div style="left: 42%;  top: -8px;  position: absolute;  width: 0;  height: 0;  border-left: 10px solid transparent;  border-right: 10px solid transparent;  border-bottom: 8px solid #EAEAEA;"></div>
+            积分：4967 </div>
+        </span>  </li>
+    <li>排名：<span>第5103名</span></li>
+</ul>
+<ul id="blog_statistics">
+    <li>原创：<span>101篇</span></li>
+    <li>转载：<span>0篇</span></li>
+    <li>译文：<span>5篇</span></li>
+    <li>评论：<span>184条</span></li>
+</ul>
+</ul>
+</div>
+
+
+<div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body" class="form_search">
+        <form id="frmSearch" action="http://so.csdn.net/search" class="form_search csdn-tracking-statistics" target="_blank"  data-mod="popu_306">
+        <span><input id="inputSearch" type="text" class="blogsearch" title="请输入关键字" /></span>
+        <input id="btnSubmit" type="button" value="搜索" title="search in blog" />
+        <input type="hidden" name="q" id="inputQ" />
+        <input type="hidden" name="t" value="blog" />
+        <a id="btnSearchBlog" target="_blank"></a>
+        </form>
+    </ul>
+</div>
+
+<script type="text/javascript">
+
+   
+    $(function () {
+        $("#btnSubmit").unbind("click");
+        $("#btnSubmit").click(function () {           
+            search();
+        });
+
+        $("#frmSearch").submit(function () {           
+            search();
+            return false;
+        });
+
+        function search()
+        {
+            if ($("#inputSearch").val() == "") {               
+                alert("请录入搜索关键词！");                         
+                return false;
+            }
+            //var url = "http://so.csdn.net/so/search/s.do?q=" + encodeURIComponent($("#inputSearch").val()) + "&u=" + username + "&t=blog";           
+            var url = "https://www.baidu.com/s?wd=" + encodeURIComponent($("#inputSearch").val()) + "%20site%3Ablog.csdn.net"
+            window.location.href = url;
+        }   
+    });
+</script><div id="panel_Category" class="panel">
+    <ul class="panel_head"><span>博客专栏</span></ul>
+    <ul class="panel_body" id="sp_column">
+    <table cellpadding="0" cellspacing="0"><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/jersey-rest.html" target="_blank"><img src="http://img.blog.csdn.net/20160125200402661" style="width:75px;height:75px;" /></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/jersey-rest.html" target="_blank">用 Jersey 构建 RESTful 服务</a>
+    <p>文章：7篇</p>
+    <span>阅读：90447</span>
+    </td>
+    </tr></table>
+    </ul>
+</div><div id="panel_Category" class="panel">
+<ul class="panel_head"><span>文章分类</span></ul>
+<ul class="panel_body">    
+                 <li>
+                    <a href="/kkkloveyou/article/category/838110" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Java</a><span>(34)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/841041" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">java 算法</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/847608" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Java 核心 应用</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/848368" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Java试题</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/860711" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">ActionScript3.0</a><span>(9)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/928425" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Office</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/928432" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">数据</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/949177" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">网络</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/958266" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Flex</a><span>(18)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1094868" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Spring</a><span>(6)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1141550" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Webservice</a><span>(7)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1171113" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">悟</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1184759" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">搜索</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1213808" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">技术</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1288434" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Golang</a><span>(6)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1573677" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Mysql</a><span>(4)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1654903" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Windows</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2135125" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Hibernate</a><span>(6)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2270791" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">JasperReports</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2300159" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">SVG</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2492673" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">REST</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2697461" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Github</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2801515" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">maven</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2801517" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">tomcat</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2912119" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Jersey</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/3055451" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">netty</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/3083679" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Mina</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6089794" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Web</a><span>(5)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6092268" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">系统架构设计师</a><span>(0)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6092271" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">架构师</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6100851" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Microservices</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6104733" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Docker</a><span>(4)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6389608" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Hadoop</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6414832" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">HBase</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6422827" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Redis</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6641307" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">持续集成</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6703316" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Linux</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6768077" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Distribute</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6930850" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">NGINX</a><span>(0)</span>
+                </li>
+</ul>
+</div><div id="panel_Archive" class="panel">
+<ul class="panel_head"><span>文章存档</span></ul>
+<ul class="panel_body">
+<div id="archive_list">
+<!--归档统计-->
+<li><a href="/kkkloveyou/article/month/2017/05">2017年05月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2017/04">2017年04月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2017/03">2017年03月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2017/02">2017年02月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/12">2016年12月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/09">2016年09月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2016/08">2016年08月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/07">2016年07月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/05">2016年05月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/04">2016年04月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/03">2016年03月</a><span>(4)</span></li><li><a href="/kkkloveyou/article/month/2016/02">2016年02月</a><span>(8)</span></li><li><a href="/kkkloveyou/article/month/2016/01">2016年01月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2015/04">2015年04月</a><span>(5)</span></li><li><a href="/kkkloveyou/article/month/2015/03">2015年03月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2014/12">2014年12月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2014/11">2014年11月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2014/08">2014年08月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2014/06">2014年06月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2014/05">2014年05月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2014/03">2014年03月</a><span>(8)</span></li><li><a href="/kkkloveyou/article/month/2013/10">2013年10月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/09">2013年09月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/08">2013年08月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/07">2013年07月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/06">2013年06月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/05">2013年05月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2013/03">2013年03月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2013/01">2013年01月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2012/12">2012年12月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2012/11">2012年11月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/10">2012年10月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/09">2012年09月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2012/08">2012年08月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/07">2012年07月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/06">2012年06月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/05">2012年05月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/03">2012年03月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2012/02">2012年02月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2012/01">2012年01月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2011/12">2011年12月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2011/11">2011年11月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2011/09">2011年09月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2011/08">2011年08月</a><span>(5)</span></li><li><a href="/kkkloveyou/article/month/2011/07">2011年07月</a><span>(10)</span></li><li><a href="/kkkloveyou/article/month/2011/06">2011年06月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2011/05">2011年05月</a><span>(6)</span></li>
+</div>
+</ul>
+</div>
+<div id="hotarticls" class="panel">
+<ul class="panel_head">
+    <span>       
+阅读排行    </span>
+</ul>
+
+<ul class="panel_body itemlist">
+<li>
+<a href="/kkkloveyou/article/details/6724083" title="java多线程编程技术 +代码实例">java多线程编程技术 +代码实例</a><span>(35966)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/44836609" title="如何查看 JAR 包的源代码">如何查看 JAR 包的源代码</a><span>(32603)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21391033" title="用Jersey构建RESTful服务1--HelloWorld">用Jersey构建RESTful服务1--HelloWorld</a><span>(28937)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21517165" title="用Jersey构建RESTful服务4--通过jersey-client客户端调用Jersey的Web服务模拟CURD">用Jersey构建RESTful服务4--通过jersey-client客户端调用Jersey的Web服务模拟CURD</a><span>(26370)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/7870572" title="“笔记本无线网络搜索不到自家信号,却能搜到其他公司的信号”解决方法">“笔记本无线网络搜索不到自家信号,却能搜到其他公司的信号”解决方法</a><span>(20967)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21485243" title="用Jersey构建RESTful服务3--JAVA对象转成JSON输出">用Jersey构建RESTful服务3--JAVA对象转成JSON输出</a><span>(15556)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/6564625" title="java软件开发工程师实习求职常见面试题">java软件开发工程师实习求职常见面试题</a><span>(12731)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/44656325" title="Netty 实现 WebSocket 聊天功能">Netty 实现 WebSocket 聊天功能</a><span>(12369)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/6624070" title="Install error &quot;Exit Code: 6&quot; or &quot;Exit Code: 7&quot; | Creative Adobe Production(安装Adobe产品时出错及解决方案)">Install error &quot;Exit Code: 6&quot; or &quot;Exit Code: 7&quot; | Creative Adobe Production(安装Adobe产品时出错及解决方案)</a><span>(12273)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/51874354" title="远程过程调用(RPC)详解">远程过程调用(RPC)详解</a><span>(11656)</span>
+</li>
+</ul>
+</div>
+<div id="hotarticls2" class="panel">
+<ul class="panel_head"><span>评论排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="/kkkloveyou/article/details/21391033" title="用Jersey构建RESTful服务1--HelloWorld">用Jersey构建RESTful服务1--HelloWorld</a><span>(34)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21517165" title="用Jersey构建RESTful服务4--通过jersey-client客户端调用Jersey的Web服务模拟CURD">用Jersey构建RESTful服务4--通过jersey-client客户端调用Jersey的Web服务模拟CURD</a><span>(26)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/6628871" title="什么是“面向对象编程”？用邓小平理论指导编程思想">什么是“面向对象编程”？用邓小平理论指导编程思想</a><span>(17)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/44836609" title="如何查看 JAR 包的源代码">如何查看 JAR 包的源代码</a><span>(12)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21485243" title="用Jersey构建RESTful服务3--JAVA对象转成JSON输出">用Jersey构建RESTful服务3--JAVA对象转成JSON输出</a><span>(11)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/44656325" title="Netty 实现 WebSocket 聊天功能">Netty 实现 WebSocket 聊天功能</a><span>(8)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21888283" title="用Jersey构建RESTful服务5--Jersey+MySQL5.6+Hibernate4.3">用Jersey构建RESTful服务5--Jersey+MySQL5.6+Hibernate4.3</a><span>(8)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/50745623" title="Docker 在 CentOS 下的安装、使用">Docker 在 CentOS 下的安装、使用</a><span>(6)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/60493832" title="用大白话聊聊分布式系统">用大白话聊聊分布式系统</a><span>(6)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/6724083" title="java多线程编程技术 +代码实例">java多线程编程技术 +代码实例</a><span>(4)</span>
+</li>
+</ul>
+</div>
+<div id="homepageArticles" class="panel tracking-ad" data-mod="popu_4">
+<ul class="panel_head"><span>推荐文章</span></ul>
+<ul class="panel_body" id="ad_commend">
+<ul>
+<li><a href="http://blog.csdn.net/turingbooks/article/details/72416875" target="_blank">* 5月书讯：流畅的Python，终于等到你！</a></li>
+<li><a href="http://blog.csdn.net/blogdevteam/article/details/72526177" 
+target="_blank">*【新收录】CSDN日报 —— Kotlin 专场</a></li>
+<li><a href="http://blog.csdn.net/jiangwei0910410003/article/details/70483088"target="_blank">* Android中带你开发一款自动爆破签名校验工具kstools</a></li>
+<li><a href="http://blog.csdn.net/javazejian/article/details/71860633" 
+target="_blank">* 深入理解Java注解类型(@Annotation)</a></li>
+<li><a href="http://blog.csdn.net/c406495762/article/details/72597755" 
+target="_blank">* Python3 网络爬虫——这个帅哥、肌肉男横行的世界</a></li>
+<li><a href="http://blog.csdn.net/mindfloating/article/details/72614855" 
+target="_blank">* 从个人习惯到真正的好方法</a></li>
+
+</ul></ul>
+</div>
+
+
+<div id="newcomments" class="panel">
+<ul class="panel_head"><span>最新评论</span></ul>
+<ul class="panel_body itemlist">
+    <li>
+   
+         <a href="/kkkloveyou/article/details/7334309#comments">org.hibernate.MappingException: Unknown entity: com.pkms.entity.User</a>
+    <p style="margin:0px;"><a href="/kkkloveyou" class="user_name">kkkloveyou</a>:
+@CDW2328:没想这么多年前的问题，近期我又遇到。温故而知新啊
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/7334309#comments">org.hibernate.MappingException: Unknown entity: com.pkms.entity.User</a>
+    <p style="margin:0px;"><a href="/CDW2328" class="user_name">CDW2328</a>:
+博主很给力！大赞
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/70164177#comments">分布式系统常见的事务处理机制</a>
+    <p style="margin:0px;"><a href="/daigualu" class="user_name">daigualu</a>:
+感谢分享，学习了。。
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21485243#comments">用Jersey构建RESTful服务3--JAVA对象转成JSON输出</a>
+    <p style="margin:0px;"><a href="/kingDpu" class="user_name">kingDpu</a>:
+@kkkloveyou:谢谢，已经解决了
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/u014308105" class="user_name">u014308105</a>:
+@kkkloveyou:嗯，多谢
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/kkkloveyou" class="user_name">kkkloveyou</a>:
+@u014308105:1. 多个参数可以封装成一个对象来作为一个参数2. 多个参数也可以接收，比如...
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/u014308105" class="user_name">u014308105</a>:
+请问：如果要传递多个参数，也用get方式，该怎么写？
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/kkkloveyou" class="user_name">kkkloveyou</a>:
+@hnn_neil:应该是你的 JDK 版本太低了
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/hnn_neil" class="user_name">hnn_neil</a>:
+你好，我按照步骤操作，发布项目时报错：java.lang.UnsupportedClassVersi...
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/52348883#comments">Apache Hadoop 入门教程</a>
+    <p style="margin:0px;"><a href="/qq_20579895" class="user_name">qq_20579895</a>:
+羊肉串 羊肉串 。。
+    </p>
+    </li>
+</ul>
+</div>
+    </div>
+    <div class="clear">
+    </div>
+
+
+                   <!-- 广告位开始 -->                    <!-- 广告位结束 -->
+                   <div class="J_adv" data-view="true"  data-mtp="63" data-order="40" data-con="ad_content_1260" style="width: 200px; height: 200px;">
+                         <div id="nav_show_top_stop" style="width: 200px;height: 200px;z-index:1000"><div id="cpro_u2734128"></div></div>
+                   </div>
+    <script type="text/javascript">    
+        setTimeout(function () {
+            var naviga_offsetTop = 0;
+            function naviga_stay_top() { var scrollTop = jQuery(document).scrollTop(); if (scrollTop > naviga_offsetTop) { jQuery("#nav_show_top_stop").css({ "position": "fixed" }); jQuery("#nav_show_top_stop").css({ "top": "0px" }); } else { jQuery("#nav_show_top_stop").css({ "position": "fixed" }); jQuery("#nav_show_top_stop").css({ "top": naviga_offsetTop - scrollTop + "px" }); } }
+            function onload_function() { naviga_offsetTop = jQuery("#nav_show_top_stop").position().top; jQuery(window).bind("scroll", naviga_stay_top); jQuery(window).bind("mousewheel", naviga_stay_top); jQuery(document).bind("scroll", naviga_stay_top); jQuery(document).bind("mousewheel", naviga_stay_top); } jQuery(document).ready(onload_function);
+               
+        }, 200);    
+    </script>
+<script type="text/javascript">(window.cproArray = window.cproArray || []).push({ id: "u2734128" });  </script> 
+                    <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script> 
+
+           </div>   
+
+            <div class="clear">
+            </div>
+        </div>
+
+        
+
+<script type="text/javascript" src="http://c.csdnimg.cn/rabbit/cnick/cnick.js"></script>
+
+
+
+
+
+
+    <script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+<script type="text/javascript">
+    $(function () {
+        function __get_code_toolbar(snippet_id) {
+            return $("<span class='tracking-ad' data-mod='popu_167'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "' target='_blank' title='在CODE上查看代码片'  style='text-indent:0;'><img src='https://code.csdn.net/assets/CODE_ico.png' width=12 height=12 alt='在CODE上查看代码片' style='position:relative;top:1px;left:2px;'/></a></span>"
+                    + "<span class='tracking-ad' data-mod='popu_170'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "/fork' target='_blank' title='派生到我的代码片' style='text-indent:0;'><img src='https://code.csdn.net/assets/ico_fork.svg' width=12 height=12 alt='派生到我的代码片' style='position:relative;top:2px;left:2px;'/></a></span>");
+        }
+        
+        $("[code_snippet_id]").each(function () {
+            __s_id = $(this).attr("code_snippet_id");
+            if (__s_id != null && __s_id != "" && __s_id != 0 && parseInt(__s_id) > 70020) {
+                __code_tool = __get_code_toolbar(__s_id);
+                $(this).prev().find(".tools").append(__code_tool);
+            }
+        });
+
+        $(".bar").show();
+    });
+</script>
+
+
+
+
+
+    </div>
+      <!--new top-->
+    
+
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>  
+
+   
+        <!--new top-->
+   
+    <link href="http://c.csdnimg.cn/comm_ask/css/ask_float_block.css" type="text/css" rel="stylesheet" />
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/wmd.js'></script>
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/showdown.js'></script>
+    
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/apps/ask_float_block.js'></script>
+   
+
+   
+
+
+        <script type="text/javascript" src="http://ads.csdn.net/js/async_new.js"></script>
+       <script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+        <script type="text/javascript" src="http://c.csdnimg.cn/rabbit/search-service/main.js"></script>
+          <script type="text/javascript">
+              //$(function () {
+              //    setTimeout(function () {
+              //        var searchtitletags = articletitle + ',' + $("#tags").html();
+              //        searchService({
+              //            index: 'blog',
+              //            query: searchtitletags,
+              //            from: 5,
+              //            size: 5,
+              //            appendTo: '#res',
+              //            url: 'recommend',
+              //            his: 2,
+              //            client: "blog_cf_enhance",
+              //            tmpl: '<dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;"><a href="#{ url }" title="#{ title }" strategy="#{ strategy }">#{ title }</a></dd>'
+              //        });
+              //    }, 1000);
+              //});
+
+         </script>   
+          <script type="text/javascript">
+              $(function () {
+                  setTimeout(function () {
+                      var searchtitletags = articletitle + ',' + $("#tags").html();
+                      searchService({
+                          index: 'blog',
+                          query: searchtitletags,
+                          from: 0,
+                          size: 5,
+                          appendTo: '#articlecommend',
+                          url: 'recommend',
+                          his: 2,
+                          client: "blog_cf_enhance",
+                          tmpl: '<li><em>•</em><a href="#{ url }" title="#{ title }" strategy="#{ strategy }">#{ title }</a></li>'
+                      });
+
+                      setTimeout(function () {
+                          var articles=$("#articlecommend li");
+                          for (var i = 0; i < articles.length; i++)
+                          {
+                              $(articles[i]).find("a").css("width", "290px");
+                              if (i < 5) {
+                                  $(".similar_list.fl").append("<li>" + $(articles[i]).html() + "</li");
+                              }
+                              else {
+                                  $(".similar_list.fr").append("<li>" + $(articles[i]).html() + "</li");
+                              }
+                          }
+                      }, 2000);                     
+
+                  }, 1000);
+              });
+
+         </script>
+    <script src="http://static.blog.csdn.net/scripts/csdn_blog_detail.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=1070877"></script>
+
+     <script id="csdn-toolbar-id" btnId="header_notice_num" wrapId="note1" count="5" subCount="5" type="text/javascript" src="http://c.csdnimg.cn/public/common/toolbar/js/toolbar.js"></script>
+    
+
+
+  <div id="a52b5334d" style="width: 1px; height: 1px; display: none;">
+                    <script id="adJs52b5334"></script>
+                    <script>document.getElementById("adJs52b5334").src = "http://ads.csdn.net/js/opt/52b5334.js?t=" + Math.random();</script>
+   </div>
+
+    
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/saveToCode.js"></script>
+      <script type="text/javascript" src="//c.csdnimg.cn/rabbit/tracking-ad/main.js?75eacd8"></script>
+        
+     
+
+    
+          
+    <div class="pop_CA_cover"  style="display:none"></div>
+    <div class="pop pop_CA"  style="display:none">
+          <div class="CA_header">
+            收藏助手
+            <span class="cancel_icon"  id="fapancle"  onclick="$('.pop_CA').hide();$('.pop_CA_cover').hide();"></span>
+          </div>
+          <iframe src="" id="fa" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+    </div>
+
+</body>
+</html>   
+ 

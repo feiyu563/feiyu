@@ -1,0 +1,883 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python开发【第十六篇】：AJAX全套 - 武沛齐 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=m_FXmwz3wxZoecUwNEK23PAzc-j9vbX_C6MblJ5ouMc1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue.css?v=jJERBFSojhmgst84aaRDal9S3q1WoO-WcNudmMzGJS81"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/133379.css?v=YSNZANkz7eBKoXq2iHYfghvodkY%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue-mobile.css?v=z0BacpCfWeLlXDCM0C158kTP_DMqMbGBapID4f-QztI1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/wupeiqi/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/wupeiqi/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/wupeiqi/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'wupeiqi', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=CPv0EEqm9L2aCgolHxaZfVYM6J-Sn5az_FJXbjzgr-o1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/wupeiqi/">Mr.Seven</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/wupeiqi/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%AD%A6%E6%B2%9B%E9%BD%90">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/wupeiqi/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/wupeiqi/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-126&nbsp;
+文章-137&nbsp;
+评论-259&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/wupeiqi/articles/5703697.html">Python开发【第十六篇】：AJAX全套</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><h3>概述</h3>
+<p><span style="font-size: 13px;">对于WEB应用程序：用户浏览器发送请求，服务器接收并处理请求，然后返回结果，往往返回就是字符串（HTML），浏览器将字符串（HTML）渲染并显示浏览器上。</span></p>
+<p><span style="font-size: 13px;">1、传统的Web应用</span></p>
+<blockquote>
+<p><span style="font-size: 13px;">一个简单操作需要重新加载全局数据</span></p>
+</blockquote>
+<p><span style="font-size: 13px;">2、AJAX</span></p>
+<blockquote>
+<p><span style="font-size: 13px;">AJAX，Asynchronous JavaScript and XML (异步的JavaScript和XML)，一种创建交互式网页应用的网页开发技术方案。</span></p>
+<ul>
+<li><span style="font-size: 13px;">异步的JavaScript：</span><br /><span style="font-size: 13px;">使用 【JavaScript语言】 以及 相关【浏览器提供类库】 的功能向服务端发送请求，当服务端处理完请求之后，【自动执行某个JavaScript的回调函数】。</span><br /><span style="font-size: 13px;">PS：以上请求和响应的整个过程是【偷偷】进行的，页面上无任何感知。</span></li>
+<li><span style="font-size: 13px;">XML</span><br /><span style="font-size: 13px;">XML是一种标记语言，是Ajax在和后台交互时传输数据的格式之一</span></li>
+
+
+</ul>
+<p><span style="font-size: 13px;">利用AJAX可以做：</span><br /><span style="font-size: 13px;">1、注册时，输入用户名自动检测用户是否已经存在。</span><br /><span style="font-size: 13px;">2、登陆时，提示用户名密码错误</span><br /><span style="font-size: 13px;">3、删除数据行时，将行ID发送到后台，后台在数据库中删除，数据库删除成功后，在页面DOM中将数据行也删除。（博客园）</span></p>
+
+
+
+
+</blockquote>
+<h3>&ldquo;伪&rdquo;AJAX</h3>
+<p><span style="font-size: 13px;">由于HTML标签的iframe标签具有局部加载内容的特性，所以可以使用其来伪造Ajax请求。</span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+    &lt;head lang="en"&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;title&gt;&lt;/title&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+
+        &lt;div&gt;
+            &lt;p&gt;请输入要加载的地址：&lt;span id="currentTime"&gt;&lt;/span&gt;&lt;/p&gt;
+            &lt;p&gt;
+                &lt;input id="url" type="text" /&gt;
+                &lt;input type="button" value="刷新" onclick="LoadPage();"&gt;
+            &lt;/p&gt;
+        &lt;/div&gt;
+
+
+        &lt;div&gt;
+            &lt;h3&gt;加载页面位置：&lt;/h3&gt;
+            &lt;iframe id="iframePosition" style="width: 100%;height: 500px;"&gt;&lt;/iframe&gt;
+        &lt;/div&gt;
+
+
+        &lt;script type="text/javascript"&gt;
+
+            window.onload= function(){
+                var myDate = new Date();
+                document.getElementById('currentTime').innerText = myDate.getTime();
+
+            };
+
+            function LoadPage(){
+                var targetUrl =  document.getElementById('url').value;
+                document.getElementById("iframePosition").src = targetUrl;
+            }
+
+        &lt;/script&gt;
+
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+<h3>原生AJAX</h3>
+<p><span style="font-size: 13px;">Ajax主要就是使用 【XmlHttpRequest】对象来完成请求的操作，该对象在主流浏览器中均存在(除早起的IE)，Ajax首次出现IE5.5中存在（ActiveX控件）。</span></p>
+<p><strong><span style="font-size: 14pt;">1、XmlHttpRequest对象介绍</span></strong></p>
+<p><span style="font-size: 13px;">XmlHttpRequest对象的主要方法：</span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">    a. void open(String method,String url,Boolen async)
+       用于创建请求
+       
+       参数：
+           method： 请求方式（字符串类型），如：POST、GET、DELETE...
+           url：    要请求的地址（字符串类型）
+           async：  是否异步（布尔类型）
+
+    b. void send(String body)
+        用于发送请求
+
+        参数：
+            body： 要发送的数据（字符串类型）
+
+    c. void setRequestHeader(String header,String value)
+        用于设置请求头
+
+        参数：
+            header： 请求头的key（字符串类型）
+            vlaue：  请求头的value（字符串类型）
+
+    d. String getAllResponseHeaders()
+        获取所有响应头
+
+        返回值：
+            响应头数据（字符串类型）
+
+    e. String getResponseHeader(String header)
+        获取响应头中指定header的值
+
+        参数：
+            header： 响应头的key（字符串类型）
+
+        返回值：
+            响应头中指定的header对应的值
+
+    f. void abort()
+
+        终止请求
+</pre>
+</div>
+<p><span style="font-size: 13px;">XmlHttpRequest对象的主要属性：</span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">    a. Number readyState
+       状态值（整数）
+
+       详细：
+          0-未初始化，尚未调用open()方法；
+          1-启动，调用了open()方法，未调用send()方法；
+          2-发送，已经调用了send()方法，未接收到响应；
+          3-接收，已经接收到部分响应数据；
+          4-完成，已经接收到全部响应数据；
+
+    b. Function onreadystatechange
+       当readyState的值改变时自动触发执行其对应的函数（回调函数）
+
+    c. String responseText
+       服务器返回的数据（字符串类型）
+
+    d. XmlDocument responseXML
+       服务器返回的数据（Xml对象）
+
+    e. Number states
+       状态码（整数），如：200、404...
+
+    f. String statesText
+       状态文本（字符串），如：OK、NotFound...
+</pre>
+</div>
+<p><strong><span style="font-size: 14pt;">2、跨浏览器支持</span></strong></p>
+<ul>
+<li><span style="font-size: 13px;">XmlHttpRequest</span><br /><span style="font-size: 13px;">IE7+, Firefox, Chrome, Opera, etc.</span></li>
+<li><span style="font-size: 13px;">ActiveXObject("Microsoft.XMLHTTP")</span><br /><span style="font-size: 13px;">IE6, IE5</span></li>
+
+
+
+
+</ul>
+<div class="cnblogs_code" onclick="cnblogs_code_show('cb330f9b-7ab8-490c-b597-90a7d4ace25f')"><img id="code_img_closed_cb330f9b-7ab8-490c-b597-90a7d4ace25f" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_cb330f9b-7ab8-490c-b597-90a7d4ace25f" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('cb330f9b-7ab8-490c-b597-90a7d4ace25f',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_cb330f9b-7ab8-490c-b597-90a7d4ace25f" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span style="color: #800000;">"</span><span style="color: #800000;">en</span><span style="color: #800000;">"</span>&gt;
+    &lt;meta charset=<span style="color: #800000;">"</span><span style="color: #800000;">UTF-8</span><span style="color: #800000;">"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h1&gt;XMLHttpRequest - Ajax请求&lt;/h1&gt;
+    &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">button</span><span style="color: #800000;">"</span> onclick=<span style="color: #800000;">"</span><span style="color: #800000;">XmlGetRequest();</span><span style="color: #800000;">"</span> value=<span style="color: #800000;">"</span><span style="color: #800000;">Get发送请求</span><span style="color: #800000;">"</span> /&gt;
+    &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">button</span><span style="color: #800000;">"</span> onclick=<span style="color: #800000;">"</span><span style="color: #800000;">XmlPostRequest();</span><span style="color: #800000;">"</span> value=<span style="color: #800000;">"</span><span style="color: #800000;">Post发送请求</span><span style="color: #800000;">"</span> /&gt;
+
+    &lt;script src=<span style="color: #800000;">"</span><span style="color: #800000;">/statics/jquery-1.12.4.js</span><span style="color: #800000;">"</span>&gt;&lt;/script&gt;
+    &lt;script type=<span style="color: #800000;">"</span><span style="color: #800000;">text/javascript</span><span style="color: #800000;">"</span>&gt;<span style="color: #000000;">
+
+        function GetXHR(){
+            var xhr </span>=<span style="color: #000000;"> null;
+            </span><span style="color: #0000ff;">if</span><span style="color: #000000;">(XMLHttpRequest){
+                xhr </span>=<span style="color: #000000;"> new XMLHttpRequest();
+            }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+                xhr </span>= new ActiveXObject(<span style="color: #800000;">"</span><span style="color: #800000;">Microsoft.XMLHTTP</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+            }
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> xhr;
+
+        }
+
+        function XhrPostRequest(){
+            var xhr </span>=<span style="color: #000000;"> GetXHR();
+            </span>//<span style="color: #000000;"> 定义回调函数
+            xhr.onreadystatechange </span>=<span style="color: #000000;"> function(){
+                </span><span style="color: #0000ff;">if</span>(xhr.readyState == 4<span style="color: #000000;">){
+                    </span>//<span style="color: #000000;"> 已经接收到全部响应数据，执行以下操作
+                    var data </span>=<span style="color: #000000;"> xhr.responseText;
+                    console.log(data);
+                }
+            };
+            </span>// 指定连接方式和地址----<span style="color: #000000;">文件方式
+            xhr.open(</span><span style="color: #800000;">'</span><span style="color: #800000;">POST</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">/test/</span><span style="color: #800000;">"</span><span style="color: #000000;">, true);
+            </span>//<span style="color: #000000;"> 设置请求头
+            xhr.setRequestHeader(</span><span style="color: #800000;">'</span><span style="color: #800000;">Content-Type</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">application/x-www-form-urlencoded; charset-UTF-8</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+            </span>//<span style="color: #000000;"> 发送请求
+            xhr.send(</span><span style="color: #800000;">'</span><span style="color: #800000;">n1=1;n2=2;</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+        }
+
+        function XhrGetRequest(){
+            var xhr </span>=<span style="color: #000000;"> GetXHR();
+            </span>//<span style="color: #000000;"> 定义回调函数
+            xhr.onreadystatechange </span>=<span style="color: #000000;"> function(){
+                </span><span style="color: #0000ff;">if</span>(xhr.readyState == 4<span style="color: #000000;">){
+                    </span>//<span style="color: #000000;"> 已经接收到全部响应数据，执行以下操作
+                    var data </span>=<span style="color: #000000;"> xhr.responseText;
+                    console.log(data);
+                }
+            };
+            </span>// 指定连接方式和地址----<span style="color: #000000;">文件方式
+            xhr.open(</span><span style="color: #800000;">'</span><span style="color: #800000;">get</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">/test/</span><span style="color: #800000;">"</span><span style="color: #000000;">, true);
+            </span>//<span style="color: #000000;"> 发送请求
+            xhr.send();
+        }
+
+    </span>&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">基于原生AJAX - Demo</span></div>
+<h3>jQuery Ajax</h3>
+<p><span style="font-size: 13px;">jQuery其实就是一个JavaScript的类库，其将复杂的功能做了上层封装，使得开发者可以在其基础上写更少的代码实现更多的功能。</span></p>
+<ul>
+<li><span style="font-size: 13px;">jQuery 不是生产者，而是大自然搬运工。</span></li>
+<li><span style="font-size: 13px;">jQuery Ajax本质 XMLHttpRequest 或 ActiveXObject&nbsp;</span></li>
+</ul>
+<p><span style="color: #888888; font-size: 13px;">注：2.+版本不再支持IE9以下的浏览器</span></p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('9c90c8ed-67ed-48ad-bf24-c12d3b1a2913')"><img id="code_img_closed_9c90c8ed-67ed-48ad-bf24-c12d3b1a2913" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_9c90c8ed-67ed-48ad-bf24-c12d3b1a2913" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('9c90c8ed-67ed-48ad-bf24-c12d3b1a2913',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_9c90c8ed-67ed-48ad-bf24-c12d3b1a2913" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">            jQuery.get(...)
+                所有参数：
+                     url: 待载入页面的URL地址
+                    data: 待发送 Key</span>/<span style="color: #000000;">value 参数。
+                 success: 载入成功时回调函数。
+                dataType: 返回内容格式，xml, json,  script, text, html
+
+
+            jQuery.post(...)
+                所有参数：
+                     url: 待载入页面的URL地址
+                    data: 待发送 Key</span>/<span style="color: #000000;">value 参数
+                 success: 载入成功时回调函数
+                dataType: 返回内容格式，xml, json,  script, text, html
+
+
+            jQuery.getJSON(...)
+                所有参数：
+                     url: 待载入页面的URL地址
+                    data: 待发送 Key</span>/<span style="color: #000000;">value 参数。
+                 success: 载入成功时回调函数。
+
+
+            jQuery.getScript(...)
+                所有参数：
+                     url: 待载入页面的URL地址
+                    data: 待发送 Key</span>/<span style="color: #000000;">value 参数。
+                 success: 载入成功时回调函数。
+
+
+            jQuery.ajax(...)
+
+                部分参数：
+
+                        url：请求地址
+                       type：请求方式，GET、POST（</span>1.9<span style="color: #000000;">.0之后用method）
+                    headers：请求头
+                       data：要发送的数据
+                contentType：即将发送信息至服务器的内容编码类型(默认: </span><span style="color: #800000;">"</span><span style="color: #800000;">application/x-www-form-urlencoded; charset=UTF-8</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+                      async：是否异步
+                    timeout：设置请求超时时间（毫秒）
+
+                 beforeSend：发送请求前执行的函数(全局)
+                   complete：完成之后执行的回调函数(全局)
+                    success：成功之后执行的回调函数(全局)
+                      error：失败之后执行的回调函数(全局)
+                
+
+                    accepts：通过请求头发送给服务器，告诉服务器当前客户端课接受的数据类型
+                   dataType：将服务器端返回的数据转换成指定类型
+                                   </span><span style="color: #800000;">"</span><span style="color: #800000;">xml</span><span style="color: #800000;">"</span><span style="color: #000000;">: 将服务器端返回的内容转换成xml格式
+                                  </span><span style="color: #800000;">"</span><span style="color: #800000;">text</span><span style="color: #800000;">"</span><span style="color: #000000;">: 将服务器端返回的内容转换成普通文本格式
+                                  </span><span style="color: #800000;">"</span><span style="color: #800000;">html</span><span style="color: #800000;">"</span><span style="color: #000000;">: 将服务器端返回的内容转换成普通文本格式，在插入DOM中时，如果包含JavaScript标签，则会尝试去执行。
+                                </span><span style="color: #800000;">"</span><span style="color: #800000;">script</span><span style="color: #800000;">"</span><span style="color: #000000;">: 尝试将返回值当作JavaScript去执行，然后再将服务器端返回的内容转换成普通文本格式
+                                  </span><span style="color: #800000;">"</span><span style="color: #800000;">json</span><span style="color: #800000;">"</span><span style="color: #000000;">: 将服务器端返回的内容转换成相应的JavaScript对象
+                                 </span><span style="color: #800000;">"</span><span style="color: #800000;">jsonp</span><span style="color: #800000;">"</span><span style="color: #000000;">: JSONP 格式
+                                          使用 JSONP 形式调用函数时，如 </span><span style="color: #800000;">"</span><span style="color: #800000;">myurl?callback=?</span><span style="color: #800000;">"</span><span style="color: #000000;"> jQuery 将自动替换 ? 为正确的函数名，以执行回调函数
+
+                                  如果不指定，jQuery 将自动根据HTTP包MIME信息返回相应类型(an XML MIME type will </span><span style="color: #0000ff;">yield</span> XML, <span style="color: #0000ff;">in</span> 1.4 JSON will <span style="color: #0000ff;">yield</span> a JavaScript object, <span style="color: #0000ff;">in</span> 1.4 script will execute the script, <span style="color: #0000ff;">and</span> anything <span style="color: #0000ff;">else</span><span style="color: #000000;"> will be returned as a string
+
+                 converters： 转换器，将服务器端的内容根据指定的dataType转换类型，并传值给success回调函数
+                         $.ajax({
+                              accepts: {
+                                mycustomtype: </span><span style="color: #800000;">'</span><span style="color: #800000;">application/x-some-custom-type</span><span style="color: #800000;">'</span><span style="color: #000000;">
+                              },
+                              
+                              </span>// Expect a `mycustomtype` back <span style="color: #0000ff;">from</span><span style="color: #000000;"> server
+                              dataType: </span><span style="color: #800000;">'</span><span style="color: #800000;">mycustomtype</span><span style="color: #800000;">'</span>
+
+                              // Instructions <span style="color: #0000ff;">for</span><span style="color: #000000;"> how to deserialize a `mycustomtype`
+                              converters: {
+                                </span><span style="color: #800000;">'</span><span style="color: #800000;">text mycustomtype</span><span style="color: #800000;">'</span><span style="color: #000000;">: function(result) {
+                                  </span>//<span style="color: #000000;"> Do Stuff
+                                  </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> newresult;
+                                }
+                              },
+                            });</span></pre>
+</div>
+<span class="cnblogs_code_collapse">jQuery Ajax 方法列表</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('9dc2454d-994b-46d4-a3eb-8ca02fdb6a4c')"><img id="code_img_closed_9dc2454d-994b-46d4-a3eb-8ca02fdb6a4c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_9dc2454d-994b-46d4-a3eb-8ca02fdb6a4c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('9dc2454d-994b-46d4-a3eb-8ca02fdb6a4c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_9dc2454d-994b-46d4-a3eb-8ca02fdb6a4c" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span style="color: #800000;">"</span><span style="color: #800000;">en</span><span style="color: #800000;">"</span>&gt;
+    &lt;meta charset=<span style="color: #800000;">"</span><span style="color: #800000;">UTF-8</span><span style="color: #800000;">"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;p&gt;
+        &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">button</span><span style="color: #800000;">"</span> onclick=<span style="color: #800000;">"</span><span style="color: #800000;">XmlSendRequest();</span><span style="color: #800000;">"</span> value=<span style="color: #800000;">'</span><span style="color: #800000;">Ajax请求</span><span style="color: #800000;">'</span> /&gt;
+    &lt;/p&gt;
+
+
+    &lt;script type=<span style="color: #800000;">"</span><span style="color: #800000;">text/javascript</span><span style="color: #800000;">"</span> src=<span style="color: #800000;">"</span><span style="color: #800000;">jquery-1.12.4.js</span><span style="color: #800000;">"</span>&gt;&lt;/script&gt;
+    &lt;script&gt;<span style="color: #000000;">
+
+        function JqSendRequest(){
+            $.ajax({
+                url: </span><span style="color: #800000;">"</span><span style="color: #800000;">http://c2.com:8000/test/</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+                type: </span><span style="color: #800000;">'</span><span style="color: #800000;">GET</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                dataType: </span><span style="color: #800000;">'</span><span style="color: #800000;">text</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                success: function(data, statusText, xmlHttpRequest){
+                    console.log(data);
+                }
+            })
+        }
+
+
+    </span>&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">基于jQueryAjax - Demo</span></div>
+<h3>跨域AJAX</h3>
+<p><span style="font-size: 13px;">由于浏览器存在同源策略机制，同源策略阻止从一个源加载的文档或脚本获取或设置另一个源加载的文档的属性。</span></p>
+<p><span style="font-size: 13px;"><strong>特别的</strong>：由于同源策略是浏览器的限制，所以请求的发送和响应是可以进行，只不过浏览器不接受罢了。</span></p>
+<p><span style="font-size: 13px;">浏览器同源策略并不是对所有的请求均制约：</span></p>
+<ul>
+<li><span style="font-size: 13px;">制约：&nbsp;XmlHttpRequest</span></li>
+<li><span style="font-size: 13px;">不叼：&nbsp;img、iframe、script等具有src属性的标签</span></li>
+</ul>
+<p><span style="font-size: 12px;"><em><span style="color: #888888;">跨域，跨域名访问，如：http://www.c1.com 域名向 http://www.c2.com域名发送请求。</span></em></span></p>
+<p><strong><span style="font-size: 18px;">1、JSONP实现跨域请求</span></strong></p>
+<p><span style="font-size: 13px;">JSONP（JSONP - JSON with Padding是JSON的一种&ldquo;使用模式&rdquo;)，利用script标签的src属性（浏览器允许script标签跨域）</span></p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('a0bac10b-2b9a-4523-9dfa-f3376225ac61')"><img id="code_img_closed_a0bac10b-2b9a-4523-9dfa-f3376225ac61" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a0bac10b-2b9a-4523-9dfa-f3376225ac61" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a0bac10b-2b9a-4523-9dfa-f3376225ac61',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_a0bac10b-2b9a-4523-9dfa-f3376225ac61" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span style="color: #800000;">"</span><span style="color: #800000;">en</span><span style="color: #800000;">"</span>&gt;
+    &lt;meta charset=<span style="color: #800000;">"</span><span style="color: #800000;">UTF-8</span><span style="color: #800000;">"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;p&gt;
+        &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">button</span><span style="color: #800000;">"</span> onclick=<span style="color: #800000;">"</span><span style="color: #800000;">Jsonp1();</span><span style="color: #800000;">"</span>  value=<span style="color: #800000;">'</span><span style="color: #800000;">提交</span><span style="color: #800000;">'</span>/&gt;
+    &lt;/p&gt;
+
+    &lt;p&gt;
+        &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">button</span><span style="color: #800000;">"</span> onclick=<span style="color: #800000;">"</span><span style="color: #800000;">Jsonp2();</span><span style="color: #800000;">"</span> value=<span style="color: #800000;">'</span><span style="color: #800000;">提交</span><span style="color: #800000;">'</span>/&gt;
+    &lt;/p&gt;
+
+    &lt;script type=<span style="color: #800000;">"</span><span style="color: #800000;">text/javascript</span><span style="color: #800000;">"</span> src=<span style="color: #800000;">"</span><span style="color: #800000;">jquery-1.12.4.js</span><span style="color: #800000;">"</span>&gt;&lt;/script&gt;
+    &lt;script&gt;<span style="color: #000000;">
+        function Jsonp1(){
+            var tag </span>= document.createElement(<span style="color: #800000;">'</span><span style="color: #800000;">script</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+            tag.src </span>= <span style="color: #800000;">"</span><span style="color: #800000;">http://c2.com:8000/test/</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+            document.head.appendChild(tag);
+            document.head.removeChild(tag);
+
+        }
+
+        function Jsonp2(){
+            $.ajax({
+                url: </span><span style="color: #800000;">"</span><span style="color: #800000;">http://c2.com:8000/test/</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+                type: </span><span style="color: #800000;">'</span><span style="color: #800000;">GET</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                dataType: </span><span style="color: #800000;">'</span><span style="color: #800000;">JSONP</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                success: function(data, statusText, xmlHttpRequest){
+                    console.log(data);
+                }
+            })
+        }
+
+
+    </span>&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">基于JSONP实现跨域Ajax - Demo</span></div>
+<p><strong><span style="font-size: 18px;">2、CORS</span></strong></p>
+<p><span style="font-size: 13px;">随着技术的发展，现在的浏览器可以支持主动设置从而允许跨域请求，即：跨域资源共享（CORS，Cross-Origin Resource Sharing），其本质是设置响应头，使得浏览器允许跨域请求。</span></p>
+<blockquote>
+<p>* 简单请求 OR 非简单请求</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">条件：
+    1、请求方式：HEAD、GET、POST
+    2、请求头信息：
+        Accept
+        Accept-Language
+        Content-Language
+        Last-Event-ID
+        Content-Type 对应的值是以下三个中的任意一个
+                                application/x-www-form-urlencoded
+                                multipart/form-data
+                                text/plain
+
+注意：同时满足以上两个条件时，则是简单请求，否则为复杂请求</pre>
+</div>
+<p>* 简单请求和非简单请求的区别？</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">   简单请求：一次请求
+非简单请求：两次请求，在发送数据之前会先发一次请求用于做&ldquo;预检&rdquo;，只有&ldquo;预检&rdquo;通过后才再发送一次请求用于数据传输。
+</pre>
+</div>
+<p>* 关于&ldquo;预检&rdquo;</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">- 请求方式：OPTIONS
+- &ldquo;预检&rdquo;其实做检查，检查如果通过则允许传输数据，检查不通过则不再发送真正想要发送的消息
+- 如何&ldquo;预检&rdquo;
+     =&gt; 如果复杂请求是PUT等请求，则服务端需要设置允许某请求，否则&ldquo;预检&rdquo;不通过
+        Access-Control-Request-Method
+     =&gt; 如果复杂请求设置了请求头，则服务端需要设置允许某请求头，否则&ldquo;预检&rdquo;不通过
+        Access-Control-Request-Headers
+</pre>
+</div>
+<p>&nbsp;</p>
+</blockquote>
+<p><span style="font-size: 13px;">基于cors实现AJAX请求:</span></p>
+<p><span style="font-size: 13px;">a、支持跨域，简单请求</span></p>
+<p><span style="color: #888888; font-size: 13px;">服务器设置响应头：Access-Control-Allow-Origin = '域名' 或 '*'</span></p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('98e76274-096e-4885-bef4-d0e0be482ac0')"><img id="code_img_closed_98e76274-096e-4885-bef4-d0e0be482ac0" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_98e76274-096e-4885-bef4-d0e0be482ac0" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('98e76274-096e-4885-bef4-d0e0be482ac0',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_98e76274-096e-4885-bef4-d0e0be482ac0" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span style="color: #800000;">"</span><span style="color: #800000;">en</span><span style="color: #800000;">"</span>&gt;
+    &lt;meta charset=<span style="color: #800000;">"</span><span style="color: #800000;">UTF-8</span><span style="color: #800000;">"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;p&gt;
+        &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">submit</span><span style="color: #800000;">"</span> onclick=<span style="color: #800000;">"</span><span style="color: #800000;">XmlSendRequest();</span><span style="color: #800000;">"</span> /&gt;
+    &lt;/p&gt;
+
+    &lt;p&gt;
+        &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">submit</span><span style="color: #800000;">"</span> onclick=<span style="color: #800000;">"</span><span style="color: #800000;">JqSendRequest();</span><span style="color: #800000;">"</span> /&gt;
+    &lt;/p&gt;
+
+    &lt;script type=<span style="color: #800000;">"</span><span style="color: #800000;">text/javascript</span><span style="color: #800000;">"</span> src=<span style="color: #800000;">"</span><span style="color: #800000;">jquery-1.12.4.js</span><span style="color: #800000;">"</span>&gt;&lt;/script&gt;
+    &lt;script&gt;<span style="color: #000000;">
+        function XmlSendRequest(){
+            var xhr </span>=<span style="color: #000000;"> new XMLHttpRequest();
+            xhr.onreadystatechange </span>=<span style="color: #000000;"> function(){
+                </span><span style="color: #0000ff;">if</span>(xhr.readyState == 4<span style="color: #000000;">) {
+                    var result </span>=<span style="color: #000000;"> xhr.responseText;
+                    console.log(result);
+                }
+            };
+            xhr.open(</span><span style="color: #800000;">'</span><span style="color: #800000;">GET</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">http://c2.com:8000/test/</span><span style="color: #800000;">"</span><span style="color: #000000;">, true);
+            xhr.send();
+        }
+
+        function JqSendRequest(){
+            $.ajax({
+                url: </span><span style="color: #800000;">"</span><span style="color: #800000;">http://c2.com:8000/test/</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+                type: </span><span style="color: #800000;">'</span><span style="color: #800000;">GET</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                dataType: </span><span style="color: #800000;">'</span><span style="color: #800000;">text</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                success: function(data, statusText, xmlHttpRequest){
+                    console.log(data);
+                }
+            })
+        }
+
+
+    </span>&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">HTML</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('f3470378-2202-4824-9cad-c1ce3de13d39')"><img id="code_img_closed_f3470378-2202-4824-9cad-c1ce3de13d39" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_f3470378-2202-4824-9cad-c1ce3de13d39" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('f3470378-2202-4824-9cad-c1ce3de13d39',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_f3470378-2202-4824-9cad-c1ce3de13d39" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">class</span><span style="color: #000000;"> MainHandler(tornado.web.RequestHandler):
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> get(self):
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">Access-Control-Allow-Origin</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">http://www.xxx.com</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        self.write(</span><span style="color: #800000;">'</span><span style="color: #800000;">{"status": true, "data": "seven"}</span><span style="color: #800000;">'</span>)</pre>
+</div>
+<span class="cnblogs_code_collapse">Torando</span></div>
+<p><span style="font-size: 13px;">b、支持跨域，复杂请求</span></p>
+<p><span style="color: #888888; font-size: 13px;">由于复杂请求时，首先会发送&ldquo;预检&rdquo;请求，如果&ldquo;预检&rdquo;成功，则发送真实数据。</span></p>
+<ul>
+<li><span style="color: #888888; font-size: 13px;">&ldquo;预检&rdquo;请求时，允许请求方式则需服务器设置响应头：Access-Control-Request-Method</span></li>
+<li><span style="color: #888888; font-size: 13px;">&ldquo;预检&rdquo;请求时，允许请求头则需服务器设置响应头：Access-Control-Request-Headers</span></li>
+<li><span style="color: #888888; font-size: 13px;">&ldquo;预检&rdquo;缓存时间，服务器设置响应头：Access-Control-Max-Age</span></li>
+</ul>
+<div class="cnblogs_code" onclick="cnblogs_code_show('dcba12da-9a70-4dcc-9239-9bb057c0eee6')"><img id="code_img_closed_dcba12da-9a70-4dcc-9239-9bb057c0eee6" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_dcba12da-9a70-4dcc-9239-9bb057c0eee6" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('dcba12da-9a70-4dcc-9239-9bb057c0eee6',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_dcba12da-9a70-4dcc-9239-9bb057c0eee6" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span style="color: #800000;">"</span><span style="color: #800000;">en</span><span style="color: #800000;">"</span>&gt;
+    &lt;meta charset=<span style="color: #800000;">"</span><span style="color: #800000;">UTF-8</span><span style="color: #800000;">"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;p&gt;
+        &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">submit</span><span style="color: #800000;">"</span> onclick=<span style="color: #800000;">"</span><span style="color: #800000;">XmlSendRequest();</span><span style="color: #800000;">"</span> /&gt;
+    &lt;/p&gt;
+
+    &lt;p&gt;
+        &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">submit</span><span style="color: #800000;">"</span> onclick=<span style="color: #800000;">"</span><span style="color: #800000;">JqSendRequest();</span><span style="color: #800000;">"</span> /&gt;
+    &lt;/p&gt;
+
+    &lt;script type=<span style="color: #800000;">"</span><span style="color: #800000;">text/javascript</span><span style="color: #800000;">"</span> src=<span style="color: #800000;">"</span><span style="color: #800000;">jquery-1.12.4.js</span><span style="color: #800000;">"</span>&gt;&lt;/script&gt;
+    &lt;script&gt;<span style="color: #000000;">
+        function XmlSendRequest(){
+            var xhr </span>=<span style="color: #000000;"> new XMLHttpRequest();
+            xhr.onreadystatechange </span>=<span style="color: #000000;"> function(){
+                </span><span style="color: #0000ff;">if</span>(xhr.readyState == 4<span style="color: #000000;">) {
+                    var result </span>=<span style="color: #000000;"> xhr.responseText;
+                    console.log(result);
+                }
+            };
+            xhr.open(</span><span style="color: #800000;">'</span><span style="color: #800000;">PUT</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">http://c2.com:8000/test/</span><span style="color: #800000;">"</span><span style="color: #000000;">, true);
+            xhr.setRequestHeader(</span><span style="color: #800000;">'</span><span style="color: #800000;">k1</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">v1</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+            xhr.send();
+        }
+
+        function JqSendRequest(){
+            $.ajax({
+                url: </span><span style="color: #800000;">"</span><span style="color: #800000;">http://c2.com:8000/test/</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+                type: </span><span style="color: #800000;">'</span><span style="color: #800000;">PUT</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                dataType: </span><span style="color: #800000;">'</span><span style="color: #800000;">text</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                headers: {</span><span style="color: #800000;">'</span><span style="color: #800000;">k1</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">v1</span><span style="color: #800000;">'</span><span style="color: #000000;">},
+                success: function(data, statusText, xmlHttpRequest){
+                    console.log(data);
+                }
+            })
+        }
+
+
+    </span>&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">HTML</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('51e285ce-d00d-4ac0-8c81-366e4cc06901')"><img id="code_img_closed_51e285ce-d00d-4ac0-8c81-366e4cc06901" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_51e285ce-d00d-4ac0-8c81-366e4cc06901" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('51e285ce-d00d-4ac0-8c81-366e4cc06901',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_51e285ce-d00d-4ac0-8c81-366e4cc06901" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">class</span><span style="color: #000000;"> MainHandler(tornado.web.RequestHandler):
+    
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> put(self):
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">Access-Control-Allow-Origin</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">http://www.xxx.com</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        self.write(</span><span style="color: #800000;">'</span><span style="color: #800000;">{"status": true, "data": "seven"}</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+    </span><span style="color: #0000ff;">def</span> options(self, *args, **<span style="color: #000000;">kwargs):
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">Access-Control-Allow-Origin</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">http://www.xxx.com</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">Access-Control-Allow-Headers</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">k1,k2</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">Access-Control-Allow-Methods</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">PUT,DELETE</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">Access-Control-Max-Age</span><span style="color: #800000;">'</span>, 10)</pre>
+</div>
+<span class="cnblogs_code_collapse">Tornado</span></div>
+<p><span style="font-size: 13px;">c、跨域获取响应头</span></p>
+<p><span style="color: #888888; font-size: 13px;">默认获取到的所有响应头只有基本信息，如果想要获取自定义的响应头，则需要再服务器端设置Access-Control-Expose-Headers。</span></p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('663ae2c4-f252-4cfe-be73-8400baaa8655')"><img id="code_img_closed_663ae2c4-f252-4cfe-be73-8400baaa8655" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_663ae2c4-f252-4cfe-be73-8400baaa8655" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('663ae2c4-f252-4cfe-be73-8400baaa8655',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_663ae2c4-f252-4cfe-be73-8400baaa8655" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span style="color: #800000;">"</span><span style="color: #800000;">en</span><span style="color: #800000;">"</span>&gt;
+    &lt;meta charset=<span style="color: #800000;">"</span><span style="color: #800000;">UTF-8</span><span style="color: #800000;">"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;p&gt;
+        &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">submit</span><span style="color: #800000;">"</span> onclick=<span style="color: #800000;">"</span><span style="color: #800000;">XmlSendRequest();</span><span style="color: #800000;">"</span> /&gt;
+    &lt;/p&gt;
+
+    &lt;p&gt;
+        &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">submit</span><span style="color: #800000;">"</span> onclick=<span style="color: #800000;">"</span><span style="color: #800000;">JqSendRequest();</span><span style="color: #800000;">"</span> /&gt;
+    &lt;/p&gt;
+
+    &lt;script type=<span style="color: #800000;">"</span><span style="color: #800000;">text/javascript</span><span style="color: #800000;">"</span> src=<span style="color: #800000;">"</span><span style="color: #800000;">jquery-1.12.4.js</span><span style="color: #800000;">"</span>&gt;&lt;/script&gt;
+    &lt;script&gt;<span style="color: #000000;">
+        function XmlSendRequest(){
+            var xhr </span>=<span style="color: #000000;"> new XMLHttpRequest();
+            xhr.onreadystatechange </span>=<span style="color: #000000;"> function(){
+                </span><span style="color: #0000ff;">if</span>(xhr.readyState == 4<span style="color: #000000;">) {
+                    var result </span>=<span style="color: #000000;"> xhr.responseText;
+                    console.log(result);
+                    </span>//<span style="color: #000000;"> 获取响应头
+                    console.log(xhr.getAllResponseHeaders());
+                }
+            };
+            xhr.open(</span><span style="color: #800000;">'</span><span style="color: #800000;">PUT</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">http://c2.com:8000/test/</span><span style="color: #800000;">"</span><span style="color: #000000;">, true);
+            xhr.setRequestHeader(</span><span style="color: #800000;">'</span><span style="color: #800000;">k1</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">v1</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+            xhr.send();
+        }
+
+        function JqSendRequest(){
+            $.ajax({
+                url: </span><span style="color: #800000;">"</span><span style="color: #800000;">http://c2.com:8000/test/</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+                type: </span><span style="color: #800000;">'</span><span style="color: #800000;">PUT</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                dataType: </span><span style="color: #800000;">'</span><span style="color: #800000;">text</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                headers: {</span><span style="color: #800000;">'</span><span style="color: #800000;">k1</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">v1</span><span style="color: #800000;">'</span><span style="color: #000000;">},
+                success: function(data, statusText, xmlHttpRequest){
+                    console.log(data);
+                    </span>//<span style="color: #000000;"> 获取响应头
+                    console.log(xmlHttpRequest.getAllResponseHeaders());
+                }
+            })
+        }
+
+
+    </span>&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">HTML</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('7b681d6d-35ad-4c44-bb72-ee08fc3c2e6d')"><img id="code_img_closed_7b681d6d-35ad-4c44-bb72-ee08fc3c2e6d" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_7b681d6d-35ad-4c44-bb72-ee08fc3c2e6d" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('7b681d6d-35ad-4c44-bb72-ee08fc3c2e6d',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_7b681d6d-35ad-4c44-bb72-ee08fc3c2e6d" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">class</span><span style="color: #000000;"> MainHandler(tornado.web.RequestHandler):
+    
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> put(self):
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">Access-Control-Allow-Origin</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">http://www.xxx.com</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">xxoo</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">seven</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">bili</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">daobidao</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">Access-Control-Expose-Headers</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">xxoo,bili</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+
+
+        self.write(</span><span style="color: #800000;">'</span><span style="color: #800000;">{"status": true, "data": "seven"}</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+    </span><span style="color: #0000ff;">def</span> options(self, *args, **<span style="color: #000000;">kwargs):
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">Access-Control-Allow-Origin</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">http://www.xxx.com</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">Access-Control-Allow-Headers</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">k1,k2</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">Access-Control-Allow-Methods</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">PUT,DELETE</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">Access-Control-Max-Age</span><span style="color: #800000;">'</span>, 10)</pre>
+</div>
+<span class="cnblogs_code_collapse">Tornado</span></div>
+<p><span style="font-size: 13px;">d、跨域传输cookie</span></p>
+<p><span style="color: #888888; font-size: 13px;">在跨域请求中，默认情况下，HTTP Authentication信息，Cookie头以及用户的SSL证书无论在预检请求中或是在实际请求都是不会被发送。</span></p>
+<p><span style="color: #888888; font-size: 13px;">如果想要发送：</span></p>
+<ul>
+<li><span style="color: #888888; font-size: 13px;">浏览器端：XMLHttpRequest的withCredentials为true</span></li>
+<li><span style="color: #888888; font-size: 13px;">服务器端：Access-Control-Allow-Credentials为true</span></li>
+<li><span style="color: #888888; font-size: 13px;">注意：服务器端响应的&nbsp;Access-Control-Allow-Origin 不能是通配符 *</span></li>
+</ul>
+<div class="cnblogs_code" onclick="cnblogs_code_show('bd7f91fc-bd7e-4a70-ac14-ce50c7dcbe03')"><img id="code_img_closed_bd7f91fc-bd7e-4a70-ac14-ce50c7dcbe03" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_bd7f91fc-bd7e-4a70-ac14-ce50c7dcbe03" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('bd7f91fc-bd7e-4a70-ac14-ce50c7dcbe03',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_bd7f91fc-bd7e-4a70-ac14-ce50c7dcbe03" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span style="color: #800000;">"</span><span style="color: #800000;">en</span><span style="color: #800000;">"</span>&gt;
+    &lt;meta charset=<span style="color: #800000;">"</span><span style="color: #800000;">UTF-8</span><span style="color: #800000;">"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;p&gt;
+        &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">submit</span><span style="color: #800000;">"</span> onclick=<span style="color: #800000;">"</span><span style="color: #800000;">XmlSendRequest();</span><span style="color: #800000;">"</span> /&gt;
+    &lt;/p&gt;
+
+    &lt;p&gt;
+        &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">submit</span><span style="color: #800000;">"</span> onclick=<span style="color: #800000;">"</span><span style="color: #800000;">JqSendRequest();</span><span style="color: #800000;">"</span> /&gt;
+    &lt;/p&gt;
+
+    &lt;script type=<span style="color: #800000;">"</span><span style="color: #800000;">text/javascript</span><span style="color: #800000;">"</span> src=<span style="color: #800000;">"</span><span style="color: #800000;">jquery-1.12.4.js</span><span style="color: #800000;">"</span>&gt;&lt;/script&gt;
+    &lt;script&gt;<span style="color: #000000;">
+        function XmlSendRequest(){
+            var xhr </span>=<span style="color: #000000;"> new XMLHttpRequest();
+            xhr.onreadystatechange </span>=<span style="color: #000000;"> function(){
+                </span><span style="color: #0000ff;">if</span>(xhr.readyState == 4<span style="color: #000000;">) {
+                    var result </span>=<span style="color: #000000;"> xhr.responseText;
+                    console.log(result);
+                }
+            };
+
+            xhr.withCredentials </span>=<span style="color: #000000;"> true;
+
+            xhr.open(</span><span style="color: #800000;">'</span><span style="color: #800000;">PUT</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">http://c2.com:8000/test/</span><span style="color: #800000;">"</span><span style="color: #000000;">, true);
+            xhr.setRequestHeader(</span><span style="color: #800000;">'</span><span style="color: #800000;">k1</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">v1</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+            xhr.send();
+        }
+
+        function JqSendRequest(){
+            $.ajax({
+                url: </span><span style="color: #800000;">"</span><span style="color: #800000;">http://c2.com:8000/test/</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+                type: </span><span style="color: #800000;">'</span><span style="color: #800000;">PUT</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                dataType: </span><span style="color: #800000;">'</span><span style="color: #800000;">text</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                headers: {</span><span style="color: #800000;">'</span><span style="color: #800000;">k1</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">v1</span><span style="color: #800000;">'</span><span style="color: #000000;">},
+                xhrFields:{withCredentials: true},
+                success: function(data, statusText, xmlHttpRequest){
+                    console.log(data);
+                }
+            })
+        }
+
+
+    </span>&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">HTML</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('0dad323e-8a80-4348-821d-883afebccd5d')"><img id="code_img_closed_0dad323e-8a80-4348-821d-883afebccd5d" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_0dad323e-8a80-4348-821d-883afebccd5d" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('0dad323e-8a80-4348-821d-883afebccd5d',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_0dad323e-8a80-4348-821d-883afebccd5d" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">class</span><span style="color: #000000;"> MainHandler(tornado.web.RequestHandler):
+    
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> put(self):
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">Access-Control-Allow-Origin</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">http://www.xxx.com</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">Access-Control-Allow-Credentials</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">true</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">xxoo</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">seven</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">bili</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">daobidao</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">Access-Control-Expose-Headers</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">xxoo,bili</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+
+        self.set_cookie(</span><span style="color: #800000;">'</span><span style="color: #800000;">kkkkk</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">vvvvv</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+
+        self.write(</span><span style="color: #800000;">'</span><span style="color: #800000;">{"status": true, "data": "seven"}</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+    </span><span style="color: #0000ff;">def</span> options(self, *args, **<span style="color: #000000;">kwargs):
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">Access-Control-Allow-Origin</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">http://www.xxx.com</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">Access-Control-Allow-Headers</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">k1,k2</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">Access-Control-Allow-Methods</span><span style="color: #800000;">'</span>, <span style="color: #800000;">"</span><span style="color: #800000;">PUT,DELETE</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        self.set_header(</span><span style="color: #800000;">'</span><span style="color: #800000;">Access-Control-Max-Age</span><span style="color: #800000;">'</span>, 10)</pre>
+</div>
+<span class="cnblogs_code_collapse">Tornado</span></div>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2016-07-25 15:30</span> <a href='http://www.cnblogs.com/wupeiqi/'>武沛齐</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>) &nbsp;<a href="https://i.cnblogs.com/EditArticles.aspx?postid=5703697" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(5703697);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=133379,cb_entryId=5703697,cb_blogApp=currentBlogApp,cb_blogUserGuid='7208b24d-95c9-e111-aa3f-842b2b196315',cb_entryCreatedDate='2016/7/25 15:30:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2017 武沛齐
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

@@ -1,0 +1,1860 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python之路【第九篇】：Python操作 RabbitMQ、Redis、Memcache、SQLAlchemy - 武沛齐 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=m_FXmwz3wxZoecUwNEK23PAzc-j9vbX_C6MblJ5ouMc1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue.css?v=jJERBFSojhmgst84aaRDal9S3q1WoO-WcNudmMzGJS81"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/133379.css?v=YSNZANkz7eBKoXq2iHYfghvodkY%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue-mobile.css?v=z0BacpCfWeLlXDCM0C158kTP_DMqMbGBapID4f-QztI1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/wupeiqi/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/wupeiqi/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/wupeiqi/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'wupeiqi', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=CPv0EEqm9L2aCgolHxaZfVYM6J-Sn5az_FJXbjzgr-o1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/wupeiqi/">Mr.Seven</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/wupeiqi/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%AD%A6%E6%B2%9B%E9%BD%90">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/wupeiqi/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/wupeiqi/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-126&nbsp;
+文章-137&nbsp;
+评论-259&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/wupeiqi/articles/5132791.html">Python之路【第九篇】：Python操作 RabbitMQ、Redis、Memcache、SQLAlchemy</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><h3>Memcached</h3>
+<p>Memcached 是一个高性能的分布式内存对象缓存系统，用于动态Web应用以减轻数据库负载。它通过在内存中缓存数据和对象来减少读取数据库的次数，从而提高动态、数据库驱动网站的速度。Memcached基于一个存储键/值对的<a href="http://baike.baidu.com/view/1487140.htm" target="_blank">hashmap</a>。其<a href="http://baike.baidu.com/view/53123.htm" target="_blank">守护进程</a>（daemon ）是用<a href="http://baike.baidu.com/subview/10075/6770152.htm" target="_blank">C</a>写的，但是客户端可以用任何语言来编写，并通过memcached协议与守护进程通信。</p>
+<p>Memcached安装和基本使用</p>
+<p>Memcached安装：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">wget http://memcached.org/latest
+tar -zxvf memcached-1.x.x.tar.gz
+cd memcached-1.x.x
+./configure &amp;&amp; make &amp;&amp; make test &amp;&amp; sudo make install
+
+PS：依赖libevent
+       yum install libevent-devel
+       apt-get install libevent-dev
+</pre>
+</div>
+<p>启动Memcached</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">memcached -d -m 10    -u root -l 10.211.55.4 -p 12000 -c 256 -P /tmp/memcached.pid
+
+参数说明:
+    -d 是启动一个守护进程
+    -m 是分配给Memcache使用的内存数量，单位是MB
+    -u 是运行Memcache的用户
+    -l 是监听的服务器IP地址
+    -p 是设置Memcache监听的端口,最好是1024以上的端口
+    -c 选项是最大运行的并发连接数，默认是1024，按照你服务器的负载量来设定
+    -P 是设置保存Memcache的pid文件
+</pre>
+</div>
+<p>Memcached命令</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">存储命令: set/add/replace/append/prepend/cas 
+获取命令: get/gets
+其他命令: delete/stats..
+</pre>
+</div>
+<p>Python操作Memcached</p>
+<p>安装API</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">python操作Memcached使用Python-memcached模块
+下载安装：https://pypi.python.org/pypi/python-memcached
+</pre>
+</div>
+<p><strong>1、第一次操作</strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">import memcache
+
+mc = memcache.Client(['10.211.55.4:12000'], debug=True)
+mc.set("foo", "bar")
+ret = mc.get('foo')
+print ret</pre>
+</div>
+<p><em><span style="color: #888888;">Ps：debug = True 表示运行出现错误时，现实错误信息，上线后移除该参数。</span></em></p>
+<p><strong>2、天生支持集群</strong></p>
+<p>python-memcached模块原生支持集群操作，其原理是在内存维护一个主机列表，且集群中主机的权重值和主机在列表中重复出现的次数成正比</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">     主机    权重
+    1.1.1.1   1
+    1.1.1.2   2
+    1.1.1.3   1
+
+那么在内存中主机列表为：
+    host_list = ["1.1.1.1", "1.1.1.2", "1.1.1.2", "1.1.1.3", ]
+</pre>
+</div>
+<p>如果用户根据如果要在内存中创建一个键值对（如：k1 = "v1"），那么要执行一下步骤：</p>
+<ul>
+<li>根据算法将 k1 转换成一个数字</li>
+<li>将数字和主机列表长度求余数，得到一个值 N（ 0 &lt;= N &lt; 列表长度 ）</li>
+<li>在主机列表中根据 第2步得到的值为索引获取主机，例如：host_list[N]</li>
+<li>连接 将第3步中获取的主机，将 k1 = "v1" 放置在该服务器的内存中</li>
+</ul>
+<p>代码实现如下：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">mc = memcache.Client([('1.1.1.1:12000', 1), ('1.1.1.2:12000', 2), ('1.1.1.3:12000', 1)], debug=True)
+
+mc.set('k1', 'v1')</pre>
+</div>
+<p><strong>3、add</strong><br />添加一条键值对，如果已经存在的 key，重复执行add操作异常</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+import memcache
+
+mc = memcache.Client(['10.211.55.4:12000'], debug=True)
+mc.add('k1', 'v1')
+# mc.add('k1', 'v2') # 报错，对已经存在的key重复添加，失败！！！
+</pre>
+</div>
+<p><strong>4、replace</strong><br />replace  修改某个key的值，如果key不存在，则异常</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+import memcache
+
+mc = memcache.Client(['10.211.55.4:12000'], debug=True)
+# 如果memcache中存在kkkk，则替换成功，否则一场
+mc.replace('kkkk','999')
+</pre>
+</div>
+<p><strong>5、set 和 set_multi</strong></p>
+<p>set &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;设置一个键值对，如果key不存在，则创建，如果key存在，则修改<br />set_multi &nbsp; 设置多个键值对，如果key不存在，则创建，如果key存在，则修改</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+import memcache
+
+mc = memcache.Client(['10.211.55.4:12000'], debug=True)
+
+mc.set('key0', 'wupeiqi')
+
+mc.set_multi({'key1': 'val1', 'key2': 'val2'})
+</pre>
+</div>
+<p><strong>6、delete 和 delete_multi</strong></p>
+<p>delete &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 在Memcached中删除指定的一个键值对<br />delete_multi &nbsp; &nbsp;在Memcached中删除指定的多个键值对</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+import memcache
+
+mc = memcache.Client(['10.211.55.4:12000'], debug=True)
+
+mc.delete('key0')
+mc.delete_multi(['key1', 'key2'])
+</pre>
+</div>
+<p><strong>7、get 和 get_multi</strong></p>
+<p>get &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;获取一个键值对<br />get_multi &nbsp; 获取多一个键值对</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+import memcache
+
+mc = memcache.Client(['10.211.55.4:12000'], debug=True)
+
+val = mc.get('key0')
+item_dict = mc.get_multi(["key1", "key2", "key3"])
+</pre>
+</div>
+<p><strong>8、append 和 prepend</strong></p>
+<p>append &nbsp; &nbsp;修改指定key的值，在该值 后面 追加内容<br />prepend &nbsp; 修改指定key的值，在该值 前面 插入内容</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+import memcache
+
+mc = memcache.Client(['10.211.55.4:12000'], debug=True)
+# k1 = "v1"
+
+mc.append('k1', 'after')
+# k1 = "v1after"
+
+mc.prepend('k1', 'before')
+# k1 = "beforev1after"
+</pre>
+</div>
+<p><strong>9、decr 和 incr　</strong>　</p>
+<p>incr &nbsp;自增，将Memcached中的某一个值增加 N （ N默认为1 ）<br />decr 自减，将Memcached中的某一个值减少 N （ N默认为1 ）</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+import memcache
+
+mc = memcache.Client(['10.211.55.4:12000'], debug=True)
+mc.set('k1', '777')
+
+mc.incr('k1')
+# k1 = 778
+
+mc.incr('k1', 10)
+# k1 = 788
+
+mc.decr('k1')
+# k1 = 787
+
+mc.decr('k1', 10)
+# k1 = 777
+</pre>
+</div>
+<p><strong>10、gets 和&nbsp;cas</strong></p>
+<p>如商城商品剩余个数，假设改值保存在memcache中，product_count = 900<br />A用户刷新页面从memcache中读取到product_count = 900<br />B用户刷新页面从memcache中读取到product_count = 900</p>
+<p>如果A、B用户均购买商品</p>
+<p>A用户修改商品剩余个数 product_count＝899<br />B用户修改商品剩余个数 product_count＝899  </p>
+<p>如此一来缓存内的数据便不在正确，两个用户购买商品后，商品剩余还是 899<br />如果使用python的set和get来操作以上过程，那么程序就会如上述所示情况！</p>
+<p>如果想要避免此情况的发生，只要使用 gets 和 cas 即可，如：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+import memcache
+mc = memcache.Client(['10.211.55.4:12000'], debug=True, cache_cas=True)
+
+v = mc.gets('product_count')
+# ...
+# 如果有人在gets之后和cas之前修改了product_count，那么，下面的设置将会执行失败，剖出异常，从而避免非正常数据的产生
+mc.cas('product_count', "899")
+</pre>
+</div>
+<p>Ps：本质上每次执行gets时，会从memcache中获取一个自增的数字，通过cas去修改gets的值时，会携带之前获取的自增值和memcache中的自增值进行比较，如果相等，则可以提交，如果不想等，那表示在gets和cas执行之间，又有其他人执行了gets（获取了缓冲的指定值）， 如此一来有可能出现非正常数据，则不允许修改。</p>
+<p><a href="http://www.oschina.net/news/26691/memcached-timeout" target="_blank">Memcached 真的过时了吗？</a></p>
+<h3>Redis</h3>
+<p>redis是一个key-value<a href="http://baike.baidu.com/view/51839.htm" target="_blank">存储系统</a>。和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(<a href="http://baike.baidu.com/view/549479.htm" target="_blank">链表</a>)、set(集合)、zset(sorted set --有序集合)和hash（哈希类型）。这些<a href="http://baike.baidu.com/view/675645.htm" target="_blank">数据类型</a>都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。在此基础上，redis支持各种不同方式的排序。与memcached一样，为了保证效率，数据都是缓存在内存中。区别的是redis会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件，并且在此基础上实现了master-slave(主从)同步。</p>
+<p>一、Redis安装和基本使用</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">wget http://download.redis.io/releases/redis-3.0.6.tar.gz
+tar xzf redis-3.0.6.tar.gz
+cd redis-3.0.6
+make
+</pre>
+</div>
+<p>启动服务端</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">src/redis-server
+</pre>
+</div>
+<p>启动客户端</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">src/redis-cli
+redis&gt; set foo bar
+OK
+redis&gt; get foo
+"bar"
+</pre>
+</div>
+<p>二、Python操作Redis</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">sudo pip install redis
+or
+sudo easy_install redis
+or
+源码安装
+
+详见：https://github.com/WoLpH/redis-py
+</pre>
+</div>
+<p>API使用</p>
+<p>redis-py 的API的使用可以分类为：</p>
+<ul>
+<li>连接方式</li>
+<li>连接池</li>
+<li>操作
+<ul>
+<li>String 操作</li>
+<li>Hash 操作</li>
+<li>List 操作</li>
+<li>Set 操作</li>
+<li>Sort Set 操作</li>
+</ul>
+</li>
+<li>管道</li>
+<li>发布订阅</li>
+</ul>
+<p>&nbsp;</p>
+<p>1、操作模式</p>
+<p>redis-py提供两个类Redis和StrictRedis用于实现Redis的命令，StrictRedis用于实现大部分官方的命令，并使用官方的语法和命令，Redis是StrictRedis的子类，用于向后兼容旧版本的redis-py。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+import redis
+
+r = redis.Redis(host='10.211.55.4', port=6379)
+r.set('foo', 'Bar')
+print r.get('foo')
+</pre>
+</div>
+<p>2、连接池</p>
+<p>redis-py使用connection pool来管理对一个redis server的所有连接，避免每次建立、释放连接的开销。默认，每个Redis实例都会维护一个自己的连接池。可以直接建立一个连接池，然后作为参数Redis，这样就可以实现多个Redis实例共享一个连接池。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+import redis
+
+pool = redis.ConnectionPool(host='10.211.55.4', port=6379)
+
+r = redis.Redis(connection_pool=pool)
+r.set('foo', 'Bar')
+print r.get('foo')
+</pre>
+</div>
+<p>3、操作</p>
+<p>String操作，r<span style="color: #333333; line-height: 1.5;">edis中的String在在内存中按照一个name对应一个value来存储。如图：</span></p>
+<p style="color: #333333;"><img style="display: block; margin-left: auto; margin-right: auto;" src="http://images2015.cnblogs.com/blog/425762/201602/425762-20160222213200645-359371350.png" alt="" width="312" height="202" /></p>
+<blockquote>
+<p>set(name, value, ex=None, px=None, nx=False, xx=False)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">在Redis中设置值，默认，不存在则创建，存在则修改
+参数：
+     ex，过期时间（秒）
+     px，过期时间（毫秒）
+     nx，如果设置为True，则只有name不存在时，当前set操作才执行
+     xx，如果设置为True，则只有name存在时，岗前set操作才执行
+</pre>
+</div>
+<p>setnx(name, value)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">设置值，只有name不存在时，执行设置操作（添加）
+</pre>
+</div>
+<p>setex(name, value, time)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;"># 设置值
+# 参数：
+    # time，过期时间（数字秒 或 timedelta对象）
+</pre>
+</div>
+<p>psetex(name, time_ms, value)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;"># 设置值
+# 参数：
+    # time_ms，过期时间（数字毫秒 或 timedelta对象）
+</pre>
+</div>
+<p>mset(*args, **kwargs)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">批量设置值
+如：
+    mset(k1='v1', k2='v2')
+    或
+    mget({'k1': 'v1', 'k2': 'v2'})
+</pre>
+</div>
+<p>get(name)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">获取值
+</pre>
+</div>
+<p>mget(keys, *args)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">批量获取
+如：
+    mget('ylr', 'wupeiqi')
+    或
+    r.mget(['ylr', 'wupeiqi'])
+</pre>
+</div>
+<p>getset(name, value)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">设置新值并获取原来的值
+</pre>
+</div>
+<p>getrange(key, start, end)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;"># 获取子序列（根据字节获取，非字符）
+# 参数：
+    # name，Redis 的 name
+    # start，起始位置（字节）
+    # end，结束位置（字节）
+# 如： "武沛齐" ，0-3表示 "武"
+</pre>
+</div>
+<p>setrange(name, offset, value)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;"># 修改字符串内容，从指定字符串索引开始向后替换（新值太长时，则向后添加）
+# 参数：
+    # offset，字符串的索引，字节（一个汉字三个字节）
+    # value，要设置的值
+</pre>
+</div>
+<p>setbit(name, offset, value)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 对name对应值的二进制表示的位进行操作
+
+# 参数：
+    # name，redis的name
+    # offset，位的索引（将值变换成二进制后再进行索引）
+    # value，值只能是 1 或 0
+
+# 注：如果在Redis中有一个对应： n1 = "foo"，
+        那么字符串foo的二进制表示为：01100110 01101111 01101111
+    所以，如果执行 setbit('n1', 7, 1)，则就会将第7位设置为1，
+        那么最终二进制则变成 01100111 01101111 01101111，即："goo"
+
+# 扩展，转换二进制表示：
+
+    # source = "武沛齐" 
+    source = "foo" 
+
+    for i in source:
+        num = ord(i)
+        print bin(num).replace('b','')
+
+    特别的，如果source是汉字 "武沛齐"怎么办？
+    答：对于utf-8，每一个汉字占 3 个字节，那么 "武沛齐" 则有 9个字节
+       对于汉字，for循环时候会按照 字节 迭代，那么在迭代时，将每一个字节转换 十进制数，然后再将十进制数转换成二进制
+        11100110 10101101 10100110 11100110 10110010 10011011 11101001 10111101 10010000
+        -------------------------- ----------------------------- -----------------------------
+                    武                         沛                           齐</pre>
+</div>
+<p>getbit(name, offset)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 获取name对应的值的二进制表示中的某位的值 （0或1）
+</pre>
+</div>
+<p>bitcount(key, start=None, end=None)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 获取name对应的值的二进制表示中 1 的个数
+# 参数：
+    # key，Redis的name
+    # start，位起始位置
+    # end，位结束位置
+</pre>
+</div>
+<p>bitop(operation, dest, *keys)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 获取多个值，并将值做位运算，将最后的结果保存至新的name对应的值
+
+# 参数：
+    # operation,AND（并） 、 OR（或） 、 NOT（非） 、 XOR（异或）
+    # dest, 新的Redis的name
+    # *keys,要查找的Redis的name
+
+# 如：
+    bitop("AND", 'new_name', 'n1', 'n2', 'n3')
+    # 获取Redis中n1,n2,n3对应的值，然后讲所有的值做位运算（求并集），然后将结果保存 new_name 对应的值中
+</pre>
+</div>
+<p>strlen(name)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 返回name对应值的字节长度（一个汉字3个字节）
+</pre>
+</div>
+<p>incr(self, name, amount=1)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 自增 name对应的值，当name不存在时，则创建name＝amount，否则，则自增。
+
+# 参数：
+    # name,Redis的name
+    # amount,自增数（必须是整数）
+
+# 注：同incrby
+</pre>
+</div>
+<p>incrbyfloat(self, name, amount=1.0)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 自增 name对应的值，当name不存在时，则创建name＝amount，否则，则自增。
+
+# 参数：
+    # name,Redis的name
+    # amount,自增数（浮点型）
+</pre>
+</div>
+<p>decr(self, name, amount=1)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 自减 name对应的值，当name不存在时，则创建name＝amount，否则，则自减。
+
+# 参数：
+    # name,Redis的name
+    # amount,自减数（整数）
+</pre>
+</div>
+<p>append(key, value)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 在redis name对应的值后面追加内容
+
+# 参数：
+    key, redis的name
+    value, 要追加的字符串
+</pre>
+</div>
+<p>　　</p>
+</blockquote>
+<p>Hash操作，redis中Hash在内存中的存储格式如下图：</p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="http://images2015.cnblogs.com/blog/425762/201602/425762-20160223115506630-113443460.png" alt="" width="345" height="232" /></p>
+<blockquote>
+<p>hset(name, key, value)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># name对应的hash中设置一个键值对（不存在，则创建；否则，修改）
+
+# 参数：
+    # name，redis的name
+    # key，name对应的hash中的key
+    # value，name对应的hash中的value
+
+# 注：
+    # hsetnx(name, key, value),当name对应的hash中不存在当前key时则创建（相当于添加）
+</pre>
+</div>
+<p>hmset(name, mapping)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 在name对应的hash中批量设置键值对
+
+# 参数：
+    # name，redis的name
+    # mapping，字典，如：{'k1':'v1', 'k2': 'v2'}
+
+# 如：
+    # r.hmset('xx', {'k1':'v1', 'k2': 'v2'})
+</pre>
+</div>
+<p>hget(name,key)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 在name对应的hash中获取根据key获取value
+</pre>
+</div>
+<p>hmget(name, keys, *args)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 在name对应的hash中获取多个key的值
+
+# 参数：
+    # name，reids对应的name
+    # keys，要获取key集合，如：['k1', 'k2', 'k3']
+    # *args，要获取的key，如：k1,k2,k3
+
+# 如：
+    # r.mget('xx', ['k1', 'k2'])
+    # 或
+    # print r.hmget('xx', 'k1', 'k2')
+</pre>
+</div>
+<p>hgetall(name)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">获取name对应hash的所有键值
+</pre>
+</div>
+<p>hlen(name)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 获取name对应的hash中键值对的个数
+</pre>
+</div>
+<p>hkeys(name)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 获取name对应的hash中所有的key的值
+</pre>
+</div>
+<p>hvals(name)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 获取name对应的hash中所有的value的值
+</pre>
+</div>
+<p>hexists(name, key)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 检查name对应的hash是否存在当前传入的key
+</pre>
+</div>
+<p>hdel(name,*keys)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 将name对应的hash中指定key的键值对删除
+</pre>
+</div>
+<p>hincrby(name, key, amount=1)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 自增name对应的hash中的指定key的值，不存在则创建key=amount
+# 参数：
+    # name，redis中的name
+    # key， hash对应的key
+    # amount，自增数（整数）
+</pre>
+</div>
+<p>hincrbyfloat(name, key, amount=1.0)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 自增name对应的hash中的指定key的值，不存在则创建key=amount
+
+# 参数：
+    # name，redis中的name
+    # key， hash对应的key
+    # amount，自增数（浮点数）
+
+# 自增name对应的hash中的指定key的值，不存在则创建key=amount
+</pre>
+</div>
+<p>hscan(name, cursor=0, match=None, count=None)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 增量式迭代获取，对于数据大的数据非常有用，hscan可以实现分片的获取数据，并非一次性将数据全部获取完，从而放置内存被撑爆
+
+# 参数：
+    # name，redis的name
+    # cursor，游标（基于游标分批取获取数据）
+    # match，匹配指定key，默认None 表示所有的key
+    # count，每次分片最少获取个数，默认None表示采用Redis的默认分片个数
+
+# 如：
+    # 第一次：cursor1, data1 = r.hscan('xx', cursor=0, match=None, count=None)
+    # 第二次：cursor2, data1 = r.hscan('xx', cursor=cursor1, match=None, count=None)
+    # ...
+    # 直到返回值cursor的值为0时，表示数据已经通过分片获取完毕
+</pre>
+</div>
+<p>hscan_iter(name, match=None, count=None)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 利用yield封装hscan创建生成器，实现分批去redis中获取数据
+
+# 参数：
+    # match，匹配指定key，默认None 表示所有的key
+    # count，每次分片最少获取个数，默认None表示采用Redis的默认分片个数
+
+# 如：
+    # for item in r.hscan_iter('xx'):
+    #     print item
+</pre>
+</div>
+<p>　　</p>
+</blockquote>
+<p>List操作，redis中的List在在内存中按照一个name对应一个List来存储。如图：</p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="http://images2015.cnblogs.com/blog/425762/201602/425762-20160223172249115-189393001.png" alt="" width="280" height="177" /></p>
+<blockquote>
+<p>lpush(name,values)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 在name对应的list中添加元素，每个新的元素都添加到列表的最左边
+
+# 如：
+    # r.lpush('oo', 11,22,33)
+    # 保存顺序为: 33,22,11
+
+# 扩展：
+    # rpush(name, values) 表示从右向左操作
+</pre>
+</div>
+<p>lpushx(name,value)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 在name对应的list中添加元素，只有name已经存在时，值添加到列表的最左边
+
+# 更多：
+    # rpushx(name, value) 表示从右向左操作
+</pre>
+</div>
+<p>llen(name)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># name对应的list元素的个数
+</pre>
+</div>
+<p>linsert(name, where, refvalue, value))</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 在name对应的列表的某一个值前或后插入一个新值
+
+# 参数：
+    # name，redis的name
+    # where，BEFORE或AFTER
+    # refvalue，标杆值，即：在它前后插入数据
+    # value，要插入的数据
+</pre>
+</div>
+<p>r.lset(name, index, value)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 对name对应的list中的某一个索引位置重新赋值
+
+# 参数：
+    # name，redis的name
+    # index，list的索引位置
+    # value，要设置的值
+</pre>
+</div>
+<p>r.lrem(name, value, num)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 在name对应的list中删除指定的值
+
+# 参数：
+    # name，redis的name
+    # value，要删除的值
+    # num，  num=0，删除列表中所有的指定值；
+           # num=2,从前到后，删除2个；
+           # num=-2,从后向前，删除2个
+</pre>
+</div>
+<p>lpop(name)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 在name对应的列表的左侧获取第一个元素并在列表中移除，返回值则是第一个元素
+
+# 更多：
+    # rpop(name) 表示从右向左操作
+</pre>
+</div>
+<p>lindex(name, index)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">在name对应的列表中根据索引获取列表元素
+</pre>
+</div>
+<p>lrange(name, start, end)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 在name对应的列表分片获取数据
+# 参数：
+    # name，redis的name
+    # start，索引的起始位置
+    # end，索引结束位置
+</pre>
+</div>
+<p>ltrim(name, start, end)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 在name对应的列表中移除没有在start-end索引之间的值
+# 参数：
+    # name，redis的name
+    # start，索引的起始位置
+    # end，索引结束位置
+</pre>
+</div>
+<p>rpoplpush(src, dst)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 从一个列表取出最右边的元素，同时将其添加至另一个列表的最左边
+# 参数：
+    # src，要取数据的列表的name
+    # dst，要添加数据的列表的name
+</pre>
+</div>
+<p>blpop(keys, timeout)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 将多个列表排列，按照从左到右去pop对应列表的元素
+
+# 参数：
+    # keys，redis的name的集合
+    # timeout，超时时间，当元素所有列表的元素获取完之后，阻塞等待列表内有数据的时间（秒）, 0 表示永远阻塞
+
+# 更多：
+    # r.brpop(keys, timeout)，从右向左获取数据
+</pre>
+</div>
+<p>brpoplpush(src, dst, timeout=0)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 从一个列表的右侧移除一个元素并将其添加到另一个列表的左侧
+
+# 参数：
+    # src，取出并要移除元素的列表对应的name
+    # dst，要插入元素的列表对应的name
+    # timeout，当src对应的列表中没有数据时，阻塞等待其有数据的超时时间（秒），0 表示永远阻塞
+</pre>
+</div>
+<p>自定义增量迭代</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 由于redis类库中没有提供对列表元素的增量迭代，如果想要循环name对应的列表的所有元素，那么就需要：
+    # 1、获取name对应的所有列表
+    # 2、循环列表
+# 但是，如果列表非常大，那么就有可能在第一步时就将程序的内容撑爆，所有有必要自定义一个增量迭代的功能：
+
+def list_iter(name):
+    """
+    自定义redis列表增量迭代
+    :param name: redis中的name，即：迭代name对应的列表
+    :return: yield 返回 列表元素
+    """
+    list_count = r.llen(name)
+    for index in xrange(list_count):
+        yield r.lindex(name, index)
+
+# 使用
+for item in list_iter('pp'):
+    print item
+</pre>
+</div>
+<p>Set操作，Set集合就是不允许重复的列表</p>
+<p>sadd(name,values)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># name对应的集合中添加元素
+</pre>
+</div>
+<p>scard(name)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">获取name对应的集合中元素个数
+</pre>
+</div>
+<p>sdiff(keys, *args)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">在第一个name对应的集合中且不在其他name对应的集合的元素集合
+</pre>
+</div>
+<p>sdiffstore(dest, keys, *args)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 获取第一个name对应的集合中且不在其他name对应的集合，再将其新加入到dest对应的集合中
+</pre>
+</div>
+<p>sinter(keys, *args)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 获取多一个name对应集合的并集
+</pre>
+</div>
+<p>sinterstore(dest, keys, *args)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 获取多一个name对应集合的并集，再讲其加入到dest对应的集合中
+</pre>
+</div>
+<p>sismember(name, value)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 检查value是否是name对应的集合的成员
+</pre>
+</div>
+<p>smembers(name)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 获取name对应的集合的所有成员
+</pre>
+</div>
+<p>smove(src, dst, value)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 将某个成员从一个集合中移动到另外一个集合
+</pre>
+</div>
+<p>spop(name)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 从集合的右侧（尾部）移除一个成员，并将其返回
+</pre>
+</div>
+<p>srandmember(name, numbers)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 从name对应的集合中随机获取 numbers 个元素
+</pre>
+</div>
+<p>srem(name, values)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 在name对应的集合中删除某些值
+</pre>
+</div>
+<p>sunion(keys, *args)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 获取多一个name对应的集合的并集
+</pre>
+</div>
+<p>sunionstore(dest,keys, *args)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 获取多一个name对应的集合的并集，并将结果保存到dest对应的集合中
+</pre>
+</div>
+<p>sscan(name, cursor=0, match=None, count=None)<br />sscan_iter(name, match=None, count=None)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 同字符串的操作，用于增量迭代分批获取元素，避免内存消耗太大
+</pre>
+</div>
+<p>&nbsp;</p>
+</blockquote>
+<p>有序集合，在集合的基础上，为每元素排序；元素的排序需要根据另外一个值来进行比较，所以，对于有序集合，每一个元素有两个值，即：值和分数，分数专门用来做排序。</p>
+<blockquote>
+<p>zadd(name, *args, **kwargs)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 在name对应的有序集合中添加元素
+# 如：
+     # zadd('zz', 'n1', 1, 'n2', 2)
+     # 或
+     # zadd('zz', n1=11, n2=22)
+</pre>
+</div>
+<p>zcard(name)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 获取name对应的有序集合元素的数量
+</pre>
+</div>
+<p>zcount(name, min, max)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 获取name对应的有序集合中分数 在 [min,max] 之间的个数
+</pre>
+</div>
+<p>zincrby(name, value, amount)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 自增name对应的有序集合的 name 对应的分数
+</pre>
+</div>
+<p>r.zrange( name, start, end, desc=False, withscores=False, score_cast_func=float)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 按照索引范围获取name对应的有序集合的元素
+
+# 参数：
+    # name，redis的name
+    # start，有序集合索引起始位置（非分数）
+    # end，有序集合索引结束位置（非分数）
+    # desc，排序规则，默认按照分数从小到大排序
+    # withscores，是否获取元素的分数，默认只获取元素的值
+    # score_cast_func，对分数进行数据转换的函数
+
+# 更多：
+    # 从大到小排序
+    # zrevrange(name, start, end, withscores=False, score_cast_func=float)
+
+    # 按照分数范围获取name对应的有序集合的元素
+    # zrangebyscore(name, min, max, start=None, num=None, withscores=False, score_cast_func=float)
+    # 从大到小排序
+    # zrevrangebyscore(name, max, min, start=None, num=None, withscores=False, score_cast_func=float)
+</pre>
+</div>
+<p>zrank(name, value)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 获取某个值在 name对应的有序集合中的排行（从 0 开始）
+
+# 更多：
+    # zrevrank(name, value)，从大到小排序
+</pre>
+</div>
+<p>zrangebylex(name, min, max, start=None, num=None)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 当有序集合的所有成员都具有相同的分值时，有序集合的元素会根据成员的 值 （lexicographical ordering）来进行排序，而这个命令则可以返回给定的有序集合键 key 中， 元素的值介于 min 和 max 之间的成员
+# 对集合中的每个成员进行逐个字节的对比（byte-by-byte compare）， 并按照从低到高的顺序， 返回排序后的集合成员。 如果两个字符串有一部分内容是相同的话， 那么命令会认为较长的字符串比较短的字符串要大
+
+# 参数：
+    # name，redis的name
+    # min，左区间（值）。 + 表示正无限； - 表示负无限； ( 表示开区间； [ 则表示闭区间
+    # min，右区间（值）
+    # start，对结果进行分片处理，索引位置
+    # num，对结果进行分片处理，索引后面的num个元素
+
+# 如：
+    # ZADD myzset 0 aa 0 ba 0 ca 0 da 0 ea 0 fa 0 ga
+    # r.zrangebylex('myzset', "-", "[ca") 结果为：['aa', 'ba', 'ca']
+
+# 更多：
+    # 从大到小排序
+    # zrevrangebylex(name, max, min, start=None, num=None)
+</pre>
+</div>
+<p>zrem(name, values)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 删除name对应的有序集合中值是values的成员
+
+# 如：zrem('zz', ['s1', 's2'])
+</pre>
+</div>
+<p>zremrangebyrank(name, min, max)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 根据排行范围删除
+</pre>
+</div>
+<p>zremrangebyscore(name, min, max)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 根据分数范围删除
+</pre>
+</div>
+<p>zremrangebylex(name, min, max)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 根据值返回删除
+</pre>
+</div>
+<p>zscore(name, value)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 获取name对应有序集合中 value 对应的分数
+</pre>
+</div>
+<p>zinterstore(dest, keys, aggregate=None)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 获取两个有序集合的交集，如果遇到相同值不同分数，则按照aggregate进行操作
+# aggregate的值为:  SUM  MIN  MAX
+</pre>
+</div>
+<p>zunionstore(dest, keys, aggregate=None)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 获取两个有序集合的并集，如果遇到相同值不同分数，则按照aggregate进行操作
+# aggregate的值为:  SUM  MIN  MAX
+</pre>
+</div>
+<p>zscan(name, cursor=0, match=None, count=None, score_cast_func=float)<br />zscan_iter(name, match=None, count=None,score_cast_func=float)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 同字符串相似，相较于字符串新增score_cast_func，用来对分数进行操作
+</pre>
+</div>
+<p>　　</p>
+</blockquote>
+<p>其他常用操作</p>
+<blockquote>
+<p>delete(*names)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 根据删除redis中的任意数据类型
+</pre>
+</div>
+<p>exists(name)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 检测redis的name是否存在
+</pre>
+</div>
+<p>keys(pattern='*')</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 根据模型获取redis的name
+
+# 更多：
+    # KEYS * 匹配数据库中所有 key 。
+    # KEYS h?llo 匹配 hello ， hallo 和 hxllo 等。
+    # KEYS h*llo 匹配 hllo 和 heeeeello 等。
+    # KEYS h[ae]llo 匹配 hello 和 hallo ，但不匹配 hillo 
+</pre>
+</div>
+<p>expire(name ,time)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 为某个redis的某个name设置超时时间
+</pre>
+</div>
+<p>rename(src, dst)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 对redis的name重命名为
+</pre>
+</div>
+<p>move(name, db))</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 将redis的某个值移动到指定的db下
+</pre>
+</div>
+<p>randomkey()</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 随机获取一个redis的name（不删除）
+</pre>
+</div>
+<p>type(name)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 获取name对应值的类型
+</pre>
+</div>
+<p>scan(cursor=0, match=None, count=None)<br />scan_iter(match=None, count=None)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 同字符串操作，用于增量迭代获取key
+</pre>
+</div>
+<p>　</p>
+</blockquote>
+<p>4、管道</p>
+<p>redis-py默认在执行每次请求都会创建（连接池申请连接）和断开（归还连接池）一次连接操作，如果想要在一次请求中指定多个命令，则可以使用pipline实现一次请求指定多个命令，并且默认情况下一次pipline 是原子性操作。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+import redis
+
+pool = redis.ConnectionPool(host='10.211.55.4', port=6379)
+
+r = redis.Redis(connection_pool=pool)
+
+# pipe = r.pipeline(transaction=False)
+pipe = r.pipeline(transaction=True)
+
+pipe.set('name', 'alex')
+pipe.set('role', 'sb')
+
+pipe.execute()
+</pre>
+</div>
+<p>5、发布订阅</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201601/425762-20160121152411125-1838441844.png" alt="" width="467" height="273" /></p>
+<p>发布者：服务器</p>
+<p>订阅者：Dashboad和数据处理</p>
+<p>Demo如下：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('3f28f3d6-94f0-4f19-aaa4-dfbc0a8172bd')"><img id="code_img_closed_3f28f3d6-94f0-4f19-aaa4-dfbc0a8172bd" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_3f28f3d6-94f0-4f19-aaa4-dfbc0a8172bd" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('3f28f3d6-94f0-4f19-aaa4-dfbc0a8172bd',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_3f28f3d6-94f0-4f19-aaa4-dfbc0a8172bd" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> redis
+
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> RedisHelper:
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span><span style="color: #000000;">(self):
+        self.</span><span style="color: #800080;">__conn</span> = redis.Redis(host=<span style="color: #800000;">'</span><span style="color: #800000;">10.211.55.4</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        self.chan_sub </span>= <span style="color: #800000;">'</span><span style="color: #800000;">fm104.5</span><span style="color: #800000;">'</span><span style="color: #000000;">
+        self.chan_pub </span>= <span style="color: #800000;">'</span><span style="color: #800000;">fm104.5</span><span style="color: #800000;">'</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> public(self, msg):
+        self.</span><span style="color: #800080;">__conn</span><span style="color: #000000;">.publish(self.chan_pub, msg)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> True
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> subscribe(self):
+        pub </span>= self.<span style="color: #800080;">__conn</span><span style="color: #000000;">.pubsub()
+        pub.subscribe(self.chan_sub)
+        pub.parse_response()
+        </span><span style="color: #0000ff;">return</span> pub</pre>
+</div>
+<span class="cnblogs_code_collapse">RedisHelper</span></div>
+<p>订阅者：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+from monitor.RedisHelper import RedisHelper
+
+obj = RedisHelper()
+redis_sub = obj.subscribe()
+
+while True:
+    msg= redis_sub.parse_response()
+    print msg
+</pre>
+</div>
+<p>发布者：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+from monitor.RedisHelper import RedisHelper
+
+obj = RedisHelper()
+obj.public('hello')
+</pre>
+</div>
+<p>更多参见：https://github.com/andymccurdy/redis-py/</p>
+<p>http://doc.redisfans.com/</p>
+<h3>RabbitMQ</h3>
+<p>RabbitMQ是一个在AMQP基础上完整的，可复用的企业消息系统。他遵循Mozilla Public License开源协议。</p>
+<p>MQ全称为Message Queue,&nbsp;<a href="http://baike.baidu.com/view/262473.htm" target="_blank">消息队列</a>（MQ）是一种应用程序对应用程序的通信方法。应用程序通过读写出入队列的消息（针对应用程序的数据）来通信，而无需专用连接来链接它们。消 息传递指的是程序之间通过在消息中发送数据进行通信，而不是通过直接调用彼此来通信，直接调用通常是用于诸如<a href="http://baike.baidu.com/view/431455.htm" target="_blank">远程过程调用</a>的技术。排队指的是应用程序通过 队列来通信。队列的使用除去了接收和发送应用程序同时执行的要求。</p>
+<p>RabbitMQ安装</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">安装配置epel源
+   $ rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+
+安装erlang
+   $ yum -y install erlang
+
+安装RabbitMQ
+   $ yum -y install rabbitmq-server</pre>
+</div>
+<p>注意：service rabbitmq-server start/stop</p>
+<p>安装API</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">pip install pika
+or
+easy_install pika
+or
+源码
+
+https://pypi.python.org/pypi/pika</pre>
+</div>
+<p>使用API操作RabbitMQ</p>
+<p>基于Queue实现生产者消费者模型</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('447226ca-aea7-4d9b-bd98-24f0f099759c')"><img id="code_img_closed_447226ca-aea7-4d9b-bd98-24f0f099759c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_447226ca-aea7-4d9b-bd98-24f0f099759c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('447226ca-aea7-4d9b-bd98-24f0f099759c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_447226ca-aea7-4d9b-bd98-24f0f099759c" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> Queue
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> threading
+
+
+message </span>= Queue.Queue(10<span style="color: #000000;">)
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> producer(i):
+    </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+        message.put(i)
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> consumer(i):
+    </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+        msg </span>=<span style="color: #000000;"> message.get()
+
+
+</span><span style="color: #0000ff;">for</span> i <span style="color: #0000ff;">in</span> range(12<span style="color: #000000;">):
+    t </span>= threading.Thread(target=producer, args=<span style="color: #000000;">(i,))
+    t.start()
+
+</span><span style="color: #0000ff;">for</span> i <span style="color: #0000ff;">in</span> range(10<span style="color: #000000;">):
+    t </span>= threading.Thread(target=consumer, args=<span style="color: #000000;">(i,))
+    t.start()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<p>对于RabbitMQ来说，生产和消费不再针对内存里的一个Queue对象，而是某台服务器上的RabbitMQ Server实现的消息队列。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+import pika
+
+# ######################### 生产者 #########################
+
+connection = pika.BlockingConnection(pika.ConnectionParameters(
+        host='localhost'))
+channel = connection.channel()
+
+channel.queue_declare(queue='hello')
+
+channel.basic_publish(exchange='',
+                      routing_key='hello',
+                      body='Hello World!')
+print(" [x] Sent 'Hello World!'")
+connection.close()
+</pre>
+</div>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+import pika
+
+# ########################## 消费者 ##########################
+
+connection = pika.BlockingConnection(pika.ConnectionParameters(
+        host='localhost'))
+channel = connection.channel()
+
+channel.queue_declare(queue='hello')
+
+def callback(ch, method, properties, body):
+    print(" [x] Received %r" % body)
+
+channel.basic_consume(callback,
+                      queue='hello',
+                      no_ack=True)
+
+print(' [*] Waiting for messages. To exit press CTRL+C')
+channel.start_consuming()
+</pre>
+</div>
+<p>1、acknowledgment 消息不丢失</p>
+<p>no-ack ＝ False，如果消费者遇到情况(its channel is closed, connection is closed, or TCP connection is lost)挂掉了，那么，RabbitMQ会重新将该任务添加到队列中。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('726b00f9-c85c-4449-9f4c-6ed859d97e38')"><img id="code_img_closed_726b00f9-c85c-4449-9f4c-6ed859d97e38" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_726b00f9-c85c-4449-9f4c-6ed859d97e38" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('726b00f9-c85c-4449-9f4c-6ed859d97e38',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_726b00f9-c85c-4449-9f4c-6ed859d97e38" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> pika
+
+connection </span>=<span style="color: #000000;"> pika.BlockingConnection(pika.ConnectionParameters(
+        host</span>=<span style="color: #800000;">'</span><span style="color: #800000;">10.211.55.4</span><span style="color: #800000;">'</span><span style="color: #000000;">))
+channel </span>=<span style="color: #000000;"> connection.channel()
+
+channel.queue_declare(queue</span>=<span style="color: #800000;">'</span><span style="color: #800000;">hello</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> callback(ch, method, properties, body):
+    </span><span style="color: #0000ff;">print</span>(<span style="color: #800000;">"</span><span style="color: #800000;"> [x] Received %r</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> body)
+    </span><span style="color: #0000ff;">import</span><span style="color: #000000;"> time
+    time.sleep(</span>10<span style="color: #000000;">)
+    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">ok</span><span style="color: #800000;">'</span><span style="color: #000000;">
+    ch.basic_ack(delivery_tag </span>=<span style="color: #000000;"> method.delivery_tag)
+
+channel.basic_consume(callback,
+                      queue</span>=<span style="color: #800000;">'</span><span style="color: #800000;">hello</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                      no_ack</span>=<span style="color: #000000;">False)
+
+</span><span style="color: #0000ff;">print</span>(<span style="color: #800000;">'</span><span style="color: #800000;"> [*] Waiting for messages. To exit press CTRL+C</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+channel.start_consuming()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">消费者</span></div>
+<p>2、<span class="n">durable &nbsp; 消息不丢失</span></p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('00cdc5f3-e5dc-4780-913b-93b5167d3c2c')"><img id="code_img_closed_00cdc5f3-e5dc-4780-913b-93b5167d3c2c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_00cdc5f3-e5dc-4780-913b-93b5167d3c2c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('00cdc5f3-e5dc-4780-913b-93b5167d3c2c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_00cdc5f3-e5dc-4780-913b-93b5167d3c2c" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> pika
+
+connection </span>= pika.BlockingConnection(pika.ConnectionParameters(host=<span style="color: #800000;">'</span><span style="color: #800000;">10.211.55.4</span><span style="color: #800000;">'</span><span style="color: #000000;">))
+channel </span>=<span style="color: #000000;"> connection.channel()
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> make message persistent</span>
+channel.queue_declare(queue=<span style="color: #800000;">'</span><span style="color: #800000;">hello</span><span style="color: #800000;">'</span>, durable=<span style="color: #000000;">True)
+
+channel.basic_publish(exchange</span>=<span style="color: #800000;">''</span><span style="color: #000000;">,
+                      routing_key</span>=<span style="color: #800000;">'</span><span style="color: #800000;">hello</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                      body</span>=<span style="color: #800000;">'</span><span style="color: #800000;">Hello World!</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                      properties</span>=<span style="color: #000000;">pika.BasicProperties(
+                          delivery_mode</span>=2, <span style="color: #008000;">#</span><span style="color: #008000;"> make message persistent</span>
+<span style="color: #000000;">                      ))
+</span><span style="color: #0000ff;">print</span>(<span style="color: #800000;">"</span><span style="color: #800000;"> [x] Sent 'Hello World!'</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+connection.close()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">生产者</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('5d197d62-92e0-4631-aba0-ec94b2d34a28')"><img id="code_img_closed_5d197d62-92e0-4631-aba0-ec94b2d34a28" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_5d197d62-92e0-4631-aba0-ec94b2d34a28" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('5d197d62-92e0-4631-aba0-ec94b2d34a28',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_5d197d62-92e0-4631-aba0-ec94b2d34a28" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> pika
+
+connection </span>= pika.BlockingConnection(pika.ConnectionParameters(host=<span style="color: #800000;">'</span><span style="color: #800000;">10.211.55.4</span><span style="color: #800000;">'</span><span style="color: #000000;">))
+channel </span>=<span style="color: #000000;"> connection.channel()
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> make message persistent</span>
+channel.queue_declare(queue=<span style="color: #800000;">'</span><span style="color: #800000;">hello</span><span style="color: #800000;">'</span>, durable=<span style="color: #000000;">True)
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> callback(ch, method, properties, body):
+    </span><span style="color: #0000ff;">print</span>(<span style="color: #800000;">"</span><span style="color: #800000;"> [x] Received %r</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> body)
+    </span><span style="color: #0000ff;">import</span><span style="color: #000000;"> time
+    time.sleep(</span>10<span style="color: #000000;">)
+    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">ok</span><span style="color: #800000;">'</span><span style="color: #000000;">
+    ch.basic_ack(delivery_tag </span>=<span style="color: #000000;"> method.delivery_tag)
+
+channel.basic_consume(callback,
+                      queue</span>=<span style="color: #800000;">'</span><span style="color: #800000;">hello</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                      no_ack</span>=<span style="color: #000000;">False)
+
+</span><span style="color: #0000ff;">print</span>(<span style="color: #800000;">'</span><span style="color: #800000;"> [*] Waiting for messages. To exit press CTRL+C</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+channel.start_consuming()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">消费者</span></div>
+<p><span class="n">3、消息获取顺序</span></p>
+<p><span class="n">默认消息队列里的数据是按照顺序被消费者拿走，例如：消费者1 去队列中获取 奇数 序列的任务，消费者1去队列中获取 偶数 序列的任务。</span></p>
+<p>channel.basic_qos(prefetch_count=1) 表示谁来谁取，不再按照奇偶数排列</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('5badc327-1ded-43b8-8e29-52ad8e3c17b3')"><img id="code_img_closed_5badc327-1ded-43b8-8e29-52ad8e3c17b3" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_5badc327-1ded-43b8-8e29-52ad8e3c17b3" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('5badc327-1ded-43b8-8e29-52ad8e3c17b3',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_5badc327-1ded-43b8-8e29-52ad8e3c17b3" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> pika
+
+connection </span>= pika.BlockingConnection(pika.ConnectionParameters(host=<span style="color: #800000;">'</span><span style="color: #800000;">10.211.55.4</span><span style="color: #800000;">'</span><span style="color: #000000;">))
+channel </span>=<span style="color: #000000;"> connection.channel()
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> make message persistent</span>
+channel.queue_declare(queue=<span style="color: #800000;">'</span><span style="color: #800000;">hello</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> callback(ch, method, properties, body):
+    </span><span style="color: #0000ff;">print</span>(<span style="color: #800000;">"</span><span style="color: #800000;"> [x] Received %r</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> body)
+    </span><span style="color: #0000ff;">import</span><span style="color: #000000;"> time
+    time.sleep(</span>10<span style="color: #000000;">)
+    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">ok</span><span style="color: #800000;">'</span><span style="color: #000000;">
+    ch.basic_ack(delivery_tag </span>=<span style="color: #000000;"> method.delivery_tag)
+
+channel.basic_qos(prefetch_count</span>=1<span style="color: #000000;">)
+
+channel.basic_consume(callback,
+                      queue</span>=<span style="color: #800000;">'</span><span style="color: #800000;">hello</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                      no_ack</span>=<span style="color: #000000;">False)
+
+</span><span style="color: #0000ff;">print</span>(<span style="color: #800000;">'</span><span style="color: #800000;"> [*] Waiting for messages. To exit press CTRL+C</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+channel.start_consuming()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">消费者</span></div>
+<p>4、发布订阅</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201607/425762-20160717140730998-2143093474.png" alt="" width="634" height="189" /></p>
+<p>发布订阅和简单的消息队列区别在于，发布订阅会将消息发送给所有的订阅者，而消息队列中的数据被消费一次便消失。所以，RabbitMQ实现发布和订阅时，会为每一个订阅者创建一个队列，而发布者发布消息时，会将消息放置在所有相关队列中。</p>
+<p>&nbsp;exchange type = fanout</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('2eea3285-d8ef-4298-bd21-e4b61b941ff3')"><img id="code_img_closed_2eea3285-d8ef-4298-bd21-e4b61b941ff3" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_2eea3285-d8ef-4298-bd21-e4b61b941ff3" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('2eea3285-d8ef-4298-bd21-e4b61b941ff3',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_2eea3285-d8ef-4298-bd21-e4b61b941ff3" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> pika
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> sys
+
+connection </span>=<span style="color: #000000;"> pika.BlockingConnection(pika.ConnectionParameters(
+        host</span>=<span style="color: #800000;">'</span><span style="color: #800000;">localhost</span><span style="color: #800000;">'</span><span style="color: #000000;">))
+channel </span>=<span style="color: #000000;"> connection.channel()
+
+channel.exchange_declare(exchange</span>=<span style="color: #800000;">'</span><span style="color: #800000;">logs</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                         type</span>=<span style="color: #800000;">'</span><span style="color: #800000;">fanout</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+message </span>= <span style="color: #800000;">'</span> <span style="color: #800000;">'</span>.join(sys.argv[1:]) <span style="color: #0000ff;">or</span> <span style="color: #800000;">"</span><span style="color: #800000;">info: Hello World!</span><span style="color: #800000;">"</span><span style="color: #000000;">
+channel.basic_publish(exchange</span>=<span style="color: #800000;">'</span><span style="color: #800000;">logs</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                      routing_key</span>=<span style="color: #800000;">''</span><span style="color: #000000;">,
+                      body</span>=<span style="color: #000000;">message)
+</span><span style="color: #0000ff;">print</span>(<span style="color: #800000;">"</span><span style="color: #800000;"> [x] Sent %r</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> message)
+connection.close()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">发布者</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('45a79d14-c0e5-42a3-a8a2-0fbe6212a1ae')"><img id="code_img_closed_45a79d14-c0e5-42a3-a8a2-0fbe6212a1ae" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_45a79d14-c0e5-42a3-a8a2-0fbe6212a1ae" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('45a79d14-c0e5-42a3-a8a2-0fbe6212a1ae',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_45a79d14-c0e5-42a3-a8a2-0fbe6212a1ae" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> pika
+
+connection </span>=<span style="color: #000000;"> pika.BlockingConnection(pika.ConnectionParameters(
+        host</span>=<span style="color: #800000;">'</span><span style="color: #800000;">localhost</span><span style="color: #800000;">'</span><span style="color: #000000;">))
+channel </span>=<span style="color: #000000;"> connection.channel()
+
+channel.exchange_declare(exchange</span>=<span style="color: #800000;">'</span><span style="color: #800000;">logs</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                         type</span>=<span style="color: #800000;">'</span><span style="color: #800000;">fanout</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+result </span>= channel.queue_declare(exclusive=<span style="color: #000000;">True)
+queue_name </span>=<span style="color: #000000;"> result.method.queue
+
+channel.queue_bind(exchange</span>=<span style="color: #800000;">'</span><span style="color: #800000;">logs</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                   queue</span>=<span style="color: #000000;">queue_name)
+
+</span><span style="color: #0000ff;">print</span>(<span style="color: #800000;">'</span><span style="color: #800000;"> [*] Waiting for logs. To exit press CTRL+C</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> callback(ch, method, properties, body):
+    </span><span style="color: #0000ff;">print</span>(<span style="color: #800000;">"</span><span style="color: #800000;"> [x] %r</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> body)
+
+channel.basic_consume(callback,
+                      queue</span>=<span style="color: #000000;">queue_name,
+                      no_ack</span>=<span style="color: #000000;">True)
+
+channel.start_consuming()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">订阅者</span></div>
+<p>5、关键字发送</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201607/425762-20160717140748795-1181706200.png" alt="" width="585" height="191" /></p>
+<p>&nbsp;exchange type = direct</p>
+<p>之前事例，发送消息时明确指定某个队列并向其中发送消息，RabbitMQ还支持根据关键字发送，即：队列绑定关键字，发送者将数据根据关键字发送到消息exchange，exchange根据 关键字 判定应该将数据发送至指定队列。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('37d73d0f-4bbb-4bfe-9d81-7e83bd82a8fe')"><img id="code_img_closed_37d73d0f-4bbb-4bfe-9d81-7e83bd82a8fe" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_37d73d0f-4bbb-4bfe-9d81-7e83bd82a8fe" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('37d73d0f-4bbb-4bfe-9d81-7e83bd82a8fe',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_37d73d0f-4bbb-4bfe-9d81-7e83bd82a8fe" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> pika
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> sys
+
+connection </span>=<span style="color: #000000;"> pika.BlockingConnection(pika.ConnectionParameters(
+        host</span>=<span style="color: #800000;">'</span><span style="color: #800000;">localhost</span><span style="color: #800000;">'</span><span style="color: #000000;">))
+channel </span>=<span style="color: #000000;"> connection.channel()
+
+channel.exchange_declare(exchange</span>=<span style="color: #800000;">'</span><span style="color: #800000;">direct_logs</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                         type</span>=<span style="color: #800000;">'</span><span style="color: #800000;">direct</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+result </span>= channel.queue_declare(exclusive=<span style="color: #000000;">True)
+queue_name </span>=<span style="color: #000000;"> result.method.queue
+
+severities </span>= sys.argv[1<span style="color: #000000;">:]
+</span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> severities:
+    sys.stderr.write(</span><span style="color: #800000;">"</span><span style="color: #800000;">Usage: %s [info] [warning] [error]\n</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> sys.argv[0])
+    sys.exit(</span>1<span style="color: #000000;">)
+
+</span><span style="color: #0000ff;">for</span> severity <span style="color: #0000ff;">in</span><span style="color: #000000;"> severities:
+    channel.queue_bind(exchange</span>=<span style="color: #800000;">'</span><span style="color: #800000;">direct_logs</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                       queue</span>=<span style="color: #000000;">queue_name,
+                       routing_key</span>=<span style="color: #000000;">severity)
+
+</span><span style="color: #0000ff;">print</span>(<span style="color: #800000;">'</span><span style="color: #800000;"> [*] Waiting for logs. To exit press CTRL+C</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> callback(ch, method, properties, body):
+    </span><span style="color: #0000ff;">print</span>(<span style="color: #800000;">"</span><span style="color: #800000;"> [x] %r:%r</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> (method.routing_key, body))
+
+channel.basic_consume(callback,
+                      queue</span>=<span style="color: #000000;">queue_name,
+                      no_ack</span>=<span style="color: #000000;">True)
+
+channel.start_consuming()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">消费者</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('cf00e6e7-8759-4b79-a1d3-9267c2f9812b')"><img id="code_img_closed_cf00e6e7-8759-4b79-a1d3-9267c2f9812b" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_cf00e6e7-8759-4b79-a1d3-9267c2f9812b" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('cf00e6e7-8759-4b79-a1d3-9267c2f9812b',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_cf00e6e7-8759-4b79-a1d3-9267c2f9812b" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> pika
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> sys
+
+connection </span>=<span style="color: #000000;"> pika.BlockingConnection(pika.ConnectionParameters(
+        host</span>=<span style="color: #800000;">'</span><span style="color: #800000;">localhost</span><span style="color: #800000;">'</span><span style="color: #000000;">))
+channel </span>=<span style="color: #000000;"> connection.channel()
+
+channel.exchange_declare(exchange</span>=<span style="color: #800000;">'</span><span style="color: #800000;">direct_logs</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                         type</span>=<span style="color: #800000;">'</span><span style="color: #800000;">direct</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+severity </span>= sys.argv[1] <span style="color: #0000ff;">if</span> len(sys.argv) &gt; 1 <span style="color: #0000ff;">else</span> <span style="color: #800000;">'</span><span style="color: #800000;">info</span><span style="color: #800000;">'</span><span style="color: #000000;">
+message </span>= <span style="color: #800000;">'</span> <span style="color: #800000;">'</span>.join(sys.argv[2:]) <span style="color: #0000ff;">or</span> <span style="color: #800000;">'</span><span style="color: #800000;">Hello World!</span><span style="color: #800000;">'</span><span style="color: #000000;">
+channel.basic_publish(exchange</span>=<span style="color: #800000;">'</span><span style="color: #800000;">direct_logs</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                      routing_key</span>=<span style="color: #000000;">severity,
+                      body</span>=<span style="color: #000000;">message)
+</span><span style="color: #0000ff;">print</span>(<span style="color: #800000;">"</span><span style="color: #800000;"> [x] Sent %r:%r</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> (severity, message))
+connection.close()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">生产者</span></div>
+<p>6、模糊匹配</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201607/425762-20160717140807232-1395723247.png" alt="" width="544" height="181" /></p>
+<p>&nbsp;exchange type = topic</p>
+<p>在topic类型下，可以让队列绑定几个模糊的关键字，之后发送者将数据发送到exchange，exchange将传入&rdquo;路由值&ldquo;和 &rdquo;关键字&ldquo;进行匹配，匹配成功，则将数据发送到指定队列。</p>
+<ul>
+<li># 表示可以匹配 0 个 或 多个 单词</li>
+<li>* &nbsp;表示只能匹配 一个 单词</li>
+</ul>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">发送者路由值              队列中
+old.boy.python          old.*  -- 不匹配
+old.boy.python          old.#  -- 匹配
+</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('d01b3cba-828d-4b0f-a563-f88f702acc71')"><img id="code_img_closed_d01b3cba-828d-4b0f-a563-f88f702acc71" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_d01b3cba-828d-4b0f-a563-f88f702acc71" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('d01b3cba-828d-4b0f-a563-f88f702acc71',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_d01b3cba-828d-4b0f-a563-f88f702acc71" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> pika
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> sys
+
+connection </span>=<span style="color: #000000;"> pika.BlockingConnection(pika.ConnectionParameters(
+        host</span>=<span style="color: #800000;">'</span><span style="color: #800000;">localhost</span><span style="color: #800000;">'</span><span style="color: #000000;">))
+channel </span>=<span style="color: #000000;"> connection.channel()
+
+channel.exchange_declare(exchange</span>=<span style="color: #800000;">'</span><span style="color: #800000;">topic_logs</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                         type</span>=<span style="color: #800000;">'</span><span style="color: #800000;">topic</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+result </span>= channel.queue_declare(exclusive=<span style="color: #000000;">True)
+queue_name </span>=<span style="color: #000000;"> result.method.queue
+
+binding_keys </span>= sys.argv[1<span style="color: #000000;">:]
+</span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> binding_keys:
+    sys.stderr.write(</span><span style="color: #800000;">"</span><span style="color: #800000;">Usage: %s [binding_key]...\n</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> sys.argv[0])
+    sys.exit(</span>1<span style="color: #000000;">)
+
+</span><span style="color: #0000ff;">for</span> binding_key <span style="color: #0000ff;">in</span><span style="color: #000000;"> binding_keys:
+    channel.queue_bind(exchange</span>=<span style="color: #800000;">'</span><span style="color: #800000;">topic_logs</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                       queue</span>=<span style="color: #000000;">queue_name,
+                       routing_key</span>=<span style="color: #000000;">binding_key)
+
+</span><span style="color: #0000ff;">print</span>(<span style="color: #800000;">'</span><span style="color: #800000;"> [*] Waiting for logs. To exit press CTRL+C</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> callback(ch, method, properties, body):
+    </span><span style="color: #0000ff;">print</span>(<span style="color: #800000;">"</span><span style="color: #800000;"> [x] %r:%r</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> (method.routing_key, body))
+
+channel.basic_consume(callback,
+                      queue</span>=<span style="color: #000000;">queue_name,
+                      no_ack</span>=<span style="color: #000000;">True)
+
+channel.start_consuming()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">消费者</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('e128608f-08f2-4921-b8c5-f3a1993f433f')"><img id="code_img_closed_e128608f-08f2-4921-b8c5-f3a1993f433f" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_e128608f-08f2-4921-b8c5-f3a1993f433f" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('e128608f-08f2-4921-b8c5-f3a1993f433f',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_e128608f-08f2-4921-b8c5-f3a1993f433f" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> pika
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> sys
+
+connection </span>=<span style="color: #000000;"> pika.BlockingConnection(pika.ConnectionParameters(
+        host</span>=<span style="color: #800000;">'</span><span style="color: #800000;">localhost</span><span style="color: #800000;">'</span><span style="color: #000000;">))
+channel </span>=<span style="color: #000000;"> connection.channel()
+
+channel.exchange_declare(exchange</span>=<span style="color: #800000;">'</span><span style="color: #800000;">topic_logs</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                         type</span>=<span style="color: #800000;">'</span><span style="color: #800000;">topic</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+routing_key </span>= sys.argv[1] <span style="color: #0000ff;">if</span> len(sys.argv) &gt; 1 <span style="color: #0000ff;">else</span> <span style="color: #800000;">'</span><span style="color: #800000;">anonymous.info</span><span style="color: #800000;">'</span><span style="color: #000000;">
+message </span>= <span style="color: #800000;">'</span> <span style="color: #800000;">'</span>.join(sys.argv[2:]) <span style="color: #0000ff;">or</span> <span style="color: #800000;">'</span><span style="color: #800000;">Hello World!</span><span style="color: #800000;">'</span><span style="color: #000000;">
+channel.basic_publish(exchange</span>=<span style="color: #800000;">'</span><span style="color: #800000;">topic_logs</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                      routing_key</span>=<span style="color: #000000;">routing_key,
+                      body</span>=<span style="color: #000000;">message)
+</span><span style="color: #0000ff;">print</span>(<span style="color: #800000;">"</span><span style="color: #800000;"> [x] Sent %r:%r</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> (routing_key, message))
+connection.close()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">生产者</span></div>
+<p>注意：</p>
+<p>&nbsp;</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('bb167bb0-526c-4724-8488-4f1b64fe0e82')"><img id="code_img_closed_bb167bb0-526c-4724-8488-4f1b64fe0e82" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_bb167bb0-526c-4724-8488-4f1b64fe0e82" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('bb167bb0-526c-4724-8488-4f1b64fe0e82',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_bb167bb0-526c-4724-8488-4f1b64fe0e82" class="cnblogs_code_hide">
+<pre>sudo rabbitmqctl add_user alex 123
+<span style="color: #008000;">#</span><span style="color: #008000;"> 设置用户为administrator角色</span>
+<span style="color: #000000;">sudo rabbitmqctl set_user_tags alex administrator
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 设置权限</span>
+sudo rabbitmqctl set_permissions -p <span style="color: #800000;">"</span><span style="color: #800000;">/</span><span style="color: #800000;">"</span> alex <span style="color: #800000;">'</span><span style="color: #800000;">.</span><span style="color: #800000;">''</span><span style="color: #800000;">.</span><span style="color: #800000;">''</span><span style="color: #800000;">.</span><span style="color: #800000;">'</span>
+
+<span style="color: #008000;">#</span><span style="color: #008000;"> 然后重启rabbiMQ服务</span>
+sudo /etc/init.d/rabbitmq-<span style="color: #000000;">server restart
+ 
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 然后可以使用刚才的用户远程连接rabbitmq server了。</span>
+
+
+------------------------------<span style="color: #000000;">
+credentials </span>= pika.PlainCredentials(<span style="color: #800000;">"</span><span style="color: #800000;">alex</span><span style="color: #800000;">"</span>,<span style="color: #800000;">"</span><span style="color: #800000;">123</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+
+connection </span>= pika.BlockingConnection(pika.ConnectionParameters(<span style="color: #800000;">'</span><span style="color: #800000;">192.168.14.47</span><span style="color: #800000;">'</span>,credentials=credentials))</pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<h3>SQLAlchemy</h3>
+<p>SQLAlchemy是<a href="http://baike.baidu.com/subview/21087/21087.htm" target="_blank">Python</a>编程语言下的一款ORM框架，该框架建立在数据库API之上，使用关系对象映射进行数据库操作，简言之便是：将对象转换成SQL，然后使用数据API执行SQL并获取执行结果。</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201601/425762-20160117042127803-263417768.png" alt="" width="539" height="377" /></p>
+<p>Dialect用于和数据API进行交流，根据配置文件的不同调用不同的数据库API，从而实现对数据库的操作，如：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">MySQL-Python
+    mysql+mysqldb://&lt;user&gt;:&lt;password&gt;@&lt;host&gt;[:&lt;port&gt;]/&lt;dbname&gt;
+
+pymysql
+    mysql+pymysql://&lt;username&gt;:&lt;password&gt;@&lt;host&gt;/&lt;dbname&gt;[?&lt;options&gt;]
+
+MySQL-Connector
+    mysql+mysqlconnector://&lt;user&gt;:&lt;password&gt;@&lt;host&gt;[:&lt;port&gt;]/&lt;dbname&gt;
+
+cx_Oracle
+    oracle+cx_oracle://user:pass@host:port/dbname[?key=value&amp;key=value...]
+
+更多详见：http://docs.sqlalchemy.org/en/latest/dialects/index.html
+</pre>
+</div>
+<p>步骤一：</p>
+<p>使用 Engine/ConnectionPooling/Dialect 进行数据库操作，Engine使用ConnectionPooling连接数据库，然后再通过Dialect执行SQL语句。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+from sqlalchemy import create_engine
+
+
+engine = create_engine("mysql+mysqldb://root:123@127.0.0.1:3306/s11", max_overflow=5)
+
+engine.execute(
+    "INSERT INTO ts_test (a, b) VALUES ('2', 'v1')"
+)
+
+engine.execute(
+     "INSERT INTO ts_test (a, b) VALUES (%s, %s)",
+    ((555, "v1"),(666, "v1"),)
+)
+engine.execute(
+    "INSERT INTO ts_test (a, b) VALUES (%(id)s, %(name)s)",
+    id=999, name="v1"
+)
+
+result = engine.execute('select * from ts_test')
+result.fetchall()</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('bcbfef61-88d4-49f1-8289-685072590b71')"><img id="code_img_closed_bcbfef61-88d4-49f1-8289-685072590b71" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_bcbfef61-88d4-49f1-8289-685072590b71" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('bcbfef61-88d4-49f1-8289-685072590b71',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_bcbfef61-88d4-49f1-8289-685072590b71" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+<span style="color: #0000ff;">from</span> sqlalchemy <span style="color: #0000ff;">import</span><span style="color: #000000;"> create_engine
+
+
+engine </span>= create_engine(<span style="color: #800000;">"</span><span style="color: #800000;">mysql+mysqldb://root:123@127.0.0.1:3306/s11</span><span style="color: #800000;">"</span>, max_overflow=5<span style="color: #000000;">)
+
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 事务操作</span>
+<span style="color: #000000;">with engine.begin() as conn:
+    conn.execute(</span><span style="color: #800000;">"</span><span style="color: #800000;">insert into table (x, y, z) values (1, 2, 3)</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+    conn.execute(</span><span style="color: #800000;">"</span><span style="color: #800000;">my_special_procedure(5)</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+    
+    
+conn </span>=<span style="color: #000000;"> engine.connect()
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 事务操作 </span>
+<span style="color: #000000;">with conn.begin():
+       conn.execute(</span><span style="color: #800000;">"</span><span style="color: #800000;">some statement</span><span style="color: #800000;">"</span>, {<span style="color: #800000;">'</span><span style="color: #800000;">x</span><span style="color: #800000;">'</span>:5, <span style="color: #800000;">'</span><span style="color: #800000;">y</span><span style="color: #800000;">'</span>:10})</pre>
+</div>
+<span class="cnblogs_code_collapse">事务操作</span></div>
+<p><span style="font-size: 13px;"><em><span style="color: #888888;">注：查看数据库连接：show status like 'Threads%';</span></em></span></p>
+<p>步骤二：</p>
+<p>使用 Schema Type/SQL Expression Language/Engine/ConnectionPooling/Dialect 进行数据库操作。Engine使用Schema Type创建一个特定的结构对象，之后通过SQL Expression Language将该对象转换成SQL语句，然后通过&nbsp;ConnectionPooling 连接数据库，再然后通过&nbsp;Dialect 执行SQL，并获取结果。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+from sqlalchemy import create_engine, Table, Column, Integer, String, MetaData, ForeignKey
+
+metadata = MetaData()
+
+user = Table('user', metadata,
+    Column('id', Integer, primary_key=True),
+    Column('name', String(20)),
+)
+
+color = Table('color', metadata,
+    Column('id', Integer, primary_key=True),
+    Column('name', String(20)),
+)
+engine = create_engine("mysql+mysqldb://root:123@127.0.0.1:3306/s11", max_overflow=5)
+
+metadata.create_all(engine)
+# metadata.clear()
+# metadata.remove()
+</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('c90b1fa4-fe6f-4cee-9853-ecfd25589857')"><img id="code_img_closed_c90b1fa4-fe6f-4cee-9853-ecfd25589857" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_c90b1fa4-fe6f-4cee-9853-ecfd25589857" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('c90b1fa4-fe6f-4cee-9853-ecfd25589857',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_c90b1fa4-fe6f-4cee-9853-ecfd25589857" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+<span style="color: #0000ff;">from</span> sqlalchemy <span style="color: #0000ff;">import</span><span style="color: #000000;"> create_engine, Table, Column, Integer, String, MetaData, ForeignKey
+
+metadata </span>=<span style="color: #000000;"> MetaData()
+
+user </span>= Table(<span style="color: #800000;">'</span><span style="color: #800000;">user</span><span style="color: #800000;">'</span><span style="color: #000000;">, metadata,
+    Column(</span><span style="color: #800000;">'</span><span style="color: #800000;">id</span><span style="color: #800000;">'</span>, Integer, primary_key=<span style="color: #000000;">True),
+    Column(</span><span style="color: #800000;">'</span><span style="color: #800000;">name</span><span style="color: #800000;">'</span>, String(20<span style="color: #000000;">)),
+)
+
+color </span>= Table(<span style="color: #800000;">'</span><span style="color: #800000;">color</span><span style="color: #800000;">'</span><span style="color: #000000;">, metadata,
+    Column(</span><span style="color: #800000;">'</span><span style="color: #800000;">id</span><span style="color: #800000;">'</span>, Integer, primary_key=<span style="color: #000000;">True),
+    Column(</span><span style="color: #800000;">'</span><span style="color: #800000;">name</span><span style="color: #800000;">'</span>, String(20<span style="color: #000000;">)),
+)
+engine </span>= create_engine(<span style="color: #800000;">"</span><span style="color: #800000;">mysql+mysqldb://root:123@127.0.0.1:3306/s11</span><span style="color: #800000;">"</span>, max_overflow=5<span style="color: #000000;">)
+
+conn </span>=<span style="color: #000000;"> engine.connect()
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 创建SQL语句，INSERT INTO "user" (id, name) VALUES (:id, :name)</span>
+conn.execute(user.insert(),{<span style="color: #800000;">'</span><span style="color: #800000;">id</span><span style="color: #800000;">'</span>:7,<span style="color: #800000;">'</span><span style="color: #800000;">name</span><span style="color: #800000;">'</span>:<span style="color: #800000;">'</span><span style="color: #800000;">seven</span><span style="color: #800000;">'</span><span style="color: #000000;">})
+conn.close()
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> sql = user.insert().values(id=123, name='wu')</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> conn.execute(sql)</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> conn.close()</span>
+
+<span style="color: #008000;">#</span><span style="color: #008000;"> sql = user.delete().where(user.c.id &gt; 1)</span>
+
+<span style="color: #008000;">#</span><span style="color: #008000;"> sql = user.update().values(fullname=user.c.name)</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> sql = user.update().where(user.c.name == 'jack').values(name='ed')</span>
+
+<span style="color: #008000;">#</span><span style="color: #008000;"> sql = select([user, ])</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> sql = select([user.c.id, ])</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> sql = select([user.c.name, color.c.name]).where(user.c.id==color.c.id)</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> sql = select([user.c.name]).order_by(user.c.name)</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> sql = select([user]).group_by(user.c.name)</span>
+
+<span style="color: #008000;">#</span><span style="color: #008000;"> result = conn.execute(sql)</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> print result.fetchall()</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> conn.close()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">增删改查</span></div>
+<p>更多内容详见：</p>
+<p>&nbsp; &nbsp;&nbsp;http://www.jianshu.com/p/e6bba189fcbd</p>
+<p>&nbsp; &nbsp; http://docs.sqlalchemy.org/en/latest/core/expression_api.html</p>
+<p>注：SQLAlchemy无法修改表结构，如果需要可以使用SQLAlchemy开发者开源的另外一个软件Alembic来完成。</p>
+<p>步骤三：</p>
+<p>使用 ORM/Schema Type/SQL Expression Language/Engine/ConnectionPooling/Dialect 所有组件对数据进行操作。根据类创建对象，对象转换成SQL，执行SQL。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+
+engine = create_engine("mysql+mysqldb://root:123@127.0.0.1:3306/s11", max_overflow=5)
+
+Base = declarative_base()
+
+
+class User(Base):
+    __tablename__ = 'users'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50))
+
+# 寻找Base的所有子类，按照子类的结构在数据库中生成对应的数据表信息
+# Base.metadata.create_all(engine)
+
+Session = sessionmaker(bind=engine)
+session = Session()
+
+
+# ########## 增 ##########
+# u = User(id=2, name='sb')
+# session.add(u)
+# session.add_all([
+#     User(id=3, name='sb'),
+#     User(id=4, name='sb')
+# ])
+# session.commit()
+
+# ########## 删除 ##########
+# session.query(User).filter(User.id &gt; 2).delete()
+# session.commit()
+
+# ########## 修改 ##########
+# session.query(User).filter(User.id &gt; 2).update({'cluster_id' : 0})
+# session.commit()
+# ########## 查 ##########
+# ret = session.query(User).filter_by(name='sb').first()
+
+# ret = session.query(User).filter_by(name='sb').all()
+# print ret
+
+# ret = session.query(User).filter(User.name.in_(['sb','bb'])).all()
+# print ret
+
+# ret = session.query(User.name.label('name_label')).all()
+# print ret,type(ret)
+
+# ret = session.query(User).order_by(User.id).all()
+# print ret
+
+# ret = session.query(User).order_by(User.id)[1:3]
+# print ret
+# session.commit()
+</pre>
+</div>
+<p>更多功能参见文档，<a href="http://files.cnblogs.com/files/wupeiqi/sqlalchemy.pdf.zip" target="_blank">猛击这里</a>下载PDF</p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2016-01-15 11:26</span> <a href='http://www.cnblogs.com/wupeiqi/'>武沛齐</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>) &nbsp;<a href="https://i.cnblogs.com/EditArticles.aspx?postid=5132791" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(5132791);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=133379,cb_entryId=5132791,cb_blogApp=currentBlogApp,cb_blogUserGuid='7208b24d-95c9-e111-aa3f-842b2b196315',cb_entryCreatedDate='2016/1/15 11:26:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2017 武沛齐
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

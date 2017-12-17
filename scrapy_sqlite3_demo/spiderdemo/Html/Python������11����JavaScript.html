@@ -1,0 +1,667 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python开发【第十一篇】：JavaScript - 武沛齐 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=m_FXmwz3wxZoecUwNEK23PAzc-j9vbX_C6MblJ5ouMc1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue.css?v=jJERBFSojhmgst84aaRDal9S3q1WoO-WcNudmMzGJS81"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/133379.css?v=YSNZANkz7eBKoXq2iHYfghvodkY%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue-mobile.css?v=z0BacpCfWeLlXDCM0C158kTP_DMqMbGBapID4f-QztI1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/wupeiqi/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/wupeiqi/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/wupeiqi/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'wupeiqi', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=CPv0EEqm9L2aCgolHxaZfVYM6J-Sn5az_FJXbjzgr-o1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/wupeiqi/">Mr.Seven</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/wupeiqi/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%AD%A6%E6%B2%9B%E9%BD%90">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/wupeiqi/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/wupeiqi/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-126&nbsp;
+文章-137&nbsp;
+评论-259&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/wupeiqi/articles/5602773.html">Python开发【第十一篇】：JavaScript</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><p>JavaScript是一门编程语言，浏览器内置了JavaScript语言的解释器，所以在浏览器上按照JavaScript语言的规则编写相应代码之，浏览器可以解释并做出相应的处理。</p>
+<h3>一、如何编写</h3>
+<p>1、JavaScript代码存在形式</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">&lt;!-- 方式一 --&gt;
+&lt;script type"text/javascript" src="JS文件"&gt;&lt;/script&gt;
+ 
+&lt;!-- 方式二 --&gt;
+&lt;script type"text/javascript"&gt;
+    Js代码内容
+&lt;/script&gt;
+</pre>
+</div>
+<p>2、JavaScript代码存放位置</p>
+<ul>
+<li>HTML的head中</li>
+<li>HTML的body代码块底部(推荐)</li>
+</ul>
+<p>由于Html代码是从上到下执行，如果Head中的js代码耗时严重，就会导致用户长时间无法看到页面，如果放置在body代码块底部，那么即使js代码耗时严重，也不会影响用户看到页面效果，只是js实现特效慢而已。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">&lt;script src="https://www.gstatic.com/og/_/js/k=og.og2.en_US.iF4jnkQuaf0.O/rt=j/t=zcms/m=def/exm=in,fot/d=1/ed=1/rs=AA2YrTv5-POC4Ks9GtGRdY2ywUWisqz7-Q"&gt;&lt;/script&gt;
+&lt;script&gt;
+    alert('123');
+&lt;/script&gt;
+</pre>
+</div>
+<h3>二、变量</h3>
+<p>JavaScript中变量的声明是一个非常容易出错的点，局部变量必须一个 var 开头，如果未使用var，则默认表示声明的是全局变量。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">    &lt;script type="text/javascript"&gt;
+
+        // 全局变量
+        name = 'seven';
+
+        function func(){
+            // 局部变量
+            var age = 18;
+
+            // 全局变量
+            gender = "男"
+        }
+    &lt;/script&gt;
+</pre>
+</div>
+<p><em><span style="color: #888888;">JavaScript中代码注释：</span></em></p>
+<ul>
+<li><em><span style="color: #888888;">单行 //</span></em></li>
+<li><em><span style="color: #888888;">多行 /* &nbsp;*/</span></em></li>
+</ul>
+<p>注意：此注释仅在Script块中生效。</p>
+<h3>三、数据类型</h3>
+<p>JavaScript 中的数据类型分为原始类型和对象类型：</p>
+<ul>
+<li>原始类型
+<ul>
+<li>数字</li>
+<li>字符串</li>
+<li>布尔值</li>
+</ul>
+</li>
+<li>对象类型
+<ul>
+<li>数组</li>
+<li>&ldquo;字典&rdquo;</li>
+<li>...</li>
+</ul>
+</li>
+</ul>
+<p>特别的，数字、布尔值、null、undefined、字符串是不可变。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('ba941eed-7510-45f1-879c-1248935bd62c')"><img id="code_img_closed_ba941eed-7510-45f1-879c-1248935bd62c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_ba941eed-7510-45f1-879c-1248935bd62c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('ba941eed-7510-45f1-879c-1248935bd62c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_ba941eed-7510-45f1-879c-1248935bd62c" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">//</span><span style="color: #008000;"> null、undefined</span>
+<span style="color: #000000;">null是JavaScript语言的关键字，它表示一个特殊值，常用来描述&ldquo;空值&rdquo;。
+undefined是一个特殊值，表示变量未定义。</span></pre>
+</div>
+<span class="cnblogs_code_collapse">null和undefined</span></div>
+<p><strong><span style="font-size: 18px;">1、数字（Number）</span></strong></p>
+<p>JavaScript中不区分整数值和浮点数值，JavaScript中所有数字均用浮点数值表示。</p>
+<p>转换：</p>
+<ul>
+<li>parseInt(..) &nbsp; &nbsp;将某值转换成数字，不成功则NaN</li>
+<li>parseFloat(..)&nbsp;将某值转换成浮点数，不成功则NaN</li>
+</ul>
+<p>特殊值：</p>
+<ul>
+<li>&nbsp;NaN，非数字。可使用 isNaN(num) 来判断。</li>
+<li>Infinity，无穷大。可使用 isFinite(num) 来判断。</li>
+</ul>
+<p>更多数值计算：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('535ae567-796f-46c7-a98d-0092cb0ae7a8')"><img id="code_img_closed_535ae567-796f-46c7-a98d-0092cb0ae7a8" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_535ae567-796f-46c7-a98d-0092cb0ae7a8" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('535ae567-796f-46c7-a98d-0092cb0ae7a8',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_535ae567-796f-46c7-a98d-0092cb0ae7a8" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">常量
+
+Math.E
+常量e，自然对数的底数。
+
+Math.LN10
+10的自然对数。
+
+Math.LN2
+2的自然对数。
+
+Math.LOG10E
+以10为底的e的对数。
+
+Math.LOG2E
+以2为底的e的对数。
+
+Math.PI
+常量figs</span>/U03C0.gif。
+<span style="color: #000000;">
+Math.SQRT1_2
+2的平方根除以1。
+
+Math.SQRT2
+2的平方根。
+
+静态函数
+
+Math.abs( )
+计算绝对值。
+
+Math.acos( )
+计算反余弦值。
+
+Math.asin( )
+计算反正弦值。
+
+Math.atan( )
+计算反正切值。
+
+Math.atan2( )
+计算从X轴到一个点的角度。
+
+Math.ceil( )
+对一个数上舍入。
+
+Math.cos( )
+计算余弦值。
+
+Math.exp( )
+计算e的指数。
+
+Math.floor( )
+对一个数下舍人。
+
+Math.log( )
+计算自然对数。
+
+Math.max( )
+返回两个数中较大的一个。
+
+Math.min( )
+返回两个数中较小的一个。
+
+Math.pow( )
+计算xy。
+
+Math.random( )
+计算一个随机数。
+
+Math.round( )
+舍入为最接近的整数。
+
+Math.sin( )
+计算正弦值。
+
+Math.sqrt( )
+计算平方根。
+
+Math.tan( )
+计算正切值。</span></pre>
+</div>
+<span class="cnblogs_code_collapse">Math</span></div>
+<p><strong><span style="font-size: 18px;">2、字符串（String）</span></strong></p>
+<p>字符串是由字符组成的数组，但在JavaScript中字符串是不可变的：可以访问字符串任意位置的文本，但是JavaScript并未提供修改已知字符串内容的方法。</p>
+<p>常见功能：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">obj.length                           长度
+
+obj.trim()                           移除空白
+obj.trimLeft()
+obj.trimRight)
+obj.charAt(n)                        返回字符串中的第n个字符
+obj.concat(value, ...)               拼接
+obj.indexOf(substring,start)         子序列位置
+obj.lastIndexOf(substring,start)     子序列位置
+obj.substring(from, to)              根据索引获取子序列
+obj.slice(start, end)                切片
+obj.toLowerCase()                    大写
+obj.toUpperCase()                    小写
+obj.split(delimiter, limit)          分割
+obj.search(regexp)                   从头开始匹配，返回匹配成功的第一个位置(g无效)
+obj.match(regexp)                    全局搜索，如果正则中有g表示找到全部，否则只找到第一个。
+obj.replace(regexp, replacement)     替换，正则中有g则替换所有，否则只替换第一个匹配项，
+                                     $数字：匹配的第n个组内容；
+                                     $&amp;：当前匹配的内容；
+                                     $`：位于匹配子串左侧的文本；
+                                     $'：位于匹配子串右侧的文本
+                                     $$：直接量$符号
+</pre>
+</div>
+<p><strong><span style="font-size: 18px;">3、布尔类型（Boolean）</span></strong></p>
+<p>布尔类型仅包含真假，与Python不同的是其首字母小写。</p>
+<ul>
+<li>== &nbsp; &nbsp; &nbsp;比较值相等</li>
+<li>!= &nbsp; &nbsp; &nbsp; 不等于</li>
+<li>=== &nbsp; 比较值和类型相等</li>
+<li>!=== &nbsp;不等于</li>
+<li>|| &nbsp; &nbsp; &nbsp; &nbsp;或</li>
+<li>&amp;&amp; &nbsp; &nbsp; &nbsp;且</li>
+</ul>
+<p><strong><span style="font-size: 18px;">4、数组</span></strong></p>
+<p>JavaScript中的数组类似于Python中的列表</p>
+<p>常见功能：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">obj.length          数组的大小
+
+obj.push(ele)       尾部追加元素
+obj.pop()           尾部获取一个元素
+obj.unshift(ele)    头部插入元素
+obj.shift()         头部移除元素
+obj.splice(start, deleteCount, value, ...)  插入、删除或替换数组的元素
+                    obj.splice(n,0,val) 指定位置插入元素
+                    obj.splice(n,1,val) 指定位置替换元素
+                    obj.splice(n,1)     指定位置删除元素
+obj.slice( )        切片
+obj.reverse( )      反转
+obj.join(sep)       将数组元素连接起来以构建一个字符串
+obj.concat(val,..)  连接数组
+obj.sort( )         对数组元素进行排序
+</pre>
+</div>
+<h3>四、其他</h3>
+<p><strong><span style="font-size: 18px;">1、序列化</span></strong></p>
+<ul>
+<li>JSON.stringify(obj) &nbsp; 序列化</li>
+<li>JSON.parse(str) &nbsp; &nbsp; &nbsp; &nbsp;反序列化</li>
+</ul>
+<p><strong><span style="font-size: 18px;">2、转义</span></strong></p>
+<ul>
+<li>decodeURI( ) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; URl中未转义的字符</li>
+<li>decodeURIComponent( ) &nbsp; URI组件中的未转义字符</li>
+<li>encodeURI( ) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; URI中的转义字符</li>
+<li>encodeURIComponent( ) &nbsp; 转义URI组件中的字符</li>
+<li>escape( ) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 对字符串转义</li>
+<li>unescape( ) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 给转义字符串解码</li>
+<li>URIError &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 由URl的编码和解码方法抛出</li>
+</ul>
+<p><strong><span style="font-size: 18px;">3、eval</span></strong></p>
+<p>JavaScript中的eval是Python中eval和exec的合集，既可以编译代码也可以获取返回值。</p>
+<ul>
+<li>eval()&nbsp;</li>
+<li>EvalError &nbsp; 执行字符串中的JavaScript代码</li>
+</ul>
+<p><strong><span style="font-size: 18px;">4、正则表达式</span></strong></p>
+<p>1、定义正则表达式</p>
+<ul>
+<li>/.../ &nbsp;用于定义正则表达式</li>
+<li>/.../g 表示全局匹配</li>
+<li>/.../i 表示不区分大小写</li>
+<li>/.../m 表示多行匹配<br />JS正则匹配时本身就是支持多行，此处多行匹配只是影响正则表达式^和$，m模式也会使用^$来匹配换行的内容)<br />
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;collapse:true;;gutter:true;">                  var pattern = /^Java\w*/gm;
+                  var text = "JavaScript is more fun than \nJavaEE or JavaBeans!";
+                  result = pattern.exec(text)
+                  result = pattern.exec(text)
+                  result = pattern.exec(text)</pre>
+</div>
+</li>
+</ul>
+<p>注：定义正则表达式也可以&nbsp;&nbsp;reg= new RegExp()</p>
+<p>2、匹配</p>
+<p>JavaScript中支持正则表达式，其主要提供了两个功能：</p>
+<ul>
+<li>test(string) &nbsp; &nbsp;&nbsp;检查字符串中是否和正则匹配<br />
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;collapse:true;;gutter:true;">                n = 'uui99sdf'
+                reg = /\d+/
+                reg.test(n)  ---&gt; true
+
+                # 只要正则在字符串中存在就匹配，如果想要开头和结尾匹配的话，就需要在正则前后加 ^和$</pre>
+</div>
+</li>
+<li>exec(string) &nbsp; &nbsp;获取正则表达式匹配的内容，如果未匹配，值为null，否则，获取匹配成功的数组。<br />
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;collapse:true;;gutter:true;">            获取正则表达式匹配的内容，如果未匹配，值为null，否则，获取匹配成功的数组。
+
+            非全局模式
+                获取匹配结果数组，注意：第一个元素是第一个匹配的结果，后面元素是正则子匹配（正则内容分组匹配）
+                var pattern = /\bJava\w*\b/;
+                var text = "JavaScript is more fun than Java or JavaBeans!";
+                result = pattern.exec(text)
+
+                var pattern = /\b(Java)\w*\b/;
+                var text = "JavaScript is more fun than Java or JavaBeans!";
+                result = pattern.exec(text)
+
+            全局模式
+                需要反复调用exec方法，来一个一个获取结果，直到匹配获取结果为null表示获取完毕
+                var pattern = /\bJava\w*\b/g;
+                var text = "JavaScript is more fun than Java or JavaBeans!";
+                result = pattern.exec(text)
+
+                var pattern = /\b(Java)\w*\b/g;
+                var text = "JavaScript is more fun than Java or JavaBeans!";
+                result = pattern.exec(text)</pre>
+</div>
+</li>
+</ul>
+<p>3、字符串中相关方法</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;collapse:true;;gutter:true;">        obj.search(regexp)                   获取索引位置，搜索整个字符串，返回匹配成功的第一个位置(g模式无效)
+        obj.match(regexp)                    获取匹配内容，搜索整个字符串，获取找到第一个匹配内容，如果正则是g模式找到全部
+        obj.replace(regexp, replacement)     替换匹配替换，正则中有g则替换所有，否则只替换第一个匹配项，
+                                                $数字：匹配的第n个组内容；
+                                                  $&amp;：当前匹配的内容；
+                                                  $`：位于匹配子串左侧的文本；
+                                                  $'：位于匹配子串右侧的文本
+                                                  $$：直接量$符号
+</pre>
+</div>
+<p>　　</p>
+<p><strong><span style="font-size: 18px;">5、时间处理</span></strong></p>
+<p>JavaScript中提供了时间相关的操作，时间操作中分为两种时间：</p>
+<ul>
+<li>时间统一时间</li>
+<li>本地时间（东8区）</li>
+</ul>
+<p><span style="color: #888888;"><em>更多操作参见：http://www.shouce.ren/api/javascript/main.html</em></span></p>
+<h3>五、语句和异常</h3>
+<p><strong><span style="font-size: 18px;">1、条件语句</span></strong></p>
+<p>JavaScript中支持两个中条件语句，分别是：if 和 switch</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('e4dd638b-ffc5-4518-aeb7-679c732894af')"><img id="code_img_closed_e4dd638b-ffc5-4518-aeb7-679c732894af" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_e4dd638b-ffc5-4518-aeb7-679c732894af" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('e4dd638b-ffc5-4518-aeb7-679c732894af',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_e4dd638b-ffc5-4518-aeb7-679c732894af" class="cnblogs_code_hide">
+<pre>    <span style="color: #0000ff;">if</span><span style="color: #000000;">(条件){
+ 
+    }</span><span style="color: #0000ff;">else</span> <span style="color: #0000ff;">if</span><span style="color: #000000;">(条件){
+         
+    }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+ 
+    }</span></pre>
+</div>
+<span class="cnblogs_code_collapse">if语句</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('ba30febd-96c3-48fc-9ae6-55f57e4f64ca')"><img id="code_img_closed_ba30febd-96c3-48fc-9ae6-55f57e4f64ca" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_ba30febd-96c3-48fc-9ae6-55f57e4f64ca" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('ba30febd-96c3-48fc-9ae6-55f57e4f64ca',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_ba30febd-96c3-48fc-9ae6-55f57e4f64ca" class="cnblogs_code_hide">
+<pre>    <span style="color: #0000ff;">switch</span><span style="color: #000000;">(name){
+        </span><span style="color: #0000ff;">case</span> '1'<span style="color: #000000;">:
+            age </span>= 123<span style="color: #000000;">;
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">case</span> '2'<span style="color: #000000;">:
+            age </span>= 456<span style="color: #000000;">;
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">default</span><span style="color: #000000;"> :
+            age </span>= 777<span style="color: #000000;">;
+    }</span></pre>
+</div>
+<span class="cnblogs_code_collapse">switch语句</span></div>
+<p><span style="font-size: 18px;"><strong>2、循环语句</strong></span></p>
+<p>JavaScript中支持三种循环语句，分别是：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('d7888776-2ae5-4258-aedd-127998157c0b')"><img id="code_img_closed_d7888776-2ae5-4258-aedd-127998157c0b" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_d7888776-2ae5-4258-aedd-127998157c0b" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('d7888776-2ae5-4258-aedd-127998157c0b',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_d7888776-2ae5-4258-aedd-127998157c0b" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">var</span> names = ["alex", "tony", "rain"<span style="color: #000000;">];
+ 
+</span><span style="color: #0000ff;">for</span>(<span style="color: #0000ff;">var</span> i=0;i&lt;names.length;i++<span style="color: #000000;">){
+    console.log(i);
+    console.log(names[i]);
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">方式一</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('3eb55e7c-37bf-43e6-9b47-c891bf302781')"><img id="code_img_closed_3eb55e7c-37bf-43e6-9b47-c891bf302781" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_3eb55e7c-37bf-43e6-9b47-c891bf302781" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('3eb55e7c-37bf-43e6-9b47-c891bf302781',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_3eb55e7c-37bf-43e6-9b47-c891bf302781" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">var</span> names = ["alex", "tony", "rain"<span style="color: #000000;">];
+
+</span><span style="color: #0000ff;">for</span>(<span style="color: #0000ff;">var</span> index <span style="color: #0000ff;">in</span><span style="color: #000000;"> names){
+    console.log(index);
+    console.log(names[index]);
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">方式二</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('58b4c33d-e1e7-416a-aadd-4f15e050c676')"><img id="code_img_closed_58b4c33d-e1e7-416a-aadd-4f15e050c676" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_58b4c33d-e1e7-416a-aadd-4f15e050c676" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('58b4c33d-e1e7-416a-aadd-4f15e050c676',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_58b4c33d-e1e7-416a-aadd-4f15e050c676" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">while</span><span style="color: #000000;">(条件){
+    </span><span style="color: #008000;">//</span><span style="color: #008000;"> break;</span>
+    <span style="color: #008000;">//</span><span style="color: #008000;"> continue;</span>
+}</pre>
+</div>
+<span class="cnblogs_code_collapse">方式三</span></div>
+<p><span style="font-size: 18px;"><strong>3、异常处理</strong></span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">try {
+    //这段代码从上往下运行，其中任何一个语句抛出异常该代码块就结束运行
+}
+catch (e) {
+    // 如果try代码块中抛出了异常，catch代码块中的代码就会被执行。
+    //e是一个局部变量，用来指向Error对象或者其他抛出的对象
+}
+finally {
+     //无论try中代码是否有异常抛出（甚至是try代码块中有return语句），finally代码块中始终会被执行。
+}
+</pre>
+</div>
+<p>注：主动跑出异常 throw Error('xxxx')</p>
+<h3>六、函数</h3>
+<p><strong><span style="font-size: 18px;">1、基本函数</span></strong></p>
+<p>JavaScript中函数基本上可以分为一下三类：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">// 普通函数
+    function func(arg){
+        return true;
+    }
+         
+// 匿名函数
+    var func = function(arg){
+        return "tony";
+    }
+ 
+// 自执行函数
+    (function(arg){
+        console.log(arg);
+    })('123')
+</pre>
+</div>
+<p>注意：对于JavaScript中函数参数，实际参数的个数可能小于形式参数的个数，函数内的特殊值arguments中封装了所有实际参数。</p>
+<p><strong><span style="font-size: 18px;">2、作用域</span></strong></p>
+<p>JavaScript中每个函数都有自己的作用域，当出现函数嵌套时，就出现了作用域链。当内层函数使用变量时，会根据作用域链从内到外一层层的循环，如果不存在，则异常。</p>
+<p>切记：所有的作用域在创建函数且未执行时候就已经存在。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">        function f2(){
+            var arg= 111;
+            function f3(){
+                console.log(arg);
+            }
+            
+            return f3;
+        }
+
+        ret = f2();
+        ret();
+</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('eb38a5f9-e013-4357-b9e0-9c73667cf76a')"><img id="code_img_closed_eb38a5f9-e013-4357-b9e0-9c73667cf76a" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_eb38a5f9-e013-4357-b9e0-9c73667cf76a" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('eb38a5f9-e013-4357-b9e0-9c73667cf76a',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_eb38a5f9-e013-4357-b9e0-9c73667cf76a" class="cnblogs_code_hide">
+<pre>        <span style="color: #0000ff;">function</span><span style="color: #000000;"> f2(){
+            </span><span style="color: #0000ff;">var</span> arg= [11,22<span style="color: #000000;">];
+            </span><span style="color: #0000ff;">function</span><span style="color: #000000;"> f3(){
+                console.log(arg);
+            }
+            arg </span>= [44,55<span style="color: #000000;">];
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> f3;
+        }
+
+        ret </span>=<span style="color: #000000;"> f2();
+        ret();</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<p>注：声明提前，在JavaScript引擎&ldquo;预编译&rdquo;时进行。</p>
+<p>更多：http://www.cnblogs.com/wupeiqi/p/5649402.html</p>
+<p>&nbsp;</p>
+<p><strong><span style="font-size: 18px;">3、闭包</span></strong></p>
+<p>闭包是指可以包含自由（未绑定到特定对象）变量的代码块。</p>
+<p>「闭包」，是指拥有多个变量和绑定了这些变量的环境的表达式（通常是一个函数），因而这些变量也是该表达式的一部分。</p>
+<p>闭包是个函数，而它「记住了周围发生了什么」。表现为由「一个函数」体中定义了「另个函数」</p>
+<p>由于作用域链只能从内向外找，默认外部无法获取函数内部变量。闭包，在外部获取函数内部的变量。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">        function f2(){
+            var arg= [11,22];
+            function f3(){
+                return arg;
+            }
+            return f3;
+        }
+
+        ret = f2();
+        ret();
+</pre>
+</div>
+<p><strong><span style="font-size: 18px;">4、面向对象</span></strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">function Foo (name,age) {
+&nbsp;&nbsp;&nbsp;&nbsp;this.Name = name;
+&nbsp;&nbsp;&nbsp;&nbsp;this.Age = age;
+&nbsp;&nbsp;&nbsp;&nbsp;this.Func = function(arg){
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return this.Name + arg;
+&nbsp;&nbsp;&nbsp;&nbsp;}
+}
+&nbsp;
+var obj = new Foo('alex', 18);
+var ret = obj.Func("sb");
+console.log(ret);
+</pre>
+</div>
+<p>对于上述代码需要注意：</p>
+<ul>
+<li>Foo充当的构造函数</li>
+<li>this代指对象</li>
+<li>创建对象时需要使用 new</li>
+</ul>
+<p>上述代码中每个对象中均保存了一个相同的Func函数，从而浪费内存。使用原型和可以解决该问题：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">        function Foo (name,age) {
+            this.Name = name;
+            this.Age = age;
+        }
+        Foo.prototype = {
+            GetInfo: function(){
+                return this.Name + this.Age
+            },
+            Func : function(arg){
+                return this.Name + arg;
+            }
+        }
+</pre>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>　　</p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2016-06-21 10:26</span> <a href='http://www.cnblogs.com/wupeiqi/'>武沛齐</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>) &nbsp;<a href="https://i.cnblogs.com/EditArticles.aspx?postid=5602773" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(5602773);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=133379,cb_entryId=5602773,cb_blogApp=currentBlogApp,cb_blogUserGuid='7208b24d-95c9-e111-aa3f-842b2b196315',cb_entryCreatedDate='2016/6/21 10:26:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2017 武沛齐
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

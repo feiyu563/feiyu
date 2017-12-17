@@ -1,0 +1,43 @@
+{% extends 'index.html '%}
+
+{% load comments %}
+
+
+{%block content%}
+
+<!-- 内容展示区 -->
+	<h3>{{bbs_obj.title}}</h3>
+	<hr>
+	{{bbs_obj.content|safe}}
+	<hr>
+	
+	<!-- 评论数显示 -->
+	{% get_comment_count for bbs_obj as comment_count %}
+	<p>
+		<span class='glyphicon glyphicon-comment'></span>
+		{{comment_count}}
+	<br>
+	</p>
+		<!-- 添加评论 -->
+	{% if user.is_authenticated%}
+		<form action='/sub_comment/' method='POST'>
+			<textarea name="comment_content" cols=100 rows=4 ></textarea>
+			<input type='hidden' name='bbs_id' value='{{bbs_obj.id}}' />
+			<br />
+			<button type="submit" class="btn btn-default">提交评论</button>
+		</form>
+	{%else%}
+        <p>Please <a href='/login/'>Login</a> to sumbit a comment!</p>
+    {%endif%}  
+	<!-- 评论内容显示区 -->
+	<!-- {% render_comment_list for bbs_obj %}  普通方式显示评论列表-->
+	{% get_comment_list for bbs_obj as comment_list %} <!-- 获取评论列表并别名 -->
+		{% for comment in comment_list reversed %}<!-- 倒叙循环 -->
+			{{ comment.submit_date }}
+			<br>
+			{{ comment.comment }}
+			<hr>
+		{% endfor %}
+		  
+{%endblock%}
+

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link href="/static/comm.css" rel="stylesheet" type="text/css" />
+        <title>Index</title>
+		<script type='text/javascript' src='/static/jquery-3.2.1.js'></script>
+		<script type="text/javascript" src='/static/zjk-login.js'></script>
+		<script type='text/javascript'>
+		$(function(){
+			$.check('#form');
+		})
+			$(function(){
+				var randomNum=parseInt(Math.random()*5,10);
+				$('#ground').css({'background-image':'url(/static/img/bg'+randomNum+'.jpg)',});
+			})
+		
+		</script>
+    </head>
+    <body>
+        <div id="ground" class="modal-ground fuzzy"></div>
+        <div id="formTable" class="modal">			
+			<form id="form" method="post" action='/login/'>
+			{% csrf_token %}
+                <div id='login-title' class="modal-header" style="height:40px;">
+                    <div style="float:left;"><h3>Please sign in</h3></div>
+                </div>
+                <div id='typeok' class="modal-body">
+                    <div class="modal-input">
+						<input type='text' class="btn" name='username' />
+					</div>
+					<div class="modal-input">	  
+						<input type='password' class="btn" name='password' />
+					</div>	  					
+                </div>
+                <div id='loginok' class="modal-footer">
+                    <input class="btn btn-success" type="submit" value="Login"><span style='color:red'>{{ login_status }}</span>
+                </div>
+            </form>
+        </div>
+
+        <div id="shade" class="modal-backdrop"></div>
+
+</body>
+</html>

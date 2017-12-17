@@ -1,0 +1,2507 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python之路【第十八篇】：Web框架们 - 武沛齐 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=m_FXmwz3wxZoecUwNEK23PAzc-j9vbX_C6MblJ5ouMc1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue.css?v=jJERBFSojhmgst84aaRDal9S3q1WoO-WcNudmMzGJS81"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/133379.css?v=YSNZANkz7eBKoXq2iHYfghvodkY%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue-mobile.css?v=z0BacpCfWeLlXDCM0C158kTP_DMqMbGBapID4f-QztI1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/wupeiqi/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/wupeiqi/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/wupeiqi/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'wupeiqi', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=CPv0EEqm9L2aCgolHxaZfVYM6J-Sn5az_FJXbjzgr-o1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/wupeiqi/">Mr.Seven</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/wupeiqi/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%AD%A6%E6%B2%9B%E9%BD%90">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/wupeiqi/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/wupeiqi/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-126&nbsp;
+文章-137&nbsp;
+评论-259&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/wupeiqi/articles/5341480.html">Python之路【第十八篇】：Web框架们</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><p>Python的WEB框架</p>
+<h3>Bottle</h3>
+<p>Bottle是一个快速、简洁、轻量级的基于WSIG的微型Web框架，此框架只由一个 .py 文件，除了Python的标准库外，其不依赖任何其他模块。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">pip install bottle
+easy_install bottle
+apt-get install python-bottle
+wget http://bottlepy.org/bottle.py</pre>
+</div>
+<p>Bottle框架大致可以分为以下部分：</p>
+<ul>
+<li>路由系统，将不同请求交由指定函数处理</li>
+<li>模板系统，将模板中的特殊语法渲染成字符串，值得一说的是Bottle的模板引擎可以任意指定：Bottle内置模板、<a class="reference external" href="http://www.makotemplates.org/">mako</a>、<a class="reference external" href="http://jinja.pocoo.org/">jinja2</a>、<a class="reference external" href="http://www.cheetahtemplate.org/">cheetah</a></li>
+<li>公共组件，用于提供处理请求相关的信息，如：表单数据、cookies、请求头等</li>
+<li>服务，Bottle默认支持多种基于WSGI的服务，如：<br />
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">server_names = {
+    'cgi': CGIServer,
+    'flup': FlupFCGIServer,
+    'wsgiref': WSGIRefServer,
+    'waitress': WaitressServer,
+    'cherrypy': CherryPyServer,
+    'paste': PasteServer,
+    'fapws3': FapwsServer,
+    'tornado': TornadoServer,
+    'gae': AppEngineServer,
+    'twisted': TwistedServer,
+    'diesel': DieselServer,
+    'meinheld': MeinheldServer,
+    'gunicorn': GunicornServer,
+    'eventlet': EventletServer,
+    'gevent': GeventServer,
+    'geventSocketIO':GeventSocketIOServer,
+    'rocket': RocketServer,
+    'bjoern' : BjoernServer,
+    'auto': AutoServer,
+}</pre>
+</div>
+</li>
+</ul>
+<p>框架的基本使用</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+from bottle import template, Bottle
+root = Bottle()
+
+@root.route('/hello/')
+def index():
+    return "Hello World"
+    # return template('&lt;b&gt;Hello {{name}}&lt;/b&gt;!', name="Alex")
+
+root.run(host='localhost', port=8080)</pre>
+</div>
+<p><strong><span style="font-size: 14pt;">一、路由系统</span></strong></p>
+<p>路由系统是的url对应指定函数，当用户请求某个url时，就由指定函数处理当前请求，对于Bottle的路由系统可以分为一下几类：</p>
+<ul>
+<li>静态路由</li>
+<li>动态路由</li>
+<li>请求方法路由</li>
+<li>二级路由</li>
+</ul>
+<p>1、静态路由</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">@root.route('/hello/')
+def index():
+    return template('&lt;b&gt;Hello {{name}}&lt;/b&gt;!', name="Alex")
+</pre>
+</div>
+<p>2、动态路由</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">@root.route('/wiki/&lt;pagename&gt;')
+def callback(pagename):
+    ...
+
+@root.route('/object/&lt;id:int&gt;')
+def callback(id):
+    ...
+
+@root.route('/show/&lt;name:re:[a-z]+&gt;')
+def callback(name):
+    ...
+
+@root.route('/static/&lt;path:path&gt;')
+def callback(path):
+    return static_file(path, root='static')
+</pre>
+</div>
+<p>3、请求方法路由</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">@root.route('/hello/', method='POST')
+def index():
+    ...
+
+@root.get('/hello/')
+def index():
+    ...
+
+@root.post('/hello/')
+def index():
+    ...
+
+@root.put('/hello/')
+def index():
+    ...
+
+@root.delete('/hello/')
+def index():
+    ...
+</pre>
+</div>
+<p>4、二级路由</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('87055cb4-fefb-4840-a03c-35da09487efc')"><img id="code_img_closed_87055cb4-fefb-4840-a03c-35da09487efc" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_87055cb4-fefb-4840-a03c-35da09487efc" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('87055cb4-fefb-4840-a03c-35da09487efc',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_87055cb4-fefb-4840-a03c-35da09487efc" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+<span style="color: #0000ff;">from</span> bottle <span style="color: #0000ff;">import</span><span style="color: #000000;"> template, Bottle
+
+app01 </span>=<span style="color: #000000;"> Bottle()
+
+@app01.route(</span><span style="color: #800000;">'</span><span style="color: #800000;">/hello/</span><span style="color: #800000;">'</span>, method=<span style="color: #800000;">'</span><span style="color: #800000;">GET</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> index():
+    </span><span style="color: #0000ff;">return</span> template(<span style="color: #800000;">'</span><span style="color: #800000;">&lt;b&gt;App01&lt;/b&gt;!</span><span style="color: #800000;">'</span>)</pre>
+</div>
+<span class="cnblogs_code_collapse">app01.py</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('4b5db4d7-f002-4166-9bb8-3568c2224cfd')"><img id="code_img_closed_4b5db4d7-f002-4166-9bb8-3568c2224cfd" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_4b5db4d7-f002-4166-9bb8-3568c2224cfd" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('4b5db4d7-f002-4166-9bb8-3568c2224cfd',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_4b5db4d7-f002-4166-9bb8-3568c2224cfd" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+<span style="color: #0000ff;">from</span> bottle <span style="color: #0000ff;">import</span><span style="color: #000000;"> template, Bottle
+
+app02 </span>=<span style="color: #000000;"> Bottle()
+
+
+@app02.route(</span><span style="color: #800000;">'</span><span style="color: #800000;">/hello/</span><span style="color: #800000;">'</span>, method=<span style="color: #800000;">'</span><span style="color: #800000;">GET</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> index():
+    </span><span style="color: #0000ff;">return</span> template(<span style="color: #800000;">'</span><span style="color: #800000;">&lt;b&gt;App02&lt;/b&gt;!</span><span style="color: #800000;">'</span>)</pre>
+</div>
+<span class="cnblogs_code_collapse">app02.py</span></div>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+from bottle import template, Bottle
+from bottle import static_file
+root = Bottle()
+
+@root.route('/hello/')
+def index():
+    return template('&lt;b&gt;Root {{name}}&lt;/b&gt;!', name="Alex")
+
+from framwork_bottle import app01
+from framwork_bottle import app02
+
+root.mount('app01', app01.app01)
+root.mount('app02', app02.app02)
+
+root.run(host='localhost', port=8080)
+</pre>
+</div>
+<p><strong><span style="font-size: 14pt;">二、模板系统</span></strong></p>
+<p>模板系统用于将Html和自定的值两者进行渲染，从而得到字符串，然后将该字符串返回给客户端。我们知道在Bottle中可以使用 内置模板系统、<a class="reference external" href="http://www.makotemplates.org/">mako</a>、<a class="reference external" href="http://jinja.pocoo.org/">jinja2</a>、<a class="reference external" href="http://www.cheetahtemplate.org/">cheetah</a>等，以内置模板系统为例：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('f386e918-d684-4a38-9aa9-59ca72ee6e1c')"><img id="code_img_closed_f386e918-d684-4a38-9aa9-59ca72ee6e1c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_f386e918-d684-4a38-9aa9-59ca72ee6e1c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('f386e918-d684-4a38-9aa9-59ca72ee6e1c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_f386e918-d684-4a38-9aa9-59ca72ee6e1c" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span style="color: #800000;">"</span><span style="color: #800000;">en</span><span style="color: #800000;">"</span>&gt;
+    &lt;meta charset=<span style="color: #800000;">"</span><span style="color: #800000;">UTF-8</span><span style="color: #800000;">"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;{{name}}&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">hello_template.tpl</span></div>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+from bottle import template, Bottle
+root = Bottle()
+
+@root.route('/hello/')
+def index():
+    # 默认情况下去目录：['./', './views/']中寻找模板文件 hello_template.html
+    # 配置在 bottle.TEMPLATE_PATH 中
+    return template('hello_template.tpl', name='alex')
+
+root.run(host='localhost', port=8080)
+</pre>
+</div>
+<p>1、语法</p>
+<ul>
+<li>单值</li>
+<li>单行Python代码</li>
+<li>Python代码快</li>
+<li>Python、Html混合</li>
+</ul>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">    &lt;h1&gt;1、单值&lt;/h1&gt;
+    {{name}}
+
+    &lt;h1&gt;2、单行Python代码&lt;/h1&gt;
+    % s1 = "hello"
+
+
+    &lt;h1&gt;3、Python代码块&lt;/h1&gt;
+    &lt;%
+        # A block of python code
+        name = name.title().strip()
+        if name == "Alex":
+            name="seven"
+    %&gt;
+
+
+    &lt;h1&gt;4、Python、Html混合&lt;/h1&gt;
+
+    % if True:
+        &lt;span&gt;{{name}}&lt;/span&gt;
+    % end
+    &lt;ul&gt;
+      % for item in name:
+        &lt;li&gt;{{item}}&lt;/li&gt;
+      % end
+    &lt;/ul&gt;</pre>
+</div>
+<p>2、函数&nbsp;</p>
+<p>include(sub_template, **variables)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 导入其他模板文件
+
+% include('header.tpl', title='Page Title')
+Page Content
+% include('footer.tpl')</pre>
+</div>
+<p>rebase(name, **variables)</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('8202d201-9b6a-462d-9017-c567a53dc6e8')"><img id="code_img_closed_8202d201-9b6a-462d-9017-c567a53dc6e8" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_8202d201-9b6a-462d-9017-c567a53dc6e8" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('8202d201-9b6a-462d-9017-c567a53dc6e8',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_8202d201-9b6a-462d-9017-c567a53dc6e8" class="cnblogs_code_hide">
+<pre>&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;{{title <span style="color: #0000ff;">or</span> <span style="color: #800000;">'</span><span style="color: #800000;">No title</span><span style="color: #800000;">'</span>}}&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;<span style="color: #000000;">
+  {{!base}}
+</span>&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">base.tpl</span></div>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 导入母版
+
+% rebase('base.tpl', title='Page Title')
+&lt;p&gt;Page Content ...&lt;/p&gt;</pre>
+</div>
+<p>defined(name)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 检查当前变量是否已经被定义，已定义True，未定义False</pre>
+</div>
+<p>get(name, default=None)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 获取某个变量的值，不存在时可设置默认值</pre>
+</div>
+<p>setdefault(name, default)</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 如果变量不存在时，为变量设置默认值
+</pre>
+</div>
+<p>扩展：自定义函数</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('899426ec-faa6-4033-8593-edbad5a936ce')"><img id="code_img_closed_899426ec-faa6-4033-8593-edbad5a936ce" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_899426ec-faa6-4033-8593-edbad5a936ce" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('899426ec-faa6-4033-8593-edbad5a936ce',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_899426ec-faa6-4033-8593-edbad5a936ce" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span style="color: #800000;">"</span><span style="color: #800000;">en</span><span style="color: #800000;">"</span>&gt;
+    &lt;meta charset=<span style="color: #800000;">"</span><span style="color: #800000;">UTF-8</span><span style="color: #800000;">"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;自定义函数&lt;/h1&gt;<span style="color: #000000;">
+    {{ wupeiqi() }}
+
+</span>&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">hello_template.tpl</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('3eff41b5-273a-4b1d-a697-ece02851c311')"><img id="code_img_closed_3eff41b5-273a-4b1d-a697-ece02851c311" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_3eff41b5-273a-4b1d-a697-ece02851c311" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('3eff41b5-273a-4b1d-a697-ece02851c311',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_3eff41b5-273a-4b1d-a697-ece02851c311" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+<span style="color: #0000ff;">from</span> bottle <span style="color: #0000ff;">import</span><span style="color: #000000;"> template, Bottle,SimpleTemplate
+root </span>=<span style="color: #000000;"> Bottle()
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> custom():
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800000;">'</span><span style="color: #800000;">123123</span><span style="color: #800000;">'</span><span style="color: #000000;">
+
+
+@root.route(</span><span style="color: #800000;">'</span><span style="color: #800000;">/hello/</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> index():
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> 默认情况下去目录：['./', './views/']中寻找模板文件 hello_template.html</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;"> 配置在 bottle.TEMPLATE_PATH 中</span>
+    <span style="color: #0000ff;">return</span> template(<span style="color: #800000;">'</span><span style="color: #800000;">hello_template.html</span><span style="color: #800000;">'</span>, name=<span style="color: #800000;">'</span><span style="color: #800000;">alex</span><span style="color: #800000;">'</span>, wupeiqi=<span style="color: #000000;">custom)
+
+root.run(host</span>=<span style="color: #800000;">'</span><span style="color: #800000;">localhost</span><span style="color: #800000;">'</span>, port=8080)</pre>
+</div>
+<span class="cnblogs_code_collapse">main.py</span></div>
+<p><span style="color: #888888;">注：变量或函数前添加 【 ! 】，则会关闭转义的功能</span></p>
+<p><strong><span style="font-size: 14pt;">三、公共组件</span></strong></p>
+<p>由于Web框架就是用来【接收用户请求】-&gt; 【处理用户请求】-&gt; 【响应相关内容】，对于具体如何处理用户请求，开发人员根据用户请求来进行处理，而对于接收用户请求和相应相关的内容均交给框架本身来处理，其处理完成之后将产出交给开发人员和用户。</p>
+<p>【接收用户请求】</p>
+<p><span style="color: #888888;"><em>当框架接收到用户请求之后，将请求信息封装在Bottle的request中，以供开发人员使用</em></span></p>
+<p>【响应相关内容】</p>
+<p><span style="color: #888888;"><em>当开发人员的代码处理完用户请求之后，会将其执行内容相应给用户，相应的内容会封装在Bottle的response中，然后再由框架将内容返回给用户</em></span></p>
+<p>所以，公共组件本质其实就是为开发人员提供接口，使其能够获取用户信息并配置响应内容。</p>
+<p>1、request</p>
+<p>Bottle中的request其实是一个LocalReqeust对象，其中封装了用户请求的相关信息：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">request.headers
+    请求头信息
+
+request.query
+    get请求信息
+
+request.forms
+    post请求信息
+
+request.files
+    上传文件信息
+
+request.params
+    get和post请求信息
+
+request.GET
+    get请求信息
+
+request.POST
+    post和上传信息
+
+request.cookies
+    cookie信息
+    
+request.environ
+    环境相关相关
+</pre>
+</div>
+<p>2、response</p>
+<p>Bottle中的request其实是一个LocalResponse对象，其中框架即将返回给用户的相关信息：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">response
+    response.status_line
+        状态行
+
+    response.status_code
+        状态码
+
+    response.headers
+        响应头
+
+    response.charset
+        编码
+
+    response.set_cookie
+        在浏览器上设置cookie
+        
+    response.delete_cookie
+        在浏览器上删除cookie
+</pre>
+</div>
+<p>实例：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('5b978ffd-a2de-4da5-b9e1-523f3e277c35')"><img id="code_img_closed_5b978ffd-a2de-4da5-b9e1-523f3e277c35" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_5b978ffd-a2de-4da5-b9e1-523f3e277c35" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('5b978ffd-a2de-4da5-b9e1-523f3e277c35',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_5b978ffd-a2de-4da5-b9e1-523f3e277c35" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">from</span> bottle <span style="color: #0000ff;">import</span><span style="color: #000000;"> route, request
+
+@route(</span><span style="color: #800000;">'</span><span style="color: #800000;">/login</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> login():
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800000;">'''</span><span style="color: #800000;">
+        &lt;form action="/login" method="post"&gt;
+            Username: &lt;input name="username" type="text" /&gt;
+            Password: &lt;input name="password" type="password" /&gt;
+            &lt;input value="Login" type="submit" /&gt;
+        &lt;/form&gt;
+    </span><span style="color: #800000;">'''</span><span style="color: #000000;">
+
+@route(</span><span style="color: #800000;">'</span><span style="color: #800000;">/login</span><span style="color: #800000;">'</span>, method=<span style="color: #800000;">'</span><span style="color: #800000;">POST</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> do_login():
+    username </span>= request.forms.get(<span style="color: #800000;">'</span><span style="color: #800000;">username</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    password </span>= request.forms.get(<span style="color: #800000;">'</span><span style="color: #800000;">password</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> check_login(username, password):
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800000;">"</span><span style="color: #800000;">&lt;p&gt;Your login information was correct.&lt;/p&gt;</span><span style="color: #800000;">"</span>
+    <span style="color: #0000ff;">else</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800000;">"</span><span style="color: #800000;">&lt;p&gt;Login failed.&lt;/p&gt;</span><span style="color: #800000;">"</span></pre>
+</div>
+<span class="cnblogs_code_collapse">基本Form请求</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('9ab91ffa-b855-4b67-8708-82bbe96bfc4c')"><img id="code_img_closed_9ab91ffa-b855-4b67-8708-82bbe96bfc4c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_9ab91ffa-b855-4b67-8708-82bbe96bfc4c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('9ab91ffa-b855-4b67-8708-82bbe96bfc4c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_9ab91ffa-b855-4b67-8708-82bbe96bfc4c" class="cnblogs_code_hide">
+<pre>&lt;form action=<span style="color: #800000;">"</span><span style="color: #800000;">/upload</span><span style="color: #800000;">"</span> method=<span style="color: #800000;">"</span><span style="color: #800000;">post</span><span style="color: #800000;">"</span> enctype=<span style="color: #800000;">"</span><span style="color: #800000;">multipart/form-data</span><span style="color: #800000;">"</span>&gt;<span style="color: #000000;">
+  Category:      </span>&lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">text</span><span style="color: #800000;">"</span> name=<span style="color: #800000;">"</span><span style="color: #800000;">category</span><span style="color: #800000;">"</span> /&gt;<span style="color: #000000;">
+  Select a file: </span>&lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">file</span><span style="color: #800000;">"</span> name=<span style="color: #800000;">"</span><span style="color: #800000;">upload</span><span style="color: #800000;">"</span> /&gt;
+  &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">submit</span><span style="color: #800000;">"</span> value=<span style="color: #800000;">"</span><span style="color: #800000;">Start upload</span><span style="color: #800000;">"</span> /&gt;
+&lt;/form&gt;<span style="color: #000000;">
+
+
+@route(</span><span style="color: #800000;">'</span><span style="color: #800000;">/upload</span><span style="color: #800000;">'</span>, method=<span style="color: #800000;">'</span><span style="color: #800000;">POST</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> do_upload():
+    category   </span>= request.forms.get(<span style="color: #800000;">'</span><span style="color: #800000;">category</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    upload     </span>= request.files.get(<span style="color: #800000;">'</span><span style="color: #800000;">upload</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    name, ext </span>=<span style="color: #000000;"> os.path.splitext(upload.filename)
+    </span><span style="color: #0000ff;">if</span> ext <span style="color: #0000ff;">not</span> <span style="color: #0000ff;">in</span> (<span style="color: #800000;">'</span><span style="color: #800000;">.png</span><span style="color: #800000;">'</span>,<span style="color: #800000;">'</span><span style="color: #800000;">.jpg</span><span style="color: #800000;">'</span>,<span style="color: #800000;">'</span><span style="color: #800000;">.jpeg</span><span style="color: #800000;">'</span><span style="color: #000000;">):
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800000;">'</span><span style="color: #800000;">File extension not allowed.</span><span style="color: #800000;">'</span><span style="color: #000000;">
+
+    save_path </span>=<span style="color: #000000;"> get_save_path_for_category(category)
+    upload.save(save_path) </span><span style="color: #008000;">#</span><span style="color: #008000;"> appends upload.filename automatically</span>
+    <span style="color: #0000ff;">return</span> <span style="color: #800000;">'</span><span style="color: #800000;">OK</span><span style="color: #800000;">'</span></pre>
+</div>
+<span class="cnblogs_code_collapse">上传文件</span>&nbsp;</div>
+<p><strong><span style="font-size: 14pt;">四、服务</span></strong></p>
+<p>对于Bottle框架其本身未实现类似于Tornado自己基于socket实现Web服务，所以必须依赖WSGI，默认Bottle已经实现并且支持的WSGI有：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('6215fe11-f83d-4d28-a725-cbf7074275b7')"><img id="code_img_closed_6215fe11-f83d-4d28-a725-cbf7074275b7" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_6215fe11-f83d-4d28-a725-cbf7074275b7" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('6215fe11-f83d-4d28-a725-cbf7074275b7',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_6215fe11-f83d-4d28-a725-cbf7074275b7" class="cnblogs_code_hide">
+<pre>server_names =<span style="color: #000000;"> {
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">cgi</span><span style="color: #800000;">'</span><span style="color: #000000;">: CGIServer,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">flup</span><span style="color: #800000;">'</span><span style="color: #000000;">: FlupFCGIServer,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">wsgiref</span><span style="color: #800000;">'</span><span style="color: #000000;">: WSGIRefServer,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">waitress</span><span style="color: #800000;">'</span><span style="color: #000000;">: WaitressServer,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">cherrypy</span><span style="color: #800000;">'</span><span style="color: #000000;">: CherryPyServer,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">paste</span><span style="color: #800000;">'</span><span style="color: #000000;">: PasteServer,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">fapws3</span><span style="color: #800000;">'</span><span style="color: #000000;">: FapwsServer,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">tornado</span><span style="color: #800000;">'</span><span style="color: #000000;">: TornadoServer,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">gae</span><span style="color: #800000;">'</span><span style="color: #000000;">: AppEngineServer,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">twisted</span><span style="color: #800000;">'</span><span style="color: #000000;">: TwistedServer,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">diesel</span><span style="color: #800000;">'</span><span style="color: #000000;">: DieselServer,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">meinheld</span><span style="color: #800000;">'</span><span style="color: #000000;">: MeinheldServer,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">gunicorn</span><span style="color: #800000;">'</span><span style="color: #000000;">: GunicornServer,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">eventlet</span><span style="color: #800000;">'</span><span style="color: #000000;">: EventletServer,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">gevent</span><span style="color: #800000;">'</span><span style="color: #000000;">: GeventServer,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">geventSocketIO</span><span style="color: #800000;">'</span><span style="color: #000000;">:GeventSocketIOServer,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">rocket</span><span style="color: #800000;">'</span><span style="color: #000000;">: RocketServer,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">bjoern</span><span style="color: #800000;">'</span><span style="color: #000000;"> : BjoernServer,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">auto</span><span style="color: #800000;">'</span><span style="color: #000000;">: AutoServer,
+}</span></pre>
+</div>
+<span class="cnblogs_code_collapse">WSGI</span></div>
+<p>使用时，只需在主app执行run方法时指定参数即可：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+from bottle import Bottle
+root = Bottle()
+
+@root.route('/hello/')
+def index():
+    return "Hello World"
+# 默认server ＝'wsgiref'
+root.run(host='localhost', port=8080, server='wsgiref')
+</pre>
+</div>
+<p>默认server＝"wsgiref"，即：使用Python内置模块wsgiref，如果想要使用其他时，则需要首先安装相关类库，然后才能使用。如：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('22600869-11c7-4390-a99d-34fd07159d8f')"><img id="code_img_closed_22600869-11c7-4390-a99d-34fd07159d8f" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_22600869-11c7-4390-a99d-34fd07159d8f" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('22600869-11c7-4390-a99d-34fd07159d8f',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_22600869-11c7-4390-a99d-34fd07159d8f" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;"> 如果使用Tornado的服务，则需要首先安装tornado才能使用</span>
+
+<span style="color: #0000ff;">class</span><span style="color: #000000;"> TornadoServer(ServerAdapter):
+    </span><span style="color: #800000;">"""</span><span style="color: #800000;"> The super hyped asynchronous server by facebook. Untested. </span><span style="color: #800000;">"""</span>
+    <span style="color: #0000ff;">def</span> run(self, handler): <span style="color: #008000;">#</span><span style="color: #008000;"> pragma: no cover</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 导入Tornado相关模块</span>
+        <span style="color: #0000ff;">import</span><span style="color: #000000;"> tornado.wsgi, tornado.httpserver, tornado.ioloop
+        container </span>=<span style="color: #000000;"> tornado.wsgi.WSGIContainer(handler)
+        server </span>=<span style="color: #000000;"> tornado.httpserver.HTTPServer(container)
+        server.listen(port</span>=self.port,address=<span style="color: #000000;">self.host)
+        tornado.ioloop.IOLoop.instance().start()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">bottle.py源码</span></div>
+<p><em><span style="color: #888888;">PS：以上WSGI中提供了19种，如果想要使期支持其他服务，则需要扩展Bottle源码来自定义一个ServerAdapter</span></em></p>
+<p>更多参见：http://www.bottlepy.org/docs/dev/index.html</p>
+<h3>Flask&nbsp;</h3>
+<p>Flask是一个基于Python开发并且依赖jinja2模板和Werkzeug WSGI服务的一个微型框架，对于Werkzeug本质是Socket服务端，其用于接收http请求并对请求进行预处理，然后触发Flask框架，开发人员基于Flask框架提供的功能对请求进行相应的处理，并返回给用户，如果要返回给用户复杂的内容时，需要借助jinja2模板来实现对模板的处理，即：将模板和数据进行渲染，将渲染后的字符串返回给用户浏览器。</p>
+<p>&ldquo;微&rdquo;(micro) 并不表示你需要把整个 Web 应用塞进单个 Python 文件（虽然确实可以 ），也不意味着 Flask 在功能上有所欠缺。微框架中的&ldquo;微&rdquo;意味着 Flask 旨在保持核心简单而易于扩展。Flask 不会替你做出太多决策&mdash;&mdash;比如使用何种数据库。而那些 Flask 所选择的&mdash;&mdash;比如使用何种模板引擎&mdash;&mdash;则很容易替换。除此之外的一切都由可由你掌握。如此，Flask 可以与您珠联璧合。</p>
+<p>默认情况下，Flask 不包含数据库抽象层、表单验证，或是其它任何已有多种库可以胜任的功能。然而，Flask 支持用扩展来给应用添加这些功能，如同是 Flask 本身实现的一样。众多的扩展提供了数据库集成、表单验证、上传处理、各种各样的开放认证技术等功能。Flask 也许是&ldquo;微小&rdquo;的，但它已准备好在需求繁杂的生产环境中投入使用。</p>
+<p>安装</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">pip install Flask</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('4f0366e6-94bd-4a96-b92f-5058d20523be')"><img id="code_img_closed_4f0366e6-94bd-4a96-b92f-5058d20523be" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_4f0366e6-94bd-4a96-b92f-5058d20523be" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('4f0366e6-94bd-4a96-b92f-5058d20523be',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_4f0366e6-94bd-4a96-b92f-5058d20523be" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+<span style="color: #0000ff;">from</span> werkzeug.wrappers <span style="color: #0000ff;">import</span><span style="color: #000000;"> Request, Response
+
+@Request.application
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> hello(request):
+    </span><span style="color: #0000ff;">return</span> Response(<span style="color: #800000;">'</span><span style="color: #800000;">Hello World!</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+</span><span style="color: #0000ff;">if</span> <span style="color: #800080;">__name__</span> == <span style="color: #800000;">'</span><span style="color: #800000;">__main__</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+    </span><span style="color: #0000ff;">from</span> werkzeug.serving <span style="color: #0000ff;">import</span><span style="color: #000000;"> run_simple
+    run_simple(</span><span style="color: #800000;">'</span><span style="color: #800000;">localhost</span><span style="color: #800000;">'</span>, 4000, hello)</pre>
+</div>
+<span class="cnblogs_code_collapse">werkzeug</span></div>
+<p><strong><span style="font-size: 14pt;">一、第一次</span></strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello World!"
+
+if __name__ == "__main__":
+    app.run()
+</pre>
+</div>
+<p><strong><span style="font-size: 14pt;">二、路由系统</span></strong></p>
+<ul>
+<li>@app.route('/user/&lt;username&gt;')</li>
+<li>@app.route('/post/&lt;int:post_id&gt;')</li>
+<li>@app.route('/post/&lt;float:post_id&gt;')</li>
+<li>@app.route('/post/&lt;path:path&gt;')</li>
+<li>@app.route('/login', methods=['GET', 'POST'])</li>
+</ul>
+<p>常用路由系统有以上五种，所有的路由系统都是基于一下对应关系来处理：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">DEFAULT_CONVERTERS = {
+    'default':          UnicodeConverter,
+    'string':           UnicodeConverter,
+    'any':              AnyConverter,
+    'path':             PathConverter,
+    'int':              IntegerConverter,
+    'float':            FloatConverter,
+    'uuid':             UUIDConverter,
+}
+</pre>
+</div>
+<p>注：对于Flask默认不支持直接写正则表达式的路由，不过可以通过自定义来实现，见：https://segmentfault.com/q/1010000000125259</p>
+<p><strong><span style="font-size: 14pt;">三、模板</span></strong></p>
+<p>1、模板的使用</p>
+<p>Flask使用的是Jinja2模板，所以其语法和Django无差别</p>
+<p>2、自定义模板方法</p>
+<p>Flask中自定义模板方法的方式和Bottle相似，创建一个函数并通过参数的形式传入render_template，如：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('68c8ea7d-d025-44b1-9326-f6fad15eb07c')"><img id="code_img_closed_68c8ea7d-d025-44b1-9326-f6fad15eb07c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_68c8ea7d-d025-44b1-9326-f6fad15eb07c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('68c8ea7d-d025-44b1-9326-f6fad15eb07c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_68c8ea7d-d025-44b1-9326-f6fad15eb07c" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span style="color: #800000;">"</span><span style="color: #800000;">en</span><span style="color: #800000;">"</span>&gt;
+    &lt;meta charset=<span style="color: #800000;">"</span><span style="color: #800000;">UTF-8</span><span style="color: #800000;">"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;自定义函数&lt;/h1&gt;<span style="color: #000000;">
+    {{ww()</span>|<span style="color: #000000;">safe}}
+
+</span>&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">index.html</span></div>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+from flask import Flask,render_template
+app = Flask(__name__)
+
+
+def wupeiqi():
+    return '&lt;h1&gt;Wupeiqi&lt;/h1&gt;'
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    return render_template('login.html', ww=wupeiqi)
+
+app.run()
+</pre>
+</div>
+<p><strong><span style="font-size: 14pt;">四、公共组件</span></strong></p>
+<p>1、请求</p>
+<p>对于Http请求，Flask会讲请求信息封装在request中(werkzeug.wrappers.BaseRequest)，提供的如下常用方法和字段以供使用：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">    request.method
+    request.args
+    request.form
+    request.values
+    request.files
+    request.cookies
+    request.headers
+    request.path
+    request.full_path
+    request.script_root
+    request.url
+    request.base_url
+    request.url_root
+    request.host_url
+    request.host
+</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('4d922416-5f74-45df-91e9-027aa5c65da6')"><img id="code_img_closed_4d922416-5f74-45df-91e9-027aa5c65da6" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_4d922416-5f74-45df-91e9-027aa5c65da6" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('4d922416-5f74-45df-91e9-027aa5c65da6',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_4d922416-5f74-45df-91e9-027aa5c65da6" class="cnblogs_code_hide">
+<pre>@app.route(<span style="color: #800000;">'</span><span style="color: #800000;">/login</span><span style="color: #800000;">'</span>, methods=[<span style="color: #800000;">'</span><span style="color: #800000;">POST</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">GET</span><span style="color: #800000;">'</span><span style="color: #000000;">])
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> login():
+    error </span>=<span style="color: #000000;"> None
+    </span><span style="color: #0000ff;">if</span> request.method == <span style="color: #800000;">'</span><span style="color: #800000;">POST</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">if</span> valid_login(request.form[<span style="color: #800000;">'</span><span style="color: #800000;">username</span><span style="color: #800000;">'</span><span style="color: #000000;">],
+                       request.form[</span><span style="color: #800000;">'</span><span style="color: #800000;">password</span><span style="color: #800000;">'</span><span style="color: #000000;">]):
+            </span><span style="color: #0000ff;">return</span> log_the_user_in(request.form[<span style="color: #800000;">'</span><span style="color: #800000;">username</span><span style="color: #800000;">'</span><span style="color: #000000;">])
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            error </span>= <span style="color: #800000;">'</span><span style="color: #800000;">Invalid username/password</span><span style="color: #800000;">'</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;"> the code below is executed if the request method</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;"> was GET or the credentials were invalid</span>
+    <span style="color: #0000ff;">return</span> render_template(<span style="color: #800000;">'</span><span style="color: #800000;">login.html</span><span style="color: #800000;">'</span>, error=error)</pre>
+</div>
+<span class="cnblogs_code_collapse">表单处理Demo</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('49389efb-94c0-4f6e-88a4-205f86f87a92')"><img id="code_img_closed_49389efb-94c0-4f6e-88a4-205f86f87a92" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_49389efb-94c0-4f6e-88a4-205f86f87a92" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('49389efb-94c0-4f6e-88a4-205f86f87a92',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_49389efb-94c0-4f6e-88a4-205f86f87a92" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">from</span> flask <span style="color: #0000ff;">import</span><span style="color: #000000;"> request
+</span><span style="color: #0000ff;">from</span> werkzeug <span style="color: #0000ff;">import</span><span style="color: #000000;"> secure_filename
+
+@app.route(</span><span style="color: #800000;">'</span><span style="color: #800000;">/upload</span><span style="color: #800000;">'</span>, methods=[<span style="color: #800000;">'</span><span style="color: #800000;">GET</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">POST</span><span style="color: #800000;">'</span><span style="color: #000000;">])
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> upload_file():
+    </span><span style="color: #0000ff;">if</span> request.method == <span style="color: #800000;">'</span><span style="color: #800000;">POST</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+        f </span>= request.files[<span style="color: #800000;">'</span><span style="color: #800000;">the_file</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+        f.save(</span><span style="color: #800000;">'</span><span style="color: #800000;">/var/www/uploads/</span><span style="color: #800000;">'</span> +<span style="color: #000000;"> secure_filename(f.filename))
+    ...</span></pre>
+</div>
+<span class="cnblogs_code_collapse">上传文件Demo</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('2356b705-f78c-4b59-b0b5-b2327e53ace8')"><img id="code_img_closed_2356b705-f78c-4b59-b0b5-b2327e53ace8" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_2356b705-f78c-4b59-b0b5-b2327e53ace8" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('2356b705-f78c-4b59-b0b5-b2327e53ace8',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_2356b705-f78c-4b59-b0b5-b2327e53ace8" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">from</span> flask <span style="color: #0000ff;">import</span><span style="color: #000000;"> request
+
+@app.route(</span><span style="color: #800000;">'</span><span style="color: #800000;">/setcookie/</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> index():
+    username </span>= request.cookies.get(<span style="color: #800000;">'</span><span style="color: #800000;">username</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> use cookies.get(key) instead of cookies[key] to not get a</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;"> KeyError if the cookie is missing.</span>
+
+
+
+
+<span style="color: #0000ff;">from</span> flask <span style="color: #0000ff;">import</span><span style="color: #000000;"> make_response
+
+@app.route(</span><span style="color: #800000;">'</span><span style="color: #800000;">/getcookie</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> index():
+    resp </span>=<span style="color: #000000;"> make_response(render_template(...))
+    resp.set_cookie(</span><span style="color: #800000;">'</span><span style="color: #800000;">username</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">the username</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    </span><span style="color: #0000ff;">return</span> resp</pre>
+</div>
+<span class="cnblogs_code_collapse">Cookie操作</span></div>
+<p>2、响应</p>
+<p>当用户请求被开发人员的逻辑处理完成之后，会将结果发送给用户浏览器，那么就需要对请求做出相应的响应。</p>
+<p>a.字符串</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">@app.route('/index/', methods=['GET', 'POST'])
+def index():
+    return "index"
+</pre>
+</div>
+<p>b.模板引擎</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">from flask import Flask,render_template,request
+app = Flask(__name__)
+
+@app.route('/index/', methods=['GET', 'POST'])
+def index():
+    return render_template("index.html")
+
+app.run()
+</pre>
+</div>
+<p>c.重定向</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+from flask import Flask, redirect, url_for
+app = Flask(__name__)
+
+@app.route('/index/', methods=['GET', 'POST'])
+def index():
+    # return redirect('/login/')
+    return redirect(url_for('login'))
+
+@app.route('/login/', methods=['GET', 'POST'])
+def login():
+    return "LOGIN"
+
+app.run()
+</pre>
+</div>
+<p>d.错误页面</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('d10e3a92-d0db-44e5-9f84-5d90d11129e9')"><img id="code_img_closed_d10e3a92-d0db-44e5-9f84-5d90d11129e9" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_d10e3a92-d0db-44e5-9f84-5d90d11129e9" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('d10e3a92-d0db-44e5-9f84-5d90d11129e9',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_d10e3a92-d0db-44e5-9f84-5d90d11129e9" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">from</span> flask <span style="color: #0000ff;">import</span><span style="color: #000000;"> Flask, abort, render_template
+app </span>= Flask(<span style="color: #800080;">__name__</span><span style="color: #000000;">)
+
+@app.route(</span><span style="color: #800000;">'</span><span style="color: #800000;">/e1/</span><span style="color: #800000;">'</span>, methods=[<span style="color: #800000;">'</span><span style="color: #800000;">GET</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">POST</span><span style="color: #800000;">'</span><span style="color: #000000;">])
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> index():
+    abort(</span>404, <span style="color: #800000;">'</span><span style="color: #800000;">Nothing</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+app.run()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">指定URL，简单错误</span></div>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">from flask import Flask, abort, render_template
+app = Flask(__name__)
+
+@app.route('/index/', methods=['GET', 'POST'])
+def index():
+    return "OK"
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('page_not_found.html'), 404
+
+app.run()
+</pre>
+</div>
+<p>e.设置相应信息</p>
+<p>使用make_response可以对相应的内容进行操作</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">from flask import Flask, abort, render_template,make_response
+app = Flask(__name__)
+
+@app.route('/index/', methods=['GET', 'POST'])
+def index():
+    response = make_response(render_template('index.html'))
+    # response是flask.wrappers.Response类型
+    # response.delete_cookie
+    # response.set_cookie
+    # response.headers['X-Something'] = 'A value'
+    return response
+
+app.run()
+</pre>
+</div>
+<p>3、Session</p>
+<p>除请求对象之外，还有一个 session 对象。它允许你在不同请求间存储特定用户的信息。它是在 Cookies 的基础上实现的，并且对 Cookies 进行密钥签名要使用会话，你需要设置一个密钥。</p>
+<ul>
+<li>
+<p>设置：session['username'] ＝ 'xxx'</p>
+</li>
+<li>删除：session.pop('username', None)</li>
+</ul>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">from flask import Flask, session, redirect, url_for, escape, request
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    if 'username' in session:
+        return 'Logged in as %s' % escape(session['username'])
+    return 'You are not logged in'
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        session['username'] = request.form['username']
+        return redirect(url_for('index'))
+    return '''
+        &lt;form action="" method="post"&gt;
+            &lt;p&gt;&lt;input type=text name=username&gt;
+            &lt;p&gt;&lt;input type=submit value=Login&gt;
+        &lt;/form&gt;
+    '''
+
+@app.route('/logout')
+def logout():
+    # remove the username from the session if it's there
+    session.pop('username', None)
+    return redirect(url_for('index'))
+
+# set the secret key.  keep this really secret:
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'</pre>
+</div>
+<p>4.message</p>
+<p>message是一个基于Session实现的用于保存数据的集合，其特点是：使用一次就删除</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('94fa269e-8216-4cb4-a0d7-128598ffcdd9')"><img id="code_img_closed_94fa269e-8216-4cb4-a0d7-128598ffcdd9" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_94fa269e-8216-4cb4-a0d7-128598ffcdd9" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('94fa269e-8216-4cb4-a0d7-128598ffcdd9',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_94fa269e-8216-4cb4-a0d7-128598ffcdd9" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE html</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">html</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">head </span><span style="color: #ff0000;">lang</span><span style="color: #0000ff;">="en"</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">meta </span><span style="color: #ff0000;">charset</span><span style="color: #0000ff;">="UTF-8"</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">head</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        </span><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">ul </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">=flashes</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+            {% for message in messages %}
+            </span><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span>{{ message }}<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">li</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+            {% endfor %}
+        </span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">ul</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+        {% endif %}
+    {% endwith %}
+</span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">html</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<span class="cnblogs_code_collapse">index.html</span></div>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">from flask import Flask, flash, redirect, render_template, request
+
+app = Flask(__name__)
+app.secret_key = 'some_secret'
+
+@app.route('/')
+def index1():
+    return render_template('index.html')
+
+@app.route('/set')
+def index2():
+    v = request.args.get('p')
+    flash(v)
+    return 'ok'
+
+if __name__ == "__main__":
+    app.run()</pre>
+</div>
+<p>5.中间件</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">from flask import Flask, flash, redirect, render_template, request
+
+app = Flask(__name__)
+app.secret_key = 'some_secret'
+
+@app.route('/')
+def index1():
+    return render_template('index.html')
+
+@app.route('/set')
+def index2():
+    v = request.args.get('p')
+    flash(v)
+    return 'ok'
+
+class MiddleWare:
+    def __init__(self,wsgi_app):
+        self.wsgi_app = wsgi_app
+
+    def __call__(self, *args, **kwargs):
+
+        return self.wsgi_app(*args, **kwargs)
+
+if __name__ == "__main__":
+    app.wsgi_app = MiddleWare(app.wsgi_app)
+    app.run(port=9999)</pre>
+</div>
+<p>Flask还有众多其他功能，更多参见：<br />&nbsp; &nbsp; http://docs.jinkan.org/docs/flask/<br />&nbsp; &nbsp;&nbsp;http://flask.pocoo.org/</p>
+<h3>Tornado</h3>
+<p>Tornado&nbsp;是&nbsp;FriendFeed&nbsp;使用的可扩展的非阻塞式 web 服务器及其相关工具的开源版本。这个 Web 框架看起来有些像web.py&nbsp;或者&nbsp;Google 的 webapp，不过为了能有效利用非阻塞式服务器环境，这个 Web 框架还包含了一些相关的有用工具 和优化。</p>
+<p>Tornado 和现在的主流 Web 服务器框架（包括大多数 Python 的框架）有着明显的区别：它是非阻塞式服务器，而且速度相当快。得利于其 非阻塞的方式和对&nbsp;<a href="http://www.kernel.org/doc/man-pages/online/pages/man4/epoll.4.html">epoll</a>&nbsp;的运用，Tornado 每秒可以处理数以千计的连接，这意味着对于实时 Web 服务来说，Tornado 是一个理想的 Web 框架。我们开发这个 Web 服务器的主要目的就是为了处理 FriendFeed 的实时功能 &mdash;&mdash;在 FriendFeed 的应用里每一个活动用户都会保持着一个服务器连接。（关于如何扩容 服务器，以处理数以千计的客户端的连接的问题，请参阅&nbsp;<a href="http://www.kegel.com/c10k.html">C10K problem</a>。）</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">pip install tornado
+源码安装
+    https://pypi.python.org/packages/source/t/tornado/tornado-4.3.tar.gz
+</pre>
+</div>
+<p><strong><span style="font-size: 14pt;">一、快速上手</span></strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+ 
+import tornado.ioloop
+import tornado.web
+ 
+ 
+class MainHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.write("Hello, world")
+ 
+application = tornado.web.Application([
+    (r"/index", MainHandler),
+])
+ 
+ 
+if __name__ == "__main__":
+    application.listen(8888)
+    tornado.ioloop.IOLoop.instance().start()
+</pre>
+</div>
+<p>第一步：执行脚本，监听 8888 端口</p>
+<p>第二步：浏览器客户端访问 /index &nbsp;--&gt; &nbsp;http://127.0.0.1:8888/index</p>
+<p>第三步：服务器接受请求，并交由对应的类处理该请求</p>
+<p>第四步：类接受到请求之后，根据请求方式（post / get / delete ...）的不同调用并执行相应的方法</p>
+<p>第五步：方法返回值的字符串内容发送浏览器</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('ed95d129-e2b0-4633-9329-d31f3c48056d')"><img id="code_img_closed_ed95d129-e2b0-4633-9329-d31f3c48056d" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_ed95d129-e2b0-4633-9329-d31f3c48056d" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('ed95d129-e2b0-4633-9329-d31f3c48056d',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_ed95d129-e2b0-4633-9329-d31f3c48056d" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span><span style="color: #008000;">
+#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> tornado.ioloop
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> tornado.web
+</span><span style="color: #0000ff;">from</span> tornado <span style="color: #0000ff;">import</span><span style="color: #000000;"> httpclient
+</span><span style="color: #0000ff;">from</span> tornado.web <span style="color: #0000ff;">import</span><span style="color: #000000;"> asynchronous
+</span><span style="color: #0000ff;">from</span> tornado <span style="color: #0000ff;">import</span><span style="color: #000000;"> gen
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> uimodules as md
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> uimethods as mt
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> MainHandler(tornado.web.RequestHandler):
+        @asynchronous
+        @gen.coroutine
+        </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> get(self):
+            </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">start get </span><span style="color: #800000;">'</span><span style="color: #000000;">
+            http </span>=<span style="color: #000000;"> httpclient.AsyncHTTPClient()
+            http.fetch(</span><span style="color: #800000;">"</span><span style="color: #800000;">http://127.0.0.1:8008/post/</span><span style="color: #800000;">"</span><span style="color: #000000;">, self.callback)
+            self.write(</span><span style="color: #800000;">'</span><span style="color: #800000;">end</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+        </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> callback(self, response):
+            </span><span style="color: #0000ff;">print</span><span style="color: #000000;"> response.body
+
+settings </span>=<span style="color: #000000;"> {
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">template_path</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">template</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">static_path</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">static</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">static_url_prefix</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">/static/</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">ui_methods</span><span style="color: #800000;">'</span><span style="color: #000000;">: mt,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">ui_modules</span><span style="color: #800000;">'</span><span style="color: #000000;">: md,
+}
+
+application </span>=<span style="color: #000000;"> tornado.web.Application([
+    (r</span><span style="color: #800000;">"</span><span style="color: #800000;">/index</span><span style="color: #800000;">"</span><span style="color: #000000;">, MainHandler),
+], </span>**<span style="color: #000000;">settings)
+
+
+</span><span style="color: #0000ff;">if</span> <span style="color: #800080;">__name__</span> == <span style="color: #800000;">"</span><span style="color: #800000;">__main__</span><span style="color: #800000;">"</span><span style="color: #000000;">:
+    application.listen(</span>8009<span style="color: #000000;">)
+    tornado.ioloop.IOLoop.instance().start()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">异步非阻塞实例</span></div>
+<p><strong><span style="font-size: 14pt;">二、路由系统</span></strong></p>
+<p>路由系统其实就是 url 和 类 的对应关系，这里不同于其他框架，其他很多框架均是 url 对应 函数，Tornado中每个url对应的是一个类。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+ 
+import tornado.ioloop
+import tornado.web
+ 
+ 
+class MainHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.write("Hello, world")
+ 
+class StoryHandler(tornado.web.RequestHandler):
+    def get(self, story_id):
+        self.write("You requested the story " + story_id)
+ 
+class BuyHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.write("buy.wupeiqi.com/index")
+ 
+application = tornado.web.Application([
+    (r"/index", MainHandler),
+    (r"/story/([0-9]+)", StoryHandler),
+])
+ 
+application.add_handlers('buy.wupeiqi.com$', [
+    (r'/index',BuyHandler),
+])
+ 
+if __name__ == "__main__":
+    application.listen(80)
+    tornado.ioloop.IOLoop.instance().start()
+</pre>
+</div>
+<p><strong><span style="font-size: 14pt;">三、模板</span></strong></p>
+<p>Tornao中的模板语言和django中类似，模板引擎将模板文件载入内存，然后将数据嵌入其中，最终获取到一个完整的字符串，再将字符串返回给请求者。</p>
+<p>Tornado 的模板支持&ldquo;控制语句&rdquo;和&ldquo;表达语句&rdquo;，控制语句是使用&nbsp;<code>{%</code>&nbsp;和&nbsp;<code>%}</code>&nbsp;包起来的 例如&nbsp;<code>{% if len(items) &gt; 2 %}</code>。表达语句是使用&nbsp;<code>{{</code>&nbsp;和&nbsp;<code>}}</code>&nbsp;包起来的，例如&nbsp;<code>{{ items[0] }}</code>。</p>
+<p>控制语句和对应的 Python 语句的格式基本完全相同。我们支持&nbsp;<code>if</code>、<code>for</code>、<code>while</code>&nbsp;和&nbsp;<code>try</code>，这些语句逻辑结束的位置需要用&nbsp;<code>{% end %}</code>&nbsp;做标记。还通过&nbsp;<code>extends</code>&nbsp;和&nbsp;<code>block</code>&nbsp;语句实现了模板继承。这些在&nbsp;<a href="http://github.com/facebook/tornado/blob/master/tornado/template.py"><code>template</code>&nbsp;模块</a>&nbsp;的代码文档中有着详细的描述。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('eecf6c1a-5193-459d-8d24-c531275c07f0')"><img id="code_img_closed_eecf6c1a-5193-459d-8d24-c531275c07f0" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_eecf6c1a-5193-459d-8d24-c531275c07f0" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('eecf6c1a-5193-459d-8d24-c531275c07f0',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_eecf6c1a-5193-459d-8d24-c531275c07f0" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv=<span style="color: #800000;">"</span><span style="color: #800000;">Content-Type</span><span style="color: #800000;">"</span> content=<span style="color: #800000;">"</span><span style="color: #800000;">text/html; charset=UTF-8</span><span style="color: #800000;">"</span>/&gt;
+    &lt;title&gt;老男孩&lt;/title&gt;
+    &lt;link href=<span style="color: #800000;">"</span><span style="color: #800000;">{{static_url(</span><span style="color: #800000;">"</span>css/common.css<span style="color: #800000;">"</span><span style="color: #800000;">)}}</span><span style="color: #800000;">"</span> rel=<span style="color: #800000;">"</span><span style="color: #800000;">stylesheet</span><span style="color: #800000;">"</span> /&gt;<span style="color: #000000;">
+    {</span>% block CSS %}{% end %<span style="color: #000000;">}
+</span>&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">pg-header</span><span style="color: #800000;">"</span>&gt;
+
+    &lt;/div&gt;<span style="color: #000000;">
+    
+    {</span>% block RenderBody %}{% end %<span style="color: #000000;">}
+   
+    </span>&lt;script src=<span style="color: #800000;">"</span><span style="color: #800000;">{{static_url(</span><span style="color: #800000;">"</span>js/jquery-1.8.2.min.js<span style="color: #800000;">"</span><span style="color: #800000;">)}}</span><span style="color: #800000;">"</span>&gt;&lt;/script&gt;<span style="color: #000000;">
+    
+    {</span>% block JavaScript %}{% end %<span style="color: #000000;">}
+</span>&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">layout.html</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('45c77fa3-8fc6-4121-807c-4b60123e25d7')"><img id="code_img_closed_45c77fa3-8fc6-4121-807c-4b60123e25d7" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_45c77fa3-8fc6-4121-807c-4b60123e25d7" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('45c77fa3-8fc6-4121-807c-4b60123e25d7',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_45c77fa3-8fc6-4121-807c-4b60123e25d7" class="cnblogs_code_hide">
+<pre>{% extends <span style="color: #800000;">'</span><span style="color: #800000;">layout.html</span><span style="color: #800000;">'</span>%<span style="color: #000000;">}
+{</span>% block CSS %<span style="color: #000000;">}
+    </span>&lt;link href=<span style="color: #800000;">"</span><span style="color: #800000;">{{static_url(</span><span style="color: #800000;">"</span>css/index.css<span style="color: #800000;">"</span><span style="color: #800000;">)}}</span><span style="color: #800000;">"</span> rel=<span style="color: #800000;">"</span><span style="color: #800000;">stylesheet</span><span style="color: #800000;">"</span> /&gt;<span style="color: #000000;">
+{</span>% end %<span style="color: #000000;">}
+
+{</span>% block RenderBody %<span style="color: #000000;">}
+    </span>&lt;h1&gt;Index&lt;/h1&gt;
+
+    &lt;ul&gt;<span style="color: #000000;">
+    {</span>%  <span style="color: #0000ff;">for</span> item <span style="color: #0000ff;">in</span> li %<span style="color: #000000;">}
+        </span>&lt;li&gt;{{item}}&lt;/li&gt;<span style="color: #000000;">
+    {</span>% end %<span style="color: #000000;">}
+    </span>&lt;/ul&gt;<span style="color: #000000;">
+
+{</span>% end %<span style="color: #000000;">}
+
+{</span>% block JavaScript %<span style="color: #000000;">}
+    
+{</span>% end %}</pre>
+</div>
+<span class="cnblogs_code_collapse">index.html</span></div>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+ 
+import tornado.ioloop
+import tornado.web
+ 
+ 
+class MainHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render('home/index.html')
+ 
+settings = {
+    'template_path': 'template',
+}
+ 
+application = tornado.web.Application([
+    (r"/index", MainHandler),
+], **settings)
+ 
+ 
+if __name__ == "__main__":
+    application.listen(80)
+    tornado.ioloop.IOLoop.instance().start()
+</pre>
+</div>
+<p>在模板中默认提供了一些函数、字段、类以供模板使用：</p>
+<ul>
+<li><code>escape</code>:&nbsp;<code>tornado.escape.xhtml_escape</code>&nbsp;的別名</li>
+<li><code>xhtml_escape</code>:&nbsp;<code>tornado.escape.xhtml_escape</code>&nbsp;的別名</li>
+<li><code>url_escape</code>:&nbsp;<code>tornado.escape.url_escape</code>&nbsp;的別名</li>
+<li><code>json_encode</code>:&nbsp;<code>tornado.escape.json_encode</code>&nbsp;的別名</li>
+<li><code>squeeze</code>:&nbsp;<code>tornado.escape.squeeze</code>&nbsp;的別名</li>
+<li><code>linkify</code>:&nbsp;<code>tornado.escape.linkify</code>&nbsp;的別名</li>
+<li><code>datetime</code>: Python 的&nbsp;<code>datetime</code>&nbsp;模组</li>
+<li><code>handler</code>: 当前的&nbsp;<code>RequestHandler</code>&nbsp;对象</li>
+<li><code>request</code>:&nbsp;<code>handler.request</code>&nbsp;的別名</li>
+<li><code>current_user</code>:&nbsp;<code>handler.current_user</code>&nbsp;的別名</li>
+<li><code>locale</code>:&nbsp;<code>handler.locale</code>&nbsp;的別名</li>
+<li><code>_</code>:&nbsp;<code>handler.locale.translate</code>&nbsp;的別名</li>
+<li><code>static_url</code>: for&nbsp;<code>handler.static_url</code>&nbsp;的別名</li>
+<li><code>xsrf_form_html</code>:&nbsp;<code>handler.xsrf_form_html</code>&nbsp;的別名</li>
+</ul>
+<p>Tornado默认提供的这些功能其实本质上就是 UIMethod 和 UIModule，我们也可以自定义从而实现类似于Django的simple_tag的功能：<br />1、定义</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('b1a7010d-66d8-44d8-bae7-9c528fb39f9b')"><img id="code_img_closed_b1a7010d-66d8-44d8-bae7-9c528fb39f9b" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_b1a7010d-66d8-44d8-bae7-9c528fb39f9b" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('b1a7010d-66d8-44d8-bae7-9c528fb39f9b',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_b1a7010d-66d8-44d8-bae7-9c528fb39f9b" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;"> uimethods.py</span>
+ 
+<span style="color: #0000ff;">def</span><span style="color: #000000;"> tab(self):
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800000;">'</span><span style="color: #800000;">UIMethod</span><span style="color: #800000;">'</span></pre>
+</div>
+<span class="cnblogs_code_collapse">uimethods.py</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('6e81145c-dbd7-4015-b6d1-541b1669bf0c')"><img id="code_img_closed_6e81145c-dbd7-4015-b6d1-541b1669bf0c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_6e81145c-dbd7-4015-b6d1-541b1669bf0c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('6e81145c-dbd7-4015-b6d1-541b1669bf0c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_6e81145c-dbd7-4015-b6d1-541b1669bf0c" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+<span style="color: #0000ff;">from</span> tornado.web <span style="color: #0000ff;">import</span><span style="color: #000000;"> UIModule
+</span><span style="color: #0000ff;">from</span> tornado <span style="color: #0000ff;">import</span><span style="color: #000000;"> escape
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> custom(UIModule):
+
+    </span><span style="color: #0000ff;">def</span> render(self, *args, **<span style="color: #000000;">kwargs):
+        </span><span style="color: #0000ff;">return</span> escape.xhtml_escape(<span style="color: #800000;">'</span><span style="color: #800000;">&lt;h1&gt;wupeiqi&lt;/h1&gt;</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        </span><span style="color: #008000;">#</span><span style="color: #008000;">return escape.xhtml_escape('&lt;h1&gt;wupeiqi&lt;/h1&gt;')</span></pre>
+</div>
+<span class="cnblogs_code_collapse">uimodules.py</span></div>
+<p>2、注册</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('7a5de5cc-e37d-4729-8e80-c61addbd86d1')"><img id="code_img_closed_7a5de5cc-e37d-4729-8e80-c61addbd86d1" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_7a5de5cc-e37d-4729-8e80-c61addbd86d1" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('7a5de5cc-e37d-4729-8e80-c61addbd86d1',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_7a5de5cc-e37d-4729-8e80-c61addbd86d1" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span><span style="color: #008000;">
+#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> tornado.ioloop
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> tornado.web
+</span><span style="color: #0000ff;">from</span> tornado.escape <span style="color: #0000ff;">import</span><span style="color: #000000;"> linkify
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> uimodules as md
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> uimethods as mt
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> MainHandler(tornado.web.RequestHandler):
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> get(self):
+        self.render(</span><span style="color: #800000;">'</span><span style="color: #800000;">index.html</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+settings </span>=<span style="color: #000000;"> {
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">template_path</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">template</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">static_path</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">static</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">static_url_prefix</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">/static/</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">ui_methods</span><span style="color: #800000;">'</span><span style="color: #000000;">: mt,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">ui_modules</span><span style="color: #800000;">'</span><span style="color: #000000;">: md,
+}
+
+application </span>=<span style="color: #000000;"> tornado.web.Application([
+    (r</span><span style="color: #800000;">"</span><span style="color: #800000;">/index</span><span style="color: #800000;">"</span><span style="color: #000000;">, MainHandler),
+], </span>**<span style="color: #000000;">settings)
+
+
+</span><span style="color: #0000ff;">if</span> <span style="color: #800080;">__name__</span> == <span style="color: #800000;">"</span><span style="color: #800000;">__main__</span><span style="color: #800000;">"</span><span style="color: #000000;">:
+    application.listen(</span>8009<span style="color: #000000;">)
+    tornado.ioloop.IOLoop.instance().start()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">main.py</span></div>
+<p>3、使用</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('2e33d358-9edd-4e27-9657-ff3215838e2b')"><img id="code_img_closed_2e33d358-9edd-4e27-9657-ff3215838e2b" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_2e33d358-9edd-4e27-9657-ff3215838e2b" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('2e33d358-9edd-4e27-9657-ff3215838e2b',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_2e33d358-9edd-4e27-9657-ff3215838e2b" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span style="color: #800000;">"</span><span style="color: #800000;">en</span><span style="color: #800000;">"</span>&gt;
+    &lt;meta charset=<span style="color: #800000;">"</span><span style="color: #800000;">UTF-8</span><span style="color: #800000;">"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;link href=<span style="color: #800000;">"</span><span style="color: #800000;">{{static_url(</span><span style="color: #800000;">"</span>commons.css<span style="color: #800000;">"</span><span style="color: #800000;">)}}</span><span style="color: #800000;">"</span> rel=<span style="color: #800000;">"</span><span style="color: #800000;">stylesheet</span><span style="color: #800000;">"</span> /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;hello&lt;/h1&gt;<span style="color: #000000;">
+    {</span>% module custom(123) %<span style="color: #000000;">}
+    {{ tab() }}
+</span>&lt;/body&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">index.html</span></div>
+<p><strong><span style="font-size: 14pt;">四、实用功能</span></strong></p>
+<p>1、静态文件</p>
+<p>对于静态文件，可以配置静态文件的目录和前段使用时的前缀，并且Tornaodo还支持静态文件缓存。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('2324102a-3d9c-41b3-90a9-334270d02543')"><img id="code_img_closed_2324102a-3d9c-41b3-90a9-334270d02543" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_2324102a-3d9c-41b3-90a9-334270d02543" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('2324102a-3d9c-41b3-90a9-334270d02543',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_2324102a-3d9c-41b3-90a9-334270d02543" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+ 
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> tornado.ioloop
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> tornado.web
+ 
+ 
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> MainHandler(tornado.web.RequestHandler):
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> get(self):
+        self.render(</span><span style="color: #800000;">'</span><span style="color: #800000;">home/index.html</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+ 
+settings </span>=<span style="color: #000000;"> {
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">template_path</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">template</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">static_path</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">static</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">static_url_prefix</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">/static/</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+}
+ 
+application </span>=<span style="color: #000000;"> tornado.web.Application([
+    (r</span><span style="color: #800000;">"</span><span style="color: #800000;">/index</span><span style="color: #800000;">"</span><span style="color: #000000;">, MainHandler),
+], </span>**<span style="color: #000000;">settings)
+ 
+ 
+</span><span style="color: #0000ff;">if</span> <span style="color: #800080;">__name__</span> == <span style="color: #800000;">"</span><span style="color: #800000;">__main__</span><span style="color: #800000;">"</span><span style="color: #000000;">:
+    application.listen(</span>80<span style="color: #000000;">)
+    tornado.ioloop.IOLoop.instance().start()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">main.py</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('e2c4ceff-7c41-44c5-b7f8-548b8193d031')"><img id="code_img_closed_e2c4ceff-7c41-44c5-b7f8-548b8193d031" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_e2c4ceff-7c41-44c5-b7f8-548b8193d031" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('e2c4ceff-7c41-44c5-b7f8-548b8193d031',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_e2c4ceff-7c41-44c5-b7f8-548b8193d031" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span style="color: #800000;">"</span><span style="color: #800000;">en</span><span style="color: #800000;">"</span>&gt;
+    &lt;meta charset=<span style="color: #800000;">"</span><span style="color: #800000;">UTF-8</span><span style="color: #800000;">"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;link href=<span style="color: #800000;">"</span><span style="color: #800000;">{{static_url(</span><span style="color: #800000;">"</span>commons.css<span style="color: #800000;">"</span><span style="color: #800000;">)}}</span><span style="color: #800000;">"</span> rel=<span style="color: #800000;">"</span><span style="color: #800000;">stylesheet</span><span style="color: #800000;">"</span> /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;hello&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">index.html</span></div>
+<p>备注：静态文件缓存的实现</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('06fca177-73e4-4798-a50a-9e8259269ea6')"><img id="code_img_closed_06fca177-73e4-4798-a50a-9e8259269ea6" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_06fca177-73e4-4798-a50a-9e8259269ea6" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('06fca177-73e4-4798-a50a-9e8259269ea6',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_06fca177-73e4-4798-a50a-9e8259269ea6" class="cnblogs_code_hide">
+<pre>    <span style="color: #0000ff;">def</span><span style="color: #000000;"> get_content_version(cls, abspath):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Returns a version string for the resource at the given path.
+
+        This class method may be overridden by subclasses.  The
+        default implementation is a hash of the file's contents.
+
+        .. versionadded:: 3.1
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        data </span>=<span style="color: #000000;"> cls.get_content(abspath)
+        hasher </span>=<span style="color: #000000;"> hashlib.md5()
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> isinstance(data, bytes):
+            hasher.update(data)
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            </span><span style="color: #0000ff;">for</span> chunk <span style="color: #0000ff;">in</span><span style="color: #000000;"> data:
+                hasher.update(chunk)
+        </span><span style="color: #0000ff;">return</span> hasher.hexdigest()</pre>
+</div>
+<span class="cnblogs_code_collapse">静态文件缓存源码</span></div>
+<p>2、csrf</p>
+<p>Tornado中的夸张请求伪造和Django中的相似，<a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">跨站伪造请求(Cross-site request forgery)</a></p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('23144d41-fc57-4ada-ad01-5992e7551daa')"><img id="code_img_closed_23144d41-fc57-4ada-ad01-5992e7551daa" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_23144d41-fc57-4ada-ad01-5992e7551daa" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('23144d41-fc57-4ada-ad01-5992e7551daa',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_23144d41-fc57-4ada-ad01-5992e7551daa" class="cnblogs_code_hide">
+<pre>settings =<span style="color: #000000;"> {
+    </span><span style="color: #800000;">"</span><span style="color: #800000;">xsrf_cookies</span><span style="color: #800000;">"</span><span style="color: #000000;">: True,
+}
+application </span>=<span style="color: #000000;"> tornado.web.Application([
+    (r</span><span style="color: #800000;">"</span><span style="color: #800000;">/</span><span style="color: #800000;">"</span><span style="color: #000000;">, MainHandler),
+    (r</span><span style="color: #800000;">"</span><span style="color: #800000;">/login</span><span style="color: #800000;">"</span><span style="color: #000000;">, LoginHandler),
+], </span>**settings)</pre>
+</div>
+<span class="cnblogs_code_collapse">配置</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('16568a0a-8600-465c-a790-2bb4ca723a7c')"><img id="code_img_closed_16568a0a-8600-465c-a790-2bb4ca723a7c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_16568a0a-8600-465c-a790-2bb4ca723a7c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('16568a0a-8600-465c-a790-2bb4ca723a7c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_16568a0a-8600-465c-a790-2bb4ca723a7c" class="cnblogs_code_hide">
+<pre>&lt;form action=<span style="color: #800000;">"</span><span style="color: #800000;">/new_message</span><span style="color: #800000;">"</span> method=<span style="color: #800000;">"</span><span style="color: #800000;">post</span><span style="color: #800000;">"</span>&gt;<span style="color: #000000;">
+  {{ xsrf_form_html() }}
+  </span>&lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">text</span><span style="color: #800000;">"</span> name=<span style="color: #800000;">"</span><span style="color: #800000;">message</span><span style="color: #800000;">"</span>/&gt;
+  &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">submit</span><span style="color: #800000;">"</span> value=<span style="color: #800000;">"</span><span style="color: #800000;">Post</span><span style="color: #800000;">"</span>/&gt;
+&lt;/form&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">普通表单使用</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('67a3ac35-1eb4-4091-824c-ab7f3bc59137')"><img id="code_img_closed_67a3ac35-1eb4-4091-824c-ab7f3bc59137" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_67a3ac35-1eb4-4091-824c-ab7f3bc59137" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('67a3ac35-1eb4-4091-824c-ab7f3bc59137',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_67a3ac35-1eb4-4091-824c-ab7f3bc59137" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">function getCookie(name) {
+    var r </span>= document.cookie.match(<span style="color: #800000;">"</span><span style="color: #800000;">\\b</span><span style="color: #800000;">"</span> + name + <span style="color: #800000;">"</span><span style="color: #800000;">=([^;]*)\\b</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">return</span> r ? r[1<span style="color: #000000;">] : undefined;
+}
+
+jQuery.postJSON </span>=<span style="color: #000000;"> function(url, args, callback) {
+    args._xsrf </span>= getCookie(<span style="color: #800000;">"</span><span style="color: #800000;">_xsrf</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    $.ajax({url: url, data: $.param(args), dataType: </span><span style="color: #800000;">"</span><span style="color: #800000;">text</span><span style="color: #800000;">"</span>, type: <span style="color: #800000;">"</span><span style="color: #800000;">POST</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+        success: function(response) {
+        callback(eval(</span><span style="color: #800000;">"</span><span style="color: #800000;">(</span><span style="color: #800000;">"</span> + response + <span style="color: #800000;">"</span><span style="color: #800000;">)</span><span style="color: #800000;">"</span><span style="color: #000000;">));
+    }});
+};</span></pre>
+</div>
+<span class="cnblogs_code_collapse">Ajax使用</span></div>
+<p>注：Ajax使用时，本质上就是去获取本地的cookie，携带cookie再来发送请求</p>
+<p>3、cookie</p>
+<p>Tornado中可以对cookie进行操作，并且还可以对cookie进行签名以放置伪造。</p>
+<p>a、基本操作</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('49ba752c-1297-4c74-bb6f-96c5a87b487a')"><img id="code_img_closed_49ba752c-1297-4c74-bb6f-96c5a87b487a" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_49ba752c-1297-4c74-bb6f-96c5a87b487a" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('49ba752c-1297-4c74-bb6f-96c5a87b487a',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_49ba752c-1297-4c74-bb6f-96c5a87b487a" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">class</span><span style="color: #000000;"> MainHandler(tornado.web.RequestHandler):
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> get(self):
+        </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span> self.get_cookie(<span style="color: #800000;">"</span><span style="color: #800000;">mycookie</span><span style="color: #800000;">"</span><span style="color: #000000;">):
+            self.set_cookie(</span><span style="color: #800000;">"</span><span style="color: #800000;">mycookie</span><span style="color: #800000;">"</span>, <span style="color: #800000;">"</span><span style="color: #800000;">myvalue</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+            self.write(</span><span style="color: #800000;">"</span><span style="color: #800000;">Your cookie was not set yet!</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            self.write(</span><span style="color: #800000;">"</span><span style="color: #800000;">Your cookie was set!</span><span style="color: #800000;">"</span>)</pre>
+</div>
+<span class="cnblogs_code_collapse">Code</span></div>
+<p>b、签名</p>
+<p>Cookie 很容易被恶意的客户端伪造。加入你想在 cookie 中保存当前登陆用户的 id 之类的信息，你需要对 cookie 作签名以防止伪造。Tornado 通过 set_secure_cookie 和 get_secure_cookie 方法直接支持了这种功能。 要使用这些方法，你需要在创建应用时提供一个密钥，名字为 cookie_secret。 你可以把它作为一个关键词参数传入应用的设置中：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('a43bc373-b960-408e-873e-1444668af276')"><img id="code_img_closed_a43bc373-b960-408e-873e-1444668af276" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a43bc373-b960-408e-873e-1444668af276" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a43bc373-b960-408e-873e-1444668af276',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_a43bc373-b960-408e-873e-1444668af276" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">class</span><span style="color: #000000;"> MainHandler(tornado.web.RequestHandler):
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> get(self):
+        </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span> self.get_secure_cookie(<span style="color: #800000;">"</span><span style="color: #800000;">mycookie</span><span style="color: #800000;">"</span><span style="color: #000000;">):
+            self.set_secure_cookie(</span><span style="color: #800000;">"</span><span style="color: #800000;">mycookie</span><span style="color: #800000;">"</span>, <span style="color: #800000;">"</span><span style="color: #800000;">myvalue</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+            self.write(</span><span style="color: #800000;">"</span><span style="color: #800000;">Your cookie was not set yet!</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            self.write(</span><span style="color: #800000;">"</span><span style="color: #800000;">Your cookie was set!</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+             
+application </span>=<span style="color: #000000;"> tornado.web.Application([
+    (r</span><span style="color: #800000;">"</span><span style="color: #800000;">/</span><span style="color: #800000;">"</span><span style="color: #000000;">, MainHandler),
+], cookie_secret</span>=<span style="color: #800000;">"</span><span style="color: #800000;">61oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=</span><span style="color: #800000;">"</span>)</pre>
+</div>
+<span class="cnblogs_code_collapse">Code</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('fe702d52-4c1d-4833-9596-d04ec365dfe4')"><img id="code_img_closed_fe702d52-4c1d-4833-9596-d04ec365dfe4" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_fe702d52-4c1d-4833-9596-d04ec365dfe4" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('fe702d52-4c1d-4833-9596-d04ec365dfe4',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_fe702d52-4c1d-4833-9596-d04ec365dfe4" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">def</span> _create_signature_v1(secret, *<span style="color: #000000;">parts):
+    hash </span>= hmac.new(utf8(secret), digestmod=<span style="color: #000000;">hashlib.sha1)
+    </span><span style="color: #0000ff;">for</span> part <span style="color: #0000ff;">in</span><span style="color: #000000;"> parts:
+        hash.update(utf8(part))
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> utf8(hash.hexdigest())
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> _create_signature_v2(secret, s):
+    hash </span>= hmac.new(utf8(secret), digestmod=<span style="color: #000000;">hashlib.sha256)
+    hash.update(utf8(s))
+    </span><span style="color: #0000ff;">return</span> utf8(hash.hexdigest())</pre>
+</div>
+<span class="cnblogs_code_collapse">内部算法</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('3aee9ee6-2dcc-4904-a879-07ff538bc4d0')"><img id="code_img_closed_3aee9ee6-2dcc-4904-a879-07ff538bc4d0" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_3aee9ee6-2dcc-4904-a879-07ff538bc4d0" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('3aee9ee6-2dcc-4904-a879-07ff538bc4d0',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_3aee9ee6-2dcc-4904-a879-07ff538bc4d0" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">def</span> create_signed_value(secret, name, value, version=None, clock=<span style="color: #000000;">None,
+                        key_version</span>=<span style="color: #000000;">None):
+    </span><span style="color: #0000ff;">if</span> version <span style="color: #0000ff;">is</span><span style="color: #000000;"> None:
+        version </span>=<span style="color: #000000;"> DEFAULT_SIGNED_VALUE_VERSION
+    </span><span style="color: #0000ff;">if</span> clock <span style="color: #0000ff;">is</span><span style="color: #000000;"> None:
+        clock </span>=<span style="color: #000000;"> time.time
+
+    timestamp </span>=<span style="color: #000000;"> utf8(str(int(clock())))
+    value </span>=<span style="color: #000000;"> base64.b64encode(utf8(value))
+    </span><span style="color: #0000ff;">if</span> version == 1<span style="color: #000000;">:
+        signature </span>=<span style="color: #000000;"> _create_signature_v1(secret, name, value, timestamp)
+        value </span>= b<span style="color: #800000;">"</span><span style="color: #800000;">|</span><span style="color: #800000;">"</span><span style="color: #000000;">.join([value, timestamp, signature])
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> value
+    </span><span style="color: #0000ff;">elif</span> version == 2<span style="color: #000000;">:
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> The v2 format consists of a version number and a series of</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> length-prefixed fields "%d:%s", the last of which is a</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> signature, all separated by pipes.  All numbers are in</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> decimal format with no leading zeros.  The signature is an</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> HMAC-SHA256 of the whole string up to that point, including</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> the final pipe.</span>
+        <span style="color: #008000;">#
+</span>        <span style="color: #008000;">#</span><span style="color: #008000;"> The fields are:</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> - format version (i.e. 2; no length prefix)</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> - key version (integer, default is 0)</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> - timestamp (integer seconds since epoch)</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> - name (not encoded; assumed to be ~alphanumeric)</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> - value (base64-encoded)</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> - signature (hex-encoded; no length prefix)</span>
+        <span style="color: #0000ff;">def</span><span style="color: #000000;"> format_field(s):
+            </span><span style="color: #0000ff;">return</span> utf8(<span style="color: #800000;">"</span><span style="color: #800000;">%d:</span><span style="color: #800000;">"</span> % len(s)) +<span style="color: #000000;"> utf8(s)
+        to_sign </span>= b<span style="color: #800000;">"</span><span style="color: #800000;">|</span><span style="color: #800000;">"</span><span style="color: #000000;">.join([
+            b</span><span style="color: #800000;">"</span><span style="color: #800000;">2</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+            format_field(str(key_version </span><span style="color: #0000ff;">or</span><span style="color: #000000;"> 0)),
+            format_field(timestamp),
+            format_field(name),
+            format_field(value),
+            b</span><span style="color: #800000;">''</span><span style="color: #000000;">])
+
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> isinstance(secret, dict):
+            </span><span style="color: #0000ff;">assert</span> key_version <span style="color: #0000ff;">is</span> <span style="color: #0000ff;">not</span> None, <span style="color: #800000;">'</span><span style="color: #800000;">Key version must be set when sign key dict is used</span><span style="color: #800000;">'</span>
+            <span style="color: #0000ff;">assert</span> version &gt;= 2, <span style="color: #800000;">'</span><span style="color: #800000;">Version must be at least 2 for key version support</span><span style="color: #800000;">'</span><span style="color: #000000;">
+            secret </span>=<span style="color: #000000;"> secret[key_version]
+
+        signature </span>=<span style="color: #000000;"> _create_signature_v2(secret, to_sign)
+        </span><span style="color: #0000ff;">return</span> to_sign +<span style="color: #000000;"> signature
+    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">raise</span> ValueError(<span style="color: #800000;">"</span><span style="color: #800000;">Unsupported version %d</span><span style="color: #800000;">"</span> % version)</pre>
+</div>
+<span class="cnblogs_code_collapse">内部算法-加密</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('950d6ed4-612f-47cc-b169-a83d91161a27')"><img id="code_img_closed_950d6ed4-612f-47cc-b169-a83d91161a27" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_950d6ed4-612f-47cc-b169-a83d91161a27" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('950d6ed4-612f-47cc-b169-a83d91161a27',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_950d6ed4-612f-47cc-b169-a83d91161a27" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">def</span><span style="color: #000000;"> _decode_signed_value_v1(secret, name, value, max_age_days, clock):
+    parts </span>= utf8(value).split(b<span style="color: #800000;">"</span><span style="color: #800000;">|</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+    </span><span style="color: #0000ff;">if</span> len(parts) != 3<span style="color: #000000;">:
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> None
+    signature </span>= _create_signature_v1(secret, name, parts[0], parts[1<span style="color: #000000;">])
+    </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span> _time_independent_equals(parts[2<span style="color: #000000;">], signature):
+        gen_log.warning(</span><span style="color: #800000;">"</span><span style="color: #800000;">Invalid cookie signature %r</span><span style="color: #800000;">"</span><span style="color: #000000;">, value)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> None
+    timestamp </span>= int(parts[1<span style="color: #000000;">])
+    </span><span style="color: #0000ff;">if</span> timestamp &lt; clock() - max_age_days * 86400<span style="color: #000000;">:
+        gen_log.warning(</span><span style="color: #800000;">"</span><span style="color: #800000;">Expired cookie %r</span><span style="color: #800000;">"</span><span style="color: #000000;">, value)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> None
+    </span><span style="color: #0000ff;">if</span> timestamp &gt; clock() + 31 * 86400<span style="color: #000000;">:
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> _cookie_signature does not hash a delimiter between the</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> parts of the cookie, so an attacker could transfer trailing</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> digits from the payload to the timestamp without altering the</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> signature.  For backwards compatibility, sanity-check timestamp</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> here instead of modifying _cookie_signature.</span>
+        gen_log.warning(<span style="color: #800000;">"</span><span style="color: #800000;">Cookie timestamp in future; possible tampering %r</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+                        value)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> None
+    </span><span style="color: #0000ff;">if</span> parts[1].startswith(b<span style="color: #800000;">"</span><span style="color: #800000;">0</span><span style="color: #800000;">"</span><span style="color: #000000;">):
+        gen_log.warning(</span><span style="color: #800000;">"</span><span style="color: #800000;">Tampered cookie %r</span><span style="color: #800000;">"</span><span style="color: #000000;">, value)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> None
+    </span><span style="color: #0000ff;">try</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> base64.b64decode(parts[0])
+    </span><span style="color: #0000ff;">except</span><span style="color: #000000;"> Exception:
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> None
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> _decode_fields_v2(value):
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> _consume_field(s):
+        length, _, rest </span>= s.partition(b<span style="color: #800000;">'</span><span style="color: #800000;">:</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        n </span>=<span style="color: #000000;"> int(length)
+        field_value </span>=<span style="color: #000000;"> rest[:n]
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> In python 3, indexing bytes returns small integers; we must</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> use a slice to get a byte string as in python 2.</span>
+        <span style="color: #0000ff;">if</span> rest[n:n + 1] != b<span style="color: #800000;">'</span><span style="color: #800000;">|</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+            </span><span style="color: #0000ff;">raise</span> ValueError(<span style="color: #800000;">"</span><span style="color: #800000;">malformed v2 signed value field</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+        rest </span>= rest[n + 1<span style="color: #000000;">:]
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> field_value, rest
+
+    rest </span>= value[2:]  <span style="color: #008000;">#</span><span style="color: #008000;"> remove version number</span>
+    key_version, rest =<span style="color: #000000;"> _consume_field(rest)
+    timestamp, rest </span>=<span style="color: #000000;"> _consume_field(rest)
+    name_field, rest </span>=<span style="color: #000000;"> _consume_field(rest)
+    value_field, passed_sig </span>=<span style="color: #000000;"> _consume_field(rest)
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> int(key_version), timestamp, name_field, value_field, passed_sig
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> _decode_signed_value_v2(secret, name, value, max_age_days, clock):
+    </span><span style="color: #0000ff;">try</span><span style="color: #000000;">:
+        key_version, timestamp, name_field, value_field, passed_sig </span>=<span style="color: #000000;"> _decode_fields_v2(value)
+    </span><span style="color: #0000ff;">except</span><span style="color: #000000;"> ValueError:
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> None
+    signed_string </span>= value[:-<span style="color: #000000;">len(passed_sig)]
+
+    </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> isinstance(secret, dict):
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;">:
+            secret </span>=<span style="color: #000000;"> secret[key_version]
+        </span><span style="color: #0000ff;">except</span><span style="color: #000000;"> KeyError:
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> None
+
+    expected_sig </span>=<span style="color: #000000;"> _create_signature_v2(secret, signed_string)
+    </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> _time_independent_equals(passed_sig, expected_sig):
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> None
+    </span><span style="color: #0000ff;">if</span> name_field !=<span style="color: #000000;"> utf8(name):
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> None
+    timestamp </span>=<span style="color: #000000;"> int(timestamp)
+    </span><span style="color: #0000ff;">if</span> timestamp &lt; clock() - max_age_days * 86400<span style="color: #000000;">:
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> The signature has expired.</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;"> None
+    </span><span style="color: #0000ff;">try</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> base64.b64decode(value_field)
+    </span><span style="color: #0000ff;">except</span><span style="color: #000000;"> Exception:
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> None
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> get_signature_key_version(value):
+    value </span>=<span style="color: #000000;"> utf8(value)
+    version </span>=<span style="color: #000000;"> _get_version(value)
+    </span><span style="color: #0000ff;">if</span> version &lt; 2<span style="color: #000000;">:
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> None
+    </span><span style="color: #0000ff;">try</span><span style="color: #000000;">:
+        key_version, _, _, _, _ </span>=<span style="color: #000000;"> _decode_fields_v2(value)
+    </span><span style="color: #0000ff;">except</span><span style="color: #000000;"> ValueError:
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> None
+
+    </span><span style="color: #0000ff;">return</span> key_version</pre>
+</div>
+<span class="cnblogs_code_collapse">内部算法-解密</span></div>
+<p>签名Cookie的本质是：</p>
+<blockquote>
+<p>写cookie过程：</p>
+<ul>
+<li>将值进行base64加密</li>
+<li>对除值以外的内容进行签名，哈希算法（无法逆向解析）</li>
+<li>拼接 签名 + 加密值</li>
+</ul>
+<p>读cookie过程：</p>
+<ul>
+<li>读取 签名 + 加密值</li>
+<li>对签名进行验证</li>
+<li>base64解密，获取值内容</li>
+</ul>
+</blockquote>
+<p>注：许多API验证机制和安全cookie的实现机制相同。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('8926b1cb-1f54-4a66-94f0-7790675c817c')"><img id="code_img_closed_8926b1cb-1f54-4a66-94f0-7790675c817c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_8926b1cb-1f54-4a66-94f0-7790675c817c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('8926b1cb-1f54-4a66-94f0-7790675c817c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_8926b1cb-1f54-4a66-94f0-7790675c817c" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+ 
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> tornado.ioloop
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> tornado.web
+ 
+ 
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> MainHandler(tornado.web.RequestHandler):
+ 
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> get(self):
+        login_user </span>= self.get_secure_cookie(<span style="color: #800000;">"</span><span style="color: #800000;">login_user</span><span style="color: #800000;">"</span><span style="color: #000000;">, None)
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> login_user:
+            self.write(login_user)
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            self.redirect(</span><span style="color: #800000;">'</span><span style="color: #800000;">/login</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+ 
+ 
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> LoginHandler(tornado.web.RequestHandler):
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> get(self):
+        self.current_user()
+ 
+        self.render(</span><span style="color: #800000;">'</span><span style="color: #800000;">login.html</span><span style="color: #800000;">'</span>, **{<span style="color: #800000;">'</span><span style="color: #800000;">status</span><span style="color: #800000;">'</span>: <span style="color: #800000;">''</span><span style="color: #000000;">})
+ 
+    </span><span style="color: #0000ff;">def</span> post(self, *args, **<span style="color: #000000;">kwargs):
+ 
+        username </span>= self.get_argument(<span style="color: #800000;">'</span><span style="color: #800000;">name</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        password </span>= self.get_argument(<span style="color: #800000;">'</span><span style="color: #800000;">pwd</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> username == <span style="color: #800000;">'</span><span style="color: #800000;">wupeiqi</span><span style="color: #800000;">'</span> <span style="color: #0000ff;">and</span> password == <span style="color: #800000;">'</span><span style="color: #800000;">123</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+            self.set_secure_cookie(</span><span style="color: #800000;">'</span><span style="color: #800000;">login_user</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">武沛齐</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+            self.redirect(</span><span style="color: #800000;">'</span><span style="color: #800000;">/</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            self.render(</span><span style="color: #800000;">'</span><span style="color: #800000;">login.html</span><span style="color: #800000;">'</span>, **{<span style="color: #800000;">'</span><span style="color: #800000;">status</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">用户名或密码错误</span><span style="color: #800000;">'</span><span style="color: #000000;">})
+ 
+settings </span>=<span style="color: #000000;"> {
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">template_path</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">template</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">static_path</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">static</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">static_url_prefix</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">/static/</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">cookie_secret</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">aiuasdhflashjdfoiuashdfiuh</span><span style="color: #800000;">'</span><span style="color: #000000;">
+}
+ 
+application </span>=<span style="color: #000000;"> tornado.web.Application([
+    (r</span><span style="color: #800000;">"</span><span style="color: #800000;">/index</span><span style="color: #800000;">"</span><span style="color: #000000;">, MainHandler),
+    (r</span><span style="color: #800000;">"</span><span style="color: #800000;">/login</span><span style="color: #800000;">"</span><span style="color: #000000;">, LoginHandler),
+], </span>**<span style="color: #000000;">settings)
+ 
+ 
+</span><span style="color: #0000ff;">if</span> <span style="color: #800080;">__name__</span> == <span style="color: #800000;">"</span><span style="color: #800000;">__main__</span><span style="color: #800000;">"</span><span style="color: #000000;">:
+    application.listen(</span>8888<span style="color: #000000;">)
+    tornado.ioloop.IOLoop.instance().start()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">Demo-基于cookie进行用户验证</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('70838a58-2108-43f2-8e48-ca6e482d2288')"><img id="code_img_closed_70838a58-2108-43f2-8e48-ca6e482d2288" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_70838a58-2108-43f2-8e48-ca6e482d2288" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('70838a58-2108-43f2-8e48-ca6e482d2288',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_70838a58-2108-43f2-8e48-ca6e482d2288" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+ 
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> tornado.ioloop
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> tornado.web
+ 
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> BaseHandler(tornado.web.RequestHandler):
+ 
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> get_current_user(self):
+        </span><span style="color: #0000ff;">return</span> self.get_secure_cookie(<span style="color: #800000;">"</span><span style="color: #800000;">login_user</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+ 
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> MainHandler(BaseHandler):
+ 
+    @tornado.web.authenticated
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> get(self):
+        login_user </span>=<span style="color: #000000;"> self.current_user
+        self.write(login_user)
+ 
+ 
+ 
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> LoginHandler(tornado.web.RequestHandler):
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> get(self):
+        self.current_user()
+ 
+        self.render(</span><span style="color: #800000;">'</span><span style="color: #800000;">login.html</span><span style="color: #800000;">'</span>, **{<span style="color: #800000;">'</span><span style="color: #800000;">status</span><span style="color: #800000;">'</span>: <span style="color: #800000;">''</span><span style="color: #000000;">})
+ 
+    </span><span style="color: #0000ff;">def</span> post(self, *args, **<span style="color: #000000;">kwargs):
+ 
+        username </span>= self.get_argument(<span style="color: #800000;">'</span><span style="color: #800000;">name</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        password </span>= self.get_argument(<span style="color: #800000;">'</span><span style="color: #800000;">pwd</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> username == <span style="color: #800000;">'</span><span style="color: #800000;">wupeiqi</span><span style="color: #800000;">'</span> <span style="color: #0000ff;">and</span> password == <span style="color: #800000;">'</span><span style="color: #800000;">123</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+            self.set_secure_cookie(</span><span style="color: #800000;">'</span><span style="color: #800000;">login_user</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">武沛齐</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+            self.redirect(</span><span style="color: #800000;">'</span><span style="color: #800000;">/</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            self.render(</span><span style="color: #800000;">'</span><span style="color: #800000;">login.html</span><span style="color: #800000;">'</span>, **{<span style="color: #800000;">'</span><span style="color: #800000;">status</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">用户名或密码错误</span><span style="color: #800000;">'</span><span style="color: #000000;">})
+ 
+settings </span>=<span style="color: #000000;"> {
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">template_path</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">template</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">static_path</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">static</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">static_url_prefix</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">/static/</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">cookie_secret</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">aiuasdhflashjdfoiuashdfiuh</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">login_url</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">/login</span><span style="color: #800000;">'</span><span style="color: #000000;">
+}
+ 
+application </span>=<span style="color: #000000;"> tornado.web.Application([
+    (r</span><span style="color: #800000;">"</span><span style="color: #800000;">/index</span><span style="color: #800000;">"</span><span style="color: #000000;">, MainHandler),
+    (r</span><span style="color: #800000;">"</span><span style="color: #800000;">/login</span><span style="color: #800000;">"</span><span style="color: #000000;">, LoginHandler),
+], </span>**<span style="color: #000000;">settings)
+ 
+ 
+</span><span style="color: #0000ff;">if</span> <span style="color: #800080;">__name__</span> == <span style="color: #800000;">"</span><span style="color: #800000;">__main__</span><span style="color: #800000;">"</span><span style="color: #000000;">:
+    application.listen(</span>8888<span style="color: #000000;">)
+    tornado.ioloop.IOLoop.instance().start()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">Demo-Toando内部提供基于cookie进行用户验证</span></div>
+<p>4、Ajax上传文件</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('c98cd4e7-dd86-46d0-b7b1-1e76970608a4')"><img id="code_img_closed_c98cd4e7-dd86-46d0-b7b1-1e76970608a4" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_c98cd4e7-dd86-46d0-b7b1-1e76970608a4" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('c98cd4e7-dd86-46d0-b7b1-1e76970608a4',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_c98cd4e7-dd86-46d0-b7b1-1e76970608a4" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">&lt;!</span><span style="color: #ff00ff;">DOCTYPE html</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">html</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">head </span><span style="color: #ff0000;">lang</span><span style="color: #0000ff;">="en"</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">meta </span><span style="color: #ff0000;">charset</span><span style="color: #0000ff;">="UTF-8"</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">title</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">head</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">input </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="file"</span><span style="color: #ff0000;"> id</span><span style="color: #0000ff;">="img"</span> <span style="color: #0000ff;">/&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">input </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="button"</span><span style="color: #ff0000;"> onclick</span><span style="color: #0000ff;">="UploadFile();"</span> <span style="color: #0000ff;">/&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">script</span><span style="color: #0000ff;">&gt;</span>
+        <span style="background-color: #f5f5f5; color: #0000ff;">function</span><span style="background-color: #f5f5f5; color: #000000;"> UploadFile(){
+            </span><span style="background-color: #f5f5f5; color: #0000ff;">var</span><span style="background-color: #f5f5f5; color: #000000;"> fileObj </span><span style="background-color: #f5f5f5; color: #000000;">=</span><span style="background-color: #f5f5f5; color: #000000;"> document.getElementById(</span><span style="background-color: #f5f5f5; color: #000000;">"</span><span style="background-color: #f5f5f5; color: #000000;">img</span><span style="background-color: #f5f5f5; color: #000000;">"</span><span style="background-color: #f5f5f5; color: #000000;">).files[</span><span style="background-color: #f5f5f5; color: #000000;">0</span><span style="background-color: #f5f5f5; color: #000000;">];
+
+            </span><span style="background-color: #f5f5f5; color: #0000ff;">var</span><span style="background-color: #f5f5f5; color: #000000;"> form </span><span style="background-color: #f5f5f5; color: #000000;">=</span> <span style="background-color: #f5f5f5; color: #0000ff;">new</span><span style="background-color: #f5f5f5; color: #000000;"> FormData();
+            form.append(</span><span style="background-color: #f5f5f5; color: #000000;">"</span><span style="background-color: #f5f5f5; color: #000000;">k1</span><span style="background-color: #f5f5f5; color: #000000;">"</span><span style="background-color: #f5f5f5; color: #000000;">, </span><span style="background-color: #f5f5f5; color: #000000;">"</span><span style="background-color: #f5f5f5; color: #000000;">v1</span><span style="background-color: #f5f5f5; color: #000000;">"</span><span style="background-color: #f5f5f5; color: #000000;">);
+            form.append(</span><span style="background-color: #f5f5f5; color: #000000;">"</span><span style="background-color: #f5f5f5; color: #000000;">fff</span><span style="background-color: #f5f5f5; color: #000000;">"</span><span style="background-color: #f5f5f5; color: #000000;">, fileObj);
+
+            </span><span style="background-color: #f5f5f5; color: #0000ff;">var</span><span style="background-color: #f5f5f5; color: #000000;"> xhr </span><span style="background-color: #f5f5f5; color: #000000;">=</span> <span style="background-color: #f5f5f5; color: #0000ff;">new</span><span style="background-color: #f5f5f5; color: #000000;"> XMLHttpRequest();
+            xhr.open(</span><span style="background-color: #f5f5f5; color: #000000;">"</span><span style="background-color: #f5f5f5; color: #000000;">post</span><span style="background-color: #f5f5f5; color: #000000;">"</span><span style="background-color: #f5f5f5; color: #000000;">, </span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">/index</span><span style="background-color: #f5f5f5; color: #000000;">'</span><span style="background-color: #f5f5f5; color: #000000;">, </span><span style="background-color: #f5f5f5; color: #0000ff;">true</span><span style="background-color: #f5f5f5; color: #000000;">);
+            xhr.send(form);
+        }
+    </span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">script</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">body</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">html</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<span class="cnblogs_code_collapse">Html</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('e31b50dd-a37b-46df-a777-41df415d255f')"><img id="code_img_closed_e31b50dd-a37b-46df-a777-41df415d255f" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_e31b50dd-a37b-46df-a777-41df415d255f" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('e31b50dd-a37b-46df-a777-41df415d255f',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_e31b50dd-a37b-46df-a777-41df415d255f" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+import tornado.ioloop
+import tornado.web
+
+
+class MainHandler(tornado.web.RequestHandler):
+    def get(self):
+
+        self.render('index.html')
+
+    def post(self, *args, **kwargs):
+        file_metas = self.request.files["fff"]
+        # print(file_metas)
+        for meta in file_metas:
+            file_name = meta['filename']
+            with open(file_name,'wb') as up:
+                up.write(meta['body'])
+
+settings = {
+    'template_path': 'template',
+}
+
+application = tornado.web.Application([
+    (r"/index", MainHandler),
+], **settings)
+
+
+if __name__ == "__main__":
+    application.listen(8000)
+    tornado.ioloop.IOLoop.instance().start()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">Python</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('449644b3-bec5-4def-94eb-7fe02e908bd9')"><img id="code_img_closed_449644b3-bec5-4def-94eb-7fe02e908bd9" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_449644b3-bec5-4def-94eb-7fe02e908bd9" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('449644b3-bec5-4def-94eb-7fe02e908bd9',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_449644b3-bec5-4def-94eb-7fe02e908bd9" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">var fileObj = $("#img")[0].files[0];
+var form = new FormData();
+form.append("k1", "v1");
+form.append("fff", fileObj);
+
+$.ajax({
+    type:'POST',
+    url: '/index',
+    data: form,
+    processData: false,  // tell jQuery not to process the data
+    contentType: false,  // tell jQuery not to set contentType
+    success: function(arg){
+        console.log(arg);
+    }
+})</span></pre>
+</div>
+<span class="cnblogs_code_collapse">jQuery Ajax Upload</span></div>
+<p><strong><span style="font-size: 14pt;">五、扩展功能</span></strong></p>
+<p>1、自定义Session</p>
+<p>a.知识储备</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+ 
+class Foo(object):
+ 
+    def __getitem__(self, key):
+        print  '__getitem__',key
+ 
+    def __setitem__(self, key, value):
+        print '__setitem__',key,value
+ 
+    def __delitem__(self, key):
+        print '__delitem__',key
+ 
+ 
+ 
+obj = Foo()
+result = obj['k1']
+#obj['k2'] = 'wupeiqi'
+#del obj['k1'] 
+</pre>
+</div>
+<p>b.session实现机制</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+ 
+import tornado.ioloop
+import tornado.web
+from hashlib import sha1
+import os, time
+ 
+session_container = {}
+ 
+create_session_id = lambda: sha1('%s%s' % (os.urandom(16), time.time())).hexdigest()
+ 
+ 
+class Session(object):
+ 
+    session_id = "__sessionId__"
+ 
+    def __init__(self, request):
+        session_value = request.get_cookie(Session.session_id)
+        if not session_value:
+            self._id = create_session_id()
+        else:
+            self._id = session_value
+        request.set_cookie(Session.session_id, self._id)
+ 
+    def __getitem__(self, key):
+        return session_container[self._id][key]
+ 
+    def __setitem__(self, key, value):
+        if session_container.has_key(self._id):
+            session_container[self._id][key] = value
+        else:
+            session_container[self._id] = {key: value}
+ 
+    def __delitem__(self, key):
+        del session_container[self._id][key]
+ 
+ 
+class BaseHandler(tornado.web.RequestHandler):
+ 
+    def initialize(self):
+        # my_session['k1']访问 __getitem__ 方法
+        self.my_session = Session(self)
+ 
+ 
+class MainHandler(BaseHandler):
+ 
+    def get(self):
+        print self.my_session['c_user']
+        print self.my_session['c_card']
+        self.write('index')
+ 
+class LoginHandler(BaseHandler):
+ 
+    def get(self):
+        self.render('login.html', **{'status': ''})
+ 
+    def post(self, *args, **kwargs):
+ 
+        username = self.get_argument('name')
+        password = self.get_argument('pwd')
+        if username == 'wupeiqi' and password == '123':
+ 
+            self.my_session['c_user'] = 'wupeiqi'
+            self.my_session['c_card'] = '12312312309823012'
+ 
+            self.redirect('/index')
+        else:
+            self.render('login.html', **{'status': '用户名或密码错误'})
+ 
+settings = {
+    'template_path': 'template',
+    'static_path': 'static',
+    'static_url_prefix': '/static/',
+    'cookie_secret': 'aiuasdhflashjdfoiuashdfiuh',
+    'login_url': '/login'
+}
+ 
+application = tornado.web.Application([
+    (r"/index", MainHandler),
+    (r"/login", LoginHandler),
+], **settings)
+ 
+ 
+if __name__ == "__main__":
+    application.listen(8888)
+    tornado.ioloop.IOLoop.instance().start()
+</pre>
+</div>
+<p>c. Session框架</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('50a51bbd-545d-48a2-9964-6954ae8d7636')"><img id="code_img_closed_50a51bbd-545d-48a2-9964-6954ae8d7636" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_50a51bbd-545d-48a2-9964-6954ae8d7636" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('50a51bbd-545d-48a2-9964-6954ae8d7636',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_50a51bbd-545d-48a2-9964-6954ae8d7636" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;">coding:utf-8</span>
+
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> sys
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> math
+</span><span style="color: #0000ff;">from</span> bisect <span style="color: #0000ff;">import</span><span style="color: #000000;"> bisect
+
+
+</span><span style="color: #0000ff;">if</span> sys.version_info &gt;= (2, 5<span style="color: #000000;">):
+    </span><span style="color: #0000ff;">import</span><span style="color: #000000;"> hashlib
+    md5_constructor </span>=<span style="color: #000000;"> hashlib.md5
+</span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+    </span><span style="color: #0000ff;">import</span><span style="color: #000000;"> md5
+    md5_constructor </span>=<span style="color: #000000;"> md5.new
+
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> HashRing(object):
+    </span><span style="color: #800000;">"""</span><span style="color: #800000;">一致性哈希</span><span style="color: #800000;">"""</span>
+    
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span><span style="color: #000000;">(self,nodes):
+        </span><span style="color: #800000;">'''</span><span style="color: #800000;">初始化
+        nodes : 初始化的节点，其中包含节点已经节点对应的权重
+                默认每一个节点有32个虚拟节点
+                对于权重，通过多创建虚拟节点来实现
+                如：nodes = [
+                        {'host':'127.0.0.1:8000','weight':1},
+                        {'host':'127.0.0.1:8001','weight':2},
+                        {'host':'127.0.0.1:8002','weight':1},
+                    ]
+        </span><span style="color: #800000;">'''</span><span style="color: #000000;">
+        
+        self.ring </span>=<span style="color: #000000;"> dict()
+        self._sorted_keys </span>=<span style="color: #000000;"> []
+
+        self.total_weight </span>=<span style="color: #000000;"> 0
+        
+        self.</span><span style="color: #800080;">__generate_circle</span><span style="color: #000000;">(nodes)
+        
+            
+            
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__generate_circle</span><span style="color: #000000;">(self,nodes):
+        </span><span style="color: #0000ff;">for</span> node_info <span style="color: #0000ff;">in</span><span style="color: #000000;"> nodes:
+            self.total_weight </span>+= node_info.get(<span style="color: #800000;">'</span><span style="color: #800000;">weight</span><span style="color: #800000;">'</span>,1<span style="color: #000000;">)
+            
+        </span><span style="color: #0000ff;">for</span> node_info <span style="color: #0000ff;">in</span><span style="color: #000000;"> nodes:
+            weight </span>= node_info.get(<span style="color: #800000;">'</span><span style="color: #800000;">weight</span><span style="color: #800000;">'</span>,1<span style="color: #000000;">)
+            node </span>= node_info.get(<span style="color: #800000;">'</span><span style="color: #800000;">host</span><span style="color: #800000;">'</span><span style="color: #000000;">,None)
+                
+            virtual_node_count </span>= math.floor((32*len(nodes)*weight) /<span style="color: #000000;"> self.total_weight)
+            </span><span style="color: #0000ff;">for</span> i <span style="color: #0000ff;">in</span><span style="color: #000000;"> xrange(0,int(virtual_node_count)):
+                key </span>= self.gen_key_thirty_two( <span style="color: #800000;">'</span><span style="color: #800000;">%s-%s</span><span style="color: #800000;">'</span> %<span style="color: #000000;"> (node, i) )
+                </span><span style="color: #0000ff;">if</span> self._sorted_keys.<span style="color: #800080;">__contains__</span><span style="color: #000000;">(key):
+                    </span><span style="color: #0000ff;">raise</span> Exception(<span style="color: #800000;">'</span><span style="color: #800000;">该节点已经存在.</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+                self.ring[key] </span>=<span style="color: #000000;"> node
+                self._sorted_keys.append(key)
+            
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> add_node(self,node):
+        </span><span style="color: #800000;">'''</span><span style="color: #800000;"> 新建节点
+        node : 要添加的节点，格式为：{'host':'127.0.0.1:8002','weight':1}，其中第一个元素表示节点，第二个元素表示该节点的权重。
+        </span><span style="color: #800000;">'''</span><span style="color: #000000;">
+        node </span>= node.get(<span style="color: #800000;">'</span><span style="color: #800000;">host</span><span style="color: #800000;">'</span><span style="color: #000000;">,None)
+        </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> node:
+                </span><span style="color: #0000ff;">raise</span> Exception(<span style="color: #800000;">'</span><span style="color: #800000;">节点的地址不能为空.</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+                
+        weight </span>= node.get(<span style="color: #800000;">'</span><span style="color: #800000;">weight</span><span style="color: #800000;">'</span>,1<span style="color: #000000;">)
+        
+        self.total_weight </span>+=<span style="color: #000000;"> weight
+        nodes_count </span>= len(self._sorted_keys) + 1<span style="color: #000000;">
+        
+        virtual_node_count </span>= math.floor((32 * nodes_count * weight) /<span style="color: #000000;"> self.total_weight)
+        </span><span style="color: #0000ff;">for</span> i <span style="color: #0000ff;">in</span><span style="color: #000000;"> xrange(0,int(virtual_node_count)):
+            key </span>= self.gen_key_thirty_two( <span style="color: #800000;">'</span><span style="color: #800000;">%s-%s</span><span style="color: #800000;">'</span> %<span style="color: #000000;"> (node, i) )
+            </span><span style="color: #0000ff;">if</span> self._sorted_keys.<span style="color: #800080;">__contains__</span><span style="color: #000000;">(key):
+                </span><span style="color: #0000ff;">raise</span> Exception(<span style="color: #800000;">'</span><span style="color: #800000;">该节点已经存在.</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+            self.ring[key] </span>=<span style="color: #000000;"> node
+            self._sorted_keys.append(key)
+        
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> remove_node(self,node):
+        </span><span style="color: #800000;">'''</span><span style="color: #800000;"> 移除节点
+        node : 要移除的节点 '127.0.0.1:8000'
+        </span><span style="color: #800000;">'''</span>
+        <span style="color: #0000ff;">for</span> key,value <span style="color: #0000ff;">in</span><span style="color: #000000;"> self.ring.items():
+            </span><span style="color: #0000ff;">if</span> value ==<span style="color: #000000;"> node:
+                </span><span style="color: #0000ff;">del</span><span style="color: #000000;"> self.ring[key]
+                self._sorted_keys.remove(key)
+    
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> get_node(self,string_key):
+        </span><span style="color: #800000;">'''</span><span style="color: #800000;">获取 string_key 所在的节点</span><span style="color: #800000;">'''</span><span style="color: #000000;">
+        pos </span>=<span style="color: #000000;"> self.get_node_pos(string_key)
+        </span><span style="color: #0000ff;">if</span> pos <span style="color: #0000ff;">is</span><span style="color: #000000;"> None:
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> None
+        </span><span style="color: #0000ff;">return</span> self.ring[ self._sorted_keys[pos]].split(<span style="color: #800000;">'</span><span style="color: #800000;">:</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> get_node_pos(self,string_key):
+        </span><span style="color: #800000;">'''</span><span style="color: #800000;">获取 string_key 所在的节点的索引</span><span style="color: #800000;">'''</span>
+        <span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> self.ring:
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> None
+            
+        key </span>=<span style="color: #000000;"> self.gen_key_thirty_two(string_key)
+        nodes </span>=<span style="color: #000000;"> self._sorted_keys
+        pos </span>=<span style="color: #000000;"> bisect(nodes, key)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> pos
+    
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> gen_key_thirty_two(self, key):
+        
+        m </span>=<span style="color: #000000;"> md5_constructor()
+        m.update(key)
+        </span><span style="color: #0000ff;">return</span> long(m.hexdigest(), 16<span style="color: #000000;">)
+        
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> gen_key_sixteen(self,key):
+        
+        b_key </span>= self.<span style="color: #800080;">__hash_digest</span><span style="color: #000000;">(key)
+        </span><span style="color: #0000ff;">return</span> self.<span style="color: #800080;">__hash_val</span>(b_key, <span style="color: #0000ff;">lambda</span><span style="color: #000000;"> x: x)
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__hash_val</span><span style="color: #000000;">(self, b_key, entry_fn):
+        </span><span style="color: #0000ff;">return</span> (( b_key[entry_fn(3)] &lt;&lt; 24)|(b_key[entry_fn(2)] &lt;&lt; 16)|(b_key[entry_fn(1)] &lt;&lt; 8)|<span style="color: #000000;"> b_key[entry_fn(0)] )
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__hash_digest</span><span style="color: #000000;">(self, key):
+        m </span>=<span style="color: #000000;"> md5_constructor()
+        m.update(key)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> map(ord, m.digest())
+
+
+</span><span style="color: #800000;">"""</span><span style="color: #800000;">
+nodes = [
+    {'host':'127.0.0.1:8000','weight':1},
+    {'host':'127.0.0.1:8001','weight':2},
+    {'host':'127.0.0.1:8002','weight':1},
+]
+
+ring = HashRing(nodes)
+result = ring.get_node('98708798709870987098709879087')
+print result
+
+</span><span style="color: #800000;">"""</span></pre>
+</div>
+<span class="cnblogs_code_collapse">一致性哈希</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('b8f2bc57-f140-45fa-9e6e-a1e3941ea6ee')"><img id="code_img_closed_b8f2bc57-f140-45fa-9e6e-a1e3941ea6ee" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_b8f2bc57-f140-45fa-9e6e-a1e3941ea6ee" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('b8f2bc57-f140-45fa-9e6e-a1e3941ea6ee',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_b8f2bc57-f140-45fa-9e6e-a1e3941ea6ee" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">from</span> hashlib <span style="color: #0000ff;">import</span><span style="color: #000000;"> sha1
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> os, time
+
+
+create_session_id </span>= <span style="color: #0000ff;">lambda</span>: sha1(<span style="color: #800000;">'</span><span style="color: #800000;">%s%s</span><span style="color: #800000;">'</span> % (os.urandom(16<span style="color: #000000;">), time.time())).hexdigest()
+
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Session(object):
+
+    session_id </span>= <span style="color: #800000;">"</span><span style="color: #800000;">__sessionId__</span><span style="color: #800000;">"</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span><span style="color: #000000;">(self, request):
+        session_value </span>=<span style="color: #000000;"> request.get_cookie(Session.session_id)
+        </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> session_value:
+            self._id </span>=<span style="color: #000000;"> create_session_id()
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            self._id </span>=<span style="color: #000000;"> session_value
+        request.set_cookie(Session.session_id, self._id)
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__getitem__</span><span style="color: #000000;">(self, key):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 根据 self._id ，在一致性哈西中找到其对应的服务器IP</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 找到相对应的redis服务器，如： r = redis.StrictRedis(host='localhost', port=6379, db=0)</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 使用python redis api 链接</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 获取数据，即：</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> return self._redis.hget(self._id, name)</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__setitem__</span><span style="color: #000000;">(self, key, value):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 根据 self._id ，在一致性哈西中找到其对应的服务器IP</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 使用python redis api 链接</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 设置session</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> self._redis.hset(self._id, name, value)</span>
+
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__delitem__</span><span style="color: #000000;">(self, key):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 根据 self._id 找到相对应的redis服务器</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 使用python redis api 链接</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 删除，即：</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;"> self._redis.hdel(self._id, name)
+        </span></pre>
+</div>
+<span class="cnblogs_code_collapse">Session</span></div>
+<p>2、自定义模型版定</p>
+<p>模型绑定有两个主要功能：</p>
+<ul>
+<li>自动生成html表单</li>
+<li>用户输入验证</li>
+</ul>
+<p>在之前学习的Django中为程序员提供了非常便捷的模型绑定功能，但是在Tornado中，一切需要自己动手！！！</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('b1128454-a665-4c16-851f-521871850db6')"><img id="code_img_closed_b1128454-a665-4c16-851f-521871850db6" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_b1128454-a665-4c16-851f-521871850db6" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('b1128454-a665-4c16-851f-521871850db6',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_b1128454-a665-4c16-851f-521871850db6" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span style="color: #800000;">"</span><span style="color: #800000;">en</span><span style="color: #800000;">"</span>&gt;
+    &lt;meta charset=<span style="color: #800000;">"</span><span style="color: #800000;">UTF-8</span><span style="color: #800000;">"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;link href=<span style="color: #800000;">"</span><span style="color: #800000;">{{static_url(</span><span style="color: #800000;">"</span>commons.css<span style="color: #800000;">"</span><span style="color: #800000;">)}}</span><span style="color: #800000;">"</span> rel=<span style="color: #800000;">"</span><span style="color: #800000;">stylesheet</span><span style="color: #800000;">"</span> /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;hello&lt;/h1&gt;
+    &lt;form action=<span style="color: #800000;">"</span><span style="color: #800000;">/index</span><span style="color: #800000;">"</span> method=<span style="color: #800000;">"</span><span style="color: #800000;">post</span><span style="color: #800000;">"</span>&gt;
+
+        &lt;p&gt;hostname: &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">text</span><span style="color: #800000;">"</span> name=<span style="color: #800000;">"</span><span style="color: #800000;">host</span><span style="color: #800000;">"</span> /&gt; &lt;/p&gt;
+        &lt;p&gt;ip: &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">text</span><span style="color: #800000;">"</span> name=<span style="color: #800000;">"</span><span style="color: #800000;">ip</span><span style="color: #800000;">"</span> /&gt; &lt;/p&gt;
+        &lt;p&gt;port: &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">text</span><span style="color: #800000;">"</span> name=<span style="color: #800000;">"</span><span style="color: #800000;">port</span><span style="color: #800000;">"</span> /&gt; &lt;/p&gt;
+        &lt;p&gt;phone: &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">text</span><span style="color: #800000;">"</span> name=<span style="color: #800000;">"</span><span style="color: #800000;">phone</span><span style="color: #800000;">"</span> /&gt; &lt;/p&gt;
+        &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">submit</span><span style="color: #800000;">"</span> /&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">html</span></div>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+ 
+import tornado.ioloop
+import tornado.web
+from hashlib import sha1
+import os, time
+import re
+ 
+ 
+class MainForm(object):
+    def __init__(self):
+        self.host = "(.*)"
+        self.ip = "^(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}$"
+        self.port = '(\d+)'
+        self.phone = '^1[3|4|5|8][0-9]\d{8}$'
+ 
+    def check_valid(self, request):
+        form_dict = self.__dict__
+        for key, regular in form_dict.items():
+            post_value = request.get_argument(key)
+            # 让提交的数据 和 定义的正则表达式进行匹配
+            ret = re.match(regular, post_value)
+            print key,ret,post_value
+ 
+ 
+class MainHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render('index.html')
+    def post(self, *args, **kwargs):
+        obj = MainForm()
+        result = obj.check_valid(self)
+        self.write('ok')
+ 
+ 
+ 
+settings = {
+    'template_path': 'template',
+    'static_path': 'static',
+    'static_url_prefix': '/static/',
+    'cookie_secret': 'aiuasdhflashjdfoiuashdfiuh',
+    'login_url': '/login'
+}
+ 
+application = tornado.web.Application([
+    (r"/index", MainHandler),
+], **settings)
+ 
+ 
+if __name__ == "__main__":
+    application.listen(8888)
+    tornado.ioloop.IOLoop.instance().start()
+</pre>
+</div>
+<p>由于请求的验证时，需要考虑是否可以为空以及正则表达式的复用，所以：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('10f0da03-f1e5-425f-bd82-734d63dea34a')"><img id="code_img_closed_10f0da03-f1e5-425f-bd82-734d63dea34a" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_10f0da03-f1e5-425f-bd82-734d63dea34a" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('10f0da03-f1e5-425f-bd82-734d63dea34a',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_10f0da03-f1e5-425f-bd82-734d63dea34a" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> tornado.ioloop
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> tornado.web
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> re
+
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Field(object):
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span><span style="color: #000000;">(self, error_msg_dict, required):
+        self.id_valid </span>=<span style="color: #000000;"> False
+        self.value </span>=<span style="color: #000000;"> None
+        self.error </span>=<span style="color: #000000;"> None
+        self.name </span>=<span style="color: #000000;"> None
+        self.error_msg </span>=<span style="color: #000000;"> error_msg_dict
+        self.required </span>=<span style="color: #000000;"> required
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> match(self, name, value):
+        self.name </span>=<span style="color: #000000;"> name
+
+        </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> self.required:
+            self.id_valid </span>=<span style="color: #000000;"> True
+            self.value </span>=<span style="color: #000000;"> value
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> value:
+                </span><span style="color: #0000ff;">if</span> self.error_msg.get(<span style="color: #800000;">'</span><span style="color: #800000;">required</span><span style="color: #800000;">'</span><span style="color: #000000;">, None):
+                    self.error </span>= self.error_msg[<span style="color: #800000;">'</span><span style="color: #800000;">required</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+                </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                    self.error </span>= <span style="color: #800000;">"</span><span style="color: #800000;">%s is required</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> name
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                ret </span>=<span style="color: #000000;"> re.match(self.REGULAR, value)
+                </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> ret:
+                    self.id_valid </span>=<span style="color: #000000;"> True
+                    self.value </span>=<span style="color: #000000;"> ret.group()
+                </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                    </span><span style="color: #0000ff;">if</span> self.error_msg.get(<span style="color: #800000;">'</span><span style="color: #800000;">valid</span><span style="color: #800000;">'</span><span style="color: #000000;">, None):
+                        self.error </span>= self.error_msg[<span style="color: #800000;">'</span><span style="color: #800000;">valid</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+                    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                        self.error </span>= <span style="color: #800000;">"</span><span style="color: #800000;">%s is invalid</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> name
+
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> IPField(Field):
+    REGULAR </span>= <span style="color: #800000;">"</span><span style="color: #800000;">^(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}$</span><span style="color: #800000;">"</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span>(self, error_msg_dict=None, required=<span style="color: #000000;">True):
+
+        error_msg </span>= {}  <span style="color: #008000;">#</span><span style="color: #008000;"> {'required': 'IP不能为空', 'valid': 'IP格式错误'}</span>
+        <span style="color: #0000ff;">if</span><span style="color: #000000;"> error_msg_dict:
+            error_msg.update(error_msg_dict)
+
+        super(IPField, self).</span><span style="color: #800080;">__init__</span>(error_msg_dict=error_msg, required=<span style="color: #000000;">required)
+
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> IntegerField(Field):
+    REGULAR </span>= <span style="color: #800000;">"</span><span style="color: #800000;">^\d+$</span><span style="color: #800000;">"</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span>(self, error_msg_dict=None, required=<span style="color: #000000;">True):
+        error_msg </span>= {<span style="color: #800000;">'</span><span style="color: #800000;">required</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">数字不能为空</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">valid</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">数字格式错误</span><span style="color: #800000;">'</span><span style="color: #000000;">}
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> error_msg_dict:
+            error_msg.update(error_msg_dict)
+
+        super(IntegerField, self).</span><span style="color: #800080;">__init__</span>(error_msg_dict=error_msg, required=<span style="color: #000000;">required)
+
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> CheckBoxField(Field):
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span>(self, error_msg_dict=None, required=<span style="color: #000000;">True):
+        error_msg </span>= {}  <span style="color: #008000;">#</span><span style="color: #008000;"> {'required': 'IP不能为空', 'valid': 'IP格式错误'}</span>
+        <span style="color: #0000ff;">if</span><span style="color: #000000;"> error_msg_dict:
+            error_msg.update(error_msg_dict)
+
+        super(CheckBoxField, self).</span><span style="color: #800080;">__init__</span>(error_msg_dict=error_msg, required=<span style="color: #000000;">required)
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> match(self, name, value):
+        self.name </span>=<span style="color: #000000;"> name
+
+        </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> self.required:
+            self.id_valid </span>=<span style="color: #000000;"> True
+            self.value </span>=<span style="color: #000000;"> value
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> value:
+                </span><span style="color: #0000ff;">if</span> self.error_msg.get(<span style="color: #800000;">'</span><span style="color: #800000;">required</span><span style="color: #800000;">'</span><span style="color: #000000;">, None):
+                    self.error </span>= self.error_msg[<span style="color: #800000;">'</span><span style="color: #800000;">required</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+                </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                    self.error </span>= <span style="color: #800000;">"</span><span style="color: #800000;">%s is required</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> name
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> isinstance(name, list):
+                    self.id_valid </span>=<span style="color: #000000;"> True
+                    self.value </span>=<span style="color: #000000;"> value
+                </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                    </span><span style="color: #0000ff;">if</span> self.error_msg.get(<span style="color: #800000;">'</span><span style="color: #800000;">valid</span><span style="color: #800000;">'</span><span style="color: #000000;">, None):
+                        self.error </span>= self.error_msg[<span style="color: #800000;">'</span><span style="color: #800000;">valid</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+                    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                        self.error </span>= <span style="color: #800000;">"</span><span style="color: #800000;">%s is invalid</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> name
+
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> FileField(Field):
+    REGULAR </span>= <span style="color: #800000;">"</span><span style="color: #800000;">^(\w+\.pdf)|(\w+\.mp3)|(\w+\.py)$</span><span style="color: #800000;">"</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span>(self, error_msg_dict=None, required=<span style="color: #000000;">True):
+        error_msg </span>= {}  <span style="color: #008000;">#</span><span style="color: #008000;"> {'required': '数字不能为空', 'valid': '数字格式错误'}</span>
+        <span style="color: #0000ff;">if</span><span style="color: #000000;"> error_msg_dict:
+            error_msg.update(error_msg_dict)
+
+        super(FileField, self).</span><span style="color: #800080;">__init__</span>(error_msg_dict=error_msg, required=<span style="color: #000000;">required)
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> match(self, name, value):
+        self.name </span>=<span style="color: #000000;"> name
+        self.value </span>=<span style="color: #000000;"> []
+        </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> self.required:
+            self.id_valid </span>=<span style="color: #000000;"> True
+            self.value </span>=<span style="color: #000000;"> value
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> value:
+                </span><span style="color: #0000ff;">if</span> self.error_msg.get(<span style="color: #800000;">'</span><span style="color: #800000;">required</span><span style="color: #800000;">'</span><span style="color: #000000;">, None):
+                    self.error </span>= self.error_msg[<span style="color: #800000;">'</span><span style="color: #800000;">required</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+                </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                    self.error </span>= <span style="color: #800000;">"</span><span style="color: #800000;">%s is required</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> name
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                m </span>=<span style="color: #000000;"> re.compile(self.REGULAR)
+                </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> isinstance(value, list):
+                    </span><span style="color: #0000ff;">for</span> file_name <span style="color: #0000ff;">in</span><span style="color: #000000;"> value:
+                        r </span>=<span style="color: #000000;"> m.match(file_name)
+                        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> r:
+                            self.value.append(r.group())
+                            self.id_valid </span>=<span style="color: #000000;"> True
+                        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                            self.id_valid </span>=<span style="color: #000000;"> False
+                            </span><span style="color: #0000ff;">if</span> self.error_msg.get(<span style="color: #800000;">'</span><span style="color: #800000;">valid</span><span style="color: #800000;">'</span><span style="color: #000000;">, None):
+                                self.error </span>= self.error_msg[<span style="color: #800000;">'</span><span style="color: #800000;">valid</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+                            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                                self.error </span>= <span style="color: #800000;">"</span><span style="color: #800000;">%s is invalid</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> name
+                            </span><span style="color: #0000ff;">break</span>
+                <span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                    </span><span style="color: #0000ff;">if</span> self.error_msg.get(<span style="color: #800000;">'</span><span style="color: #800000;">valid</span><span style="color: #800000;">'</span><span style="color: #000000;">, None):
+                        self.error </span>= self.error_msg[<span style="color: #800000;">'</span><span style="color: #800000;">valid</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+                    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                        self.error </span>= <span style="color: #800000;">"</span><span style="color: #800000;">%s is invalid</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> name
+
+    </span><span style="color: #0000ff;">def</span> save(self, request, upload_path=<span style="color: #800000;">""</span><span style="color: #000000;">):
+
+        file_metas </span>=<span style="color: #000000;"> request.files[self.name]
+        </span><span style="color: #0000ff;">for</span> meta <span style="color: #0000ff;">in</span><span style="color: #000000;"> file_metas:
+            file_name </span>= meta[<span style="color: #800000;">'</span><span style="color: #800000;">filename</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+            with open(file_name,</span><span style="color: #800000;">'</span><span style="color: #800000;">wb</span><span style="color: #800000;">'</span><span style="color: #000000;">) as up:
+                up.write(meta[</span><span style="color: #800000;">'</span><span style="color: #800000;">body</span><span style="color: #800000;">'</span><span style="color: #000000;">])
+
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Form(object):
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span><span style="color: #000000;">(self):
+        self.value_dict </span>=<span style="color: #000000;"> {}
+        self.error_dict </span>=<span style="color: #000000;"> {}
+        self.valid_status </span>=<span style="color: #000000;"> True
+
+    </span><span style="color: #0000ff;">def</span> validate(self, request, depth=10, pre_key=<span style="color: #800000;">""</span><span style="color: #000000;">):
+
+        self.initialize()
+        self.</span><span style="color: #800080;">__valid</span><span style="color: #000000;">(self, request, depth, pre_key)
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> initialize(self):
+        </span><span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__valid</span><span style="color: #000000;">(self, form_obj, request, depth, pre_key):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        验证用户表单请求的数据
+        :param form_obj: Form对象（Form派生类的对象）
+        :param request: Http请求上下文（用于从请求中获取用户提交的值）
+        :param depth: 对Form内容的深度的支持
+        :param pre_key: Html中name属性值的前缀（多层Form时，内部递归时设置，无需理会）
+        :return: 是否验证通过，True：验证成功；False：验证失败
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+
+        depth </span>-= 1
+        <span style="color: #0000ff;">if</span> depth &lt;<span style="color: #000000;"> 0:
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> None
+        form_field_dict </span>= form_obj.<span style="color: #800080;">__dict__</span>
+        <span style="color: #0000ff;">for</span> key, field_obj <span style="color: #0000ff;">in</span><span style="color: #000000;"> form_field_dict.items():
+            </span><span style="color: #0000ff;">print</span><span style="color: #000000;"> key,field_obj
+            </span><span style="color: #0000ff;">if</span> isinstance(field_obj, Form) <span style="color: #0000ff;">or</span><span style="color: #000000;"> isinstance(field_obj, Field):
+                </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> isinstance(field_obj, Form):
+                    </span><span style="color: #008000;">#</span><span style="color: #008000;"> 获取以key开头的所有的值，以参数的形式传至</span>
+                    self.<span style="color: #800080;">__valid</span><span style="color: #000000;">(field_obj, request, depth, key)
+                    </span><span style="color: #0000ff;">continue</span>
+                <span style="color: #0000ff;">if</span><span style="color: #000000;"> pre_key:
+                    key </span>= <span style="color: #800000;">"</span><span style="color: #800000;">%s.%s</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> (pre_key, key)
+
+                </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> isinstance(field_obj, CheckBoxField):
+                    post_value </span>=<span style="color: #000000;"> request.get_arguments(key, None)
+                </span><span style="color: #0000ff;">elif</span><span style="color: #000000;"> isinstance(field_obj, FileField):
+                    post_value </span>=<span style="color: #000000;"> []
+                    file_list </span>=<span style="color: #000000;"> request.request.files.get(key, None)
+                    </span><span style="color: #0000ff;">for</span> file_item <span style="color: #0000ff;">in</span><span style="color: #000000;"> file_list:
+                        post_value.append(file_item[</span><span style="color: #800000;">'</span><span style="color: #800000;">filename</span><span style="color: #800000;">'</span><span style="color: #000000;">])
+                </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                    post_value </span>=<span style="color: #000000;"> request.get_argument(key, None)
+
+                </span><span style="color: #0000ff;">print</span><span style="color: #000000;"> post_value
+                </span><span style="color: #008000;">#</span><span style="color: #008000;"> 让提交的数据 和 定义的正则表达式进行匹配</span>
+<span style="color: #000000;">                field_obj.match(key, post_value)
+                </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> field_obj.id_valid:
+                    self.value_dict[key] </span>=<span style="color: #000000;"> field_obj.value
+                </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                    self.error_dict[key] </span>=<span style="color: #000000;"> field_obj.error
+                    self.valid_status </span>=<span style="color: #000000;"> False
+
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> ListForm(object):
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span><span style="color: #000000;">(self, form_type):
+        self.form_type </span>=<span style="color: #000000;"> form_type
+        self.valid_status </span>=<span style="color: #000000;"> True
+        self.value_dict </span>=<span style="color: #000000;"> {}
+        self.error_dict </span>=<span style="color: #000000;"> {}
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> validate(self, request):
+        name_list </span>= request.request.arguments.keys() +<span style="color: #000000;"> request.request.files.keys()
+        index </span>=<span style="color: #000000;"> 0
+        flag </span>=<span style="color: #000000;"> False
+        </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+            pre_key </span>= <span style="color: #800000;">"</span><span style="color: #800000;">[%d]</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> index
+            </span><span style="color: #0000ff;">for</span> name <span style="color: #0000ff;">in</span><span style="color: #000000;"> name_list:
+                </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> name.startswith(pre_key):
+                    flag </span>=<span style="color: #000000;"> True
+                    </span><span style="color: #0000ff;">break</span>
+            <span style="color: #0000ff;">if</span><span style="color: #000000;"> flag:
+                form_obj </span>=<span style="color: #000000;"> self.form_type()
+                form_obj.validate(request, depth</span>=10, pre_key=<span style="color: #800000;">"</span><span style="color: #800000;">[%d]</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> index)
+                </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> form_obj.valid_status:
+                    self.value_dict[index] </span>=<span style="color: #000000;"> form_obj.value_dict
+                </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                    self.error_dict[index] </span>=<span style="color: #000000;"> form_obj.error_dict
+                    self.valid_status </span>=<span style="color: #000000;"> False
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">
+
+            index </span>+= 1<span style="color: #000000;">
+            flag </span>=<span style="color: #000000;"> False
+
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> MainForm(Form):
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span><span style="color: #000000;">(self):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> self.ip = IPField(required=True)</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> self.port = IntegerField(required=True)</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> self.new_ip = IPField(required=True)</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> self.second = SecondForm()</span>
+        self.fff = FileField(required=<span style="color: #000000;">True)
+        super(MainForm, self).</span><span style="color: #800080;">__init__</span><span style="color: #000000;">()
+
+</span><span style="color: #008000;">#
+#</span><span style="color: #008000;"> class SecondForm(Form):</span><span style="color: #008000;">
+#
+#</span><span style="color: #008000;">     def __init__(self):</span><span style="color: #008000;">
+#</span><span style="color: #008000;">         self.ip = IPField(required=True)</span><span style="color: #008000;">
+#</span><span style="color: #008000;">         self.new_ip = IPField(required=True)</span><span style="color: #008000;">
+#
+#</span><span style="color: #008000;">         super(SecondForm, self).__init__()</span>
+
+
+<span style="color: #0000ff;">class</span><span style="color: #000000;"> MainHandler(tornado.web.RequestHandler):
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> get(self):
+        self.render(</span><span style="color: #800000;">'</span><span style="color: #800000;">index.html</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    </span><span style="color: #0000ff;">def</span> post(self, *args, **<span style="color: #000000;">kwargs):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> for i in  dir(self.request):</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;">     print i</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print self.request.arguments</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print self.request.files</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print self.request.query</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> name_list = self.request.arguments.keys() + self.request.files.keys()</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print name_list</span>
+
+        <span style="color: #008000;">#</span><span style="color: #008000;"> list_form = ListForm(MainForm)</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> list_form.validate(self)</span>
+        <span style="color: #008000;">#
+</span>        <span style="color: #008000;">#</span><span style="color: #008000;"> print list_form.valid_status</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print list_form.value_dict</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print list_form.error_dict</span>
+
+        <span style="color: #008000;">#</span><span style="color: #008000;"> obj = MainForm()</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> obj.validate(self)</span>
+        <span style="color: #008000;">#
+</span>        <span style="color: #008000;">#</span><span style="color: #008000;"> print "验证结果：", obj.valid_status</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print "符合验证结果：", obj.value_dict</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print "错误信息:"</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> for key, item in obj.error_dict.items():</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;">     print key,item</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print self.get_arguments('favor'),type(self.get_arguments('favor'))</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print self.get_argument('favor'),type(self.get_argument('favor'))</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print type(self.get_argument('fff')),self.get_argument('fff')</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print self.request.files</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> obj = MainForm()</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> obj.validate(self)</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print obj.valid_status</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print obj.value_dict</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print obj.error_dict</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print self.request,type(self.request)</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> obj.fff.save(self.request)</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> from tornado.httputil import HTTPServerRequest</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> name_list = self.request.arguments.keys() + self.request.files.keys()</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print name_list</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print self.request.files,type(self.request.files)</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print len(self.request.files.get('fff'))</span>
+        
+        <span style="color: #008000;">#</span><span style="color: #008000;"> obj = MainForm()</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> obj.validate(self)</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print obj.valid_status</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print obj.value_dict</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> print obj.error_dict</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> obj.fff.save(self.request)</span>
+        self.write(<span style="color: #800000;">'</span><span style="color: #800000;">ok</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+
+
+settings </span>=<span style="color: #000000;"> {
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">template_path</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">template</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">static_path</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">static</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">static_url_prefix</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">/static/</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">cookie_secret</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">aiuasdhflashjdfoiuashdfiuh</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+    </span><span style="color: #800000;">'</span><span style="color: #800000;">login_url</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">/login</span><span style="color: #800000;">'</span><span style="color: #000000;">
+}
+
+application </span>=<span style="color: #000000;"> tornado.web.Application([
+    (r</span><span style="color: #800000;">"</span><span style="color: #800000;">/index</span><span style="color: #800000;">"</span><span style="color: #000000;">, MainHandler),
+], </span>**<span style="color: #000000;">settings)
+
+
+</span><span style="color: #0000ff;">if</span> <span style="color: #800080;">__name__</span> == <span style="color: #800000;">"</span><span style="color: #800000;">__main__</span><span style="color: #800000;">"</span><span style="color: #000000;">:
+    application.listen(</span>8888<span style="color: #000000;">)
+    tornado.ioloop.IOLoop.instance().start()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">Form验证框架</span></div>
+<p>&nbsp;</p>
+<p><span style="font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.5;">&nbsp;</span></p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2016-03-31 15:56</span> <a href='http://www.cnblogs.com/wupeiqi/'>武沛齐</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>) &nbsp;<a href="https://i.cnblogs.com/EditArticles.aspx?postid=5341480" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(5341480);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=133379,cb_entryId=5341480,cb_blogApp=currentBlogApp,cb_blogUserGuid='7208b24d-95c9-e111-aa3f-842b2b196315',cb_entryCreatedDate='2016/3/31 15:56:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2017 武沛齐
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

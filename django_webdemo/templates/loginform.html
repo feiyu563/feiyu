@@ -1,0 +1,14 @@
+<form method="post" action='/loginform/'>
+ {% csrf_token %}
+<table>
+{{ login_status }}
+{% for item	in user_data %}
+
+{{item }}
+
+<br />
+
+{% endfor %}
+<tr><td><input type="submit" value='GET START' /></td></tr>
+</table>
+</form>

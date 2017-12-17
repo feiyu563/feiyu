@@ -1,0 +1,2549 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+     
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    
+<head>  
+
+            <link rel="canonical" href="http://blog.csdn.net/kkkloveyou/article/details/52348883"/> 
+ <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+
+    <title>Apache Hadoop 入门教程 - kkkloveyou
+        - 博客频道 - CSDN.NET</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="Apache Hadoop 是一个由 Apache 基金会所开发的分布式系统基础架构。可以让用户在不了解分布式底层细节的情况下，开发出可靠、可扩展的分布式计算应用。Apache Hadoop 框架，允许用户使用简单的编程模型来实现计算机集群的大型数据集的分布式处理。它的目的是支持从单一服务器到上千台机器的扩展，充分利用了每台机器所提供本地计算和存储，而不是依靠硬件来提供高可用性。其本身被设计成在应用层检测和处理故" />
+   
+    <script src="http://static.blog.csdn.net/scripts/blog_static_head.min.js" type="text/javascript"></script>
+
+    
+        <!--new top-->
+               <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/css/index.css">        <!--new top-->
+    
+      <!-- ad begin -->
+         <script language="javascript" type="text/javascript" src="http://ads.csdn.net/js/tracking.js"></script>
+    <!-- ad end-->
+
+    <link rel="Stylesheet" type="text/css" href="http://static.blog.csdn.net/skin/dark1/css/style.css?v=1.1" />
+
+    
+
+    <link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="/kkkloveyou/rss/list" />
+    <link rel="shortcut icon" href="http://c.csdnimg.cn/public/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+ 
+
+     
+    <link rel="stylesheet" href="http://static.blog.csdn.net/css/csdn_blog_detail.min.css" />
+
+</head>
+
+
+<body>
+       
+
+
+
+    <!-- 广告位开始 -->
+        
+    <!-- 广告位结束 -->
+
+    
+   
+      <!--new top-->
+    <script id="toolbar-tpl-scriptId" fixed="true" prod="blog" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/html.js" type="text/javascript"></script>
+     <!--new top-->
+    <div id="container">
+        <div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h2>
+                <a href="http://blog.csdn.net/kkkloveyou">kkkloveyou</a></h2>
+            <h3>关注Web编程的那点事</h3>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+        
+     
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg">
+    </div>
+    <div class="navigator">
+        <ul>           
+                <li id="btnContents"><a href="http://blog.csdn.net/kkkloveyou?viewmode=contents"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_mulu'])">
+                    <img src="http://static.blog.csdn.net/images/ico_list.gif">目录视图</span></a></li>
+                <li id="btnView"><a href="http://blog.csdn.net/kkkloveyou?viewmode=list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_zhaiyao'])">
+                    <img src="http://static.blog.csdn.net/images/ico_summary.gif">摘要视图</span></a></li>
+                <li id="btnRss"><a href="http://blog.csdn.net/kkkloveyou/rss/list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_RSS'])">
+                    <img src="http://static.blog.csdn.net/images/ico_rss.gif">订阅</span></a></li>                
+            
+
+            </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "kkkloveyou";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/kkkloveyou";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "";  
+</script>
+
+        <div id="body">
+            <div id="main">
+                <div class="main">
+                        <div class="ad_class">
+<div class="notice tracking-ad" data-mod='popu_3' > 
+
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/71710010">
+<font color=blue><strong>【活动】2017 CSDN博客专栏评选</strong></font></a>
+
+&nbsp;&nbsp;&nbsp;&nbsp
+
+<a href=" http://blog.csdn.net/turingbooks/article/details/72416875">
+<font color=red><strong>【5月书讯】流畅的Python，终于等到你！</strong></font></a>
+&nbsp;&nbsp;&nbsp;&nbsp
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/72638703">
+<font color=blue><strong>CSDN日报20170523 ——《技术合伙人，千万别做！》
+</strong>
+&nbsp;&nbsp;&nbsp;&nbsp
+
+
+</div>                        </div>
+                        
+
+
+
+  
+
+
+
+
+
+
+<script   type="text/javascript" src="http://static.blog.csdn.net/scripts/category.js"></script>
+
+  <script type="text/ecmascript">
+      window.quickReplyflag = true;
+           
+            var isBole = false;
+            
+      
+      var fasrc="http://my.csdn.net/my/favorite/miniadd?t=Apache+Hadoop+%e5%85%a5%e9%97%a8%e6%95%99%e7%a8%8b&u=http://blog.csdn.net/kkkloveyou/article/details/52348883"
+
+    </script>
+<div id="article_details" class="details">
+    <div class="article_title">   
+         <span class="ico ico_type_Original"></span>
+
+
+    <h1>
+        <span class="link_title"><a href="/kkkloveyou/article/details/52348883">
+        Apache Hadoop 入门教程            
+        </a></span>
+    </h1>
+</div>
+
+   
+
+        <div class="article_manage clearfix">
+        <div class="article_l">
+            <span class="link_categories">
+            标签：
+              <a href='http://www.csdn.net/tag/apache' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">apache</a><a href='http://www.csdn.net/tag/hadoop' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">hadoop</a><a href='http://www.csdn.net/tag/%e5%88%86%e5%b8%83%e5%bc%8f%e8%ae%a1%e7%ae%97' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">分布式计算</a><a href='http://www.csdn.net/tag/%e5%88%86%e5%b8%83%e5%bc%8f' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">分布式</a>
+            </span>
+        </div>
+        <div class="article_r">
+            <span class="link_postdate">2016-08-28 23:16</span>
+            <span class="link_view" title="阅读次数">5659人阅读</span>
+            <span class="link_comments" title="评论次数"> <a href="#comments" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_pinglun'])">评论</a>(1)</span>
+            <span class="link_collect tracking-ad" data-mod="popu_171"> <a href="javascript:void(0);" onclick="javascript:collectArticle('Apache+Hadoop+%e5%85%a5%e9%97%a8%e6%95%99%e7%a8%8b','52348883');return false;" title="收藏">收藏</a></span>
+             <span class="link_report"> <a href="#report" onclick="javascript:report(52348883,2);return false;" title="举报">举报</a></span>
+
+        </div>
+    </div>
+    <div class="embody"  style="display:none" id="embody">
+        <span class="embody_t">本文章已收录于：</span>
+        <div class="embody_c" id="lib" value="{&quot;err&quot;:0,&quot;msg&quot;:&quot;ok&quot;,&quot;data&quot;:[]}"></div>
+    </div>
+    <style type="text/css">        
+            .embody{
+                padding:10px 10px 10px;
+                margin:0 -20px;
+                border-bottom:solid 1px #ededed;                
+            }
+            .embody_b{
+                margin:0 ;
+                padding:10px 0;
+            }
+            .embody .embody_t,.embody .embody_c{
+                display: inline-block;
+                margin-right:10px;
+            }
+            .embody_t{
+                font-size: 12px;
+                color:#999;
+            }
+            .embody_c{
+                font-size: 12px;
+            }
+            .embody_c img,.embody_c em{
+                display: inline-block;
+                vertical-align: middle;               
+            }
+             .embody_c img{               
+                width:30px;
+                height:30px;
+            }
+            .embody_c em{
+                margin: 0 20px 0 10px;
+                color:#333;
+                font-style: normal;
+            }
+    </style>
+    <script  type="text/javascript">
+        $(function () {
+            try
+            {
+                var lib = eval("("+$("#lib").attr("value")+")");
+                var html = "";
+                if (lib.err == 0) {
+                    $.each(lib.data, function (i) {
+                        var obj = lib.data[i];
+                        //html += '<img src="' + obj.logo + '"/>' + obj.name + "&nbsp;&nbsp;";
+                        html += ' <a href="' + obj.url + '" target="_blank">';
+                        html += ' <img src="' + obj.logo + '">';
+                        html += ' <em><b>' + obj.name + '</b></em>';
+                        html += ' </a>';
+                    });
+                    if (html != "") {
+                        setTimeout(function () {
+                            $("#lib").html(html);                      
+                            $("#embody").show();
+                        }, 100);
+                    }
+                }      
+            } catch (err)
+            { }
+            
+        });
+    </script>
+      <div class="category clearfix">
+        <div class="category_l">
+           <img src="http://static.blog.csdn.net/images/category_icon.jpg">
+            <span>分类：</span>
+        </div>
+        <div class="category_r">
+                    <label>
+                        <span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_fenlei']);">Hadoop<em></em></span>                       
+                    </label>      
+        </div>
+    </div>
+        <div   class="bog_copyright">         
+            <p  class="copyright_p" >版权声明：本文为博主原创文章，未经博主允许不得转载。</p>
+        </div>
+
+  
+
+  
+  
+     
+
+
+<div id="article_content" class="article_content tracking-ad" data-mod=popu_307  data-dsm = "post" >
+        <div class="markdown_views"><p>原文同步至 <a href="http://waylau.com/about-hadoop/">http://waylau.com/about-hadoop/</a></p>
+
+<p>Apache Hadoop 是一个由 Apache 基金会所开发的分布式系统基础架构。可以让用户在不了解分布式底层细节的情况下，开发出可靠、可扩展的分布式计算应用。</p>
+
+<p>Apache Hadoop 框架，允许用户使用简单的编程模型来实现计算机集群的大型数据集的分布式处理。它的目的是支持从单一服务器到上千台机器的扩展，充分利用了每台机器所提供本地计算和存储，而不是依靠硬件来提供高可用性。其本身被设计成在应用层检测和处理故障的库，对于计算机集群来说，其中每台机器的顶层都被设计成可以容错的，以便提供一个高度可用的服务。</p>
+
+<p>Apache Hadoop 的框架最核心的设计就是：HDFS 和 MapReduce。HDFS 为海量的数据提供了存储，而 MapReduce 则为海量的数据提供了计算。</p>
+
+<!-- more -->
+
+<h2 id="apache-hadoop-简介">Apache Hadoop 简介</h2>
+
+<p>正如上一节 MapReduce 所提到的那样，Apache Hadoop 受到了 Google  的 GFS 和 MapReduce 的启发，而前者产生了 Apache Hadoop 的分布式文件系统  NDFS (Nutch Distributed File System) ，而后者也被纳入到 Apache Hadoop 作为核心组件之一。</p>
+
+<p>Apache Hadoop 的雏形开始于2002年的 Apache 的 Nutch。Nutch 是一个开源 Java 实现的搜索引擎。它提供了我们运行自己的搜索引擎所需的全部工具，包括全文搜索和 Web 爬虫。</p>
+
+<p>随后在 2003 年 Google 发表了一篇技术学术论文关于 Google 文件系统（GFS）。GFS 也就是 Google File System，是 Google 公司为了存储海量搜索数据而设计的专用文件系统。</p>
+
+<p>2004年 Nutch 创始人 Doug Cutting（同时也是 Apache Lucene 的创始人） 基于 Google 的 GFS 论文实现了分布式文件存储系统名为 NDFS。</p>
+
+<p>2004年 Google 又发表了一篇技术学术论文，向全世界介绍了 MapReduce。2005年 Doug Cutting 又基于 MapReduce，在 Nutch 搜索引擎实现了该功能。</p>
+
+<p>2006年，Yahoo! 雇用了 Doug Cutting，Doug Cutting 将 NDFS 和MapReduce 升级命名为 Hadoop。Yahoo! 开建了一个独立的团队给 Goug Cutting 专门研究发展 Hadoop。</p>
+
+<p>2008年1月，Hadoop 成为了 Apache 顶级项目。之后 Hadoop 被成功的应用在了其他公司，其中包括 Last.fm、Facebook、《纽约时报》等。 </p>
+
+<p>2008年2月，Yahoo! 宣布其搜索引擎产品部署在一个拥有1万个内核的 Hadoop 集群上。</p>
+
+<p>2008年4月，Hadoop 打破世界记录，称为最快排序1TB数据的系统。有关该报道的记录，可以参阅《Apache Hadoop Wins Terabyte Sort Benchmark》（见 <a href="https://developer.yahoo.com/blogs/hadoop/apache-hadoop-wins-terabyte-sort-benchmark-408.html">https://developer.yahoo.com/blogs/hadoop/apache-hadoop-wins-terabyte-sort-benchmark-408.html</a>）。</p>
+
+<p>截止目前，Apache Hadoop 的最新版本为 2.7.3。</p>
+
+<p>Apache Hadoop 它主要有以下几个优点：</p>
+
+<ul>
+<li><strong>高可靠性</strong>。Hadoop 按位存储和处理数据的能力值得人们信赖。</li>
+<li><strong>高扩展性</strong>。Hadoop 是在可用的计算机集簇间分配数据并完成计算任务的，这些集簇可以方便地扩展到数以千计的节点中。</li>
+<li><strong>高效性</strong>。Hadoop 能够在节点之间动态地移动数据，并保证各个节点的动态平衡，因此处理速度非常快。</li>
+<li><strong>高容错性</strong>。Hadoop 能够自动保存数据的多个副本，并且能够自动将失败的任务重新分配。</li>
+<li><strong>低成本</strong>。Hadoop 是开源的，项目的软件成本因此会大大降低。</li>
+</ul>
+
+
+
+<h2 id="apache-hadoop-核心组件">Apache Hadoop 核心组件</h2>
+
+<p>Apache Hadoop 包含以下模块：</p>
+
+<ul>
+<li><strong>Hadoop Common</strong>：常见实用工具，用来支持其他 Hadoop 模块。</li>
+<li><strong>Hadoop Distributed File System（HDFS）</strong>：分布式文件系统，它提供对应用程序数据的高吞吐量访问。</li>
+<li><strong>Hadoop YARN</strong>：一个作业调度和集群资源管理框架。</li>
+<li><strong>Hadoop MapReduce</strong>：基于 YARN 的大型数据集的并行处理系统。</li>
+</ul>
+
+<p>其他与 Apache Hadoop 的相关项目包括：</p>
+
+<ul>
+<li><strong><a href="http://incubator.apache.org/ambari/">Ambari</a></strong>：一个基于Web 的工具，用于配置、管理和监控的 Apache Hadoop 集群，其中包括支持 Hadoop HDFS、Hadoop MapReduce、Hive、HCatalog、HBase、ZooKeeper、Oozie、Pig 和 Sqoop。Ambari 还提供了仪表盘查看集群的健康，如热图，并能够以用户友好的方式来查看的 MapReduce、Pig 和 Hive 应用，方便诊断其性能。</li>
+<li><strong><a href="http://avro.apache.org/">Avro</a></strong>：数据序列化系统。</li>
+<li><strong><a href="http://cassandra.apache.org/">Cassandra</a></strong>：可扩展的、无单点故障的多主数据库。</li>
+<li><strong><a href="http://incubator.apache.org/chukwa/">Chukwa</a></strong>：数据采集系统，用于管理大型分布式系统。</li>
+<li><strong><a href="http://hbase.apache.org/">HBase</a></strong>：一个可扩展的分布式数据库，支持结构化数据的大表存储。(有关 HBase 的内容，会在后面章节讲述)</li>
+<li><strong><a href="http://hive.apache.org/">Hive</a></strong>：数据仓库基础设施，提供数据汇总以及特定的查询。</li>
+<li><strong><a href="http://mahout.apache.org/">Mahout</a></strong>：一种可扩展的机器学习和数据挖掘库。</li>
+<li><strong><a href="http://pig.apache.org/">Pig</a></strong>：一个高层次的数据流并行计算语言和执行框架。</li>
+<li><strong><a href="http://spark.incubator.apache.org/">Spark</a></strong>：Hadoop 数据的快速和通用计算引擎。Spark 提供了简单和强大的编程模型用以支持广泛的应用，其中包括 ETL、机器学习、流处理和图形计算。(有关 Spark 的内容，会在后面章节讲述)</li>
+<li><strong><a href="http://tez.incubator.apache.org/">TEZ</a></strong>：通用的数据流编程框架，建立在 Hadoop YARN 之上。它提供了一个强大而灵活的引擎来执行任意 DAG 任务，以实现批量和交互式数据的处理。TEZ 正在被 Hive、Pig 和 Hadoop 生态系统中其他框架所采用，也可以通过其他商业软件（例如 ETL 工具），以取代的 Hadoop MapReduce 作为底层执行引擎。</li>
+<li><strong><a href="http://zookeeper.apache.org/">ZooKeeper</a></strong>：一个高性能的分布式应用程序协调服务。(有关 ZooKeeper 的内容，会在后面章节讲述)</li>
+</ul>
+
+
+
+<h2 id="apache-hadoop-单节点上的安装配置">Apache Hadoop 单节点上的安装配置</h2>
+
+<p>下面将演示快速完成在单节点上的 Hadoop 安装与配置，以便你对 Hadoop HDFS 和 MapReduce 框架有所体会。</p>
+
+
+
+<h3 id="1-先决条件">1. 先决条件</h3>
+
+<p>支持平台：</p>
+
+<ul>
+<li>GNU/Linux：已经证实了 Hadoop 在 GNU/Linux 平台上可以支持 2000 个节点的集群；</li>
+<li>Windows。本文所演示的例子都是在 GNU/Linux 平台上运行，若在  Windows 运行，可以参阅 <a href="http://wiki.apache.org/hadoop/Hadoop2OnWindows">http://wiki.apache.org/hadoop/Hadoop2OnWindows</a>。</li>
+</ul>
+
+<p>所需软件：</p>
+
+<ul>
+<li>Java 必须安装。Hadoop 2.7 及以后版本，需要安装 Java 7，可以是 OpenJDK 或者是 Oracle（HotSpot）的 JDK/JRE。其他版本的 JDK 要求，可以参阅 <a href="http://wiki.apache.org/hadoop/HadoopJavaVersions">http://wiki.apache.org/hadoop/HadoopJavaVersions</a>；</li>
+<li>ssh 必须安装并且保证 sshd 一直运行，以便用 Hadoop 脚本管理远端Hadoop 守护进程。下面是在 Ubuntu 上的安装的示例：</li>
+</ul>
+
+
+
+<pre class="prettyprint"><code class=" hljs bash">$ <span class="hljs-built_in">sudo</span> apt-get install ssh
+$ <span class="hljs-built_in">sudo</span> apt-get install rsync</code></pre>
+
+
+
+<h3 id="2-下载">2. 下载</h3>
+
+<p>下载地址在 <a href="http://www.apache.org/dyn/closer.cgi/hadoop/common/">http://www.apache.org/dyn/closer.cgi/hadoop/common/</a>。</p>
+
+
+
+<h3 id="3-运行-hadoop-集群的准备工作">3. 运行 Hadoop 集群的准备工作</h3>
+
+<p>解压所下载的 Hadoop 发行版。编辑 <code>etc/hadoop/hadoop-env.sh</code> 文件，定义如下参数：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs bash"><span class="hljs-comment"># 设置 Java 的安装目录</span>
+<span class="hljs-keyword">export</span> JAVA_HOME=/usr/java/latest</code></pre>
+
+<p>尝试如下命令：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby"><span class="hljs-variable">$ </span>bin/hadoop</code></pre>
+
+<p>将会显示 hadoop 脚本的使用文档。</p>
+
+<p>现在你可以用以下三种支持的模式中的一种启动 Hadoop 集群：</p>
+
+<ul>
+<li>本地（单机）模式</li>
+<li>伪分布式模式</li>
+<li>完全分布式模式</li>
+</ul>
+
+
+
+<h3 id="4-单机模式的操作方法">4. 单机模式的操作方法</h3>
+
+<p>默认情况下，Hadoop 被配置成以非分布式模式运行的一个独立 Java 进程。这对调试非常有帮助。</p>
+
+<p>下面的实例将已解压的 conf 目录拷贝作为输入，查找并显示匹配给定正则表达式的条目。输出写入到指定的 output 目录。 </p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby"><span class="hljs-variable">$ </span>mkdir input
+<span class="hljs-variable">$ </span>cp etc/hadoop/*.xml input
+<span class="hljs-variable">$ </span>bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-<span class="hljs-number">2.7</span>.<span class="hljs-number">3</span>.jar grep input output <span class="hljs-string">'dfs[a-z.]+'</span>
+<span class="hljs-variable">$ </span>cat output/*</code></pre>
+
+
+
+<h3 id="5-伪分布式模式的操作方法">5. 伪分布式模式的操作方法</h3>
+
+<p>Hadoop 可以在单节点上以所谓的伪分布式模式运行，此时每一个 Hadoop 守护进程都作为一个独立的 Java 进程运行。</p>
+
+
+
+<h4 id="配置">配置</h4>
+
+<p>使用如下的:</p>
+
+<p><code>etc/hadoop/core-site.xml</code>:</p>
+
+
+
+<pre class="prettyprint"><code class="language-xml hljs "><span class="hljs-tag">&lt;<span class="hljs-title">configuration</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">property</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">name</span>&gt;</span>fs.defaultFS<span class="hljs-tag">&lt;/<span class="hljs-title">name</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">value</span>&gt;</span>hdfs://localhost:9000<span class="hljs-tag">&lt;/<span class="hljs-title">value</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">property</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">configuration</span>&gt;</span></code></pre>
+
+<p><code>etc/hadoop/hdfs-site.xml</code>:</p>
+
+
+
+<pre class="prettyprint"><code class="language-xml hljs "><span class="hljs-tag">&lt;<span class="hljs-title">configuration</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">property</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">name</span>&gt;</span>dfs.replication<span class="hljs-tag">&lt;/<span class="hljs-title">name</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">value</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-title">value</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">property</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">configuration</span>&gt;</span></code></pre>
+
+
+
+<h4 id="免密码-ssh-设置">免密码 ssh 设置</h4>
+
+<p>现在确认能否不输入口令就用 ssh 登录 localhost:</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby"><span class="hljs-variable">$ </span>ssh localhost</code></pre>
+
+<p>如果不输入口令就无法用 ssh 登陆 localhost，执行下面的命令：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby"><span class="hljs-variable">$ </span>ssh-keygen -t rsa -<span class="hljs-constant">P</span> <span class="hljs-string">''</span> -f ~<span class="hljs-regexp">/.ssh/id</span>_rsa
+<span class="hljs-variable">$ </span>cat ~<span class="hljs-regexp">/.ssh/id</span>_rsa.pub &gt;&gt; ~<span class="hljs-regexp">/.ssh/authorized</span>_keys
+<span class="hljs-variable">$ </span>chmod <span class="hljs-number">0600</span> ~<span class="hljs-regexp">/.ssh/authorized</span>_keys</code></pre>
+
+
+
+<h4 id="执行">执行</h4>
+
+<p>下面演示本地运行一个 MapReduce 的 job，以下是运行步骤。</p>
+
+<p>（1）格式化一个新的分布式文件系统：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby"><span class="hljs-variable">$ </span>bin/hdfs namenode -format</code></pre>
+
+<p>（2）启动 NameNode 守护进程和 DataNode 守护进程：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby"><span class="hljs-variable">$ </span>sbin/start-dfs.sh</code></pre>
+
+<p>Hadoop 守护进程的日志写入到 <code>$HADOOP_LOG_DIR</code>目录（默认是  <code>$HADOOP_HOME/logs</code>）</p>
+
+<p>（3）浏览 NameNode 的网络接口，它们的地址默认为：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs">NameNode - http:<span class="hljs-comment">//localhost:50070/</span></code></pre>
+
+<p>（4）创建 HDFS 目录来执行 MapReduce 的 job：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby"><span class="hljs-variable">$ </span>bin/hdfs dfs -mkdir /user
+<span class="hljs-variable">$ </span>bin/hdfs dfs -mkdir /user/&lt;username&gt;</code></pre>
+
+<p>（5）将输入文件拷贝到分布式文件系统：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby"><span class="hljs-variable">$ </span>bin/hdfs dfs -put etc/hadoop input</code></pre>
+
+<p>（6）运行发行版提供的示例程序：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs lasso">$ bin/hadoop jar share/hadoop/mapreduce/hadoop<span class="hljs-attribute">-mapreduce</span><span class="hljs-attribute">-examples</span><span class="hljs-subst">-</span><span class="hljs-number">2.7</span><span class="hljs-number">.3</span><span class="hljs-built_in">.</span>jar grep input output <span class="hljs-string">'dfs[a-z.]+'</span></code></pre>
+
+<p>（7）查看输出文件</p>
+
+<p>将输出文件从分布式文件系统拷贝到本地文件系统查看：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby"><span class="hljs-variable">$ </span>bin/hdfs dfs -get output output
+<span class="hljs-variable">$ </span>cat output/*</code></pre>
+
+<p>或者，在分布式文件系统上查看输出文件：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby"><span class="hljs-variable">$ </span>bin/hdfs dfs -cat output/*</code></pre>
+
+<p>（8）完成全部操作后，停止守护进程：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby"><span class="hljs-variable">$ </span>sbin/stop-dfs.sh</code></pre>
+
+
+
+<h4 id="运行在单节点的-yarn">运行在单节点的 YARN</h4>
+
+<p>您可以通过设置几个参数，另外运行 ResourceManager 的守护进程和 NodeManager 守护进程以伪分布式模式在 YARN 上运行 MapReduce job。</p>
+
+<p>以下是运行步骤。</p>
+
+<p>（1）配置</p>
+
+<p><code>etc/hadoop/mapred-site.xml</code>:</p>
+
+
+
+<pre class="prettyprint"><code class="language-xml hljs "><span class="hljs-tag">&lt;<span class="hljs-title">configuration</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">property</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">name</span>&gt;</span>mapreduce.framework.name<span class="hljs-tag">&lt;/<span class="hljs-title">name</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">value</span>&gt;</span>yarn<span class="hljs-tag">&lt;/<span class="hljs-title">value</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">property</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">configuration</span>&gt;</span></code></pre>
+
+<p><code>etc/hadoop/yarn-site.xml</code>:</p>
+
+
+
+<pre class="prettyprint"><code class="language-xml hljs "><span class="hljs-tag">&lt;<span class="hljs-title">configuration</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">property</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="hljs-tag">&lt;/<span class="hljs-title">name</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">value</span>&gt;</span>mapreduce_shuffle<span class="hljs-tag">&lt;/<span class="hljs-title">value</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">property</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">configuration</span>&gt;</span></code></pre>
+
+<p>（2）启动 ResourceManager 守护进程和 NodeManager 守护进程</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby"><span class="hljs-variable">$ </span>sbin/start-yarn.sh</code></pre>
+
+<p>（3）浏览 ResourceManager 的网络接口，它们的地址默认为：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs">ResourceManager - http:<span class="hljs-comment">//localhost:8088/</span></code></pre>
+
+<p>（4）运行 MapReduce job</p>
+
+<p>（5）完成全部操作后，停止守护进程：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby"> <span class="hljs-variable">$ </span>sbin/stop-yarn.sh</code></pre>
+
+
+
+<h3 id="6-完全分布式模式的操作方法">6. 完全分布式模式的操作方法</h3>
+
+<p>关于搭建完全分布式模式的，请参阅下文《Apache Hadoop 集群上的安装配置》小节内容。</p>
+
+
+
+<h2 id="apache-hadoop-集群上的安装配置">Apache Hadoop 集群上的安装配置</h2>
+
+<p>本节将描述如何安装、配置和管理 Hadoop 集群，其规模可从几个节点的小集群到几千个节点的超大集群。</p>
+
+
+
+<h3 id="1-先决条件-1">1. 先决条件</h3>
+
+<p>确保在你集群中的每个节点上都安装了所有必需软件，安装 Hadoop 集群通常要将安装软件解压到集群内的所有机器上，参考上节内容《Apache Hadoop 单节点上的安装配置》。</p>
+
+<p>通常情况下，集群中的一台机器被指定为 NameNode 和另一台机器作为  ResourceManager。这些都是 master。其他服务（例如，Web 应用程序代理服务器和 MapReduce Job History 服务器）是在专用的硬件还是共享基础设施上运行，这取决于负载。</p>
+
+<p>在群集里剩余的机器充当 DataNode 和 NodeManager。这些都是 slave。</p>
+
+
+
+<h3 id="2-在-non-secure-mode非安全模式下的配置">2. 在 Non-Secure Mode（非安全模式）下的配置</h3>
+
+<p>Hadoop 配置有两种类型的重要配置文件：</p>
+
+<ul>
+<li>默认只读，包括 <code>core-default.xml</code>、<code>hdfs-default.xml</code>、<code>yarn-default.xml</code> 和 <code>mapred-default.xml</code>；</li>
+<li>针对站点配置，包括 <code>etc/hadoop/core-site.xml</code>、<code>etc/hadoop/hdfs-site.xml</code>、<code>etc/hadoop/yarn-site.xml</code> 和 <code>etc/hadoop/mapred-site.xml</code>。</li>
+</ul>
+
+<p>另外，你能够配置 bin 目录下的 <code>etc/hadoop/hadoop-env.sh</code> 和 <code>etc/hadoop/yarn-env.sh</code> 脚本文件的值来控制 Hadoop 的脚本。</p>
+
+<p>为了配置 Hadoop 集群，你需要配置 Hadoop 守护进程的执行环境和Hadoop 守护进程的配置参数。</p>
+
+<p>HDFS  的守护进程有 NameNode、econdaryNameNode 和 DataNode。YARN 的守护进程有 ResourceManager、NodeManager 和 WebAppProxy。若 MapReduce 在使用，那么 MapReduce Job History Server 也是在运行的。在大型的集群中，这些一般都是在不同的主机上运行。</p>
+
+
+
+<h4 id="配置-hadoop-守护进程的运行环境">配置 Hadoop 守护进程的运行环境</h4>
+
+<p>管理员应该利用<code>etc/hadoop/hadoop-env.sh</code>、<code>etc/hadoop/mapred-env.sh</code> 和 <code>etc/hadoop/yarn-env.sh</code> 脚本来对 Hadoop 守护进程的环境做一些自定义的配置。</p>
+
+<p>至少你应该在每个远程节点上正确配置 JAVA_HOME。</p>
+
+<p>管理员能够使用下面的表格当中的配置选项来配置独立的守护进程：</p>
+
+<table>
+<thead>
+<tr>
+  <th>守护进程</th>
+  <th>环境变量</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>NameNode</td>
+  <td>HADOOP_NAMENODE_OPTS</td>
+</tr>
+<tr>
+  <td>DataNode</td>
+  <td>HADOOP_DATANODE_OPTS</td>
+</tr>
+<tr>
+  <td>SecondaryNamenode</td>
+  <td>HADOOP_SECONDARYNAMENODE_OPTS</td>
+</tr>
+<tr>
+  <td>ResourceManager</td>
+  <td>YARN_RESOURCEMANAGER_OPTS</td>
+</tr>
+<tr>
+  <td>NodeManager</td>
+  <td>YARN_NODEMANAGER_OPTS</td>
+</tr>
+<tr>
+  <td>WebAppProxy</td>
+  <td>YARN_PROXYSERVER_OPTS</td>
+</tr>
+<tr>
+  <td>Map Reduce Job History Server</td>
+  <td>HADOOP_JOB_HISTORYSERVER_OPTS</td>
+</tr>
+</tbody></table>
+
+
+<p>例如，配置 Namenode 时,为了使其能够 parallelGC（并行回收垃圾）， 要把下面的代码加入到<code>etc/hadoop/hadoop-env.sh</code>：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs bash"><span class="hljs-keyword">export</span> HADOOP_NAMENODE_OPTS=<span class="hljs-string">"-XX:+UseParallelGC"</span></code></pre>
+
+<p>其它可定制的常用参数还包括：</p>
+
+<ul>
+<li>HADOOP_PID_DIR——守护进程的进程 id 存放目录；</li>
+<li>HADOOP_LOG_DIR——守护进程的日志文件存放目录。如果不存在会被自动创建；</li>
+<li>HADOOP_HEAPSIZE/YARN_HEAPSIZE——最大可用的堆大小，单位为MB。比如，1000MB。这个参数用于设置守护进程的堆大小。缺省大小是1000。可以为每个守护进程单独设置这个值。</li>
+</ul>
+
+<p>在大多数情况下，你应该指定 HADOOP_PID_DIR 和 HADOOP_LOG_DIR 目录，这样它们只能由要运行 hadoop 守护进程的用户写入。否则会受到符号链接攻击的可能。</p>
+
+<p>这也是在 shell 环境配置里配置 HADOOP_PREFIX 的传统方式。例如，在<code>/etc/profile.d</code>中一个简单的脚本的配置如下：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs bash">HADOOP_PREFIX=/path/to/hadoop
+<span class="hljs-keyword">export</span> HADOOP_PREFIX</code></pre>
+
+<table>
+<thead>
+<tr>
+  <th>守护进程</th>
+  <th>环境变量</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>ResourceManager</td>
+  <td>YARN_RESOURCEMANAGER_HEAPSIZE</td>
+</tr>
+<tr>
+  <td>NodeManager</td>
+  <td>YARN_NODEMANAGER_HEAPSIZE</td>
+</tr>
+<tr>
+  <td>WebAppProxy</td>
+  <td>YARN_PROXYSERVER_HEAPSIZE</td>
+</tr>
+<tr>
+  <td>Map Reduce Job History Server</td>
+  <td>HADOOP_JOB_HISTORYSERVER_HEAPSIZE</td>
+</tr>
+</tbody></table>
+
+
+
+
+<h4 id="配置-hadoop-守护进程">配置 Hadoop 守护进程</h4>
+
+<p>这部分涉及 Hadoop 集群的重要参数的配置</p>
+
+<ul>
+<li><code>etc/hadoop/core-site.xml</code> </li>
+</ul>
+
+<table>
+<thead>
+<tr>
+  <th>参数</th>
+  <th>取值</th>
+  <th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>fs.defaultFS</td>
+  <td>NameNode URI</td>
+  <td>hdfs://host:port/</td>
+</tr>
+<tr>
+  <td>io.file.buffer.size</td>
+  <td>131072</td>
+  <td>SequenceFiles 中读写缓冲的大小</td>
+</tr>
+</tbody></table>
+
+
+<p>* <code>etc/hadoop/hdfs-site.xml</code> </p>
+
+<p>用于配置 NameNode：</p>
+
+<table>
+<thead>
+<tr>
+  <th>参数</th>
+  <th>取值</th>
+  <th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>dfs.namenode.name.dir</td>
+  <td>NameNode 持久存储命名空间及事务日志的本地文件系统路径。</td>
+  <td>当这个值是一个逗号分割的目录列表时，name table 数据将会被复制到所有目录中做冗余备份。</td>
+</tr>
+<tr>
+  <td>dfs.hosts / dfs.hosts.exclude</td>
+  <td>允许/排除的 DataNodes  列表。</td>
+  <td>如果有必要，使用这些文件，以控制允许的 datanodes 的列表。</td>
+</tr>
+<tr>
+  <td>dfs.blocksize</td>
+  <td>268435456</td>
+  <td>在大型文件系统里面设置 HDFS 块大小为 256MB</td>
+</tr>
+<tr>
+  <td>dfs.namenode.handler.count</td>
+  <td>100</td>
+  <td>在大数量的 DataNodes 里面用更多的 NameNode 服务器线程来控制 RPC</td>
+</tr>
+</tbody></table>
+
+
+<p>用于配置 DataNode：</p>
+
+<table>
+<thead>
+<tr>
+  <th>参数</th>
+  <th>取值</th>
+  <th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>dfs.datanode.data.dir</td>
+  <td>DataNode存放块数据的本地文件系统路径，逗号分割的列表。</td>
+  <td>当这个值是逗号分割的目录列表时，数据将被存储在所有目录下，通常分布在不同设备上。</td>
+</tr>
+</tbody></table>
+
+
+<p>* <code>etc/hadoop/yarn-site.xml</code> </p>
+
+<p>用于配置 ResourceManager 和 NodeManager：</p>
+
+<table>
+<thead>
+<tr>
+  <th>参数</th>
+  <th>取值</th>
+  <th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>yarn.acl.enable</td>
+  <td>true / false</td>
+  <td>是否启用 ACLs。默认是 false</td>
+</tr>
+<tr>
+  <td>yarn.admin.acl</td>
+  <td>Admin ACL</td>
+  <td>ACL 集群上设置管理员。 ACLs 是用逗号分隔的。默认为 * 意味着任何人。特殊值空格，意味着没有人可以进入。</td>
+</tr>
+<tr>
+  <td>yarn.log-aggregation-enable</td>
+  <td>false</td>
+  <td>配置算法启用日志聚合</td>
+</tr>
+</tbody></table>
+
+
+<p>用于配置 ResourceManager :</p>
+
+<table>
+<thead>
+<tr>
+  <th>参数</th>
+  <th>取值</th>
+  <th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>yarn.resourcemanager.address</td>
+  <td>ResourceManager host:port ，用于给客户端提交 jobs</td>
+  <td>若 host:port 设置，则覆盖 yarn.resourcemanager.hostname 中的 hostname</td>
+</tr>
+<tr>
+  <td>yarn.resourcemanager.scheduler.address</td>
+  <td>ResourceManager host:port，用于 ApplicationMasters （主节点）和 Scheduler（调度器）通信来取得资源</td>
+  <td>若 host:port 设置，则覆盖 yarn.resourcemanager.hostname 中的 hostname</td>
+</tr>
+<tr>
+  <td>yarn.resourcemanager.resource-tracker.address</td>
+  <td>ResourceManager host:port ，用于 NodeManagers</td>
+  <td>若 host:port 设置，则覆盖 yarn.resourcemanager.hostname 中的 hostname</td>
+</tr>
+<tr>
+  <td>yarn.resourcemanager.admin.address</td>
+  <td>ResourceManager host:port ，用于管理命令</td>
+  <td>若 host:port 设置，则覆盖 yarn.resourcemanager.hostname 中的 hostname</td>
+</tr>
+<tr>
+  <td>yarn.resourcemanager.webapp.address</td>
+  <td>ResourceManager web-ui host:port，用于 web 管理</td>
+  <td>若 host:port 设置，则覆盖 yarn.resourcemanager.hostname 中的 hostname</td>
+</tr>
+<tr>
+  <td>yarn.resourcemanager.scheduler.class</td>
+  <td>ResourceManager Scheduler 类</td>
+  <td>CapacityScheduler （推荐）、FairScheduler（也推荐）或 FifoScheduler</td>
+</tr>
+<tr>
+  <td>yarn.scheduler.minimum-allocation-mb</td>
+  <td>分配给每个容器请求Resource Manager 的最小内存</td>
+  <td>单位为 MB</td>
+</tr>
+<tr>
+  <td>yarn.scheduler.maximum-allocation-mb</td>
+  <td>分配给每个容器请求Resource Manager 的最大内存</td>
+  <td>单位为 MB</td>
+</tr>
+<tr>
+  <td>yarn.resourcemanager.nodes.include-path / yarn.resourcemanager.nodes.exclude-path</td>
+  <td>允许/拒绝的NodeManager 的列表</td>
+  <td>如果有必要，用这些文件来控制列出的允许的 NodeManager</td>
+</tr>
+</tbody></table>
+
+
+<p>用于配置 NodeManager :</p>
+
+<table>
+<thead>
+<tr>
+  <th>参数</th>
+  <th>取值</th>
+  <th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>yarn.nodemanager.resource.memory-mb</td>
+  <td>NodeManager 可用的物理内存</td>
+  <td>定义在 NodeManager 上的全部资源，用来运行容器。</td>
+</tr>
+<tr>
+  <td>yarn.nodemanager.vmem-pmem-ratio</td>
+  <td>task 使用虚拟内存的最大比例，可能超过物理内存</td>
+  <td>每个 task 使用的虚拟内存可能超过它的物理内存， 虚拟内存靠这个比率来进行限制。这个比率限制的在 NodeManager 上task 使用的虚拟内存总数，可能会超过它的物理内存。</td>
+</tr>
+<tr>
+  <td>yarn.nodemanager.local-dirs</td>
+  <td>在本地文件系统里，写入中间数据的地方的路径。多个路径就用逗号进行隔开。</td>
+  <td>多个路径有助于分散磁盘I/O</td>
+</tr>
+<tr>
+  <td>yarn.nodemanager.log-dirs</td>
+  <td>在本地文件系统里，写入日志的地方的路径。多个路径就用逗号进行隔开。</td>
+  <td>多个路径有助于分散磁盘I/O</td>
+</tr>
+<tr>
+  <td>yarn.nodemanager.log.retain-seconds</td>
+  <td>10800</td>
+  <td>日志文件在NodeManager 上保存的默认时间（单位为秒），仅仅适合在日志聚合关闭的时候使用。</td>
+</tr>
+<tr>
+  <td>yarn.nodemanager.remote-app-log-dir</td>
+  <td>/logs</td>
+  <td>在应用程序完成的时候，应用程序的日志将移到这个HDFS目录。需要设置适当的权限。 仅仅适合在日志聚合开启的时候使用。</td>
+</tr>
+<tr>
+  <td>yarn.nodemanager.remote-app-log-dir-suffix</td>
+  <td>logs</td>
+  <td>追加到远程日志目录</td>
+</tr>
+<tr>
+  <td>yarn.nodemanager.aux-services   、 mapreduce.shuffle</td>
+  <td>给 Map Reduce 应用程序设置 Shuffle 服务。</td>
+  <td></td>
+</tr>
+</tbody></table>
+
+
+<p>用于配置 History Server (需搬移到其它地方)：</p>
+
+<table>
+<thead>
+<tr>
+  <th>参数</th>
+  <th>取值</th>
+  <th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>yarn.log-aggregation.retain-seconds</td>
+  <td>-1</td>
+  <td>保留聚合日志的时间， -1 表示不启用。需要注意的是，该值不能设置的太小</td>
+</tr>
+<tr>
+  <td>yarn.log-aggregation.retain-check-interval-seconds</td>
+  <td>-1</td>
+  <td>检查聚合日志保留的时间间隔，-1 表示不启用。需要注意的是，该值不能设置的太小</td>
+</tr>
+</tbody></table>
+
+
+<p>* <code>etc/hadoop/mapred-site.xml</code></p>
+
+<p>用于配置 MapReduce 应用：</p>
+
+<table>
+<thead>
+<tr>
+  <th>参数</th>
+  <th>取值</th>
+  <th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>mapreduce.framework.name</td>
+  <td>yarn</td>
+  <td>运行框架设置为 Hadoop YARN.</td>
+</tr>
+<tr>
+  <td>mapreduce.map.memory.mb</td>
+  <td>1536</td>
+  <td>maps 的最大资源.</td>
+</tr>
+<tr>
+  <td>mapreduce.map.java.opts</td>
+  <td>-Xmx1024M</td>
+  <td>maps 子虚拟机的堆大小</td>
+</tr>
+<tr>
+  <td>mapreduce.reduce.memory.mb</td>
+  <td>3072</td>
+  <td>reduces 的最大资源.</td>
+</tr>
+<tr>
+  <td>mapreduce.reduce.java.opts</td>
+  <td>-Xmx2560M</td>
+  <td>reduces 子虚拟机的堆大小</td>
+</tr>
+<tr>
+  <td>mapreduce.task.io.sort.mb</td>
+  <td>512</td>
+  <td>任务内部排序缓冲区大小</td>
+</tr>
+<tr>
+  <td>mapreduce.task.io.sort.factor</td>
+  <td>100</td>
+  <td>在整理文件时一次性合并的流数量</td>
+</tr>
+<tr>
+  <td>mapreduce.reduce.shuffle.parallelcopies</td>
+  <td>50</td>
+  <td>reduces 运行的最大并行复制的数量，用于获取大量的 maps 的输出</td>
+</tr>
+</tbody></table>
+
+
+<p>用于配置 MapReduce JobHistory Server：</p>
+
+<table>
+<thead>
+<tr>
+  <th>参数</th>
+  <th>取值</th>
+  <th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>mapreduce.jobhistory.address</td>
+  <td>MapReduce JobHistory Server host:port</td>
+  <td>默认端口是 10020.</td>
+</tr>
+<tr>
+  <td>mapreduce.jobhistory.webapp.address</td>
+  <td>MapReduce JobHistory Server Web 界面 host:port</td>
+  <td>默认端口是 19888.</td>
+</tr>
+<tr>
+  <td>mapreduce.jobhistory.intermediate-done-dir</td>
+  <td>/mr-history/tmp</td>
+  <td>MapReduce jobs 写入历史文件的目录</td>
+</tr>
+<tr>
+  <td>mapreduce.jobhistory.done-dir</td>
+  <td>/mr-history/done</td>
+  <td>MR JobHistory Server 管理的历史文件目录</td>
+</tr>
+</tbody></table>
+
+
+
+
+<h3 id="3-监控-nodemanager-的健康状况">3. 监控 NodeManager 的健康状况</h3>
+
+<p>Hadoop 提供了一种机制，管理员可以配置 NodeManager  来运行提供脚本定期确认一个节点是否健康。</p>
+
+<p>管理员可以通过在脚本中执行检查来判断该节点是否处于健康状态。如果脚本检查到节点不健康，可以打印一个标准的 ERROR（错误）输出。NodeManager 通过一些脚本定期检查他的输出，如果脚本输出有 ERROR信息，如上所述，该节点将报告为不健康，就将节点加入到 ResourceManager 的黑名单列表中，则任务不会分配到该节点中。然后 NodeManager 继续跑这个脚本，所以如果 Node 节点变为健康了，将自动的从 ResourceManager 的黑名单列表删除，节点的健康状况随着脚本的输出，如果变为不健康，在 ResourceManager web 接口上对管理员来说是可用的。这个时候节点的健康状况不会显示在web接口上。</p>
+
+<p>在<code>etc/hadoop/yarn-site.xml</code>下，可以控制节点的健康检查脚本：</p>
+
+<table>
+<thead>
+<tr>
+  <th>参数</th>
+  <th>取值</th>
+  <th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>yarn.nodemanager.health-checker.script.path</td>
+  <td>Node health script</td>
+  <td>这个脚本检查节点的健康状态。</td>
+</tr>
+<tr>
+  <td>yarn.nodemanager.health-checker.script.opts</td>
+  <td>Node health script options</td>
+  <td>检查节点的健康状态脚本选项</td>
+</tr>
+<tr>
+  <td>yarn.nodemanager.health-checker.script.interval-ms</td>
+  <td>Node health script interval</td>
+  <td>运行健康脚本的时间间隔</td>
+</tr>
+<tr>
+  <td>yarn.nodemanager.health-checker.script.timeout-ms</td>
+  <td>Node health script timeout interval</td>
+  <td>健康脚本的执行超时时间</td>
+</tr>
+</tbody></table>
+
+
+<p>如果只是本地硬盘坏了，健康检查脚本将不会设置该节点为 ERROR。但是NodeManager 有能力来定期检查本地磁盘的健康（检查 nodemanager-local-dirs 和 nodemanager-log-dirs 两个目录），当达到yarn.nodemanager.disk-health-checker.min-healthy-disks 设置的阀值，则整个节点将标记为不健康。</p>
+
+
+
+<h3 id="4-slaves-file">4. Slaves File</h3>
+
+<p>所有 slave 的 hostname 或者 IP 都保存在<code>etc/hadoop/slaves</code>文件中，每行一个。脚本可以通过<code>etc/hadoop/slaves</code>文件去运行多台机器的命令。他不使用任何基于 Java 的 Hadoop 配置。为了使用这个功能，ssh 必须建立好使用账户才能运行 Hadoop。所以在安装 Hadoop 的时候，需要配置 ssh 登陆。</p>
+
+
+
+<h3 id="5-hadoop-rack-awareness机架感知">5. Hadoop Rack Awareness（机架感知）</h3>
+
+<p>很多 Hadoop 组件得益于机架感知，给性能和安全性带来了很大的提升，Hadoop 的守护进程调用管理配置的模块，获取到集群 slave 的机架信息，更多的机架感知信息，查看这里 <a href="http://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoop-common/RackAwareness.html">http://hadoop.apache.org/docs/r2.7.3/hadoop-project-dist/hadoop-common/RackAwareness.html</a>。</p>
+
+<p>使用 HDFS 时，强烈推荐使用机架感知。</p>
+
+
+
+<h3 id="6-日志">6. 日志</h3>
+
+<p>Hadoop 使用 <a href="http://logging.apache.org/log4j/2.x/">Apache log4j</a> 作为日志框架，编辑<code>etc/hadoop/log4j.properties</code>文件来自定义日志的配置。</p>
+
+
+
+<h3 id="7-操纵-hadoop-集群">7. 操纵 Hadoop  集群</h3>
+
+<p>所有必备的配置都完成了，分发  HADOOP_CONF_DIR 配置文件到所有机器，所有机器安装 Hadoop 目录的路径应该是一样的。</p>
+
+<p>在一般情况下，建议 HDFS 和 YARN 作为单独的用户运行。在大多数安装中，HDFS 执行 “hdfs”。YARN  通常使用“yarn”帐户。</p>
+
+
+
+<h4 id="hadoop-启动">Hadoop 启动</h4>
+
+<p>为了启动 Hadoop 集群，你需要启动 HDFS 和 YARN 集群。</p>
+
+<p>第一次使用 HDFS 需要格式化。 作为 hdfs 格式化新分发的文件系统：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby">[hdfs]<span class="hljs-variable">$ </span><span class="hljs-variable">$HADOOP_PREFIX</span>/bin/hdfs namenode -format &lt;cluster_name&gt;</code></pre>
+
+<p>作为 hdfs，通过如下命令启动 HDFS NameNode 到指定的节点 ：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby">[hdfs]<span class="hljs-variable">$ </span><span class="hljs-variable">$HADOOP_PREFIX</span>/sbin/hadoop-daemon.sh --config <span class="hljs-variable">$HADOOP_CONF_DIR</span> --script hdfs start namenode</code></pre>
+
+<p>作为 hdfs，通过如下命令启动 HDFS DataNode  到每个指定的节点 ：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby">[hdfs]<span class="hljs-variable">$ </span><span class="hljs-variable">$HADOOP_PREFIX</span>/sbin/hadoop-daemons.sh --config <span class="hljs-variable">$HADOOP_CONF_DIR</span> --script hdfs start datanode</code></pre>
+
+<p>作为 hdfs，如果 <code>etc/hadoop/slaves</code> 和 ssh 可信任访问已经配置，那么所有的 HDFS 进程都可以通过脚本工具来启动：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby">[hdfs]<span class="hljs-variable">$ </span><span class="hljs-variable">$HADOOP_PREFIX</span>/sbin/start-dfs.sh</code></pre>
+
+<p>作为 yarn，通过下面的命令启动 YARN，运行指定的 ResourceManager ：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby">[yarn]<span class="hljs-variable">$ </span><span class="hljs-variable">$HADOOP_YARN_HOME</span>/sbin/yarn-daemon.sh --config <span class="hljs-variable">$HADOOP_CONF_DIR</span> start resourcemanager</code></pre>
+
+<p>作为 yarn，运行脚本来启动从机上的所有 NodeManager：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby">[yarn]<span class="hljs-variable">$ </span><span class="hljs-variable">$HADOOP_YARN_HOME</span>/sbin/yarn-daemons.sh --config <span class="hljs-variable">$HADOOP_CONF_DIR</span> start nodemanager</code></pre>
+
+<p>作为 yarn，启动本地化的 WebAppProxy 服务器。如果想使用大量的服务器来实现负载均衡，那么它就应该运行在它们各自机器之上：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby">[yarn]<span class="hljs-variable">$ </span><span class="hljs-variable">$HADOOP_YARN_HOME</span>/sbin/yarn-daemon.sh --config <span class="hljs-variable">$HADOOP_CONF_DIR</span> start proxyserver</code></pre>
+
+<p>作为 yarn，如果 <code>etc/hadoop/slaves</code> 和 ssh 可信任访问已经配置，那么所有的 YARN 进程都可以通过脚本工具来启动:</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby">[yarn]<span class="hljs-variable">$ </span><span class="hljs-variable">$HADOOP_PREFIX</span>/sbin/start-yarn.sh</code></pre>
+
+<p>作为 mapred，根据下面的命令启动 MapReduce JobHistory Server ：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby">[mapred]<span class="hljs-variable">$ </span><span class="hljs-variable">$HADOOP_PREFIX</span>/sbin/mr-jobhistory-daemon.sh --config <span class="hljs-variable">$HADOOP_CONF_DIR</span> start historyserver</code></pre>
+
+
+
+<h4 id="hadoop-关闭">Hadoop 关闭</h4>
+
+<p>作为 hdfs，通过以下命令停止 NameNode：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby">[hdfs]<span class="hljs-variable">$ </span><span class="hljs-variable">$HADOOP_PREFIX</span>/sbin/hadoop-daemon.sh --config <span class="hljs-variable">$HADOOP_CONF_DIR</span> --script hdfs stop namenode</code></pre>
+
+<p>作为 hdfs，运行脚本停止在所有从机上的所有 DataNode:</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby">[hdfs]<span class="hljs-variable">$ </span><span class="hljs-variable">$HADOOP_PREFIX</span>/sbin/hadoop-daemons.sh --config <span class="hljs-variable">$HADOOP_CONF_DIR</span> --script hdfs stop datanode</code></pre>
+
+<p>作为 hdfs，如果 <code>etc/hadoop/slaves</code> 和 ssh 可信任访问已经配置，那么所有的 HDFS 进程都可以通过脚本工具来关闭：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby">[hdfs]<span class="hljs-variable">$ </span><span class="hljs-variable">$HADOOP_PREFIX</span>/sbin/stop-dfs.sh</code></pre>
+
+<p>作为 yarn，通过以下命令停止 ResourceManager:</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby">[yarn]<span class="hljs-variable">$ </span><span class="hljs-variable">$HADOOP_YARN_HOME</span>/sbin/yarn-daemon.sh --config <span class="hljs-variable">$HADOOP_CONF_DIR</span> stop resourcemanager</code></pre>
+
+<p>作为 yarn，运行一下脚本停止 slave 机器上的 NodeManager : </p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby">[yarn]<span class="hljs-variable">$ </span><span class="hljs-variable">$HADOOP_YARN_HOME</span>/sbin/yarn-daemons.sh --config <span class="hljs-variable">$HADOOP_CONF_DIR</span> stop nodemanager</code></pre>
+
+<p>作为 yarn，如果 <code>etc/hadoop/slaves</code> 和 ssh 可信任访问已经配置，那么所有的 YARN 进程都可以通过脚本工具来关闭</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby">[yarn]<span class="hljs-variable">$ </span><span class="hljs-variable">$HADOOP_PREFIX</span>/sbin/stop-yarn.sh</code></pre>
+
+<p>作为 yarn，停止 WebAppProxy 服务器。由于负载均衡有可能设置了多个: </p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby">[yarn]<span class="hljs-variable">$ </span><span class="hljs-variable">$HADOOP_YARN_HOME</span>/sbin/yarn-daemon.sh --config <span class="hljs-variable">$HADOOP_CONF_DIR</span> stop proxyserver</code></pre>
+
+<p>作为 mapred，通过以下命令停止 MapReduce JobHistory Server :</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby">[mapred]<span class="hljs-variable">$ </span><span class="hljs-variable">$HADOOP_PREFIX</span>/sbin/mr-jobhistory-daemon.sh --config <span class="hljs-variable">$HADOOP_CONF_DIR</span> stop historyserver
+</code></pre>
+
+
+
+<h3 id="8-web-界面">8. Web 界面</h3>
+
+<p>当 Hadoop 启动后，可以查看如下 Web 界面：</p>
+
+<table>
+<thead>
+<tr>
+  <th>守护进行</th>
+  <th>Web 界面</th>
+  <th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>NameNode</td>
+  <td><a href="http://nn_host:port/">http://nn_host:port/</a></td>
+  <td>默认 HTTP 端口为 50070.</td>
+</tr>
+<tr>
+  <td>ResourceManager</td>
+  <td><a href="http://rm_host:port/">http://rm_host:port/</a></td>
+  <td>默认 HTTP端口为 8088</td>
+</tr>
+<tr>
+  <td>MapReduce JobHistory Server</td>
+  <td><a href="http://jhs_host:port/">http://jhs_host:port/</a></td>
+  <td>默认 HTTP  端口为 19888</td>
+</tr>
+</tbody></table>
+
+
+
+
+<h2 id="例子词频统计-wordcount-程序">例子：词频统计 WordCount 程序</h2>
+
+<p>下面是 Hadoop 提供的词频统计 WordCount 程序 示例。运行运行改程序之前，请确保 HDFS 已经启动。</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-keyword">import</span> java.io.BufferedReader;
+<span class="hljs-keyword">import</span> java.io.FileReader;
+<span class="hljs-keyword">import</span> java.io.IOException;
+<span class="hljs-keyword">import</span> java.net.URI;
+<span class="hljs-keyword">import</span> java.util.ArrayList;
+<span class="hljs-keyword">import</span> java.util.HashSet;
+<span class="hljs-keyword">import</span> java.util.List;
+<span class="hljs-keyword">import</span> java.util.Set;
+<span class="hljs-keyword">import</span> java.util.StringTokenizer;
+
+<span class="hljs-keyword">import</span> org.apache.hadoop.conf.Configuration;
+<span class="hljs-keyword">import</span> org.apache.hadoop.fs.Path;
+<span class="hljs-keyword">import</span> org.apache.hadoop.io.IntWritable;
+<span class="hljs-keyword">import</span> org.apache.hadoop.io.Text;
+<span class="hljs-keyword">import</span> org.apache.hadoop.mapreduce.Job;
+<span class="hljs-keyword">import</span> org.apache.hadoop.mapreduce.Mapper;
+<span class="hljs-keyword">import</span> org.apache.hadoop.mapreduce.Reducer;
+<span class="hljs-keyword">import</span> org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+<span class="hljs-keyword">import</span> org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+<span class="hljs-keyword">import</span> org.apache.hadoop.mapreduce.Counter;
+<span class="hljs-keyword">import</span> org.apache.hadoop.util.GenericOptionsParser;
+<span class="hljs-keyword">import</span> org.apache.hadoop.util.StringUtils;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WordCount2</span> {</span>
+
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TokenizerMapper</span>
+       <span class="hljs-keyword">extends</span> <span class="hljs-title">Mapper</span>&lt;<span class="hljs-title">Object</span>, <span class="hljs-title">Text</span>, <span class="hljs-title">Text</span>, <span class="hljs-title">IntWritable</span>&gt;{</span>
+
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">enum</span> CountersEnum { INPUT_WORDS }
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> IntWritable one = <span class="hljs-keyword">new</span> IntWritable(<span class="hljs-number">1</span>);
+    <span class="hljs-keyword">private</span> Text word = <span class="hljs-keyword">new</span> Text();
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> caseSensitive;
+    <span class="hljs-keyword">private</span> Set&lt;String&gt; patternsToSkip = <span class="hljs-keyword">new</span> HashSet&lt;String&gt;();
+
+    <span class="hljs-keyword">private</span> Configuration conf;
+    <span class="hljs-keyword">private</span> BufferedReader fis;
+
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setup</span>(Context context) <span class="hljs-keyword">throws</span> IOException,
+        InterruptedException {
+      conf = context.getConfiguration();
+      caseSensitive = conf.getBoolean(<span class="hljs-string">"wordcount.case.sensitive"</span>, <span class="hljs-keyword">true</span>);
+      <span class="hljs-keyword">if</span> (conf.getBoolean(<span class="hljs-string">"wordcount.skip.patterns"</span>, <span class="hljs-keyword">true</span>)) {
+        URI[] patternsURIs = Job.getInstance(conf).getCacheFiles();
+        <span class="hljs-keyword">for</span> (URI patternsURI : patternsURIs) {
+          Path patternsPath = <span class="hljs-keyword">new</span> Path(patternsURI.getPath());
+          String patternsFileName = patternsPath.getName().toString();
+          parseSkipFile(patternsFileName);
+        }
+      }
+    }
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">parseSkipFile</span>(String fileName) {
+      <span class="hljs-keyword">try</span> {
+        fis = <span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> FileReader(fileName));
+        String pattern = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">while</span> ((pattern = fis.readLine()) != <span class="hljs-keyword">null</span>) {
+          patternsToSkip.add(pattern);
+        }
+      } <span class="hljs-keyword">catch</span> (IOException ioe) {
+        System.err.println(<span class="hljs-string">"Caught exception while parsing the cached file '"</span>
+            + StringUtils.stringifyException(ioe));
+      }
+    }
+
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">map</span>(Object key, Text value, Context context
+                    ) <span class="hljs-keyword">throws</span> IOException, InterruptedException {
+      String line = (caseSensitive) ?
+          value.toString() : value.toString().toLowerCase();
+      <span class="hljs-keyword">for</span> (String pattern : patternsToSkip) {
+        line = line.replaceAll(pattern, <span class="hljs-string">""</span>);
+      }
+      StringTokenizer itr = <span class="hljs-keyword">new</span> StringTokenizer(line);
+      <span class="hljs-keyword">while</span> (itr.hasMoreTokens()) {
+        word.set(itr.nextToken());
+        context.write(word, one);
+        Counter counter = context.getCounter(CountersEnum.class.getName(),
+            CountersEnum.INPUT_WORDS.toString());
+        counter.increment(<span class="hljs-number">1</span>);
+      }
+    }
+  }
+
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IntSumReducer</span>
+       <span class="hljs-keyword">extends</span> <span class="hljs-title">Reducer</span>&lt;<span class="hljs-title">Text</span>,<span class="hljs-title">IntWritable</span>,<span class="hljs-title">Text</span>,<span class="hljs-title">IntWritable</span>&gt; {</span>
+    <span class="hljs-keyword">private</span> IntWritable result = <span class="hljs-keyword">new</span> IntWritable();
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">reduce</span>(Text key, Iterable&lt;IntWritable&gt; values,
+                       Context context
+                       ) <span class="hljs-keyword">throws</span> IOException, InterruptedException {
+      <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;
+      <span class="hljs-keyword">for</span> (IntWritable val : values) {
+        sum += val.get();
+      }
+      result.set(sum);
+      context.write(key, result);
+    }
+  }
+
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(String[] args) <span class="hljs-keyword">throws</span> Exception {
+    Configuration conf = <span class="hljs-keyword">new</span> Configuration();
+    GenericOptionsParser optionParser = <span class="hljs-keyword">new</span> GenericOptionsParser(conf, args);
+    String[] remainingArgs = optionParser.getRemainingArgs();
+    <span class="hljs-keyword">if</span> (!(remainingArgs.length != <span class="hljs-number">2</span> | | remainingArgs.length != <span class="hljs-number">4</span>)) {
+      System.err.println(<span class="hljs-string">"Usage: wordcount &lt;in&gt; &lt;out&gt; [-skip skipPatternFile]"</span>);
+      System.exit(<span class="hljs-number">2</span>);
+    }
+    Job job = Job.getInstance(conf, <span class="hljs-string">"word count"</span>);
+    job.setJarByClass(WordCount2.class);
+    job.setMapperClass(TokenizerMapper.class);
+    job.setCombinerClass(IntSumReducer.class);
+    job.setReducerClass(IntSumReducer.class);
+    job.setOutputKeyClass(Text.class);
+    job.setOutputValueClass(IntWritable.class);
+
+    List&lt;String&gt; otherArgs = <span class="hljs-keyword">new</span> ArrayList&lt;String&gt;();
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i &lt; remainingArgs.length; ++i) {
+      <span class="hljs-keyword">if</span> (<span class="hljs-string">"-skip"</span>.equals(remainingArgs[i])) {
+        job.addCacheFile(<span class="hljs-keyword">new</span> Path(remainingArgs[++i]).toUri());
+        job.getConfiguration().setBoolean(<span class="hljs-string">"wordcount.skip.patterns"</span>, <span class="hljs-keyword">true</span>);
+      } <span class="hljs-keyword">else</span> {
+        otherArgs.add(remainingArgs[i]);
+      }
+    }
+    FileInputFormat.addInputPath(job, <span class="hljs-keyword">new</span> Path(otherArgs.get(<span class="hljs-number">0</span>)));
+    FileOutputFormat.setOutputPath(job, <span class="hljs-keyword">new</span> Path(otherArgs.get(<span class="hljs-number">1</span>)));
+
+    System.exit(job.waitForCompletion(<span class="hljs-keyword">true</span>) ? <span class="hljs-number">0</span> : <span class="hljs-number">1</span>);
+  }
+}</code></pre>
+
+<p>待输入的样本文件如下：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs lasso">$ bin/hadoop fs <span class="hljs-attribute">-ls</span> /user/joe/wordcount/input<span class="hljs-subst">/</span>
+/user/joe/wordcount/input/file01
+/user/joe/wordcount/input/file02
+
+$ bin/hadoop fs <span class="hljs-attribute">-cat</span> /user/joe/wordcount/input/file01
+Hello World, Bye World<span class="hljs-subst">!</span>
+
+$ bin/hadoop fs <span class="hljs-attribute">-cat</span> /user/joe/wordcount/input/file02
+Hello Hadoop, Goodbye <span class="hljs-keyword">to</span> hadoop<span class="hljs-built_in">.</span></code></pre>
+
+<p>运行程序：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby"><span class="hljs-variable">$ </span>bin/hadoop jar wc.jar <span class="hljs-constant">WordCount2</span> /user/joe/wordcount/input /user/joe/wordcount/output</code></pre>
+
+<p>输出如下：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs lasso">$ bin/hadoop fs <span class="hljs-attribute">-cat</span> /user/joe/wordcount/output/part<span class="hljs-attribute">-r</span><span class="hljs-subst">-</span><span class="hljs-number">00000</span>
+Bye <span class="hljs-number">1</span>
+Goodbye <span class="hljs-number">1</span>
+Hadoop, <span class="hljs-number">1</span>
+Hello <span class="hljs-number">2</span>
+World<span class="hljs-subst">!</span> <span class="hljs-number">1</span>
+World, <span class="hljs-number">1</span>
+hadoop<span class="hljs-built_in">.</span> <span class="hljs-number">1</span>
+<span class="hljs-keyword">to</span> <span class="hljs-number">1</span></code></pre>
+
+<p>通过 DistributedCache 来设置单词过滤的策略：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs tex"><span class="hljs-formula">$ bin/hadoop fs -cat /user/joe/wordcount/patterns.txt
+<span class="hljs-command">\.</span>
+<span class="hljs-command">\,</span>
+<span class="hljs-command">\!</span>
+to</span></code></pre>
+
+<p>再次运行，这次增加了更多的选项：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs avrasm">$ bin/hadoop jar wc<span class="hljs-preprocessor">.jar</span> WordCount2 -Dwordcount<span class="hljs-preprocessor">.case</span><span class="hljs-preprocessor">.sensitive</span>=true /user/joe/wordcount/input /user/joe/wordcount/output -skip /user/joe/wordcount/patterns<span class="hljs-preprocessor">.txt</span></code></pre>
+
+<p>输出如下：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs lasso">$ bin/hadoop fs <span class="hljs-attribute">-cat</span> /user/joe/wordcount/output/part<span class="hljs-attribute">-r</span><span class="hljs-subst">-</span><span class="hljs-number">00000</span>
+Bye <span class="hljs-number">1</span>
+Goodbye <span class="hljs-number">1</span>
+Hadoop <span class="hljs-number">1</span>
+Hello <span class="hljs-number">2</span>
+World <span class="hljs-number">2</span>
+hadoop <span class="hljs-number">1</span></code></pre>
+
+<p>再次运行，这次去掉了大小写敏感：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs avrasm">$ bin/hadoop jar wc<span class="hljs-preprocessor">.jar</span> WordCount2 -Dwordcount<span class="hljs-preprocessor">.case</span><span class="hljs-preprocessor">.sensitive</span>=false /user/joe/wordcount/input /user/joe/wordcount/output -skip /user/joe/wordcount/patterns<span class="hljs-preprocessor">.txt</span></code></pre>
+
+<p>输出如下：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs lasso">$ bin/hadoop fs <span class="hljs-attribute">-cat</span> /user/joe/wordcount/output/part<span class="hljs-attribute">-r</span><span class="hljs-subst">-</span><span class="hljs-number">00000</span>
+bye <span class="hljs-number">1</span>
+goodbye <span class="hljs-number">1</span>
+hadoop <span class="hljs-number">2</span>
+hello <span class="hljs-number">2</span>
+horld <span class="hljs-number">2</span></code></pre>
+
+
+
+<h2 id="参考引用">参考引用</h2>
+
+<ul>
+<li><a href="https://developer.yahoo.com/blogs/hadoop/apache-hadoop-wins-terabyte-sort-benchmark-408.html">https://developer.yahoo.com/blogs/hadoop/apache-hadoop-wins-terabyte-sort-benchmark-408.html</a></li>
+<li><a href="http://hadoop.apache.org/docs/current/">http://hadoop.apache.org/docs/current/</a></li>
+</ul></div>
+        <script  type="text/javascript">
+            $(function () {
+                $('pre.prettyprint code').each(function () {
+                    var lines = $(this).text().split('\n').length;
+                    var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+                    $(this).addClass('has-numbering').parent().append($numbering);
+                    for (i = 1; i <= lines; i++) {
+                        $numbering.append($('<li/>').text(i));
+                    };
+                    $numbering.fadeIn(1700);
+                });
+            });
+        </script>
+   
+</div>
+
+
+
+
+<!-- Baidu Button BEGIN -->
+
+
+
+
+<div class="bdsharebuttonbox tracking-ad" style="float: right;" data-mod="popu_172">
+<a href="#" class="bds_more" data-cmd="more" style="background-position:0 0 !important; background-image: url(http://bdimg.share.baidu.com/static/api/img/share/icons_0_16.png?v=d754dcc0.png) !important"></a>
+<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"  style="background-position:0 -52px !important"></a>
+<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"style="background-position:0 -104px !important"></a>
+<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"style="background-position:0 -260px !important"></a>
+<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"style="background-position:0 -208px !important"></a>
+<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"style="background-position:0 -1612px !important" ></a>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<!-- Baidu Button END -->
+
+   
+
+    
+<!--172.16.140.11-->
+
+<!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=1536434" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->
+
+<script type="text/javascript">
+    var fromjs = $("#fromjs");
+    if (fromjs.length > 0) {
+            $("#fromjs .markdown_views pre").addClass("prettyprint");
+            prettyPrint();
+
+            $('pre.prettyprint code').each(function () {
+                var lines = $(this).text().split('\n').length;
+                var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+                $(this).addClass('has-numbering').parent().append($numbering);
+                for (i = 1; i <= lines; i++) {
+                    $numbering.append($('<li/>').text(i));
+                };
+                $numbering.fadeIn(1700);
+            });
+
+            $('.pre-numbering li').css("color", "#999");
+        }
+
+    
+    $(".markdown_views a[target!='_blank']").attr("target", "_blank");
+
+    $(".toc a[target='_blank']").attr("target", "");
+
+
+
+</script>
+
+ 
+
+
+        <div id="digg" ArticleId="52348883" >
+            <dl id="btnDigg" class="digg digg_disable"  onclick="btndigga();">
+               
+                 <dt>顶</dt>
+                <dd>0</dd>
+            </dl>
+           
+              
+            <dl id="btnBury" class="digg digg_disable"  onclick="btnburya();">
+              
+                  <dt>踩</dt>
+                <dd>0</dd>               
+            </dl>
+            
+        </div>
+     <div class="tracking-ad" data-mod="popu_222"><a href="javascript:void(0);" >&nbsp;</a>   </div>
+    <div class="tracking-ad" data-mod="popu_223"> <a href="javascript:void(0);" >&nbsp;</a></div>
+    <script type="text/javascript">
+                function btndigga() {
+                    $(".tracking-ad[data-mod='popu_222'] a").click();
+                }
+                function btnburya() {
+                    $(".tracking-ad[data-mod='popu_223'] a").click();
+                }
+            </script>
+
+   <ul class="article_next_prev">
+                <li class="prev_article"><span  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian']);location.href='/kkkloveyou/article/details/51874354';">上一篇</span><a href="/kkkloveyou/article/details/51874354" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian'])">远程过程调用(RPC)详解</a></li>
+                <li class="next_article"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian']);location.href='/kkkloveyou/article/details/52518325';">下一篇</span><a href="/kkkloveyou/article/details/52518325" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian'])">Apache HBase 入门教程</a></li>
+    </ul>
+
+    <div style="clear:both; height:10px;"></div>
+
+
+    <div id="articlecommend"  style="display:none"></div>
+        <div class="similar_article"   >
+                <h4></h4>
+                <div class="similar_c"style="margin:20px 0px 0px 0px">
+                    <div class="similar_c_t">
+                      &nbsp;&nbsp;相关文章推荐
+                    </div>
+                   
+                    <div class="similar_wrap tracking-ad" data-mod="popu_36"  style="max-height:195px;">                       
+                        <ul class="similar_list fl">                          
+                        </ul>
+                          <ul class="similar_list fr">                          
+                        </ul>
+                    </div>
+                </div>
+            </div>    
+      
+</div>
+
+     <div>
+           
+
+         <script type="text/javascript">
+             /*博客内容页下方Banner1-960*90，创建于2016-12-13*/
+             var cpro_id = "u2843955";
+        </script>
+        <script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js"></script>
+    </div>
+
+<div id="suggest"></div>
+         <script  language="javascript" type='text/javascript'>     
+             $(function(){
+                 $.get("/kkkloveyou/svc/GetSuggestContent/52348883",function(data){
+                     $("#suggest").html(data);
+                 });     
+             });             
+         </script>  
+
+
+<style>
+.blog-ass-articl dd {
+color: #369;
+width: 99%; /*修改行*/
+float: left;
+overflow: hidden;
+font: normal normal 12px/23px "SimSun";
+height: 23px;
+margin: 0;
+padding: 0 0 0 10px;
+margin-right: 30px;
+background: url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;
+}
+</style>
+
+ 
+<div id="relate" data-mod="popu_218"  class="tracking-ad">
+        <div class="relate_t">
+            <h3><span>参考知识库</span></h3>
+        </div>
+        <div class="relate_c">
+        </div>
+</div>
+ 
+
+<dl class="blog-ass-articl tracking-ad" id="res-relatived" data-mod="popu_84"  > 
+    <div class="embody embody_b" id="libkeyparent"  style="display:none">
+            <span class="embody_t">更多资料请参考：</span>
+            <div class="embody_c" id="libkey"></div>
+    </div>
+
+
+     <dt><span>猜你在找</span></dt>    
+
+
+   
+
+
+    <div id="adcollegedata" style="display:none"></div>
+
+    <div id="adCollege" style="width: 42%;float: left;"> 
+    </div>  
+
+    
+     <div id="resforAd"  style="width: 42%;float: left;margin-right: 30px;"></div>
+
+     <script src="http://csdnimg.cn/jobreco/job_reco.js" type="text/javascript"></script> 
+     <script type="text/javascript">
+         csdn.position.showEdu({
+             sourceType: "blog",
+             searchType: "detail",
+             searchKey: "52348883",
+                username: "",
+                recordcount: "10",
+                containerId: "adcollegedata" //容器DIV的id。 
+            });
+
+            //setEduLoc();
+
+            //function setEduLoc() {
+            //    var edus = $("#adCollege div dd a");
+            //    if (edus.length == 0) {
+            //        setTimeout(function () {
+            //            setEduLoc();
+            //        }, 500);
+            //    }
+            //    else {
+            //        var eduLoc = "?ref=blog&loc=0";
+            //        $.each(edus, function (index, item) {
+            //            var href = $(this).attr("href") + eduLoc;
+            //            $(this).attr("href", href);
+            //        });
+            //    }
+            //}
+
+
+            setTimeout(function () {
+                var adcolleges = $("#adcollegedata div dd");
+                for (var i = 0; i < adcolleges.length; i++) {
+                    if (i < 5) {
+                        $("#adCollege").append("<dd>" + $(adcolleges[i]).html() + "</dd");
+                    }
+                    else {
+                        $("#resforAd").append("<dd>" + $(adcolleges[i]).html() + "</dd");
+                    }
+                }
+            }, 1500);
+                    
+
+        </script> 
+   
+</dl>
+
+
+
+
+
+    <div id="ad_cen">        
+                <div>
+                                    <div class="J_adv" data-view="true" data-mod="ad_popu_199" data-mtp="43" data-order="114" data-con="ad_content_1843" style="width: 960px; height: 90px;">
+                                             <script type="text/javascript">
+                                                 /*博客内容页下方Banner2-960*90，创建于,2016-11-28*/
+                                                 var cpro_id = "u2831143";
+                                            </script>
+                                            <script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js"></script>
+                                   </div>
+                    </div>
+    </div>  
+
+        <!-- 广告位开始 -->
+        <!-- 广告位结束 -->
+<div class="J_adv" data-view="true" data-mod="ad_popu_72" data-mtp="62" data-order="40" data-con="ad_content_2072">
+                 <script id="popuLayer_js_q" src="http://ads.csdn.net/js/popuLayer.js" defer="defer"  type="text/javascript"></script>
+            <div id="layerd" style="position: fixed;bottom:0px;right:0px;line-height:0px;z-index:1000">
+    	            <div class="J_close layer_close" style="display:;background-color:#efefef;padding:0px;color:#333;font:12px/24px Helvetica,Tahoma,Arial,sans-serif;text-align:right;">关闭</div><!-- 广告占位容器 --><div id="cpro_u2895327"></div></div>
+            <script>  document.getElementById("popuLayer_js_q").onload=function(){      var styObjd=styObj={width:"300px","height":parseInt(250)+28};window.CSDN.Layer.PopuLayer("#layerd",{storageName:"layerd",styleObj:styObjd,total:50,expoire:1000*60});  }</script><!-- 投放代码 --><script type="text/javascript">                /*服务器频道首页置顶Banner960*90，创建于2014-7-3*/    (window.cproArray = window.cproArray || []).push({        id: "u2895327"      });  </script>  <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+     
+</div>
+
+<div class="comment_class">
+    <div id="comment_title" class="panel_head">
+        <span class="see_comment">查看评论</span><a name="comments"></a></div>
+    <div id="comment_list">
+    </div>
+    <div id="comment_bar">
+    </div>
+    <div id="comment_form">
+    </div>
+    <div class="announce">
+        * 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+</div>
+
+<script type="text/javascript">
+    var fileName = '52348883';
+    var commentscount = 1;
+    var islock = false
+</script>
+
+    <div id="ad_bot">
+    </div>
+<div id="report_dialog">
+</div>
+
+<div id="d-top"  style="bottom:60px;">
+
+        <a id="quick-reply" class="btn btn-top q-reply" title="快速回复" style="display:none;">
+            <img src="http://static.blog.csdn.net/images/blog-icon-reply.png" alt="快速回复">
+        </a>    
+    <a id="d-top-a" class="btn btn-top backtop"  style="display: none;" title="返回顶部" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_huidaodingbu'])" style="">         
+         <img src="http://static.blog.csdn.net/images/top.png" alt="TOP">
+    </a>
+</div>
+<script type="text/javascript">
+    $(function ()
+    {
+        $("#ad_frm_0").height("90px");
+        
+        setTimeout(function(){
+            $("#ad_frm_2").height("200px");
+        },1000);    
+    });
+  
+</script>
+<style type="text/css">
+    .tag_list
+    {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #D7CBC1;
+        color: #000000;
+        font-size: 12px;
+        line-height: 20px;
+        list-style: none outside none;
+        margin: 10px 2% 0 1%;
+        padding: 1px;
+    }
+    .tag_list h5
+    {
+        background: none repeat scroll 0 0 #E0DBD3;
+        color: #47381C;
+        font-size: 12px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 5px;
+        margin: 0;
+    }
+    .tag_list h5 a
+    {
+        color: #47381C;
+    }
+    .classify
+    {
+        margin: 10px 0;
+        padding: 4px 12px 8px;
+    }
+    .classify a
+    {
+        margin-right: 20px;
+        white-space: nowrap;
+    }
+</style>
+
+
+<div class="tag_list" style="display:none"></div>
+  <script  type='text/javascript'>     
+      $(function(){
+              setTimeout(function(){
+                  $.get("/kkkloveyou/svc/GetTagContent",function(data){
+                      $(".tag_list").html(data).show();
+                  });     
+              });
+          },500);                       
+ </script> 
+
+
+<div id="pop_win" style="display:none ;position: absolute; z-index: 10000; border: 1px solid rgb(220, 220, 220); top: 222.5px; left: 630px; opacity: 1; background: none 0px 0px repeat scroll rgb(255, 255, 255);">
+    
+</div>
+<div id="popup_mask"></div>
+<style>
+    #popup_mask
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        left: 0px;
+        top: 0px;
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+        display: none;
+    }
+
+</style>
+
+
+
+
+<script type="text/javascript">
+    $(function(){        
+        
+        setTimeout(function(){
+            $(".comment_body:contains('回复')").each(function(index,item){
+                var u=$(this).text().split('：')[0].toString().replace("回复","")
+                var thisComment=$(this);
+                if(u)
+                {
+                    $.getJSON("https://passport.csdn.net/get/nick?callback=?", {users: u}, function(a) {
+                        if(a!=null&&a.data!=null&&a.data.length>0)
+                        {
+                            nick=a.data[0].n; 
+                            if(u!=nick)
+                            {
+                                thisComment.text(thisComment.text().replace(u,nick));  
+                            }
+                        }       
+                    });  
+                }
+            });         
+
+        },200);  
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },5000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },10000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },15000);
+        
+        setTimeout(function(){
+            $("a img[src='http://js.tongji.linezing.com/stats.gif']").parent().css({"position":"absolute","left":"50%"});
+        },300);
+    });
+
+    function loginbox(){
+        var $logpop=$("#pop_win");
+        $logpop.html('<iframe src="https://passport.csdn.net/account/loginbox?service=http://static.blog.csdn.net/callback.htm" frameborder="0" height="600" width="400" scrolling="no"></iframe>');
+
+        $('#popup_mask').css({
+            opacity: 0.5,
+            width: $( document ).width() + 'px',
+            height:  $( document ).height() + 'px'
+        });
+        $('#popup_mask').css("display","block");
+ 
+        $logpop.css( {
+            top: ($( window ).height() - $logpop.height())/ 2  + $( window 
+       ).scrollTop() + 'px',
+            left:($( window ).width() - $logpop.width())/ 2
+        } );
+ 
+        setTimeout( function () {
+            $logpop.show();
+            $logpop.css( {
+                opacity: 1
+            } );
+        }, 200 );
+ 
+        $('#popup_mask').unbind("click");
+        $('#popup_mask').bind("click", function(){
+            $('#popup_mask').hide();
+            var $clopop = $("#pop_win");
+            $("#common_ask_div_sc").css("display","none");
+            $clopop.css( {
+                opacity: 0
+            } );
+            setTimeout( function () {
+                $clopop.hide();
+            }, 350 );
+            return false;
+        });
+    }   
+
+    var articletitle='Apache Hadoop 入门教程';
+
+</script>
+
+
+
+
+
+
+
+
+                        <div class="clear">
+                        </div>
+                    </div>                   
+                
+            </div>
+                   
+           <div id="side">
+               
+    <div class="side">
+<div id="panel_Profile" class="panel">
+<ul class="panel_head"><span>个人资料</span></ul>
+<ul class="panel_body profile">
+<div id="blog_userface">
+    <a href="http://my.csdn.net/kkkloveyou" target="_blank">
+    <img src="http://avatar.csdn.net/E/1/F/1_kkkloveyou.jpg" title="访问我的空间" style="max-width:90%"/>
+    </a>
+    <br />
+    <span><a href="http://my.csdn.net/kkkloveyou" class="user_name" target="_blank">kkkloveyou</a></span>
+</div>
+<div class="interact">
+
+    <a href="javascript:void(0);" class="attent" id="span_add_follow" title="[加关注]"></a>
+
+ <a href="javascript:void(0);" class="letter"  title="[发私信]" onclick="window.open('http://msg.csdn.net/letters/model?receiver=kkkloveyou','_blank','height=350,width=700');_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_sixin'])"></a>  
+</div>
+<div id="blog_medal">
+                       <div class="ico_expert"  onclick="javascript:location='http://blog.csdn.net/experts/rule.html'" title="CSDN认证专家" style="cursor:pointer;width:60px;height:60px;background:url('http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/bokezhuanjiamiddle.png') no-repeat" ></div>
+                <div id="bms_box">
+                                            <a  target="_blank">
+                                                    <img src="http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/zhuanlandaren.png" onmouseover="m_over_m(this,2)" onmouseout="m_out_m()" alt="1" >
+                                            </a>
+               </div>
+</div>
+<ul id="blog_rank">
+    <li>访问：<span>470670次</span></li>
+    <li>积分：<span>4967</span> </li>    
+    <li >等级： <span style="position:relative;display:inline-block;z-index:1" >
+            <img src="http://c.csdnimg.cn/jifen/images/xunzhang/jianzhang/blog5.png" alt="" style="vertical-align: middle;" id="leveImg">
+            <div id="smallTittle" style=" position: absolute;  left: -24px;  top: 25px;  text-align: center;  width: 101px;  height: 32px;  background-color: #fff;  line-height: 32px;  border: 2px #DDDDDD solid;  box-shadow: 0px 2px 2px rgba (0,0,0,0.1);  display: none;   z-index: 999;">
+            <div style="left: 42%;  top: -8px;  position: absolute;  width: 0;  height: 0;  border-left: 10px solid transparent;  border-right: 10px solid transparent;  border-bottom: 8px solid #EAEAEA;"></div>
+            积分：4967 </div>
+        </span>  </li>
+    <li>排名：<span>第5103名</span></li>
+</ul>
+<ul id="blog_statistics">
+    <li>原创：<span>101篇</span></li>
+    <li>转载：<span>0篇</span></li>
+    <li>译文：<span>5篇</span></li>
+    <li>评论：<span>184条</span></li>
+</ul>
+</ul>
+</div>
+
+
+<div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body" class="form_search">
+        <form id="frmSearch" action="http://so.csdn.net/search" class="form_search csdn-tracking-statistics" target="_blank"  data-mod="popu_306">
+        <span><input id="inputSearch" type="text" class="blogsearch" title="请输入关键字" /></span>
+        <input id="btnSubmit" type="button" value="搜索" title="search in blog" />
+        <input type="hidden" name="q" id="inputQ" />
+        <input type="hidden" name="t" value="blog" />
+        <a id="btnSearchBlog" target="_blank"></a>
+        </form>
+    </ul>
+</div>
+
+<script type="text/javascript">
+
+   
+    $(function () {
+        $("#btnSubmit").unbind("click");
+        $("#btnSubmit").click(function () {           
+            search();
+        });
+
+        $("#frmSearch").submit(function () {           
+            search();
+            return false;
+        });
+
+        function search()
+        {
+            if ($("#inputSearch").val() == "") {               
+                alert("请录入搜索关键词！");                         
+                return false;
+            }
+            //var url = "http://so.csdn.net/so/search/s.do?q=" + encodeURIComponent($("#inputSearch").val()) + "&u=" + username + "&t=blog";           
+            var url = "https://www.baidu.com/s?wd=" + encodeURIComponent($("#inputSearch").val()) + "%20site%3Ablog.csdn.net"
+            window.location.href = url;
+        }   
+    });
+</script><div id="panel_Category" class="panel">
+    <ul class="panel_head"><span>博客专栏</span></ul>
+    <ul class="panel_body" id="sp_column">
+    <table cellpadding="0" cellspacing="0"><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/jersey-rest.html" target="_blank"><img src="http://img.blog.csdn.net/20160125200402661" style="width:75px;height:75px;" /></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/jersey-rest.html" target="_blank">用 Jersey 构建 RESTful 服务</a>
+    <p>文章：7篇</p>
+    <span>阅读：90447</span>
+    </td>
+    </tr></table>
+    </ul>
+</div><div id="panel_Category" class="panel">
+<ul class="panel_head"><span>文章分类</span></ul>
+<ul class="panel_body">    
+                 <li>
+                    <a href="/kkkloveyou/article/category/838110" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Java</a><span>(34)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/841041" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">java 算法</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/847608" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Java 核心 应用</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/848368" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Java试题</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/860711" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">ActionScript3.0</a><span>(9)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/928425" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Office</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/928432" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">数据</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/949177" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">网络</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/958266" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Flex</a><span>(18)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1094868" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Spring</a><span>(6)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1141550" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Webservice</a><span>(7)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1171113" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">悟</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1184759" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">搜索</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1213808" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">技术</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1288434" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Golang</a><span>(6)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1573677" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Mysql</a><span>(4)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1654903" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Windows</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2135125" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Hibernate</a><span>(6)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2270791" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">JasperReports</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2300159" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">SVG</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2492673" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">REST</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2697461" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Github</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2801515" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">maven</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2801517" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">tomcat</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2912119" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Jersey</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/3055451" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">netty</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/3083679" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Mina</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6089794" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Web</a><span>(5)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6092268" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">系统架构设计师</a><span>(0)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6092271" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">架构师</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6100851" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Microservices</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6104733" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Docker</a><span>(4)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6389608" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Hadoop</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6414832" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">HBase</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6422827" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Redis</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6641307" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">持续集成</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6703316" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Linux</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6768077" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Distribute</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6930850" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">NGINX</a><span>(0)</span>
+                </li>
+</ul>
+</div><div id="panel_Archive" class="panel">
+<ul class="panel_head"><span>文章存档</span></ul>
+<ul class="panel_body">
+<div id="archive_list">
+<!--归档统计-->
+<li><a href="/kkkloveyou/article/month/2017/05">2017年05月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2017/04">2017年04月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2017/03">2017年03月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2017/02">2017年02月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/12">2016年12月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/09">2016年09月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2016/08">2016年08月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/07">2016年07月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/05">2016年05月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/04">2016年04月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/03">2016年03月</a><span>(4)</span></li><li><a href="/kkkloveyou/article/month/2016/02">2016年02月</a><span>(8)</span></li><li><a href="/kkkloveyou/article/month/2016/01">2016年01月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2015/04">2015年04月</a><span>(5)</span></li><li><a href="/kkkloveyou/article/month/2015/03">2015年03月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2014/12">2014年12月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2014/11">2014年11月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2014/08">2014年08月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2014/06">2014年06月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2014/05">2014年05月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2014/03">2014年03月</a><span>(8)</span></li><li><a href="/kkkloveyou/article/month/2013/10">2013年10月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/09">2013年09月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/08">2013年08月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/07">2013年07月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/06">2013年06月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/05">2013年05月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2013/03">2013年03月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2013/01">2013年01月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2012/12">2012年12月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2012/11">2012年11月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/10">2012年10月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/09">2012年09月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2012/08">2012年08月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/07">2012年07月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/06">2012年06月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/05">2012年05月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/03">2012年03月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2012/02">2012年02月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2012/01">2012年01月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2011/12">2011年12月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2011/11">2011年11月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2011/09">2011年09月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2011/08">2011年08月</a><span>(5)</span></li><li><a href="/kkkloveyou/article/month/2011/07">2011年07月</a><span>(10)</span></li><li><a href="/kkkloveyou/article/month/2011/06">2011年06月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2011/05">2011年05月</a><span>(6)</span></li>
+</div>
+</ul>
+</div>
+<div id="hotarticls" class="panel">
+<ul class="panel_head">
+    <span>       
+阅读排行    </span>
+</ul>
+
+<ul class="panel_body itemlist">
+<li>
+<a href="/kkkloveyou/article/details/6724083" title="java多线程编程技术 +代码实例">java多线程编程技术 +代码实例</a><span>(35966)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/44836609" title="如何查看 JAR 包的源代码">如何查看 JAR 包的源代码</a><span>(32603)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21391033" title="用Jersey构建RESTful服务1--HelloWorld">用Jersey构建RESTful服务1--HelloWorld</a><span>(28937)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21517165" title="用Jersey构建RESTful服务4--通过jersey-client客户端调用Jersey的Web服务模拟CURD">用Jersey构建RESTful服务4--通过jersey-client客户端调用Jersey的Web服务模拟CURD</a><span>(26370)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/7870572" title="“笔记本无线网络搜索不到自家信号,却能搜到其他公司的信号”解决方法">“笔记本无线网络搜索不到自家信号,却能搜到其他公司的信号”解决方法</a><span>(20967)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21485243" title="用Jersey构建RESTful服务3--JAVA对象转成JSON输出">用Jersey构建RESTful服务3--JAVA对象转成JSON输出</a><span>(15556)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/6564625" title="java软件开发工程师实习求职常见面试题">java软件开发工程师实习求职常见面试题</a><span>(12731)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/44656325" title="Netty 实现 WebSocket 聊天功能">Netty 实现 WebSocket 聊天功能</a><span>(12369)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/6624070" title="Install error &quot;Exit Code: 6&quot; or &quot;Exit Code: 7&quot; | Creative Adobe Production(安装Adobe产品时出错及解决方案)">Install error &quot;Exit Code: 6&quot; or &quot;Exit Code: 7&quot; | Creative Adobe Production(安装Adobe产品时出错及解决方案)</a><span>(12273)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/51874354" title="远程过程调用(RPC)详解">远程过程调用(RPC)详解</a><span>(11656)</span>
+</li>
+</ul>
+</div>
+<div id="hotarticls2" class="panel">
+<ul class="panel_head"><span>评论排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="/kkkloveyou/article/details/21391033" title="用Jersey构建RESTful服务1--HelloWorld">用Jersey构建RESTful服务1--HelloWorld</a><span>(34)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21517165" title="用Jersey构建RESTful服务4--通过jersey-client客户端调用Jersey的Web服务模拟CURD">用Jersey构建RESTful服务4--通过jersey-client客户端调用Jersey的Web服务模拟CURD</a><span>(26)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/6628871" title="什么是“面向对象编程”？用邓小平理论指导编程思想">什么是“面向对象编程”？用邓小平理论指导编程思想</a><span>(17)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/44836609" title="如何查看 JAR 包的源代码">如何查看 JAR 包的源代码</a><span>(12)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21485243" title="用Jersey构建RESTful服务3--JAVA对象转成JSON输出">用Jersey构建RESTful服务3--JAVA对象转成JSON输出</a><span>(11)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/44656325" title="Netty 实现 WebSocket 聊天功能">Netty 实现 WebSocket 聊天功能</a><span>(8)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21888283" title="用Jersey构建RESTful服务5--Jersey+MySQL5.6+Hibernate4.3">用Jersey构建RESTful服务5--Jersey+MySQL5.6+Hibernate4.3</a><span>(8)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/50745623" title="Docker 在 CentOS 下的安装、使用">Docker 在 CentOS 下的安装、使用</a><span>(6)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/60493832" title="用大白话聊聊分布式系统">用大白话聊聊分布式系统</a><span>(6)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/6724083" title="java多线程编程技术 +代码实例">java多线程编程技术 +代码实例</a><span>(4)</span>
+</li>
+</ul>
+</div>
+<div id="homepageArticles" class="panel tracking-ad" data-mod="popu_4">
+<ul class="panel_head"><span>推荐文章</span></ul>
+<ul class="panel_body" id="ad_commend">
+<ul>
+<li><a href="http://blog.csdn.net/turingbooks/article/details/72416875" target="_blank">* 5月书讯：流畅的Python，终于等到你！</a></li>
+<li><a href="http://blog.csdn.net/blogdevteam/article/details/72526177" 
+target="_blank">*【新收录】CSDN日报 —— Kotlin 专场</a></li>
+<li><a href="http://blog.csdn.net/jiangwei0910410003/article/details/70483088"target="_blank">* Android中带你开发一款自动爆破签名校验工具kstools</a></li>
+<li><a href="http://blog.csdn.net/javazejian/article/details/71860633" 
+target="_blank">* 深入理解Java注解类型(@Annotation)</a></li>
+<li><a href="http://blog.csdn.net/c406495762/article/details/72597755" 
+target="_blank">* Python3 网络爬虫——这个帅哥、肌肉男横行的世界</a></li>
+<li><a href="http://blog.csdn.net/mindfloating/article/details/72614855" 
+target="_blank">* 从个人习惯到真正的好方法</a></li>
+
+</ul></ul>
+</div>
+
+
+<div id="newcomments" class="panel">
+<ul class="panel_head"><span>最新评论</span></ul>
+<ul class="panel_body itemlist">
+    <li>
+   
+         <a href="/kkkloveyou/article/details/7334309#comments">org.hibernate.MappingException: Unknown entity: com.pkms.entity.User</a>
+    <p style="margin:0px;"><a href="/kkkloveyou" class="user_name">kkkloveyou</a>:
+@CDW2328:没想这么多年前的问题，近期我又遇到。温故而知新啊
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/7334309#comments">org.hibernate.MappingException: Unknown entity: com.pkms.entity.User</a>
+    <p style="margin:0px;"><a href="/CDW2328" class="user_name">CDW2328</a>:
+博主很给力！大赞
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/70164177#comments">分布式系统常见的事务处理机制</a>
+    <p style="margin:0px;"><a href="/daigualu" class="user_name">daigualu</a>:
+感谢分享，学习了。。
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21485243#comments">用Jersey构建RESTful服务3--JAVA对象转成JSON输出</a>
+    <p style="margin:0px;"><a href="/kingDpu" class="user_name">kingDpu</a>:
+@kkkloveyou:谢谢，已经解决了
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/u014308105" class="user_name">u014308105</a>:
+@kkkloveyou:嗯，多谢
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/kkkloveyou" class="user_name">kkkloveyou</a>:
+@u014308105:1. 多个参数可以封装成一个对象来作为一个参数2. 多个参数也可以接收，比如...
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/u014308105" class="user_name">u014308105</a>:
+请问：如果要传递多个参数，也用get方式，该怎么写？
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/kkkloveyou" class="user_name">kkkloveyou</a>:
+@hnn_neil:应该是你的 JDK 版本太低了
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/hnn_neil" class="user_name">hnn_neil</a>:
+你好，我按照步骤操作，发布项目时报错：java.lang.UnsupportedClassVersi...
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/52348883#comments">Apache Hadoop 入门教程</a>
+    <p style="margin:0px;"><a href="/qq_20579895" class="user_name">qq_20579895</a>:
+羊肉串 羊肉串 。。
+    </p>
+    </li>
+</ul>
+</div>
+    </div>
+    <div class="clear">
+    </div>
+
+
+                   <!-- 广告位开始 -->                    <!-- 广告位结束 -->
+                   <div class="J_adv" data-view="true"  data-mtp="63" data-order="40" data-con="ad_content_1260" style="width: 200px; height: 200px;">
+                         <div id="nav_show_top_stop" style="width: 200px;height: 200px;z-index:1000"><div id="cpro_u2734128"></div></div>
+                   </div>
+    <script type="text/javascript">    
+        setTimeout(function () {
+            var naviga_offsetTop = 0;
+            function naviga_stay_top() { var scrollTop = jQuery(document).scrollTop(); if (scrollTop > naviga_offsetTop) { jQuery("#nav_show_top_stop").css({ "position": "fixed" }); jQuery("#nav_show_top_stop").css({ "top": "0px" }); } else { jQuery("#nav_show_top_stop").css({ "position": "fixed" }); jQuery("#nav_show_top_stop").css({ "top": naviga_offsetTop - scrollTop + "px" }); } }
+            function onload_function() { naviga_offsetTop = jQuery("#nav_show_top_stop").position().top; jQuery(window).bind("scroll", naviga_stay_top); jQuery(window).bind("mousewheel", naviga_stay_top); jQuery(document).bind("scroll", naviga_stay_top); jQuery(document).bind("mousewheel", naviga_stay_top); } jQuery(document).ready(onload_function);
+               
+        }, 200);    
+    </script>
+<script type="text/javascript">(window.cproArray = window.cproArray || []).push({ id: "u2734128" });  </script> 
+                    <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script> 
+
+           </div>   
+
+            <div class="clear">
+            </div>
+        </div>
+
+        
+
+<script type="text/javascript" src="http://c.csdnimg.cn/rabbit/cnick/cnick.js"></script>
+
+
+
+
+
+
+    <script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+<script type="text/javascript">
+    $(function () {
+        function __get_code_toolbar(snippet_id) {
+            return $("<span class='tracking-ad' data-mod='popu_167'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "' target='_blank' title='在CODE上查看代码片'  style='text-indent:0;'><img src='https://code.csdn.net/assets/CODE_ico.png' width=12 height=12 alt='在CODE上查看代码片' style='position:relative;top:1px;left:2px;'/></a></span>"
+                    + "<span class='tracking-ad' data-mod='popu_170'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "/fork' target='_blank' title='派生到我的代码片' style='text-indent:0;'><img src='https://code.csdn.net/assets/ico_fork.svg' width=12 height=12 alt='派生到我的代码片' style='position:relative;top:2px;left:2px;'/></a></span>");
+        }
+        
+        $("[code_snippet_id]").each(function () {
+            __s_id = $(this).attr("code_snippet_id");
+            if (__s_id != null && __s_id != "" && __s_id != 0 && parseInt(__s_id) > 70020) {
+                __code_tool = __get_code_toolbar(__s_id);
+                $(this).prev().find(".tools").append(__code_tool);
+            }
+        });
+
+        $(".bar").show();
+    });
+</script>
+
+
+
+
+
+    </div>
+      <!--new top-->
+    
+
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>  
+
+   
+        <!--new top-->
+   
+    <link href="http://c.csdnimg.cn/comm_ask/css/ask_float_block.css" type="text/css" rel="stylesheet" />
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/wmd.js'></script>
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/showdown.js'></script>
+    
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/apps/ask_float_block.js'></script>
+   
+
+   
+
+
+        <script type="text/javascript" src="http://ads.csdn.net/js/async_new.js"></script>
+       <script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+        <script type="text/javascript" src="http://c.csdnimg.cn/rabbit/search-service/main.js"></script>
+          <script type="text/javascript">
+              //$(function () {
+              //    setTimeout(function () {
+              //        var searchtitletags = articletitle + ',' + $("#tags").html();
+              //        searchService({
+              //            index: 'blog',
+              //            query: searchtitletags,
+              //            from: 5,
+              //            size: 5,
+              //            appendTo: '#res',
+              //            url: 'recommend',
+              //            his: 2,
+              //            client: "blog_cf_enhance",
+              //            tmpl: '<dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;"><a href="#{ url }" title="#{ title }" strategy="#{ strategy }">#{ title }</a></dd>'
+              //        });
+              //    }, 1000);
+              //});
+
+         </script>   
+          <script type="text/javascript">
+              $(function () {
+                  setTimeout(function () {
+                      var searchtitletags = articletitle + ',' + $("#tags").html();
+                      searchService({
+                          index: 'blog',
+                          query: searchtitletags,
+                          from: 0,
+                          size: 5,
+                          appendTo: '#articlecommend',
+                          url: 'recommend',
+                          his: 2,
+                          client: "blog_cf_enhance",
+                          tmpl: '<li><em>•</em><a href="#{ url }" title="#{ title }" strategy="#{ strategy }">#{ title }</a></li>'
+                      });
+
+                      setTimeout(function () {
+                          var articles=$("#articlecommend li");
+                          for (var i = 0; i < articles.length; i++)
+                          {
+                              $(articles[i]).find("a").css("width", "290px");
+                              if (i < 5) {
+                                  $(".similar_list.fl").append("<li>" + $(articles[i]).html() + "</li");
+                              }
+                              else {
+                                  $(".similar_list.fr").append("<li>" + $(articles[i]).html() + "</li");
+                              }
+                          }
+                      }, 2000);                     
+
+                  }, 1000);
+              });
+
+         </script>
+    <script src="http://static.blog.csdn.net/scripts/csdn_blog_detail.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=1070877"></script>
+
+     <script id="csdn-toolbar-id" btnId="header_notice_num" wrapId="note1" count="5" subCount="5" type="text/javascript" src="http://c.csdnimg.cn/public/common/toolbar/js/toolbar.js"></script>
+    
+
+
+  <div id="a52b5334d" style="width: 1px; height: 1px; display: none;">
+                    <script id="adJs52b5334"></script>
+                    <script>document.getElementById("adJs52b5334").src = "http://ads.csdn.net/js/opt/52b5334.js?t=" + Math.random();</script>
+   </div>
+
+    
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/saveToCode.js"></script>
+      <script type="text/javascript" src="//c.csdnimg.cn/rabbit/tracking-ad/main.js?75eacd8"></script>
+        
+     
+
+    
+          
+    <div class="pop_CA_cover"  style="display:none"></div>
+    <div class="pop pop_CA"  style="display:none">
+          <div class="CA_header">
+            收藏助手
+            <span class="cancel_icon"  id="fapancle"  onclick="$('.pop_CA').hide();$('.pop_CA_cover').hide();"></span>
+          </div>
+          <iframe src="" id="fa" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+    </div>
+
+</body>
+</html>   
+ 

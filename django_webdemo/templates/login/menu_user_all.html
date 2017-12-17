@@ -1,0 +1,35 @@
+{% extends 'login/menu_main.html' %}
+{% block css %}
+<link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block js %}
+<script type="text/javascript" src='/static/bootstrap/js/bootstrap.js'></script>
+{% endblock %}
+{% block myson %}
+<table  class="table table-hover">
+<thead>
+<tr>
+    <th>ID</th>
+    <th>用户名</th>
+	<th>密码</th>
+	<th>身份证</th>
+	<th>年龄</th>
+	<th>手机</th>
+	<th>登录时间</th>
+	<th>编辑操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>{{item.id}}</td>
+	<th>{{item.name}}</th>
+	<td>{{item.passwd}}</td>
+	<td>{{item.card}}</td>
+	<td>{{item.age}}</td>
+	<td>{{item.phone}}</td>
+	<td>{{item.login_time}}</td>
+	<td><a href="/menu_user/0">返回</a></td>
+</tr>
+</tbody>
+</table>
+{% endblock %}

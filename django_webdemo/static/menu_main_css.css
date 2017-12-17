@@ -1,0 +1,31 @@
+.body_div{
+	position:fixed;
+	height:60px;
+	border:1px solid #3C3A3A;
+	width:100%;
+	left:0;
+	top:0;
+	right:0;
+	background-color:#3C3A3A;
+	padding-left:20px;
+	padding-top:10px;
+	font-size:25px;
+	color:white;
+}
+.body_down{
+	height:800px;
+}
+.body_left_menu{
+	position:fixed;
+	bottom:50px;
+	width:200px;
+	left:5px;
+	top:98px;
+}
+.body_right{
+	position:fixed;
+	bottom:50px;
+	right:10px;
+	left:220px;
+	top:98px;	
+}

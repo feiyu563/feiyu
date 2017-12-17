@@ -1,0 +1,1591 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+     
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    
+<head>  
+
+            <link rel="canonical" href="http://blog.csdn.net/kkkloveyou/article/details/51025147"/> 
+ <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+
+    <title>Docker 在 openSUSE 下的安装、使用 - kkkloveyou
+        - 博客频道 - CSDN.NET</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="本文介绍了 Docker 在 openSUSE 环境下的详细安装过程，并尝试运行一个简单 Spring Boot 的 image 来感受下 Docker 的风采。" />
+   
+    <script src="http://static.blog.csdn.net/scripts/blog_static_head.min.js" type="text/javascript"></script>
+
+    
+        <!--new top-->
+               <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/css/index.css">        <!--new top-->
+    
+      <!-- ad begin -->
+         <script language="javascript" type="text/javascript" src="http://ads.csdn.net/js/tracking.js"></script>
+    <!-- ad end-->
+
+    <link rel="Stylesheet" type="text/css" href="http://static.blog.csdn.net/skin/dark1/css/style.css?v=1.1" />
+
+    
+
+    <link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="/kkkloveyou/rss/list" />
+    <link rel="shortcut icon" href="http://c.csdnimg.cn/public/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+ 
+
+     
+    <link rel="stylesheet" href="http://static.blog.csdn.net/css/csdn_blog_detail.min.css" />
+
+</head>
+
+
+<body>
+       
+
+
+
+    <!-- 广告位开始 -->
+        
+    <!-- 广告位结束 -->
+
+    
+   
+      <!--new top-->
+    <script id="toolbar-tpl-scriptId" fixed="true" prod="blog" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/html.js" type="text/javascript"></script>
+     <!--new top-->
+    <div id="container">
+        <div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h2>
+                <a href="http://blog.csdn.net/kkkloveyou">kkkloveyou</a></h2>
+            <h3>关注Web编程的那点事</h3>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+        
+     
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg">
+    </div>
+    <div class="navigator">
+        <ul>           
+                <li id="btnContents"><a href="http://blog.csdn.net/kkkloveyou?viewmode=contents"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_mulu'])">
+                    <img src="http://static.blog.csdn.net/images/ico_list.gif">目录视图</span></a></li>
+                <li id="btnView"><a href="http://blog.csdn.net/kkkloveyou?viewmode=list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_zhaiyao'])">
+                    <img src="http://static.blog.csdn.net/images/ico_summary.gif">摘要视图</span></a></li>
+                <li id="btnRss"><a href="http://blog.csdn.net/kkkloveyou/rss/list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_RSS'])">
+                    <img src="http://static.blog.csdn.net/images/ico_rss.gif">订阅</span></a></li>                
+            
+
+            </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "kkkloveyou";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/kkkloveyou";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "";  
+</script>
+
+        <div id="body">
+            <div id="main">
+                <div class="main">
+                        <div class="ad_class">
+<div class="notice tracking-ad" data-mod='popu_3' > 
+
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/71710010">
+<font color=blue><strong>【活动】2017 CSDN博客专栏评选</strong></font></a>
+
+&nbsp;&nbsp;&nbsp;&nbsp
+
+<a href=" http://blog.csdn.net/turingbooks/article/details/72416875">
+<font color=red><strong>【5月书讯】流畅的Python，终于等到你！</strong></font></a>
+&nbsp;&nbsp;&nbsp;&nbsp
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/72638703">
+<font color=blue><strong>CSDN日报20170523 ——《技术合伙人，千万别做！》
+</strong>
+&nbsp;&nbsp;&nbsp;&nbsp
+
+
+</div>                        </div>
+                        
+
+
+
+  
+
+
+
+
+
+
+<script   type="text/javascript" src="http://static.blog.csdn.net/scripts/category.js"></script>
+
+  <script type="text/ecmascript">
+      window.quickReplyflag = true;
+           
+            var isBole = false;
+            
+      
+      var fasrc="http://my.csdn.net/my/favorite/miniadd?t=Docker+%e5%9c%a8+openSUSE+%e4%b8%8b%e7%9a%84%e5%ae%89%e8%a3%85%e3%80%81%e4%bd%bf%e7%94%a8&u=http://blog.csdn.net/kkkloveyou/article/details/51025147"
+
+    </script>
+<div id="article_details" class="details">
+    <div class="article_title">   
+         <span class="ico ico_type_Original"></span>
+
+
+    <h1>
+        <span class="link_title"><a href="/kkkloveyou/article/details/51025147">
+        Docker 在 openSUSE 下的安装、使用            
+        </a></span>
+    </h1>
+</div>
+
+   
+
+        <div class="article_manage clearfix">
+        <div class="article_l">
+            <span class="link_categories">
+            标签：
+              <a href='http://www.csdn.net/tag/opensuse' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">opensuse</a><a href='http://www.csdn.net/tag/Docker' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">Docker</a>
+            </span>
+        </div>
+        <div class="article_r">
+            <span class="link_postdate">2016-03-31 12:09</span>
+            <span class="link_view" title="阅读次数">1335人阅读</span>
+            <span class="link_comments" title="评论次数"> <a href="#comments" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_pinglun'])">评论</a>(0)</span>
+            <span class="link_collect tracking-ad" data-mod="popu_171"> <a href="javascript:void(0);" onclick="javascript:collectArticle('Docker+%e5%9c%a8+openSUSE+%e4%b8%8b%e7%9a%84%e5%ae%89%e8%a3%85%e3%80%81%e4%bd%bf%e7%94%a8','51025147');return false;" title="收藏">收藏</a></span>
+             <span class="link_report"> <a href="#report" onclick="javascript:report(51025147,2);return false;" title="举报">举报</a></span>
+
+        </div>
+    </div>
+    <div class="embody"  style="display:none" id="embody">
+        <span class="embody_t">本文章已收录于：</span>
+        <div class="embody_c" id="lib" value="{&quot;err&quot;:0,&quot;msg&quot;:&quot;ok&quot;,&quot;data&quot;:[]}"></div>
+    </div>
+    <style type="text/css">        
+            .embody{
+                padding:10px 10px 10px;
+                margin:0 -20px;
+                border-bottom:solid 1px #ededed;                
+            }
+            .embody_b{
+                margin:0 ;
+                padding:10px 0;
+            }
+            .embody .embody_t,.embody .embody_c{
+                display: inline-block;
+                margin-right:10px;
+            }
+            .embody_t{
+                font-size: 12px;
+                color:#999;
+            }
+            .embody_c{
+                font-size: 12px;
+            }
+            .embody_c img,.embody_c em{
+                display: inline-block;
+                vertical-align: middle;               
+            }
+             .embody_c img{               
+                width:30px;
+                height:30px;
+            }
+            .embody_c em{
+                margin: 0 20px 0 10px;
+                color:#333;
+                font-style: normal;
+            }
+    </style>
+    <script  type="text/javascript">
+        $(function () {
+            try
+            {
+                var lib = eval("("+$("#lib").attr("value")+")");
+                var html = "";
+                if (lib.err == 0) {
+                    $.each(lib.data, function (i) {
+                        var obj = lib.data[i];
+                        //html += '<img src="' + obj.logo + '"/>' + obj.name + "&nbsp;&nbsp;";
+                        html += ' <a href="' + obj.url + '" target="_blank">';
+                        html += ' <img src="' + obj.logo + '">';
+                        html += ' <em><b>' + obj.name + '</b></em>';
+                        html += ' </a>';
+                    });
+                    if (html != "") {
+                        setTimeout(function () {
+                            $("#lib").html(html);                      
+                            $("#embody").show();
+                        }, 100);
+                    }
+                }      
+            } catch (err)
+            { }
+            
+        });
+    </script>
+      <div class="category clearfix">
+        <div class="category_l">
+           <img src="http://static.blog.csdn.net/images/category_icon.jpg">
+            <span>分类：</span>
+        </div>
+        <div class="category_r">
+                    <label  onclick="GetCategoryArticles('6104733','kkkloveyou','top','51025147');">
+                        <span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_fenlei']);">Docker<em>（3）</em></span>
+                      <img class="arrow-down" src="http://static.blog.csdn.net/images/arrow_triangle _down.jpg" style="display:inline;">
+                      <img class="arrow-up" src="http://static.blog.csdn.net/images/arrow_triangle_up.jpg" style="display:none;">
+                        <div class="subItem">
+                            <div class="subItem_t"><a  href="http://blog.csdn.net/kkkloveyou/article/category/6104733"  target="_blank">作者同类文章</a><i class="J_close">X</i></div>
+                            <ul class="subItem_l" id="top_6104733">                            
+                            </ul>
+                        </div>
+                    </label>                    
+        </div>
+    </div>
+        <div   class="bog_copyright">         
+            <p  class="copyright_p" >版权声明：本文为博主原创文章，未经博主允许不得转载。</p>
+        </div>
+
+  
+
+  
+  
+     
+
+
+<div id="article_content" class="article_content tracking-ad" data-mod=popu_307  data-dsm = "post" >
+        <div class="markdown_views"><p>本文同步至 <a href="http://waylau.com/docker-installation-opensuse/">http://waylau.com/docker-installation-opensuse/</a></p>
+
+<hr>
+
+<p>本文介绍了 Docker 在 openSUSE 环境下的详细安装过程，并尝试运行一个简单 Spring Boot 的 image 来感受下 Docker 的风采。</p>
+
+
+
+<h2 id="什么是-docker">什么是 Docker</h2>
+
+<p><img src="https://docs.docker.com/dist/assets/images/logo.png" alt="" title=""></p>
+
+<p>Docker 是为开发人员和系统管理员用于构建、发布、并运行分布式应用程序的开放式平台。该平台由 Docker 引擎（一个便携、轻巧的运行时和打包工具） 和 Docker Hub （一个共享应用程序和自动化工作流的云服务）等组成。Docker 可以使应用程序从组件迅速组装并消除了开发、质量保证和生产环境之间的摩擦问题。这样一来，IT部门可以更快地发布，而这些应用程序不管是运行在笔记本电脑、数据中心的虚拟机，还是任何的云，其运行过程和结果都是一致的。</p>
+
+<p>更多有关 Docker 的介绍，可以参阅《<a href="http://waylau.com/ahout-docker/">简述 Docker</a>》 一文。</p>
+
+
+
+<h2 id="前置条件">前置条件</h2>
+
+<ul>
+<li>64-bit 系统</li>
+<li>kernel 3.10+</li>
+<li>openSUSE 13.2+。本例使用的是 <a href="http://software.opensuse.org/421/zh_CN">openSUSE Leap 42.1</a>（如果你没有 openSUSE 系统，可以尝试在虚拟机里面装个 openSUSE 系统，可以参阅《<a href="http://waylau.com/about-oracle-vm-virtualbox/">Oracle VM VirtualBox 安装和使用</a>》《<a href="http://waylau.com/centos-7-installation-and-configuration/">CentOS 7 安装、配置</a>》）</li>
+</ul>
+
+<p>使用 <code>uname -r</code> 检查 kernel 版本</p>
+
+<pre><code>$ uname -r
+4.1.12-1-default
+</code></pre>
+
+<p>建议你使用最新的系统，以为一直的 bug 都会在新的 kernel 发布中修复。</p>
+
+
+
+<h2 id="安装">安装</h2>
+
+<p>openSUSE 13.2 起，自带了仓库，所以无需添加</p>
+
+
+
+<h3 id="安装-opensuse-国内镜像源">安装 openSUSE 国内镜像源</h3>
+
+<p>网络原因，访问 openSUSE 速度慢且不稳定，建议采用国内镜像库，下面例子是使用的 aliyun</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruby">zypper addrepo -f <span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/mirrors.aliyun.com/opensuse</span><span class="hljs-regexp">/update/leap</span><span class="hljs-regexp">/42.1/oss</span>&nbsp; openSUSE-<span class="hljs-number">42.1</span>-<span class="hljs-constant">Update</span>-<span class="hljs-constant">Oss</span>
+
+zypper addrepo -f <span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/mirrors.aliyun.com/opensuse</span><span class="hljs-regexp">/update/leap</span><span class="hljs-regexp">/42.1/non</span>-oss/ openSUSE-<span class="hljs-number">42.1</span>-<span class="hljs-constant">Update</span>-<span class="hljs-constant">Non</span>-<span class="hljs-constant">Oss</span>
+
+zypper addrepo -f <span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/mirrors.aliyun.com/opensuse</span><span class="hljs-regexp">/distribution/leap</span><span class="hljs-regexp">/42.1/repo</span><span class="hljs-regexp">/oss/</span> openSUSE-<span class="hljs-number">42.1</span>-<span class="hljs-constant">Oss</span>
+
+zypper addrepo -f <span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/mirrors.aliyun.com/opensuse</span><span class="hljs-regexp">/distribution/leap</span><span class="hljs-regexp">/42.1/repo</span><span class="hljs-regexp">/non-oss/</span>&nbsp; openSUSE-<span class="hljs-number">42.1</span>-<span class="hljs-constant">Non</span>-<span class="hljs-constant">Oss</span>
+
+zypper addrepo -f <span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/mirrors.aliyun.com/packman</span><span class="hljs-regexp">/openSUSE_Leap_42.1/</span> aliyun-packman</code></pre>
+
+
+
+<h3 id="安装-docker-包">安装 Docker 包</h3>
+
+<pre><code>$ sudo zypper in docker
+</code></pre>
+
+<p>输出如下：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs vhdl">linux-aihn:~ # zypper <span class="hljs-keyword">in</span> docker
+Retrieving repository <span class="hljs-attribute">'openSUSE</span>-Leap-<span class="hljs-number">42.1</span>-Update' metadata <span class="hljs-comment">--------------------------[|]</span>
+
+Warning: Digest verification failed <span class="hljs-keyword">for</span> <span class="hljs-keyword">file</span> '<span class="hljs-number">7256e9794</span>decb02046412d2dc8ab5fa5a17875c1303f31663094da5ede29e933-app-icons.tar.gz'
+[/var/cache/zypp/raw/repo-updateQVITjj/repodata/<span class="hljs-number">7256e9794</span>decb02046412d2dc8ab5fa5a17875c1303f31663094da5ede29e933-app-icons.tar.gz]
+
+  expected <span class="hljs-number">7256e9794</span>decb02046412d2dc8ab5fa5a17875c1303f31663094da5ede29e933
+  but got  a6be6f0868adbffa79d87856f6f3de4317a1e5c3f923be66eed899c4b559850b
+
+Accepting packages <span class="hljs-keyword">with</span> wrong checksums can lead <span class="hljs-keyword">to</span> a corrupted system <span class="hljs-keyword">and</span> <span class="hljs-keyword">in</span> extreme cases even <span class="hljs-keyword">to</span> a system compromise.
+
+However <span class="hljs-keyword">if</span> you made certain that the <span class="hljs-keyword">file</span> <span class="hljs-keyword">with</span> checksum <span class="hljs-attribute">'a6be</span>..' <span class="hljs-keyword">is</span> secure, correct
+<span class="hljs-keyword">and</span> should be used within this operation, enter the first <span class="hljs-number">4</span> characters <span class="hljs-keyword">of</span> the checksum
+<span class="hljs-keyword">to</span> unblock using this <span class="hljs-keyword">file</span> <span class="hljs-keyword">on</span> your own risk. Empty input will discard the <span class="hljs-keyword">file</span>.
+
+Unblock <span class="hljs-keyword">or</span> discard? [a6be/? shows <span class="hljs-keyword">all</span> options] (discard): discard
+Retrieving repository <span class="hljs-attribute">'openSUSE</span>-Leap-<span class="hljs-number">42.1</span>-Update' metadata ......................[error]
+Repository <span class="hljs-attribute">'openSUSE</span>-Leap-<span class="hljs-number">42.1</span>-Update' <span class="hljs-keyword">is</span> invalid.
+[repo-update|http://download.opensuse.org/update/leap/<span class="hljs-number">42.1</span>/oss/] Valid metadata <span class="hljs-keyword">not</span> found at specified URL
+Please check <span class="hljs-keyword">if</span> the URIs defined <span class="hljs-keyword">for</span> this repository are pointing <span class="hljs-keyword">to</span> a valid repository.
+Skipping repository <span class="hljs-attribute">'openSUSE</span>-Leap-<span class="hljs-number">42.1</span>-Update' because <span class="hljs-keyword">of</span> the above error.
+Loading repository data...
+Reading installed packages...
+Resolving <span class="hljs-keyword">package</span> dependencies...
+
+The following <span class="hljs-number">6</span> <span class="hljs-keyword">NEW</span> packages are going <span class="hljs-keyword">to</span> be installed:
+  bridge-utils docker git-core git-gui gitk perl-Error
+
+<span class="hljs-number">6</span> <span class="hljs-keyword">new</span> packages <span class="hljs-keyword">to</span> install.
+Overall download size: <span class="hljs-number">10.6</span> MiB. Already cached: <span class="hljs-number">0</span> B. <span class="hljs-keyword">After</span> the operation, additional
+<span class="hljs-number">50.7</span> MiB will be used.
+Continue? [y/n/? shows <span class="hljs-keyword">all</span> options] (y): y
+Retrieving <span class="hljs-keyword">package</span> perl-Error-<span class="hljs-number">0.17021</span>-<span class="hljs-number">3.2</span>.noarch   (<span class="hljs-number">1</span>/<span class="hljs-number">6</span>),  <span class="hljs-number">28.3</span> KiB ( <span class="hljs-number">49.8</span> KiB unpacked)
+Retrieving: perl-Error-<span class="hljs-number">0.17021</span>-<span class="hljs-number">3.2</span>.noarch.rpm ....................................[done]
+Retrieving <span class="hljs-keyword">package</span> bridge-utils-<span class="hljs-number">1.5</span>-<span class="hljs-number">21.3</span>.x86_64    (<span class="hljs-number">2</span>/<span class="hljs-number">6</span>),  <span class="hljs-number">32.0</span> KiB ( <span class="hljs-number">66.0</span> KiB unpacked)
+Retrieving: bridge-utils-<span class="hljs-number">1.5</span>-<span class="hljs-number">21.3</span>.x86_64.rpm .....................................[done]
+Retrieving <span class="hljs-keyword">package</span> git-core-<span class="hljs-number">2.6</span><span class="hljs-number">.2</span>-<span class="hljs-number">3.1</span>.x86_64       (<span class="hljs-number">3</span>/<span class="hljs-number">6</span>),   <span class="hljs-number">3.9</span> MiB ( <span class="hljs-number">25.7</span> MiB unpacked)
+Retrieving: git-core-<span class="hljs-number">2.6</span><span class="hljs-number">.2</span>-<span class="hljs-number">3.1</span>.x86_64.rpm ..........................[done (<span class="hljs-number">267.4</span> KiB/s)]
+Retrieving <span class="hljs-keyword">package</span> gitk-<span class="hljs-number">2.6</span><span class="hljs-number">.2</span>-<span class="hljs-number">3.1</span>.x86_64           (<span class="hljs-number">4</span>/<span class="hljs-number">6</span>), <span class="hljs-number">217.2</span> KiB (<span class="hljs-number">705.6</span> KiB unpacked)
+Retrieving: gitk-<span class="hljs-number">2.6</span><span class="hljs-number">.2</span>-<span class="hljs-number">3.1</span>.x86_64.rpm ............................................[done]
+Retrieving <span class="hljs-keyword">package</span> git-gui-<span class="hljs-number">2.6</span><span class="hljs-number">.2</span>-<span class="hljs-number">3.1</span>.x86_64        (<span class="hljs-number">5</span>/<span class="hljs-number">6</span>), <span class="hljs-number">296.1</span> KiB (  <span class="hljs-number">1.3</span> MiB unpacked)
+Retrieving: git-gui-<span class="hljs-number">2.6</span><span class="hljs-number">.2</span>-<span class="hljs-number">3.1</span>.x86_64.rpm .........................................[done]
+Retrieving <span class="hljs-keyword">package</span> docker-<span class="hljs-number">1.9</span><span class="hljs-number">.1</span>-<span class="hljs-number">13.1</span>.x86_64        (<span class="hljs-number">6</span>/<span class="hljs-number">6</span>),   <span class="hljs-number">6.2</span> MiB ( <span class="hljs-number">22.9</span> MiB unpacked)
+Retrieving: docker-<span class="hljs-number">1.9</span><span class="hljs-number">.1</span>-<span class="hljs-number">13.1</span>.x86_64.rpm ...........................[done (<span class="hljs-number">272.8</span> KiB/s)]
+Checking <span class="hljs-keyword">for</span> <span class="hljs-keyword">file</span> conflicts: .....................................................[done]
+(<span class="hljs-number">1</span>/<span class="hljs-number">6</span>) Installing: perl-Error-<span class="hljs-number">0.17021</span>-<span class="hljs-number">3.2</span> .........................................[done]
+(<span class="hljs-number">2</span>/<span class="hljs-number">6</span>) Installing: bridge-utils-<span class="hljs-number">1.5</span>-<span class="hljs-number">21.3</span> ..........................................[done]
+(<span class="hljs-number">3</span>/<span class="hljs-number">6</span>) Installing: git-core-<span class="hljs-number">2.6</span><span class="hljs-number">.2</span>-<span class="hljs-number">3.1</span> .............................................[done]
+(<span class="hljs-number">4</span>/<span class="hljs-number">6</span>) Installing: gitk-<span class="hljs-number">2.6</span><span class="hljs-number">.2</span>-<span class="hljs-number">3.1</span> .................................................[done]
+(<span class="hljs-number">5</span>/<span class="hljs-number">6</span>) Installing: git-gui-<span class="hljs-number">2.6</span><span class="hljs-number">.2</span>-<span class="hljs-number">3.1</span> ..............................................[done]
+(<span class="hljs-number">6</span>/<span class="hljs-number">6</span>) Installing: docker-<span class="hljs-number">1.9</span><span class="hljs-number">.1</span>-<span class="hljs-number">13.1</span> ..............................................[done]
+Additional rpm output:
+creating <span class="hljs-keyword">group</span> docker...
+Updating /etc/sysconfig/docker...</code></pre>
+
+
+
+<h2 id="启动-docker-守护进程">启动 docker 守护进程</h2>
+
+<pre><code>$ sudo  systemctl start docker.service
+</code></pre>
+
+
+
+<h2 id="配置让-docker-服务随系统自动启动">配置让 docker 服务随系统自动启动</h2>
+
+<pre><code>$ sudo systemctl enable docker.service
+</code></pre>
+
+<p>docker 会创建一个以<code>docker</code>命名的用户组，添加用户到这个用户组</p>
+
+<pre><code>sudo /usr/sbin/usermod -a -G docker &lt;username&gt;
+</code></pre>
+
+
+
+<h2 id="卸载-docker">卸载 docker</h2>
+
+<p>卸载 Docker 包:</p>
+
+<pre><code>$ sudo zypper rm docker
+</code></pre>
+
+<p>上述命令不会卸载 images、containers、volumes, 或者用户创建在主机的配置文件。若想卸载干净上述所有 images、containers、volumes,  执行:</p>
+
+<pre><code>$ rm -rf /var/lib/docker
+</code></pre>
+
+<p>用户创建在主机的配置文件需手动删除。</p>
+
+
+
+<h2 id="拉取-image-到本地">拉取 image 到本地</h2>
+
+<p>可以将 Docker Bub 存储的 image 拉取到本地，执行 </p>
+
+<pre><code>docker pull waylau/docker-spring-boot
+</code></pre>
+
+<p>输出如下：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs mel">linux-aihn:~ # docker pull waylau/docker-<span class="hljs-keyword">spring</span>-boot
+Using <span class="hljs-keyword">default</span> tag: latest
+Pulling repository docker.io/waylau/docker-<span class="hljs-keyword">spring</span>-boot
+<span class="hljs-number">3694</span>bcee2712: Download complete 
+a2e9c1527ca5: Download complete 
+<span class="hljs-number">20</span>f4b5a54fc6: Download complete 
+<span class="hljs-number">7</span>a220626bc9e: Download complete 
+<span class="hljs-number">620</span>bbe9b8954: Download complete 
+a0b5e5298dc5: Download complete 
+<span class="hljs-number">2</span>f8558117280: Download complete 
+d2ee7992d027: Download complete 
+Status: Downloaded newer <span class="hljs-keyword">image</span> <span class="hljs-keyword">for</span> waylau/docker-<span class="hljs-keyword">spring</span>-boot:latest
+docker.io/waylau/docker-<span class="hljs-keyword">spring</span>-boot: this <span class="hljs-keyword">image</span> was pulled from a legacy registry.  Important: This registry version will not be supported <span class="hljs-keyword">in</span> future versions of docker.</code></pre>
+
+
+
+<h2 id="运行-image-本地镜像">运行 image 本地镜像</h2>
+
+<p>执行：</p>
+
+<pre><code>docker run -p 8080:8080 -t waylau/docker-spring-boot
+</code></pre>
+
+<p>最后成功的界面如下：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs fsharp">linux-aihn:~ # docker run -p <span class="hljs-number">8080</span>:<span class="hljs-number">8080</span> -t waylau/docker-spring-boot
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v1<span class="hljs-number">.3</span><span class="hljs-number">.3</span>.RELEASE)
+
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">33</span>:<span class="hljs-number">53.043</span>  INFO <span class="hljs-number">1</span> --- [           main] c.waylau.docker_spring_boot.Application  : Starting Application v1<span class="hljs-number">.0</span><span class="hljs-number">.0</span> on <span class="hljs-number">5</span>dfa67f23534 <span class="hljs-keyword">with</span> PID <span class="hljs-number">1</span> (/app.jar started by root <span class="hljs-keyword">in</span> /)
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">33</span>:<span class="hljs-number">53.096</span>  INFO <span class="hljs-number">1</span> --- [           main] c.waylau.docker_spring_boot.Application  : No active profile set, falling back <span class="hljs-keyword">to</span> <span class="hljs-keyword">default</span> profiles: <span class="hljs-keyword">default</span>
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">33</span>:<span class="hljs-number">55.050</span>  INFO <span class="hljs-number">1</span> --- [           main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@<span class="hljs-number">64</span>dac4db: startup date [Thu Mar <span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">33</span>:<span class="hljs-number">54</span> GMT <span class="hljs-number">2016</span>]; root <span class="hljs-keyword">of</span> context hierarchy
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">03.254</span>  INFO <span class="hljs-number">1</span> --- [           main] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition <span class="hljs-keyword">for</span> bean 'beanNameViewResolver' <span class="hljs-keyword">with</span> a different definition: replacing [Root bean: <span class="hljs-keyword">class</span> [<span class="hljs-keyword">null</span>]; scope=; <span class="hljs-keyword">abstract</span>=<span class="hljs-keyword">false</span>; lazyInit=<span class="hljs-keyword">false</span>; autowireMode=<span class="hljs-number">3</span>; dependencyCheck=<span class="hljs-number">0</span>; autowireCandidate=<span class="hljs-keyword">true</span>; primary=<span class="hljs-keyword">false</span>; factoryBeanName=org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration; factoryMethodName=beanNameViewResolver; initMethodName=<span class="hljs-keyword">null</span>; destroyMethodName=(inferred); defined <span class="hljs-keyword">in</span> <span class="hljs-keyword">class</span> path resource [org/springframework/boot/autoconfigure/web/ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration.<span class="hljs-keyword">class</span>]] <span class="hljs-keyword">with</span> [Root bean: <span class="hljs-keyword">class</span> [<span class="hljs-keyword">null</span>]; scope=; <span class="hljs-keyword">abstract</span>=<span class="hljs-keyword">false</span>; lazyInit=<span class="hljs-keyword">false</span>; autowireMode=<span class="hljs-number">3</span>; dependencyCheck=<span class="hljs-number">0</span>; autowireCandidate=<span class="hljs-keyword">true</span>; primary=<span class="hljs-keyword">false</span>; factoryBeanName=org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter; factoryMethodName=beanNameViewResolver; initMethodName=<span class="hljs-keyword">null</span>; destroyMethodName=(inferred); defined <span class="hljs-keyword">in</span> <span class="hljs-keyword">class</span> path resource [org/springframework/boot/autoconfigure/web/WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter.<span class="hljs-keyword">class</span>]]
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">11.228</span>  INFO <span class="hljs-number">1</span> --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized <span class="hljs-keyword">with</span> port(s): <span class="hljs-number">8080</span> (http)
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">11.424</span>  INFO <span class="hljs-number">1</span> --- [           main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">11.440</span>  INFO <span class="hljs-number">1</span> --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/<span class="hljs-number">8.0</span><span class="hljs-number">.32</span>
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">12.574</span>  INFO <span class="hljs-number">1</span> --- [ost-startStop-<span class="hljs-number">1</span>] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">12.575</span>  INFO <span class="hljs-number">1</span> --- [ost-startStop-<span class="hljs-number">1</span>] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed <span class="hljs-keyword">in</span> <span class="hljs-number">17670</span> ms
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">16.786</span>  INFO <span class="hljs-number">1</span> --- [ost-startStop-<span class="hljs-number">1</span>] o.s.b.c.e.ServletRegistrationBean        : Mapping servlet: 'dispatcherServlet' <span class="hljs-keyword">to</span> [/]
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">16.839</span>  INFO <span class="hljs-number">1</span> --- [ost-startStop-<span class="hljs-number">1</span>] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'characterEncodingFilter' <span class="hljs-keyword">to</span>: [/*]
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">16.842</span>  INFO <span class="hljs-number">1</span> --- [ost-startStop-<span class="hljs-number">1</span>] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'hiddenHttpMethodFilter' <span class="hljs-keyword">to</span>: [/*]
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">16.867</span>  INFO <span class="hljs-number">1</span> --- [ost-startStop-<span class="hljs-number">1</span>] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'httpPutFormContentFilter' <span class="hljs-keyword">to</span>: [/*]
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">16.868</span>  INFO <span class="hljs-number">1</span> --- [ost-startStop-<span class="hljs-number">1</span>] o.s.b.c.embedded.FilterRegistrationBean  : Mapping filter: 'requestContextFilter' <span class="hljs-keyword">to</span>: [/*]
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">20.432</span>  INFO <span class="hljs-number">1</span> --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking <span class="hljs-keyword">for</span> @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@<span class="hljs-number">64</span>dac4db: startup date [Thu Mar <span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">33</span>:<span class="hljs-number">54</span> GMT <span class="hljs-number">2016</span>]; root <span class="hljs-keyword">of</span> context hierarchy
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">21.405</span>  INFO <span class="hljs-number">1</span> --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped <span class="hljs-string">"{[/]}"</span> onto <span class="hljs-keyword">public</span> java.lang.String com.waylau.docker_spring_boot.Application.home()
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">21.451</span>  INFO <span class="hljs-number">1</span> --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped <span class="hljs-string">"{[/error],produces=[text/html]}"</span> onto <span class="hljs-keyword">public</span> org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">21.457</span>  INFO <span class="hljs-number">1</span> --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped <span class="hljs-string">"{[/error]}"</span> onto <span class="hljs-keyword">public</span> org.springframework.http.ResponseEntity&lt;java.util.Map&lt;java.lang.String, java.lang.Object&gt;&gt; org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">22.033</span>  INFO <span class="hljs-number">1</span> --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler <span class="hljs-keyword">of</span> <span class="hljs-class"><span class="hljs-keyword">type</span> [<span class="hljs-title">class</span> <span class="hljs-title">org</span>.<span class="hljs-title">springframework</span>.<span class="hljs-title">web</span>.<span class="hljs-title">servlet</span>.<span class="hljs-title">resource</span>.<span class="hljs-title">ResourceHttpRequestHandler</span>]</span>
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">22.037</span>  INFO <span class="hljs-number">1</span> --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler <span class="hljs-keyword">of</span> <span class="hljs-class"><span class="hljs-keyword">type</span> [<span class="hljs-title">class</span> <span class="hljs-title">org</span>.<span class="hljs-title">springframework</span>.<span class="hljs-title">web</span>.<span class="hljs-title">servlet</span>.<span class="hljs-title">resource</span>.<span class="hljs-title">ResourceHttpRequestHandler</span>]</span>
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">22.658</span>  INFO <span class="hljs-number">1</span> --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler <span class="hljs-keyword">of</span> <span class="hljs-class"><span class="hljs-keyword">type</span> [<span class="hljs-title">class</span> <span class="hljs-title">org</span>.<span class="hljs-title">springframework</span>.<span class="hljs-title">web</span>.<span class="hljs-title">servlet</span>.<span class="hljs-title">resource</span>.<span class="hljs-title">ResourceHttpRequestHandler</span>]</span>
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">23.787</span>  INFO <span class="hljs-number">1</span> --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans <span class="hljs-keyword">for</span> JMX exposure on startup
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">24.497</span>  INFO <span class="hljs-number">1</span> --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): <span class="hljs-number">8080</span> (http)
+<span class="hljs-number">2016</span>-<span class="hljs-number">03</span>-<span class="hljs-number">31</span> <span class="hljs-number">02</span>:<span class="hljs-number">34</span>:<span class="hljs-number">24.567</span>  INFO <span class="hljs-number">1</span> --- [           main] c.waylau.docker_spring_boot.Application  : Started Application <span class="hljs-keyword">in</span> <span class="hljs-number">39.766</span> seconds (JVM running <span class="hljs-keyword">for</span> <span class="hljs-number">46.766</span>)</code></pre>
+
+
+
+<h3 id="访问项目">访问项目</h3>
+
+<p>如果程序正确运行，浏览器访问 <a href="http://localhost:8080/">http://localhost:8080/</a>，可以看到页面 “Hello Docker World.” 字样。</p>
+
+
+
+<h2 id="查看-docker-image">查看 docker image</h2>
+
+<p>可以看到 pull 回来的这个 image 的一个情况、大小等信息。</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs bash">linux-aihn:~ <span class="hljs-comment"># docker images</span>
+REPOSITORY                  TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+waylau/docker-spring-boot   latest              <span class="hljs-number">3694</span>bcee2712        <span class="hljs-number">10</span> days ago         <span class="hljs-number">180.8</span> MB</code></pre>
+
+
+
+<h2 id="源码">源码</h2>
+
+<p>获取项目源码， <br>
+<a href="https://github.com/waylau/docker-demos">https://github.com/waylau/docker-demos</a> 中的 <code>samples/spring-boot</code></p>
+
+<p>获取项目镜像， <a href="https://hub.docker.com/r/waylau/docker-spring-boot/">https://hub.docker.com/r/waylau/docker-spring-boot/</a></p>
+
+
+
+<h2 id="参考">参考</h2>
+
+<ul>
+<li><a href="https://docs.docker.com/engine/installation/linux/SUSE/">https://docs.docker.com/engine/installation/linux/SUSE/</a></li>
+<li>《<a href="http://waylau.com/about-oracle-vm-virtualbox/">Oracle VM VirtualBox 安装和使用</a>》</li>
+<li>《<a href="http://waylau.com/centos-7-installation-and-configuration/">CentOS 7 安装、配置</a>》</li>
+</ul></div>
+        <script  type="text/javascript">
+            $(function () {
+                $('pre.prettyprint code').each(function () {
+                    var lines = $(this).text().split('\n').length;
+                    var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+                    $(this).addClass('has-numbering').parent().append($numbering);
+                    for (i = 1; i <= lines; i++) {
+                        $numbering.append($('<li/>').text(i));
+                    };
+                    $numbering.fadeIn(1700);
+                });
+            });
+        </script>
+   
+</div>
+
+
+
+
+<!-- Baidu Button BEGIN -->
+
+
+
+
+<div class="bdsharebuttonbox tracking-ad" style="float: right;" data-mod="popu_172">
+<a href="#" class="bds_more" data-cmd="more" style="background-position:0 0 !important; background-image: url(http://bdimg.share.baidu.com/static/api/img/share/icons_0_16.png?v=d754dcc0.png) !important"></a>
+<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"  style="background-position:0 -52px !important"></a>
+<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"style="background-position:0 -104px !important"></a>
+<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"style="background-position:0 -260px !important"></a>
+<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"style="background-position:0 -208px !important"></a>
+<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"style="background-position:0 -1612px !important" ></a>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<!-- Baidu Button END -->
+
+   
+
+    
+<!--172.16.140.12-->
+
+<!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=1536434" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->
+
+<script type="text/javascript">
+    var fromjs = $("#fromjs");
+    if (fromjs.length > 0) {
+            $("#fromjs .markdown_views pre").addClass("prettyprint");
+            prettyPrint();
+
+            $('pre.prettyprint code').each(function () {
+                var lines = $(this).text().split('\n').length;
+                var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+                $(this).addClass('has-numbering').parent().append($numbering);
+                for (i = 1; i <= lines; i++) {
+                    $numbering.append($('<li/>').text(i));
+                };
+                $numbering.fadeIn(1700);
+            });
+
+            $('.pre-numbering li').css("color", "#999");
+        }
+
+    
+    $(".markdown_views a[target!='_blank']").attr("target", "_blank");
+
+    $(".toc a[target='_blank']").attr("target", "");
+
+
+
+</script>
+
+ 
+
+
+        <div id="digg" ArticleId="51025147" >
+            <dl id="btnDigg" class="digg digg_disable"  onclick="btndigga();">
+               
+                 <dt>顶</dt>
+                <dd>0</dd>
+            </dl>
+           
+              
+            <dl id="btnBury" class="digg digg_disable"  onclick="btnburya();">
+              
+                  <dt>踩</dt>
+                <dd>0</dd>               
+            </dl>
+            
+        </div>
+     <div class="tracking-ad" data-mod="popu_222"><a href="javascript:void(0);" >&nbsp;</a>   </div>
+    <div class="tracking-ad" data-mod="popu_223"> <a href="javascript:void(0);" >&nbsp;</a></div>
+    <script type="text/javascript">
+                function btndigga() {
+                    $(".tracking-ad[data-mod='popu_222'] a").click();
+                }
+                function btnburya() {
+                    $(".tracking-ad[data-mod='popu_223'] a").click();
+                }
+            </script>
+
+   <ul class="article_next_prev">
+                <li class="prev_article"><span  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian']);location.href='/kkkloveyou/article/details/50942275';">上一篇</span><a href="/kkkloveyou/article/details/50942275" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian'])">用 Docker 构建、运行、发布来一个 Spring Boot 应用</a></li>
+                <li class="next_article"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian']);location.href='/kkkloveyou/article/details/51181866';">下一篇</span><a href="/kkkloveyou/article/details/51181866" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian'])">Hibernate 性能优化法则</a></li>
+    </ul>
+
+    <div style="clear:both; height:10px;"></div>
+
+
+    <div id="articlecommend"  style="display:none"></div>
+        <div class="similar_article"   >
+                <h4></h4>
+                <div class="similar_c"style="margin:20px 0px 0px 0px">
+                    <div class="similar_c_t">
+                      &nbsp;&nbsp;相关文章推荐
+                    </div>
+                   
+                    <div class="similar_wrap tracking-ad" data-mod="popu_36"  style="max-height:195px;">                       
+                        <ul class="similar_list fl">                          
+                        </ul>
+                          <ul class="similar_list fr">                          
+                        </ul>
+                    </div>
+                </div>
+            </div>    
+      
+</div>
+
+     <div>
+           
+
+         <script type="text/javascript">
+             /*博客内容页下方Banner1-960*90，创建于2016-12-13*/
+             var cpro_id = "u2843955";
+        </script>
+        <script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js"></script>
+    </div>
+
+<div id="suggest"></div>
+         <script  language="javascript" type='text/javascript'>     
+             $(function(){
+                 $.get("/kkkloveyou/svc/GetSuggestContent/51025147",function(data){
+                     $("#suggest").html(data);
+                 });     
+             });             
+         </script>  
+
+
+<style>
+.blog-ass-articl dd {
+color: #369;
+width: 99%; /*修改行*/
+float: left;
+overflow: hidden;
+font: normal normal 12px/23px "SimSun";
+height: 23px;
+margin: 0;
+padding: 0 0 0 10px;
+margin-right: 30px;
+background: url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;
+}
+</style>
+
+ 
+<div id="relate" data-mod="popu_218"  class="tracking-ad">
+        <div class="relate_t">
+            <h3><span>参考知识库</span></h3>
+        </div>
+        <div class="relate_c">
+        </div>
+</div>
+ 
+
+<dl class="blog-ass-articl tracking-ad" id="res-relatived" data-mod="popu_84"  > 
+    <div class="embody embody_b" id="libkeyparent"  style="display:none">
+            <span class="embody_t">更多资料请参考：</span>
+            <div class="embody_c" id="libkey"></div>
+    </div>
+
+
+     <dt><span>猜你在找</span></dt>    
+
+
+   
+
+
+    <div id="adcollegedata" style="display:none"></div>
+
+    <div id="adCollege" style="width: 42%;float: left;"> 
+    </div>  
+
+    
+     <div id="resforAd"  style="width: 42%;float: left;margin-right: 30px;"></div>
+
+     <script src="http://csdnimg.cn/jobreco/job_reco.js" type="text/javascript"></script> 
+     <script type="text/javascript">
+         csdn.position.showEdu({
+             sourceType: "blog",
+             searchType: "detail",
+             searchKey: "51025147",
+                username: "",
+                recordcount: "10",
+                containerId: "adcollegedata" //容器DIV的id。 
+            });
+
+            //setEduLoc();
+
+            //function setEduLoc() {
+            //    var edus = $("#adCollege div dd a");
+            //    if (edus.length == 0) {
+            //        setTimeout(function () {
+            //            setEduLoc();
+            //        }, 500);
+            //    }
+            //    else {
+            //        var eduLoc = "?ref=blog&loc=0";
+            //        $.each(edus, function (index, item) {
+            //            var href = $(this).attr("href") + eduLoc;
+            //            $(this).attr("href", href);
+            //        });
+            //    }
+            //}
+
+
+            setTimeout(function () {
+                var adcolleges = $("#adcollegedata div dd");
+                for (var i = 0; i < adcolleges.length; i++) {
+                    if (i < 5) {
+                        $("#adCollege").append("<dd>" + $(adcolleges[i]).html() + "</dd");
+                    }
+                    else {
+                        $("#resforAd").append("<dd>" + $(adcolleges[i]).html() + "</dd");
+                    }
+                }
+            }, 1500);
+                    
+
+        </script> 
+   
+</dl>
+
+
+
+
+
+    <div id="ad_cen">        
+                <div>
+                                    <div class="J_adv" data-view="true" data-mod="ad_popu_199" data-mtp="43" data-order="114" data-con="ad_content_1843" style="width: 960px; height: 90px;">
+                                             <script type="text/javascript">
+                                                 /*博客内容页下方Banner2-960*90，创建于,2016-11-28*/
+                                                 var cpro_id = "u2831143";
+                                            </script>
+                                            <script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js"></script>
+                                   </div>
+                    </div>
+    </div>  
+
+        <!-- 广告位开始 -->
+        <!-- 广告位结束 -->
+<div class="J_adv" data-view="true" data-mod="ad_popu_72" data-mtp="62" data-order="40" data-con="ad_content_2072">
+                 <script id="popuLayer_js_q" src="http://ads.csdn.net/js/popuLayer.js" defer="defer"  type="text/javascript"></script>
+            <div id="layerd" style="position: fixed;bottom:0px;right:0px;line-height:0px;z-index:1000">
+    	            <div class="J_close layer_close" style="display:;background-color:#efefef;padding:0px;color:#333;font:12px/24px Helvetica,Tahoma,Arial,sans-serif;text-align:right;">关闭</div><!-- 广告占位容器 --><div id="cpro_u2895327"></div></div>
+            <script>  document.getElementById("popuLayer_js_q").onload=function(){      var styObjd=styObj={width:"300px","height":parseInt(250)+28};window.CSDN.Layer.PopuLayer("#layerd",{storageName:"layerd",styleObj:styObjd,total:50,expoire:1000*60});  }</script><!-- 投放代码 --><script type="text/javascript">                /*服务器频道首页置顶Banner960*90，创建于2014-7-3*/    (window.cproArray = window.cproArray || []).push({        id: "u2895327"      });  </script>  <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+     
+</div>
+
+<div class="comment_class">
+    <div id="comment_title" class="panel_head">
+        <span class="see_comment">查看评论</span><a name="comments"></a></div>
+    <div id="comment_list">
+    </div>
+    <div id="comment_bar">
+    </div>
+    <div id="comment_form">
+    </div>
+    <div class="announce">
+        * 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+</div>
+
+<script type="text/javascript">
+    var fileName = '51025147';
+    var commentscount = 0;
+    var islock = false
+</script>
+
+    <div id="ad_bot">
+    </div>
+<div id="report_dialog">
+</div>
+
+<div id="d-top"  style="bottom:60px;">
+
+        <a id="quick-reply" class="btn btn-top q-reply" title="快速回复" style="display:none;">
+            <img src="http://static.blog.csdn.net/images/blog-icon-reply.png" alt="快速回复">
+        </a>    
+    <a id="d-top-a" class="btn btn-top backtop"  style="display: none;" title="返回顶部" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_huidaodingbu'])" style="">         
+         <img src="http://static.blog.csdn.net/images/top.png" alt="TOP">
+    </a>
+</div>
+<script type="text/javascript">
+    $(function ()
+    {
+        $("#ad_frm_0").height("90px");
+        
+        setTimeout(function(){
+            $("#ad_frm_2").height("200px");
+        },1000);    
+    });
+  
+</script>
+<style type="text/css">
+    .tag_list
+    {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #D7CBC1;
+        color: #000000;
+        font-size: 12px;
+        line-height: 20px;
+        list-style: none outside none;
+        margin: 10px 2% 0 1%;
+        padding: 1px;
+    }
+    .tag_list h5
+    {
+        background: none repeat scroll 0 0 #E0DBD3;
+        color: #47381C;
+        font-size: 12px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 5px;
+        margin: 0;
+    }
+    .tag_list h5 a
+    {
+        color: #47381C;
+    }
+    .classify
+    {
+        margin: 10px 0;
+        padding: 4px 12px 8px;
+    }
+    .classify a
+    {
+        margin-right: 20px;
+        white-space: nowrap;
+    }
+</style>
+
+
+<div class="tag_list" style="display:none"></div>
+  <script  type='text/javascript'>     
+      $(function(){
+              setTimeout(function(){
+                  $.get("/kkkloveyou/svc/GetTagContent",function(data){
+                      $(".tag_list").html(data).show();
+                  });     
+              });
+          },500);                       
+ </script> 
+
+
+<div id="pop_win" style="display:none ;position: absolute; z-index: 10000; border: 1px solid rgb(220, 220, 220); top: 222.5px; left: 630px; opacity: 1; background: none 0px 0px repeat scroll rgb(255, 255, 255);">
+    
+</div>
+<div id="popup_mask"></div>
+<style>
+    #popup_mask
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        left: 0px;
+        top: 0px;
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+        display: none;
+    }
+
+</style>
+
+
+
+
+<script type="text/javascript">
+    $(function(){        
+        
+        setTimeout(function(){
+            $(".comment_body:contains('回复')").each(function(index,item){
+                var u=$(this).text().split('：')[0].toString().replace("回复","")
+                var thisComment=$(this);
+                if(u)
+                {
+                    $.getJSON("https://passport.csdn.net/get/nick?callback=?", {users: u}, function(a) {
+                        if(a!=null&&a.data!=null&&a.data.length>0)
+                        {
+                            nick=a.data[0].n; 
+                            if(u!=nick)
+                            {
+                                thisComment.text(thisComment.text().replace(u,nick));  
+                            }
+                        }       
+                    });  
+                }
+            });         
+
+        },200);  
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },5000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },10000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },15000);
+        
+        setTimeout(function(){
+            $("a img[src='http://js.tongji.linezing.com/stats.gif']").parent().css({"position":"absolute","left":"50%"});
+        },300);
+    });
+
+    function loginbox(){
+        var $logpop=$("#pop_win");
+        $logpop.html('<iframe src="https://passport.csdn.net/account/loginbox?service=http://static.blog.csdn.net/callback.htm" frameborder="0" height="600" width="400" scrolling="no"></iframe>');
+
+        $('#popup_mask').css({
+            opacity: 0.5,
+            width: $( document ).width() + 'px',
+            height:  $( document ).height() + 'px'
+        });
+        $('#popup_mask').css("display","block");
+ 
+        $logpop.css( {
+            top: ($( window ).height() - $logpop.height())/ 2  + $( window 
+       ).scrollTop() + 'px',
+            left:($( window ).width() - $logpop.width())/ 2
+        } );
+ 
+        setTimeout( function () {
+            $logpop.show();
+            $logpop.css( {
+                opacity: 1
+            } );
+        }, 200 );
+ 
+        $('#popup_mask').unbind("click");
+        $('#popup_mask').bind("click", function(){
+            $('#popup_mask').hide();
+            var $clopop = $("#pop_win");
+            $("#common_ask_div_sc").css("display","none");
+            $clopop.css( {
+                opacity: 0
+            } );
+            setTimeout( function () {
+                $clopop.hide();
+            }, 350 );
+            return false;
+        });
+    }   
+
+    var articletitle='Docker 在 openSUSE 下的安装、使用';
+
+</script>
+
+
+
+
+
+
+
+
+                        <div class="clear">
+                        </div>
+                    </div>                   
+                
+            </div>
+                   
+           <div id="side">
+               
+    <div class="side">
+<div id="panel_Profile" class="panel">
+<ul class="panel_head"><span>个人资料</span></ul>
+<ul class="panel_body profile">
+<div id="blog_userface">
+    <a href="http://my.csdn.net/kkkloveyou" target="_blank">
+    <img src="http://avatar.csdn.net/E/1/F/1_kkkloveyou.jpg" title="访问我的空间" style="max-width:90%"/>
+    </a>
+    <br />
+    <span><a href="http://my.csdn.net/kkkloveyou" class="user_name" target="_blank">kkkloveyou</a></span>
+</div>
+<div class="interact">
+
+    <a href="javascript:void(0);" class="attent" id="span_add_follow" title="[加关注]"></a>
+
+ <a href="javascript:void(0);" class="letter"  title="[发私信]" onclick="window.open('http://msg.csdn.net/letters/model?receiver=kkkloveyou','_blank','height=350,width=700');_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_sixin'])"></a>  
+</div>
+<div id="blog_medal">
+                       <div class="ico_expert"  onclick="javascript:location='http://blog.csdn.net/experts/rule.html'" title="CSDN认证专家" style="cursor:pointer;width:60px;height:60px;background:url('http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/bokezhuanjiamiddle.png') no-repeat" ></div>
+                <div id="bms_box">
+                                            <a  target="_blank">
+                                                    <img src="http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/zhuanlandaren.png" onmouseover="m_over_m(this,2)" onmouseout="m_out_m()" alt="1" >
+                                            </a>
+               </div>
+</div>
+<ul id="blog_rank">
+    <li>访问：<span>470665次</span></li>
+    <li>积分：<span>4967</span> </li>    
+    <li >等级： <span style="position:relative;display:inline-block;z-index:1" >
+            <img src="http://c.csdnimg.cn/jifen/images/xunzhang/jianzhang/blog5.png" alt="" style="vertical-align: middle;" id="leveImg">
+            <div id="smallTittle" style=" position: absolute;  left: -24px;  top: 25px;  text-align: center;  width: 101px;  height: 32px;  background-color: #fff;  line-height: 32px;  border: 2px #DDDDDD solid;  box-shadow: 0px 2px 2px rgba (0,0,0,0.1);  display: none;   z-index: 999;">
+            <div style="left: 42%;  top: -8px;  position: absolute;  width: 0;  height: 0;  border-left: 10px solid transparent;  border-right: 10px solid transparent;  border-bottom: 8px solid #EAEAEA;"></div>
+            积分：4967 </div>
+        </span>  </li>
+    <li>排名：<span>第5103名</span></li>
+</ul>
+<ul id="blog_statistics">
+    <li>原创：<span>101篇</span></li>
+    <li>转载：<span>0篇</span></li>
+    <li>译文：<span>5篇</span></li>
+    <li>评论：<span>184条</span></li>
+</ul>
+</ul>
+</div>
+
+
+<div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body" class="form_search">
+        <form id="frmSearch" action="http://so.csdn.net/search" class="form_search csdn-tracking-statistics" target="_blank"  data-mod="popu_306">
+        <span><input id="inputSearch" type="text" class="blogsearch" title="请输入关键字" /></span>
+        <input id="btnSubmit" type="button" value="搜索" title="search in blog" />
+        <input type="hidden" name="q" id="inputQ" />
+        <input type="hidden" name="t" value="blog" />
+        <a id="btnSearchBlog" target="_blank"></a>
+        </form>
+    </ul>
+</div>
+
+<script type="text/javascript">
+
+   
+    $(function () {
+        $("#btnSubmit").unbind("click");
+        $("#btnSubmit").click(function () {           
+            search();
+        });
+
+        $("#frmSearch").submit(function () {           
+            search();
+            return false;
+        });
+
+        function search()
+        {
+            if ($("#inputSearch").val() == "") {               
+                alert("请录入搜索关键词！");                         
+                return false;
+            }
+            //var url = "http://so.csdn.net/so/search/s.do?q=" + encodeURIComponent($("#inputSearch").val()) + "&u=" + username + "&t=blog";           
+            var url = "https://www.baidu.com/s?wd=" + encodeURIComponent($("#inputSearch").val()) + "%20site%3Ablog.csdn.net"
+            window.location.href = url;
+        }   
+    });
+</script><div id="panel_Category" class="panel">
+    <ul class="panel_head"><span>博客专栏</span></ul>
+    <ul class="panel_body" id="sp_column">
+    <table cellpadding="0" cellspacing="0"><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/jersey-rest.html" target="_blank"><img src="http://img.blog.csdn.net/20160125200402661" style="width:75px;height:75px;" /></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/jersey-rest.html" target="_blank">用 Jersey 构建 RESTful 服务</a>
+    <p>文章：7篇</p>
+    <span>阅读：90447</span>
+    </td>
+    </tr></table>
+    </ul>
+</div><div id="panel_Category" class="panel">
+<ul class="panel_head"><span>文章分类</span></ul>
+<ul class="panel_body">    
+                 <li>
+                    <a href="/kkkloveyou/article/category/838110" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Java</a><span>(34)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/841041" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">java 算法</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/847608" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Java 核心 应用</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/848368" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Java试题</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/860711" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">ActionScript3.0</a><span>(9)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/928425" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Office</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/928432" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">数据</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/949177" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">网络</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/958266" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Flex</a><span>(18)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1094868" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Spring</a><span>(6)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1141550" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Webservice</a><span>(7)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1171113" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">悟</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1184759" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">搜索</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1213808" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">技术</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1288434" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Golang</a><span>(6)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1573677" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Mysql</a><span>(4)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1654903" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Windows</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2135125" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Hibernate</a><span>(6)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2270791" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">JasperReports</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2300159" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">SVG</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2492673" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">REST</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2697461" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Github</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2801515" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">maven</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2801517" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">tomcat</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2912119" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Jersey</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/3055451" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">netty</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/3083679" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Mina</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6089794" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Web</a><span>(5)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6092268" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">系统架构设计师</a><span>(0)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6092271" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">架构师</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6100851" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Microservices</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6104733" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Docker</a><span>(4)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6389608" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Hadoop</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6414832" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">HBase</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6422827" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Redis</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6641307" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">持续集成</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6703316" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Linux</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6768077" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Distribute</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6930850" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">NGINX</a><span>(0)</span>
+                </li>
+</ul>
+</div><div id="panel_Archive" class="panel">
+<ul class="panel_head"><span>文章存档</span></ul>
+<ul class="panel_body">
+<div id="archive_list">
+<!--归档统计-->
+<li><a href="/kkkloveyou/article/month/2017/05">2017年05月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2017/04">2017年04月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2017/03">2017年03月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2017/02">2017年02月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/12">2016年12月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/09">2016年09月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2016/08">2016年08月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/07">2016年07月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/05">2016年05月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/04">2016年04月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/03">2016年03月</a><span>(4)</span></li><li><a href="/kkkloveyou/article/month/2016/02">2016年02月</a><span>(8)</span></li><li><a href="/kkkloveyou/article/month/2016/01">2016年01月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2015/04">2015年04月</a><span>(5)</span></li><li><a href="/kkkloveyou/article/month/2015/03">2015年03月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2014/12">2014年12月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2014/11">2014年11月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2014/08">2014年08月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2014/06">2014年06月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2014/05">2014年05月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2014/03">2014年03月</a><span>(8)</span></li><li><a href="/kkkloveyou/article/month/2013/10">2013年10月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/09">2013年09月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/08">2013年08月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/07">2013年07月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/06">2013年06月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/05">2013年05月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2013/03">2013年03月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2013/01">2013年01月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2012/12">2012年12月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2012/11">2012年11月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/10">2012年10月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/09">2012年09月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2012/08">2012年08月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/07">2012年07月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/06">2012年06月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/05">2012年05月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/03">2012年03月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2012/02">2012年02月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2012/01">2012年01月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2011/12">2011年12月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2011/11">2011年11月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2011/09">2011年09月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2011/08">2011年08月</a><span>(5)</span></li><li><a href="/kkkloveyou/article/month/2011/07">2011年07月</a><span>(10)</span></li><li><a href="/kkkloveyou/article/month/2011/06">2011年06月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2011/05">2011年05月</a><span>(6)</span></li>
+</div>
+</ul>
+</div>
+<div id="hotarticls" class="panel">
+<ul class="panel_head">
+    <span>       
+阅读排行    </span>
+</ul>
+
+<ul class="panel_body itemlist">
+<li>
+<a href="/kkkloveyou/article/details/6724083" title="java多线程编程技术 +代码实例">java多线程编程技术 +代码实例</a><span>(35966)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/44836609" title="如何查看 JAR 包的源代码">如何查看 JAR 包的源代码</a><span>(32603)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21391033" title="用Jersey构建RESTful服务1--HelloWorld">用Jersey构建RESTful服务1--HelloWorld</a><span>(28937)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21517165" title="用Jersey构建RESTful服务4--通过jersey-client客户端调用Jersey的Web服务模拟CURD">用Jersey构建RESTful服务4--通过jersey-client客户端调用Jersey的Web服务模拟CURD</a><span>(26370)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/7870572" title="“笔记本无线网络搜索不到自家信号,却能搜到其他公司的信号”解决方法">“笔记本无线网络搜索不到自家信号,却能搜到其他公司的信号”解决方法</a><span>(20967)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21485243" title="用Jersey构建RESTful服务3--JAVA对象转成JSON输出">用Jersey构建RESTful服务3--JAVA对象转成JSON输出</a><span>(15556)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/6564625" title="java软件开发工程师实习求职常见面试题">java软件开发工程师实习求职常见面试题</a><span>(12731)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/44656325" title="Netty 实现 WebSocket 聊天功能">Netty 实现 WebSocket 聊天功能</a><span>(12369)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/6624070" title="Install error &quot;Exit Code: 6&quot; or &quot;Exit Code: 7&quot; | Creative Adobe Production(安装Adobe产品时出错及解决方案)">Install error &quot;Exit Code: 6&quot; or &quot;Exit Code: 7&quot; | Creative Adobe Production(安装Adobe产品时出错及解决方案)</a><span>(12273)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/51874354" title="远程过程调用(RPC)详解">远程过程调用(RPC)详解</a><span>(11656)</span>
+</li>
+</ul>
+</div>
+<div id="hotarticls2" class="panel">
+<ul class="panel_head"><span>评论排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="/kkkloveyou/article/details/21391033" title="用Jersey构建RESTful服务1--HelloWorld">用Jersey构建RESTful服务1--HelloWorld</a><span>(34)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21517165" title="用Jersey构建RESTful服务4--通过jersey-client客户端调用Jersey的Web服务模拟CURD">用Jersey构建RESTful服务4--通过jersey-client客户端调用Jersey的Web服务模拟CURD</a><span>(26)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/6628871" title="什么是“面向对象编程”？用邓小平理论指导编程思想">什么是“面向对象编程”？用邓小平理论指导编程思想</a><span>(17)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/44836609" title="如何查看 JAR 包的源代码">如何查看 JAR 包的源代码</a><span>(12)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21485243" title="用Jersey构建RESTful服务3--JAVA对象转成JSON输出">用Jersey构建RESTful服务3--JAVA对象转成JSON输出</a><span>(11)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/44656325" title="Netty 实现 WebSocket 聊天功能">Netty 实现 WebSocket 聊天功能</a><span>(8)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21888283" title="用Jersey构建RESTful服务5--Jersey+MySQL5.6+Hibernate4.3">用Jersey构建RESTful服务5--Jersey+MySQL5.6+Hibernate4.3</a><span>(8)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/50745623" title="Docker 在 CentOS 下的安装、使用">Docker 在 CentOS 下的安装、使用</a><span>(6)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/60493832" title="用大白话聊聊分布式系统">用大白话聊聊分布式系统</a><span>(6)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/6724083" title="java多线程编程技术 +代码实例">java多线程编程技术 +代码实例</a><span>(4)</span>
+</li>
+</ul>
+</div>
+<div id="homepageArticles" class="panel tracking-ad" data-mod="popu_4">
+<ul class="panel_head"><span>推荐文章</span></ul>
+<ul class="panel_body" id="ad_commend">
+<ul>
+<li><a href="http://blog.csdn.net/turingbooks/article/details/72416875" target="_blank">* 5月书讯：流畅的Python，终于等到你！</a></li>
+<li><a href="http://blog.csdn.net/blogdevteam/article/details/72526177" 
+target="_blank">*【新收录】CSDN日报 —— Kotlin 专场</a></li>
+<li><a href="http://blog.csdn.net/jiangwei0910410003/article/details/70483088"target="_blank">* Android中带你开发一款自动爆破签名校验工具kstools</a></li>
+<li><a href="http://blog.csdn.net/javazejian/article/details/71860633" 
+target="_blank">* 深入理解Java注解类型(@Annotation)</a></li>
+<li><a href="http://blog.csdn.net/c406495762/article/details/72597755" 
+target="_blank">* Python3 网络爬虫——这个帅哥、肌肉男横行的世界</a></li>
+<li><a href="http://blog.csdn.net/mindfloating/article/details/72614855" 
+target="_blank">* 从个人习惯到真正的好方法</a></li>
+
+</ul></ul>
+</div>
+
+
+<div id="newcomments" class="panel">
+<ul class="panel_head"><span>最新评论</span></ul>
+<ul class="panel_body itemlist">
+    <li>
+   
+         <a href="/kkkloveyou/article/details/7334309#comments">org.hibernate.MappingException: Unknown entity: com.pkms.entity.User</a>
+    <p style="margin:0px;"><a href="/kkkloveyou" class="user_name">kkkloveyou</a>:
+@CDW2328:没想这么多年前的问题，近期我又遇到。温故而知新啊
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/7334309#comments">org.hibernate.MappingException: Unknown entity: com.pkms.entity.User</a>
+    <p style="margin:0px;"><a href="/CDW2328" class="user_name">CDW2328</a>:
+博主很给力！大赞
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/70164177#comments">分布式系统常见的事务处理机制</a>
+    <p style="margin:0px;"><a href="/daigualu" class="user_name">daigualu</a>:
+感谢分享，学习了。。
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21485243#comments">用Jersey构建RESTful服务3--JAVA对象转成JSON输出</a>
+    <p style="margin:0px;"><a href="/kingDpu" class="user_name">kingDpu</a>:
+@kkkloveyou:谢谢，已经解决了
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/u014308105" class="user_name">u014308105</a>:
+@kkkloveyou:嗯，多谢
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/kkkloveyou" class="user_name">kkkloveyou</a>:
+@u014308105:1. 多个参数可以封装成一个对象来作为一个参数2. 多个参数也可以接收，比如...
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/u014308105" class="user_name">u014308105</a>:
+请问：如果要传递多个参数，也用get方式，该怎么写？
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/kkkloveyou" class="user_name">kkkloveyou</a>:
+@hnn_neil:应该是你的 JDK 版本太低了
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/hnn_neil" class="user_name">hnn_neil</a>:
+你好，我按照步骤操作，发布项目时报错：java.lang.UnsupportedClassVersi...
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/52348883#comments">Apache Hadoop 入门教程</a>
+    <p style="margin:0px;"><a href="/qq_20579895" class="user_name">qq_20579895</a>:
+羊肉串 羊肉串 。。
+    </p>
+    </li>
+</ul>
+</div>
+    </div>
+    <div class="clear">
+    </div>
+
+
+                   <!-- 广告位开始 -->                    <!-- 广告位结束 -->
+                   <div class="J_adv" data-view="true"  data-mtp="63" data-order="40" data-con="ad_content_1260" style="width: 200px; height: 200px;">
+                         <div id="nav_show_top_stop" style="width: 200px;height: 200px;z-index:1000"><div id="cpro_u2734128"></div></div>
+                   </div>
+    <script type="text/javascript">    
+        setTimeout(function () {
+            var naviga_offsetTop = 0;
+            function naviga_stay_top() { var scrollTop = jQuery(document).scrollTop(); if (scrollTop > naviga_offsetTop) { jQuery("#nav_show_top_stop").css({ "position": "fixed" }); jQuery("#nav_show_top_stop").css({ "top": "0px" }); } else { jQuery("#nav_show_top_stop").css({ "position": "fixed" }); jQuery("#nav_show_top_stop").css({ "top": naviga_offsetTop - scrollTop + "px" }); } }
+            function onload_function() { naviga_offsetTop = jQuery("#nav_show_top_stop").position().top; jQuery(window).bind("scroll", naviga_stay_top); jQuery(window).bind("mousewheel", naviga_stay_top); jQuery(document).bind("scroll", naviga_stay_top); jQuery(document).bind("mousewheel", naviga_stay_top); } jQuery(document).ready(onload_function);
+               
+        }, 200);    
+    </script>
+<script type="text/javascript">(window.cproArray = window.cproArray || []).push({ id: "u2734128" });  </script> 
+                    <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script> 
+
+           </div>   
+
+            <div class="clear">
+            </div>
+        </div>
+
+        
+
+<script type="text/javascript" src="http://c.csdnimg.cn/rabbit/cnick/cnick.js"></script>
+
+
+
+
+
+
+    <script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+<script type="text/javascript">
+    $(function () {
+        function __get_code_toolbar(snippet_id) {
+            return $("<span class='tracking-ad' data-mod='popu_167'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "' target='_blank' title='在CODE上查看代码片'  style='text-indent:0;'><img src='https://code.csdn.net/assets/CODE_ico.png' width=12 height=12 alt='在CODE上查看代码片' style='position:relative;top:1px;left:2px;'/></a></span>"
+                    + "<span class='tracking-ad' data-mod='popu_170'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "/fork' target='_blank' title='派生到我的代码片' style='text-indent:0;'><img src='https://code.csdn.net/assets/ico_fork.svg' width=12 height=12 alt='派生到我的代码片' style='position:relative;top:2px;left:2px;'/></a></span>");
+        }
+        
+        $("[code_snippet_id]").each(function () {
+            __s_id = $(this).attr("code_snippet_id");
+            if (__s_id != null && __s_id != "" && __s_id != 0 && parseInt(__s_id) > 70020) {
+                __code_tool = __get_code_toolbar(__s_id);
+                $(this).prev().find(".tools").append(__code_tool);
+            }
+        });
+
+        $(".bar").show();
+    });
+</script>
+
+
+
+
+
+    </div>
+      <!--new top-->
+    
+
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>  
+
+   
+        <!--new top-->
+   
+    <link href="http://c.csdnimg.cn/comm_ask/css/ask_float_block.css" type="text/css" rel="stylesheet" />
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/wmd.js'></script>
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/showdown.js'></script>
+    
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/apps/ask_float_block.js'></script>
+   
+
+   
+
+
+        <script type="text/javascript" src="http://ads.csdn.net/js/async_new.js"></script>
+       <script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+        <script type="text/javascript" src="http://c.csdnimg.cn/rabbit/search-service/main.js"></script>
+          <script type="text/javascript">
+              //$(function () {
+              //    setTimeout(function () {
+              //        var searchtitletags = articletitle + ',' + $("#tags").html();
+              //        searchService({
+              //            index: 'blog',
+              //            query: searchtitletags,
+              //            from: 5,
+              //            size: 5,
+              //            appendTo: '#res',
+              //            url: 'recommend',
+              //            his: 2,
+              //            client: "blog_cf_enhance",
+              //            tmpl: '<dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;"><a href="#{ url }" title="#{ title }" strategy="#{ strategy }">#{ title }</a></dd>'
+              //        });
+              //    }, 1000);
+              //});
+
+         </script>   
+          <script type="text/javascript">
+              $(function () {
+                  setTimeout(function () {
+                      var searchtitletags = articletitle + ',' + $("#tags").html();
+                      searchService({
+                          index: 'blog',
+                          query: searchtitletags,
+                          from: 0,
+                          size: 5,
+                          appendTo: '#articlecommend',
+                          url: 'recommend',
+                          his: 2,
+                          client: "blog_cf_enhance",
+                          tmpl: '<li><em>•</em><a href="#{ url }" title="#{ title }" strategy="#{ strategy }">#{ title }</a></li>'
+                      });
+
+                      setTimeout(function () {
+                          var articles=$("#articlecommend li");
+                          for (var i = 0; i < articles.length; i++)
+                          {
+                              $(articles[i]).find("a").css("width", "290px");
+                              if (i < 5) {
+                                  $(".similar_list.fl").append("<li>" + $(articles[i]).html() + "</li");
+                              }
+                              else {
+                                  $(".similar_list.fr").append("<li>" + $(articles[i]).html() + "</li");
+                              }
+                          }
+                      }, 2000);                     
+
+                  }, 1000);
+              });
+
+         </script>
+    <script src="http://static.blog.csdn.net/scripts/csdn_blog_detail.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=1070877"></script>
+
+     <script id="csdn-toolbar-id" btnId="header_notice_num" wrapId="note1" count="5" subCount="5" type="text/javascript" src="http://c.csdnimg.cn/public/common/toolbar/js/toolbar.js"></script>
+    
+
+
+  <div id="a52b5334d" style="width: 1px; height: 1px; display: none;">
+                    <script id="adJs52b5334"></script>
+                    <script>document.getElementById("adJs52b5334").src = "http://ads.csdn.net/js/opt/52b5334.js?t=" + Math.random();</script>
+   </div>
+
+    
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/saveToCode.js"></script>
+      <script type="text/javascript" src="//c.csdnimg.cn/rabbit/tracking-ad/main.js?75eacd8"></script>
+        
+     
+
+    
+          
+    <div class="pop_CA_cover"  style="display:none"></div>
+    <div class="pop pop_CA"  style="display:none">
+          <div class="CA_header">
+            收藏助手
+            <span class="cancel_icon"  id="fapancle"  onclick="$('.pop_CA').hide();$('.pop_CA_cover').hide();"></span>
+          </div>
+          <iframe src="" id="fa" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+    </div>
+
+</body>
+</html>   
+ 

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Auto Home</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	{% block css %} {% endblock %}
+	<link href="/static/menu_main_css.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src='/static/jquery-3.2.1.js'></script>
+	<script type="text/javascript" src='/static/zjk-login.js'></script>
+	{% block js %} {% endblock %}
+	<script>
+		$(function(){
+		{% block javas %} {% endblock %}
+			$('.list-group').click(function(){
+				$(this).siblings().children('.caidan').addClass('hide');
+				$(this).children().removeClass('hide');
+			});
+		})
+		
+		
+	
+	</script>
+</head>
+<body>
+<div class='body_div'>Auto Home</div>
+<div class='body_down'>
+<div class='body_left_menu'>
+	
+	<div class="list-group">
+	  <span class="list-group-item active">
+		用户管理
+	  </span>
+	 <div class='caidan'>
+	  <a href="/menu_user/0" class="list-group-item">用户编辑</a>
+	  <a href="#" class="list-group-item">index1</a>
+	  <a href="#" class="list-group-item">index2</a>
+	  <a href="/menu" class="list-group-item">返回首页</a>
+	 </div>
+	</div>
+
+	<div class="list-group">
+	  <span class="list-group-item active">
+		功能订制
+	  </span>
+	  <div class='caidan hide'>
+	  <a href="#" class="list-group-item">index6</a>
+	  <a href="#" class="list-group-item">index7</a>
+	  <a href="#" class="list-group-item">index8</a>
+	  </div>
+	</div>
+	
+	<div class="list-group">
+	  <span class="list-group-item active">
+		系统设置
+	  </span>
+	  <div class='caidan hide'>
+	  <a href="#" class="list-group-item">index6</a>
+	  <a href="#" class="list-group-item">index7</a>
+	  <a href="/login" class="list-group-item">退出系统</a>
+	  </div>
+	</div>
+
+	
+</div>
+<div class='body_right'>
+{% block myson %} {% endblock %}
+</div>
+</div>
+{% block foot %} {% endblock %}
+</body>
+</html>

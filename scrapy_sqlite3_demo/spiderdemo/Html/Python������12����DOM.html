@@ -1,0 +1,1096 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python开发【第十二篇】：DOM - 武沛齐 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=m_FXmwz3wxZoecUwNEK23PAzc-j9vbX_C6MblJ5ouMc1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue.css?v=jJERBFSojhmgst84aaRDal9S3q1WoO-WcNudmMzGJS81"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/133379.css?v=YSNZANkz7eBKoXq2iHYfghvodkY%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue-mobile.css?v=z0BacpCfWeLlXDCM0C158kTP_DMqMbGBapID4f-QztI1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/wupeiqi/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/wupeiqi/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/wupeiqi/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'wupeiqi', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=CPv0EEqm9L2aCgolHxaZfVYM6J-Sn5az_FJXbjzgr-o1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/wupeiqi/">Mr.Seven</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/wupeiqi/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%AD%A6%E6%B2%9B%E9%BD%90">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/wupeiqi/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/wupeiqi/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-126&nbsp;
+文章-137&nbsp;
+评论-259&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/wupeiqi/articles/5643298.html">Python开发【第十二篇】：DOM</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><p>文档对象模型（Document Object Model，DOM）是一种用于HTML和XML文档的编程接口。它给文档提供了一种结构化的表示方法，可以改变文档的内容和呈现方式。我们最为关心的是，DOM把网页和脚本以及其他的编程语言联系了起来。DOM属于浏览器，而不是JavaScript语言规范里的规定的核心内容。</p>
+<h3>一、查找元素</h3>
+<p>1、直接查找</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">document.getElementById             根据ID获取一个标签
+document.getElementsByName          根据name属性获取标签集合
+document.getElementsByClassName     根据class属性获取标签集合
+document.getElementsByTagName       根据标签名获取标签集合
+</pre>
+</div>
+<p>2、间接查找</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">parentNode          // 父节点
+childNodes          // 所有子节点
+firstChild          // 第一个子节点
+lastChild           // 最后一个子节点
+nextSibling         // 下一个兄弟节点
+previousSibling     // 上一个兄弟节点
+
+parentElement           // 父节点标签元素
+children                // 所有子标签
+firstElementChild       // 第一个子标签元素
+lastElementChild        // 最后一个子标签元素
+nextElementtSibling     // 下一个兄弟标签元素
+previousElementSibling  // 上一个兄弟标签元素
+</pre>
+</div>
+<h3>二、操作</h3>
+<p>1、内容</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">innerText   文本
+outerText
+innerHTML   HTML内容
+innerHTML   
+value       值</pre>
+</div>
+<p>2、属性</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">attributes                // 获取所有标签属性
+setAttribute(key,value)   // 设置标签属性
+getAttribute(key)         // 获取指定标签属性
+
+/*
+var atr = document.createAttribute("class");
+atr.nodeValue="democlass";
+document.getElementById('n1').setAttributeNode(atr);
+*/
+</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('2f2a15b1-6485-43f0-9b1b-1d9d17dc7d60')"><img id="code_img_closed_2f2a15b1-6485-43f0-9b1b-1d9d17dc7d60" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_2f2a15b1-6485-43f0-9b1b-1d9d17dc7d60" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('2f2a15b1-6485-43f0-9b1b-1d9d17dc7d60',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_2f2a15b1-6485-43f0-9b1b-1d9d17dc7d60" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span style="color: #800000;">"</span><span style="color: #800000;">en</span><span style="color: #800000;">"</span>&gt;
+    &lt;meta charset=<span style="color: #800000;">"</span><span style="color: #800000;">UTF-8</span><span style="color: #800000;">"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">button</span><span style="color: #800000;">"</span> value=<span style="color: #800000;">"</span><span style="color: #800000;">全选</span><span style="color: #800000;">"</span>  onclick=<span style="color: #800000;">"</span><span style="color: #800000;">CheckAll();</span><span style="color: #800000;">"</span>/&gt;
+    &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">button</span><span style="color: #800000;">"</span> value=<span style="color: #800000;">"</span><span style="color: #800000;">取消</span><span style="color: #800000;">"</span> onclick=<span style="color: #800000;">"</span><span style="color: #800000;">CancelAll();</span><span style="color: #800000;">"</span>/&gt;
+    &lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">button</span><span style="color: #800000;">"</span> value=<span style="color: #800000;">"</span><span style="color: #800000;">反选</span><span style="color: #800000;">"</span> onclick=<span style="color: #800000;">"</span><span style="color: #800000;">ReverseCheck();</span><span style="color: #800000;">"</span>/&gt;
+
+    &lt;table border=<span style="color: #800000;">"</span><span style="color: #800000;">1</span><span style="color: #800000;">"</span> &gt;
+        &lt;thead&gt;
+
+        &lt;/thead&gt;
+        &lt;tbody id=<span style="color: #800000;">"</span><span style="color: #800000;">tb</span><span style="color: #800000;">"</span>&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">checkbox</span><span style="color: #800000;">"</span> /&gt;&lt;/td&gt;
+                &lt;td&gt;111&lt;/td&gt;
+                &lt;td&gt;222&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">checkbox</span><span style="color: #800000;">"</span> /&gt;&lt;/td&gt;
+                &lt;td&gt;111&lt;/td&gt;
+                &lt;td&gt;222&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">checkbox</span><span style="color: #800000;">"</span> /&gt;&lt;/td&gt;
+                &lt;td&gt;111&lt;/td&gt;
+                &lt;td&gt;222&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;&lt;input type=<span style="color: #800000;">"</span><span style="color: #800000;">checkbox</span><span style="color: #800000;">"</span> /&gt;&lt;/td&gt;
+                &lt;td&gt;111&lt;/td&gt;
+                &lt;td&gt;222&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+    &lt;script&gt;<span style="color: #000000;">
+        function CheckAll(ths){
+            var tb </span>= document.getElementById(<span style="color: #800000;">'</span><span style="color: #800000;">tb</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+            var trs </span>=<span style="color: #000000;"> tb.childNodes;
+            </span><span style="color: #0000ff;">for</span>(var i =0; i&lt;trs.length; i++<span style="color: #000000;">){
+
+                var current_tr </span>=<span style="color: #000000;"> trs[i];
+                </span><span style="color: #0000ff;">if</span>(current_tr.nodeType==1<span style="color: #000000;">){
+                    var inp </span>= current_tr.firstElementChild.getElementsByTagName(<span style="color: #800000;">'</span><span style="color: #800000;">input</span><span style="color: #800000;">'</span><span style="color: #000000;">)[0];
+                    inp.checked </span>=<span style="color: #000000;"> true;
+                }
+            }
+        }
+
+        function CancelAll(ths){
+            var tb </span>= document.getElementById(<span style="color: #800000;">'</span><span style="color: #800000;">tb</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+            var trs </span>=<span style="color: #000000;"> tb.childNodes;
+            </span><span style="color: #0000ff;">for</span>(var i =0; i&lt;trs.length; i++<span style="color: #000000;">){
+
+                var current_tr </span>=<span style="color: #000000;"> trs[i];
+                </span><span style="color: #0000ff;">if</span>(current_tr.nodeType==1<span style="color: #000000;">){
+                    var inp </span>= current_tr.firstElementChild.getElementsByTagName(<span style="color: #800000;">'</span><span style="color: #800000;">input</span><span style="color: #800000;">'</span><span style="color: #000000;">)[0];
+                    inp.checked </span>=<span style="color: #000000;"> false;
+                }
+            }
+        }
+
+        function ReverseCheck(ths){
+            var tb </span>= document.getElementById(<span style="color: #800000;">'</span><span style="color: #800000;">tb</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+            var trs </span>=<span style="color: #000000;"> tb.childNodes;
+            </span><span style="color: #0000ff;">for</span>(var i =0; i&lt;trs.length; i++<span style="color: #000000;">){
+                var current_tr </span>=<span style="color: #000000;"> trs[i];
+                </span><span style="color: #0000ff;">if</span>(current_tr.nodeType==1<span style="color: #000000;">){
+                    var inp </span>= current_tr.firstElementChild.getElementsByTagName(<span style="color: #800000;">'</span><span style="color: #800000;">input</span><span style="color: #800000;">'</span><span style="color: #000000;">)[0];
+                    </span><span style="color: #0000ff;">if</span><span style="color: #000000;">(inp.checked){
+                        inp.checked </span>=<span style="color: #000000;"> false;
+                    }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+                        inp.checked </span>=<span style="color: #000000;"> true;
+                    }
+                }
+            }
+        }
+
+    </span>&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">Demo</span></div>
+<p>3、class操作</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">className                // 获取所有类名
+classList.remove(cls)    // 删除指定类
+classList.add(cls)       // 添加类
+</pre>
+</div>
+<p>4、标签操作</p>
+<p>a.创建标签</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">// 方式一
+var tag = document.createElement('a')
+tag.innerText = "wupeiqi"
+tag.className = "c1"
+tag.href = "http://www.cnblogs.com/wupeiqi"
+
+// 方式二
+var tag = "&lt;a class='c1' href='http://www.cnblogs.com/wupeiqi'&gt;wupeiqi&lt;/a&gt;"</pre>
+</div>
+<p>b.操作标签</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">// 方式一
+var obj = "&lt;input type='text' /&gt;";
+xxx.insertAdjacentHTML("beforeEnd",obj);
+xxx.insertAdjacentElement('afterBegin',document.createElement('p'))
+
+//注意：第一个参数只能是'beforeBegin'、 'afterBegin'、 'beforeEnd'、 'afterEnd'
+
+// 方式二
+var tag = document.createElement('a')
+xxx.appendChild(tag)
+xxx.insertBefore(tag,xxx[1])</pre>
+</div>
+<p>5、样式操作</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">var obj = document.getElementById('i1')
+
+obj.style.fontSize = "32px";
+obj.style.backgroundColor = "red";</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('70c898fa-f325-4912-9504-73e6aecdcae7')"><img id="code_img_closed_70c898fa-f325-4912-9504-73e6aecdcae7" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_70c898fa-f325-4912-9504-73e6aecdcae7" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('70c898fa-f325-4912-9504-73e6aecdcae7',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_70c898fa-f325-4912-9504-73e6aecdcae7" class="cnblogs_code_hide">
+<pre>    &lt;input onfocus=<span style="color: #800000;">"</span><span style="color: #800000;">Focus(this);</span><span style="color: #800000;">"</span> onblur=<span style="color: #800000;">"</span><span style="color: #800000;">Blur(this);</span><span style="color: #800000;">"</span> id=<span style="color: #800000;">"</span><span style="color: #800000;">search</span><span style="color: #800000;">"</span> value=<span style="color: #800000;">"</span><span style="color: #800000;">请输入关键字</span><span style="color: #800000;">"</span> style=<span style="color: #800000;">"</span><span style="color: #800000;">color: gray;</span><span style="color: #800000;">"</span> /&gt;
+
+    &lt;script&gt;<span style="color: #000000;">
+        function Focus(ths){
+            ths.style.color </span>= <span style="color: #800000;">"</span><span style="color: #800000;">black</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">if</span>(ths.value == <span style="color: #800000;">'</span><span style="color: #800000;">请输入关键字</span><span style="color: #800000;">'</span> || ths.value.trim() == <span style="color: #800000;">""</span><span style="color: #000000;">){
+
+                ths.value </span>= <span style="color: #800000;">""</span><span style="color: #000000;">;
+            }
+        }
+
+        function Blur(ths){
+            </span><span style="color: #0000ff;">if</span>(ths.value.trim() == <span style="color: #800000;">""</span><span style="color: #000000;">){
+                ths.value </span>= <span style="color: #800000;">'</span><span style="color: #800000;">请输入关键字</span><span style="color: #800000;">'</span><span style="color: #000000;">;
+                ths.style.color </span>= <span style="color: #800000;">'</span><span style="color: #800000;">gray</span><span style="color: #800000;">'</span><span style="color: #000000;">;
+            }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+                ths.style.color </span>= <span style="color: #800000;">"</span><span style="color: #800000;">black</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+            }
+        }
+    </span>&lt;/script&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">Demo</span></div>
+<p>6、位置操作</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">总文档高度
+document.documentElement.offsetHeight
+ 
+当前文档占屏幕高度
+document.documentElement.clientHeight
+ 
+自身高度
+tag.offsetHeight
+ 
+距离上级定位高度
+tag.offsetTop
+ 
+父定位标签
+tag.offsetParent
+ 
+滚动高度
+tag.scrollTop
+
+/*
+    clientHeight -&gt; 可见区域：height + padding
+    clientTop    -&gt; border高度
+    offsetHeight -&gt; 可见区域：height + padding + border
+    offsetTop    -&gt; 上级定位标签的高度
+    scrollHeight -&gt; 全文高：height + padding
+    scrollTop    -&gt; 滚动高度
+    特别的：
+        document.documentElement代指文档根节点
+*/</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('7e332bab-32bb-409b-9611-01aa1cf011ad')"><img id="code_img_closed_7e332bab-32bb-409b-9611-01aa1cf011ad" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_7e332bab-32bb-409b-9611-01aa1cf011ad" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('7e332bab-32bb-409b-9611-01aa1cf011ad',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_7e332bab-32bb-409b-9611-01aa1cf011ad" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span style="color: #800000;">"</span><span style="color: #800000;">en</span><span style="color: #800000;">"</span>&gt;
+    &lt;meta charset=<span style="color: #800000;">"</span><span style="color: #800000;">UTF-8</span><span style="color: #800000;">"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body style=<span style="color: #800000;">"</span><span style="color: #800000;">margin: 0;</span><span style="color: #800000;">"</span>&gt;
+    &lt;div style=<span style="color: #800000;">"</span><span style="color: #800000;">height: 900px;</span><span style="color: #800000;">"</span>&gt;
+
+    &lt;/div&gt;
+    &lt;div style=<span style="color: #800000;">"</span><span style="color: #800000;">padding: 10px;</span><span style="color: #800000;">"</span>&gt;
+        &lt;div id=<span style="color: #800000;">"</span><span style="color: #800000;">i1</span><span style="color: #800000;">"</span> style=<span style="color: #800000;">"</span><span style="color: #800000;">height:190px;padding: 2px;border: 1px solid red;margin: 8px;</span><span style="color: #800000;">"</span>&gt;
+                &lt;p&gt;asdf&lt;/p&gt;
+                &lt;p&gt;asdf&lt;/p&gt;
+                &lt;p&gt;asdf&lt;/p&gt;
+                &lt;p&gt;asdf&lt;/p&gt;
+                &lt;p&gt;asdf&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;<span style="color: #000000;">
+        var i1 </span>= document.getElementById(<span style="color: #800000;">'</span><span style="color: #800000;">i1</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+
+        console.log(i1.clientHeight); </span>// 可见区域：height +<span style="color: #000000;"> padding
+        console.log(i1.clientTop);    </span>//<span style="color: #000000;"> border高度
+        console.log(</span><span style="color: #800000;">'</span><span style="color: #800000;">=====</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+        console.log(i1.offsetHeight); </span>// 可见区域：height + padding +<span style="color: #000000;"> border
+        console.log(i1.offsetTop);    </span>//<span style="color: #000000;"> 上级定位标签的高度
+        console.log(</span><span style="color: #800000;">'</span><span style="color: #800000;">=====</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+        console.log(i1.scrollHeight);   </span>//全文高：height +<span style="color: #000000;"> padding
+        console.log(i1.scrollTop);      </span>//<span style="color: #000000;"> 滚动高度
+        console.log(</span><span style="color: #800000;">'</span><span style="color: #800000;">=====</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+
+    </span>&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">test</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('de9ae552-3e75-40ad-9ded-7ebc88f56ae2')"><img id="code_img_closed_de9ae552-3e75-40ad-9ded-7ebc88f56ae2" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_de9ae552-3e75-40ad-9ded-7ebc88f56ae2" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('de9ae552-3e75-40ad-9ded-7ebc88f56ae2',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_de9ae552-3e75-40ad-9ded-7ebc88f56ae2" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span style="color: #800000;">"</span><span style="color: #800000;">en</span><span style="color: #800000;">"</span>&gt;
+    &lt;meta charset=<span style="color: #800000;">"</span><span style="color: #800000;">UTF-8</span><span style="color: #800000;">"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;style&gt;<span style="color: #000000;">
+
+    body{
+        margin: 0px;
+    }
+    img {
+        border: 0;
+    }
+    ul{
+        padding: 0;
+        margin: 0;
+        list</span>-<span style="color: #000000;">style: none;
+    }
+    .clearfix:after {
+        content: </span><span style="color: #800000;">"</span><span style="color: #800000;">.</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+
+    .wrap{
+        width: 980px;
+        margin: 0 auto;
+    }
+
+    .pg</span>-<span style="color: #000000;">header{
+        background</span>-color: <span style="color: #008000;">#</span><span style="color: #008000;">303a40;</span>
+        -webkit-box-shadow: 0 2px 5px rgba(0,0,0,.2<span style="color: #000000;">);
+        </span>-moz-box-shadow: 0 2px 5px rgba(0,0,0,.2<span style="color: #000000;">);
+        box</span>-shadow: 0 2px 5px rgba(0,0,0,.2<span style="color: #000000;">);
+    }
+    .pg</span>-<span style="color: #000000;">header .logo{
+        float: left;
+        padding:5px 10px 5px 0px;
+    }
+    .pg</span>-<span style="color: #000000;">header .logo img{
+        vertical</span>-<span style="color: #000000;">align: middle;
+        width: 110px;
+        height: 40px;
+
+    }
+    .pg</span>-<span style="color: #000000;">header .nav{
+        line</span>-<span style="color: #000000;">height: 50px;
+    }
+    .pg</span>-<span style="color: #000000;">header .nav ul li{
+        float: left;
+    }
+    .pg</span>-<span style="color: #000000;">header .nav ul li a{
+        display: block;
+        color: </span><span style="color: #008000;">#</span><span style="color: #008000;">ccc;</span>
+<span style="color: #000000;">        padding: 0 20px;
+        text</span>-<span style="color: #000000;">decoration: none;
+        font</span>-<span style="color: #000000;">size: 14px;
+    }
+    .pg</span>-<span style="color: #000000;">header .nav ul li a:hover{
+        color: </span><span style="color: #008000;">#</span><span style="color: #008000;">fff;</span>
+        background-color: <span style="color: #008000;">#</span><span style="color: #008000;">425a66;</span>
+<span style="color: #000000;">    }
+    .pg</span>-<span style="color: #000000;">body{
+
+    }
+    .pg</span>-<span style="color: #000000;">body .catalog{
+        position: absolute;
+        top:60px;
+        width: 200px;
+        background</span>-color: <span style="color: #008000;">#</span><span style="color: #008000;">fafafa;</span>
+<span style="color: #000000;">        bottom: 0px;
+    }
+    .pg</span>-<span style="color: #000000;">body .catalog.fixed{
+        position: fixed;
+        top:10px;
+    }
+
+    .pg</span>-body .catalog .catalog-<span style="color: #000000;">item.active{
+        color: </span><span style="color: #008000;">#</span><span style="color: #008000;">fff;</span>
+        background-color: <span style="color: #008000;">#</span><span style="color: #008000;">425a66;</span>
+<span style="color: #000000;">    }
+
+    .pg</span>-<span style="color: #000000;">body .content{
+        position: absolute;
+        top:60px;
+        width: 700px;
+        margin</span>-<span style="color: #000000;">left: 210px;
+        background</span>-color: <span style="color: #008000;">#</span><span style="color: #008000;">fafafa;</span>
+<span style="color: #000000;">        overflow: auto;
+    }
+    .pg</span>-<span style="color: #000000;">body .content .section{
+        height: 500px;
+    }
+</span>&lt;/style&gt;
+&lt;body onscroll=<span style="color: #800000;">"</span><span style="color: #800000;">ScrollEvent();</span><span style="color: #800000;">"</span>&gt;
+&lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">pg-header</span><span style="color: #800000;">"</span>&gt;
+    &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">wrap clearfix</span><span style="color: #800000;">"</span>&gt;
+        &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">logo</span><span style="color: #800000;">"</span>&gt;
+            &lt;a href=<span style="color: #800000;">"</span><span style="color: #800000;">#</span><span style="color: #800000;">"</span>&gt;
+                &lt;img src=<span style="color: #800000;">"</span><span style="color: #800000;">http://core.pc.lietou-static.com/revs/images/common/logo_7012c4a4.pn</span><span style="color: #800000;">"</span>&gt;
+            &lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">nav</span><span style="color: #800000;">"</span>&gt;
+            &lt;ul&gt;
+                &lt;li&gt;
+                    &lt;a  href=<span style="color: #800000;">"</span><span style="color: #800000;">#</span><span style="color: #800000;">"</span>&gt;首页&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;a  href=<span style="color: #800000;">"</span><span style="color: #800000;">#</span><span style="color: #800000;">"</span>&gt;功能一&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;a  href=<span style="color: #800000;">"</span><span style="color: #800000;">#</span><span style="color: #800000;">"</span>&gt;功能二&lt;/a&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">pg-body</span><span style="color: #800000;">"</span>&gt;
+    &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">wrap</span><span style="color: #800000;">"</span>&gt;
+        &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">catalog</span><span style="color: #800000;">"</span>&gt;
+            &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">catalog-item</span><span style="color: #800000;">"</span> auto-to=<span style="color: #800000;">"</span><span style="color: #800000;">function1</span><span style="color: #800000;">"</span>&gt;&lt;a&gt;第1张&lt;/a&gt;&lt;/div&gt;
+            &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">catalog-item</span><span style="color: #800000;">"</span> auto-to=<span style="color: #800000;">"</span><span style="color: #800000;">function2</span><span style="color: #800000;">"</span>&gt;&lt;a&gt;第2张&lt;/a&gt;&lt;/div&gt;
+            &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">catalog-item</span><span style="color: #800000;">"</span> auto-to=<span style="color: #800000;">"</span><span style="color: #800000;">function3</span><span style="color: #800000;">"</span>&gt;&lt;a&gt;第3张&lt;/a&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">content</span><span style="color: #800000;">"</span>&gt;
+            &lt;div menu=<span style="color: #800000;">"</span><span style="color: #800000;">function1</span><span style="color: #800000;">"</span> <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">section</span><span style="color: #800000;">"</span>&gt;
+                &lt;h1&gt;第一章&lt;/h1&gt;
+            &lt;/div&gt;
+            &lt;div menu=<span style="color: #800000;">"</span><span style="color: #800000;">function2</span><span style="color: #800000;">"</span> <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">section</span><span style="color: #800000;">"</span>&gt;
+                &lt;h1&gt;第二章&lt;/h1&gt;
+            &lt;/div&gt;
+            &lt;div menu=<span style="color: #800000;">"</span><span style="color: #800000;">function3</span><span style="color: #800000;">"</span> <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">section</span><span style="color: #800000;">"</span>&gt;
+                &lt;h1&gt;第三章&lt;/h1&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+&lt;/div&gt;
+    &lt;script&gt;<span style="color: #000000;">
+        function ScrollEvent(){
+            var bodyScrollTop </span>=<span style="color: #000000;"> document.body.scrollTop;
+            </span><span style="color: #0000ff;">if</span>(bodyScrollTop&gt;50<span style="color: #000000;">){
+                document.getElementsByClassName(</span><span style="color: #800000;">'</span><span style="color: #800000;">catalog</span><span style="color: #800000;">'</span>)[0].classList.add(<span style="color: #800000;">'</span><span style="color: #800000;">fixed</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+            }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+                document.getElementsByClassName(</span><span style="color: #800000;">'</span><span style="color: #800000;">catalog</span><span style="color: #800000;">'</span>)[0].classList.remove(<span style="color: #800000;">'</span><span style="color: #800000;">fixed</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+            }
+
+        }
+    </span>&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">Demo-滚动固定</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('fbdd18da-d4bf-40f9-a248-72b5c8620419')"><img id="code_img_closed_fbdd18da-d4bf-40f9-a248-72b5c8620419" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_fbdd18da-d4bf-40f9-a248-72b5c8620419" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('fbdd18da-d4bf-40f9-a248-72b5c8620419',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_fbdd18da-d4bf-40f9-a248-72b5c8620419" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span style="color: #800000;">"</span><span style="color: #800000;">en</span><span style="color: #800000;">"</span>&gt;
+    &lt;meta charset=<span style="color: #800000;">"</span><span style="color: #800000;">UTF-8</span><span style="color: #800000;">"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;style&gt;<span style="color: #000000;">
+
+    body{
+        margin: 0px;
+    }
+    img {
+        border: 0;
+    }
+    ul{
+        padding: 0;
+        margin: 0;
+        list</span>-<span style="color: #000000;">style: none;
+    }
+    h1{
+        padding: 0;
+        margin: 0;
+    }
+    .clearfix:after {
+        content: </span><span style="color: #800000;">"</span><span style="color: #800000;">.</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+
+    .wrap{
+        width: 980px;
+        margin: 0 auto;
+    }
+
+    .pg</span>-<span style="color: #000000;">header{
+        background</span>-color: <span style="color: #008000;">#</span><span style="color: #008000;">303a40;</span>
+        -webkit-box-shadow: 0 2px 5px rgba(0,0,0,.2<span style="color: #000000;">);
+        </span>-moz-box-shadow: 0 2px 5px rgba(0,0,0,.2<span style="color: #000000;">);
+        box</span>-shadow: 0 2px 5px rgba(0,0,0,.2<span style="color: #000000;">);
+    }
+    .pg</span>-<span style="color: #000000;">header .logo{
+        float: left;
+        padding:5px 10px 5px 0px;
+    }
+    .pg</span>-<span style="color: #000000;">header .logo img{
+        vertical</span>-<span style="color: #000000;">align: middle;
+        width: 110px;
+        height: 40px;
+
+    }
+    .pg</span>-<span style="color: #000000;">header .nav{
+        line</span>-<span style="color: #000000;">height: 50px;
+    }
+    .pg</span>-<span style="color: #000000;">header .nav ul li{
+        float: left;
+    }
+    .pg</span>-<span style="color: #000000;">header .nav ul li a{
+        display: block;
+        color: </span><span style="color: #008000;">#</span><span style="color: #008000;">ccc;</span>
+<span style="color: #000000;">        padding: 0 20px;
+        text</span>-<span style="color: #000000;">decoration: none;
+        font</span>-<span style="color: #000000;">size: 14px;
+    }
+    .pg</span>-<span style="color: #000000;">header .nav ul li a:hover{
+        color: </span><span style="color: #008000;">#</span><span style="color: #008000;">fff;</span>
+        background-color: <span style="color: #008000;">#</span><span style="color: #008000;">425a66;</span>
+<span style="color: #000000;">    }
+    .pg</span>-<span style="color: #000000;">body{
+
+    }
+    .pg</span>-<span style="color: #000000;">body .catalog{
+        position: absolute;
+        top:60px;
+        width: 200px;
+        background</span>-color: <span style="color: #008000;">#</span><span style="color: #008000;">fafafa;</span>
+<span style="color: #000000;">        bottom: 0px;
+    }
+    .pg</span>-<span style="color: #000000;">body .catalog.fixed{
+        position: fixed;
+        top:10px;
+    }
+
+    .pg</span>-body .catalog .catalog-<span style="color: #000000;">item.active{
+        color: </span><span style="color: #008000;">#</span><span style="color: #008000;">fff;</span>
+        background-color: <span style="color: #008000;">#</span><span style="color: #008000;">425a66;</span>
+<span style="color: #000000;">    }
+
+    .pg</span>-<span style="color: #000000;">body .content{
+        position: absolute;
+        top:60px;
+        width: 700px;
+        margin</span>-<span style="color: #000000;">left: 210px;
+        background</span>-color: <span style="color: #008000;">#</span><span style="color: #008000;">fafafa;</span>
+<span style="color: #000000;">        overflow: auto;
+    }
+    .pg</span>-<span style="color: #000000;">body .content .section{
+        height: 500px;
+        border: 1px solid red;
+    }
+</span>&lt;/style&gt;
+&lt;body onscroll=<span style="color: #800000;">"</span><span style="color: #800000;">ScrollEvent();</span><span style="color: #800000;">"</span>&gt;
+&lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">pg-header</span><span style="color: #800000;">"</span>&gt;
+    &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">wrap clearfix</span><span style="color: #800000;">"</span>&gt;
+        &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">logo</span><span style="color: #800000;">"</span>&gt;
+            &lt;a href=<span style="color: #800000;">"</span><span style="color: #800000;">#</span><span style="color: #800000;">"</span>&gt;
+                &lt;img src=<span style="color: #800000;">"</span><span style="color: #800000;">http://core.pc.lietou-static.com/revs/images/common/logo_7012c4a4.pn</span><span style="color: #800000;">"</span>&gt;
+            &lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">nav</span><span style="color: #800000;">"</span>&gt;
+            &lt;ul&gt;
+                &lt;li&gt;
+                    &lt;a  href=<span style="color: #800000;">"</span><span style="color: #800000;">#</span><span style="color: #800000;">"</span>&gt;首页&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;a  href=<span style="color: #800000;">"</span><span style="color: #800000;">#</span><span style="color: #800000;">"</span>&gt;功能一&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;a  href=<span style="color: #800000;">"</span><span style="color: #800000;">#</span><span style="color: #800000;">"</span>&gt;功能二&lt;/a&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">pg-body</span><span style="color: #800000;">"</span>&gt;
+    &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">wrap</span><span style="color: #800000;">"</span>&gt;
+        &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">catalog</span><span style="color: #800000;">"</span> id=<span style="color: #800000;">"</span><span style="color: #800000;">catalog</span><span style="color: #800000;">"</span>&gt;
+            &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">catalog-item</span><span style="color: #800000;">"</span> auto-to=<span style="color: #800000;">"</span><span style="color: #800000;">function1</span><span style="color: #800000;">"</span>&gt;&lt;a&gt;第1张&lt;/a&gt;&lt;/div&gt;
+            &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">catalog-item</span><span style="color: #800000;">"</span> auto-to=<span style="color: #800000;">"</span><span style="color: #800000;">function2</span><span style="color: #800000;">"</span>&gt;&lt;a&gt;第2张&lt;/a&gt;&lt;/div&gt;
+            &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">catalog-item</span><span style="color: #800000;">"</span> auto-to=<span style="color: #800000;">"</span><span style="color: #800000;">function3</span><span style="color: #800000;">"</span>&gt;&lt;a&gt;第3张&lt;/a&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">content</span><span style="color: #800000;">"</span> id=<span style="color: #800000;">"</span><span style="color: #800000;">content</span><span style="color: #800000;">"</span>&gt;
+            &lt;div menu=<span style="color: #800000;">"</span><span style="color: #800000;">function1</span><span style="color: #800000;">"</span> <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">section</span><span style="color: #800000;">"</span>&gt;
+                &lt;h1&gt;第一章&lt;/h1&gt;
+            &lt;/div&gt;
+            &lt;div menu=<span style="color: #800000;">"</span><span style="color: #800000;">function2</span><span style="color: #800000;">"</span> <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">section</span><span style="color: #800000;">"</span>&gt;
+                &lt;h1&gt;第二章&lt;/h1&gt;
+            &lt;/div&gt;
+            &lt;div menu=<span style="color: #800000;">"</span><span style="color: #800000;">function3</span><span style="color: #800000;">"</span> <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">section</span><span style="color: #800000;">"</span>&gt;
+                &lt;h1&gt;第三章&lt;/h1&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+&lt;/div&gt;
+    &lt;script&gt;<span style="color: #000000;">
+        function ScrollEvent(){
+            var bodyScrollTop </span>=<span style="color: #000000;"> document.body.scrollTop;
+            </span><span style="color: #0000ff;">if</span>(bodyScrollTop&gt;50<span style="color: #000000;">){
+                document.getElementsByClassName(</span><span style="color: #800000;">'</span><span style="color: #800000;">catalog</span><span style="color: #800000;">'</span>)[0].classList.add(<span style="color: #800000;">'</span><span style="color: #800000;">fixed</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+            }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+                document.getElementsByClassName(</span><span style="color: #800000;">'</span><span style="color: #800000;">catalog</span><span style="color: #800000;">'</span>)[0].classList.remove(<span style="color: #800000;">'</span><span style="color: #800000;">fixed</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+            }
+
+            var content </span>= document.getElementById(<span style="color: #800000;">'</span><span style="color: #800000;">content</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+            var sections </span>=<span style="color: #000000;"> content.children;
+            </span><span style="color: #0000ff;">for</span>(var i=0;i&lt;sections.length;i++<span style="color: #000000;">){
+                var current_section </span>=<span style="color: #000000;"> sections[i];
+
+                </span>//<span style="color: #000000;"> 当前标签距离顶部绝对高度
+                var scOffTop </span>= current_section.offsetTop + 60<span style="color: #000000;">;
+
+                </span>//<span style="color: #000000;"> 当前标签距离顶部，相对高度
+                var offTop </span>= scOffTop -<span style="color: #000000;"> bodyScrollTop;
+
+                </span>//<span style="color: #000000;"> 当前标签高度
+                var height </span>=<span style="color: #000000;"> current_section.scrollHeight;
+
+                </span><span style="color: #0000ff;">if</span>(offTop&lt;0 &amp;&amp; -offTop &lt;<span style="color: #000000;"> height){
+                    </span>//<span style="color: #000000;"> 当前标签添加active
+                    </span>//<span style="color: #000000;"> 其他移除 active
+                    var menus </span>= document.getElementById(<span style="color: #800000;">'</span><span style="color: #800000;">catalog</span><span style="color: #800000;">'</span><span style="color: #000000;">).children;
+                    var current_menu </span>=<span style="color: #000000;"> menus[i];
+                    current_menu.classList.add(</span><span style="color: #800000;">'</span><span style="color: #800000;">active</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+                    </span><span style="color: #0000ff;">for</span>(var j=0;j&lt;menus.length;j++<span style="color: #000000;">){
+                        </span><span style="color: #0000ff;">if</span>(menus[j] ==<span style="color: #000000;"> current_menu){
+
+                        }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+                            menus[j].classList.remove(</span><span style="color: #800000;">'</span><span style="color: #800000;">active</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+                        }
+                    }
+                    </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+                }
+
+            }
+
+
+        }
+    </span>&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">Demo-滚动菜单</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('4b18e50f-38e5-4807-afee-e8d6fda44215')"><img id="code_img_closed_4b18e50f-38e5-4807-afee-e8d6fda44215" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_4b18e50f-38e5-4807-afee-e8d6fda44215" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('4b18e50f-38e5-4807-afee-e8d6fda44215',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_4b18e50f-38e5-4807-afee-e8d6fda44215" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang=<span style="color: #800000;">"</span><span style="color: #800000;">en</span><span style="color: #800000;">"</span>&gt;
+    &lt;meta charset=<span style="color: #800000;">"</span><span style="color: #800000;">UTF-8</span><span style="color: #800000;">"</span>&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;style&gt;<span style="color: #000000;">
+
+    body{
+        margin: 0px;
+    }
+    img {
+        border: 0;
+    }
+    ul{
+        padding: 0;
+        margin: 0;
+        list</span>-<span style="color: #000000;">style: none;
+    }
+    h1{
+        padding: 0;
+        margin: 0;
+    }
+    .clearfix:after {
+        content: </span><span style="color: #800000;">"</span><span style="color: #800000;">.</span><span style="color: #800000;">"</span><span style="color: #000000;">;
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+
+    .wrap{
+        width: 980px;
+        margin: 0 auto;
+    }
+
+    .pg</span>-<span style="color: #000000;">header{
+        background</span>-color: <span style="color: #008000;">#</span><span style="color: #008000;">303a40;</span>
+        -webkit-box-shadow: 0 2px 5px rgba(0,0,0,.2<span style="color: #000000;">);
+        </span>-moz-box-shadow: 0 2px 5px rgba(0,0,0,.2<span style="color: #000000;">);
+        box</span>-shadow: 0 2px 5px rgba(0,0,0,.2<span style="color: #000000;">);
+    }
+    .pg</span>-<span style="color: #000000;">header .logo{
+        float: left;
+        padding:5px 10px 5px 0px;
+    }
+    .pg</span>-<span style="color: #000000;">header .logo img{
+        vertical</span>-<span style="color: #000000;">align: middle;
+        width: 110px;
+        height: 40px;
+
+    }
+    .pg</span>-<span style="color: #000000;">header .nav{
+        line</span>-<span style="color: #000000;">height: 50px;
+    }
+    .pg</span>-<span style="color: #000000;">header .nav ul li{
+        float: left;
+    }
+    .pg</span>-<span style="color: #000000;">header .nav ul li a{
+        display: block;
+        color: </span><span style="color: #008000;">#</span><span style="color: #008000;">ccc;</span>
+<span style="color: #000000;">        padding: 0 20px;
+        text</span>-<span style="color: #000000;">decoration: none;
+        font</span>-<span style="color: #000000;">size: 14px;
+    }
+    .pg</span>-<span style="color: #000000;">header .nav ul li a:hover{
+        color: </span><span style="color: #008000;">#</span><span style="color: #008000;">fff;</span>
+        background-color: <span style="color: #008000;">#</span><span style="color: #008000;">425a66;</span>
+<span style="color: #000000;">    }
+    .pg</span>-<span style="color: #000000;">body{
+
+    }
+    .pg</span>-<span style="color: #000000;">body .catalog{
+        position: absolute;
+        top:60px;
+        width: 200px;
+        background</span>-color: <span style="color: #008000;">#</span><span style="color: #008000;">fafafa;</span>
+<span style="color: #000000;">        bottom: 0px;
+    }
+    .pg</span>-<span style="color: #000000;">body .catalog.fixed{
+        position: fixed;
+        top:10px;
+    }
+
+    .pg</span>-body .catalog .catalog-<span style="color: #000000;">item.active{
+        color: </span><span style="color: #008000;">#</span><span style="color: #008000;">fff;</span>
+        background-color: <span style="color: #008000;">#</span><span style="color: #008000;">425a66;</span>
+<span style="color: #000000;">    }
+
+    .pg</span>-<span style="color: #000000;">body .content{
+        position: absolute;
+        top:60px;
+        width: 700px;
+        margin</span>-<span style="color: #000000;">left: 210px;
+        background</span>-color: <span style="color: #008000;">#</span><span style="color: #008000;">fafafa;</span>
+<span style="color: #000000;">        overflow: auto;
+    }
+    .pg</span>-<span style="color: #000000;">body .content .section{
+        height: 500px;
+        border: 1px solid red;
+    }
+</span>&lt;/style&gt;
+&lt;body onscroll=<span style="color: #800000;">"</span><span style="color: #800000;">ScrollEvent();</span><span style="color: #800000;">"</span>&gt;
+&lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">pg-header</span><span style="color: #800000;">"</span>&gt;
+    &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">wrap clearfix</span><span style="color: #800000;">"</span>&gt;
+        &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">logo</span><span style="color: #800000;">"</span>&gt;
+            &lt;a href=<span style="color: #800000;">"</span><span style="color: #800000;">#</span><span style="color: #800000;">"</span>&gt;
+                &lt;img src=<span style="color: #800000;">"</span><span style="color: #800000;">http://core.pc.lietou-static.com/revs/images/common/logo_7012c4a4.pn</span><span style="color: #800000;">"</span>&gt;
+            &lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">nav</span><span style="color: #800000;">"</span>&gt;
+            &lt;ul&gt;
+                &lt;li&gt;
+                    &lt;a  href=<span style="color: #800000;">"</span><span style="color: #800000;">#</span><span style="color: #800000;">"</span>&gt;首页&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;a  href=<span style="color: #800000;">"</span><span style="color: #800000;">#</span><span style="color: #800000;">"</span>&gt;功能一&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;a  href=<span style="color: #800000;">"</span><span style="color: #800000;">#</span><span style="color: #800000;">"</span>&gt;功能二&lt;/a&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">pg-body</span><span style="color: #800000;">"</span>&gt;
+    &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">wrap</span><span style="color: #800000;">"</span>&gt;
+        &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">catalog</span><span style="color: #800000;">"</span> id=<span style="color: #800000;">"</span><span style="color: #800000;">catalog</span><span style="color: #800000;">"</span>&gt;
+            &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">catalog-item</span><span style="color: #800000;">"</span> auto-to=<span style="color: #800000;">"</span><span style="color: #800000;">function1</span><span style="color: #800000;">"</span>&gt;&lt;a&gt;第1张&lt;/a&gt;&lt;/div&gt;
+            &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">catalog-item</span><span style="color: #800000;">"</span> auto-to=<span style="color: #800000;">"</span><span style="color: #800000;">function2</span><span style="color: #800000;">"</span>&gt;&lt;a&gt;第2张&lt;/a&gt;&lt;/div&gt;
+            &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">catalog-item</span><span style="color: #800000;">"</span> auto-to=<span style="color: #800000;">"</span><span style="color: #800000;">function3</span><span style="color: #800000;">"</span>&gt;&lt;a&gt;第3张&lt;/a&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">content</span><span style="color: #800000;">"</span> id=<span style="color: #800000;">"</span><span style="color: #800000;">content</span><span style="color: #800000;">"</span>&gt;
+            &lt;div menu=<span style="color: #800000;">"</span><span style="color: #800000;">function1</span><span style="color: #800000;">"</span> <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">section</span><span style="color: #800000;">"</span>&gt;
+                &lt;h1&gt;第一章&lt;/h1&gt;
+            &lt;/div&gt;
+            &lt;div menu=<span style="color: #800000;">"</span><span style="color: #800000;">function2</span><span style="color: #800000;">"</span> <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">section</span><span style="color: #800000;">"</span>&gt;
+                &lt;h1&gt;第二章&lt;/h1&gt;
+            &lt;/div&gt;
+            &lt;div menu=<span style="color: #800000;">"</span><span style="color: #800000;">function3</span><span style="color: #800000;">"</span> <span style="color: #0000ff;">class</span>=<span style="color: #800000;">"</span><span style="color: #800000;">section</span><span style="color: #800000;">"</span> style=<span style="color: #800000;">"</span><span style="color: #800000;">height: 200px;</span><span style="color: #800000;">"</span>&gt;
+                &lt;h1&gt;第三章&lt;/h1&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+&lt;/div&gt;
+    &lt;script&gt;<span style="color: #000000;">
+        function ScrollEvent(){
+            var bodyScrollTop </span>=<span style="color: #000000;"> document.body.scrollTop;
+            </span><span style="color: #0000ff;">if</span>(bodyScrollTop&gt;50<span style="color: #000000;">){
+                document.getElementsByClassName(</span><span style="color: #800000;">'</span><span style="color: #800000;">catalog</span><span style="color: #800000;">'</span>)[0].classList.add(<span style="color: #800000;">'</span><span style="color: #800000;">fixed</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+            }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+                document.getElementsByClassName(</span><span style="color: #800000;">'</span><span style="color: #800000;">catalog</span><span style="color: #800000;">'</span>)[0].classList.remove(<span style="color: #800000;">'</span><span style="color: #800000;">fixed</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+            }
+
+            var content </span>= document.getElementById(<span style="color: #800000;">'</span><span style="color: #800000;">content</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+            var sections </span>=<span style="color: #000000;"> content.children;
+            </span><span style="color: #0000ff;">for</span>(var i=0;i&lt;sections.length;i++<span style="color: #000000;">){
+                var current_section </span>=<span style="color: #000000;"> sections[i];
+
+                </span>//<span style="color: #000000;"> 当前标签距离顶部绝对高度
+                var scOffTop </span>= current_section.offsetTop + 60<span style="color: #000000;">;
+
+                </span>//<span style="color: #000000;"> 当前标签距离顶部，相对高度
+                var offTop </span>= scOffTop -<span style="color: #000000;"> bodyScrollTop;
+
+                </span>//<span style="color: #000000;"> 当前标签高度
+                var height </span>=<span style="color: #000000;"> current_section.scrollHeight;
+
+                </span><span style="color: #0000ff;">if</span>(offTop&lt;0 &amp;&amp; -offTop &lt;<span style="color: #000000;"> height){
+                    </span>//<span style="color: #000000;"> 当前标签添加active
+                    </span>//<span style="color: #000000;"> 其他移除 active
+
+                    </span>//<span style="color: #000000;"> 如果已经到底部，现实第三个菜单
+                    </span>// 文档高度 ＝ 滚动高度 +<span style="color: #000000;"> 视口高度
+
+                    var a </span>= document.getElementsByClassName(<span style="color: #800000;">'</span><span style="color: #800000;">content</span><span style="color: #800000;">'</span>)[0].offsetHeight + 60<span style="color: #000000;">;
+                    var b </span>= bodyScrollTop +<span style="color: #000000;"> document.documentElement.clientHeight;
+                    console.log(a</span>+60<span style="color: #000000;">,b);
+                    </span><span style="color: #0000ff;">if</span>(a ==<span style="color: #000000;"> b){
+                        var menus </span>= document.getElementById(<span style="color: #800000;">'</span><span style="color: #800000;">catalog</span><span style="color: #800000;">'</span><span style="color: #000000;">).children;
+                        var current_menu </span>= document.getElementById(<span style="color: #800000;">'</span><span style="color: #800000;">catalog</span><span style="color: #800000;">'</span><span style="color: #000000;">).lastElementChild;
+                        current_menu.classList.add(</span><span style="color: #800000;">'</span><span style="color: #800000;">active</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+                        </span><span style="color: #0000ff;">for</span>(var j=0;j&lt;menus.length;j++<span style="color: #000000;">){
+                            </span><span style="color: #0000ff;">if</span>(menus[j] ==<span style="color: #000000;"> current_menu){
+
+                            }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+                                menus[j].classList.remove(</span><span style="color: #800000;">'</span><span style="color: #800000;">active</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+                            }
+                        }
+                    }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+                        var menus </span>= document.getElementById(<span style="color: #800000;">'</span><span style="color: #800000;">catalog</span><span style="color: #800000;">'</span><span style="color: #000000;">).children;
+                        var current_menu </span>=<span style="color: #000000;"> menus[i];
+                        current_menu.classList.add(</span><span style="color: #800000;">'</span><span style="color: #800000;">active</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+                        </span><span style="color: #0000ff;">for</span>(var j=0;j&lt;menus.length;j++<span style="color: #000000;">){
+                            </span><span style="color: #0000ff;">if</span>(menus[j] ==<span style="color: #000000;"> current_menu){
+
+                            }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+                                menus[j].classList.remove(</span><span style="color: #800000;">'</span><span style="color: #800000;">active</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+                            }
+                        }
+                    }
+
+
+
+
+                    </span><span style="color: #0000ff;">break</span><span style="color: #000000;">;
+                }
+
+            }
+
+
+        }
+    </span>&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">Demo-滚动高度</span></div>
+<p>7、提交表单</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">document.geElementById('form').submit()
+</pre>
+</div>
+<p>8、其他操作</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">console.log                 输出框
+alert                       弹出框
+confirm                     确认框
+ 
+// URL和刷新
+location.href               获取URL
+location.href = "url"       重定向
+location.reload()           重新加载
+ 
+// 定时器
+setInterval                 多次定时器
+clearInterval               清除多次定时器
+setTimeout                  单次定时器
+clearTimeout                清除单次定时器
+</pre>
+</div>
+<h3>三、事件</h3>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201604/425762-20160408202307750-1195102492.png" alt="" width="695" height="622" /></p>
+<p>对于事件需要注意的要点：</p>
+<ul>
+<li>this</li>
+<li>event</li>
+<li>事件链以及跳出</li>
+</ul>
+<p>this标签当前正在操作的标签，event封装了当前事件的内容。</p>
+<p>实例：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('06dea751-5db6-4eed-b3c6-6deba2415ee7')"><img id="code_img_closed_06dea751-5db6-4eed-b3c6-6deba2415ee7" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_06dea751-5db6-4eed-b3c6-6deba2415ee7" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('06dea751-5db6-4eed-b3c6-6deba2415ee7',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_06dea751-5db6-4eed-b3c6-6deba2415ee7" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset='utf-8' /&gt;
+        &lt;title&gt;&lt;/title&gt;
+        
+        &lt;style&gt;<span style="color: #000000;">
+            .gray{
+                color:gray;
+            }
+            .black{
+                color:black;
+            }
+        </span>&lt;/style&gt;
+        &lt;script type="text/javascript"&gt;
+            <span style="color: #0000ff;">function</span><span style="color: #000000;"> Enter(){
+               </span><span style="color: #0000ff;">var</span> id= document.getElementById("tip"<span style="color: #000000;">)
+               id.className </span>= 'black'<span style="color: #000000;">;
+               </span><span style="color: #0000ff;">if</span>(id.value=='请输入关键字'||id.value.trim()==''<span style="color: #000000;">){
+                    id.value </span>= ''<span style="color: #000000;">
+               }
+            }
+            </span><span style="color: #0000ff;">function</span><span style="color: #000000;"> Leave(){
+                </span><span style="color: #0000ff;">var</span> id= document.getElementById("tip"<span style="color: #000000;">)
+                </span><span style="color: #0000ff;">var</span> val =<span style="color: #000000;"> id.value;
+                </span><span style="color: #0000ff;">if</span>(val.length==0||id.value.trim()==''<span style="color: #000000;">){
+                    id.value </span>= '请输入关键字'<span style="color: #000000;">
+                    id.className </span>= 'gray'<span style="color: #000000;">;
+                }</span><span style="color: #0000ff;">else</span><span style="color: #000000;">{
+                    id.className </span>= 'black'<span style="color: #000000;">;
+                }
+            }
+        </span>&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;input type='text' class='gray' id='tip' value='请输入关键字' onfocus='Enter();'  onblur='Leave();'/&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">搜索框</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('040ffcab-da85-4d77-b09c-2391d06d0650')"><img id="code_img_closed_040ffcab-da85-4d77-b09c-2391d06d0650" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_040ffcab-da85-4d77-b09c-2391d06d0650" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('040ffcab-da85-4d77-b09c-2391d06d0650',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_040ffcab-da85-4d77-b09c-2391d06d0650" class="cnblogs_code_hide">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset='utf-8' &gt;
+        &lt;title&gt;欢迎blue shit莅临指导&amp;nbsp;&amp;nbsp;&lt;/title&gt;
+        &lt;script type='text/javascript'&gt;
+            <span style="color: #0000ff;">function</span><span style="color: #000000;"> Go(){
+                </span><span style="color: #0000ff;">var</span> content =<span style="color: #000000;"> document.title;
+                </span><span style="color: #0000ff;">var</span> firstChar = content.charAt(0<span style="color: #000000;">)
+                </span><span style="color: #0000ff;">var</span> sub = content.substring(1<span style="color: #000000;">,content.length)
+                document.title </span>= sub +<span style="color: #000000;"> firstChar;
+            }
+            setInterval(</span>'Go()',1000<span style="color: #000000;">);
+        </span>&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;    
+    &lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<span class="cnblogs_code_collapse">跑马灯</span></div>
+<p>&nbsp;</p>
+<p><span style="line-height: 1.5;">&nbsp;</span></p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2016-07-05 13:20</span> <a href='http://www.cnblogs.com/wupeiqi/'>武沛齐</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>) &nbsp;<a href="https://i.cnblogs.com/EditArticles.aspx?postid=5643298" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(5643298);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=133379,cb_entryId=5643298,cb_blogApp=currentBlogApp,cb_blogUserGuid='7208b24d-95c9-e111-aa3f-842b2b196315',cb_entryCreatedDate='2016/7/5 13:20:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2017 武沛齐
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

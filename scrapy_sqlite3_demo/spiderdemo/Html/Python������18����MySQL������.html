@@ -1,0 +1,819 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python开发【第十八篇】：MySQL（二） - 武沛齐 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=m_FXmwz3wxZoecUwNEK23PAzc-j9vbX_C6MblJ5ouMc1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue.css?v=jJERBFSojhmgst84aaRDal9S3q1WoO-WcNudmMzGJS81"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/133379.css?v=YSNZANkz7eBKoXq2iHYfghvodkY%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue-mobile.css?v=z0BacpCfWeLlXDCM0C158kTP_DMqMbGBapID4f-QztI1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/wupeiqi/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/wupeiqi/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/wupeiqi/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'wupeiqi', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=CPv0EEqm9L2aCgolHxaZfVYM6J-Sn5az_FJXbjzgr-o1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/wupeiqi/">Mr.Seven</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/wupeiqi/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%AD%A6%E6%B2%9B%E9%BD%90">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/wupeiqi/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/wupeiqi/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-126&nbsp;
+文章-137&nbsp;
+评论-259&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/wupeiqi/articles/5713323.html">Python开发【第十八篇】：MySQL（二）</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><h3>视图</h3>
+<p>视图是一个虚拟表（非真实存在），其本质是【根据SQL语句获取动态的数据集，并为其命名】，用户使用时只需使用【名称】即可获取结果集，并可以将其当作表来使用。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('631c772a-c5e5-41bb-a9b7-977d7f9631bd')"><img id="code_img_closed_631c772a-c5e5-41bb-a9b7-977d7f9631bd" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_631c772a-c5e5-41bb-a9b7-977d7f9631bd" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('631c772a-c5e5-41bb-a9b7-977d7f9631bd',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_631c772a-c5e5-41bb-a9b7-977d7f9631bd" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">SELECT</span>
+    <span style="color: #808080;">*</span>
+<span style="color: #0000ff;">FROM</span><span style="color: #000000;">
+    (
+        </span><span style="color: #0000ff;">SELECT</span><span style="color: #000000;">
+            nid,
+            NAME
+        </span><span style="color: #0000ff;">FROM</span><span style="color: #000000;">
+            tb1
+        </span><span style="color: #0000ff;">WHERE</span><span style="color: #000000;">
+            nid </span><span style="color: #808080;">&gt;</span> <span style="color: #800000; font-weight: bold;">2</span><span style="color: #000000;">
+    ) </span><span style="color: #0000ff;">AS</span><span style="color: #000000;"> A
+</span><span style="color: #0000ff;">WHERE</span><span style="color: #000000;">
+    A. NAME </span><span style="color: #808080;">&gt;</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">alex</span><span style="color: #ff0000;">'</span>;</pre>
+</div>
+<span class="cnblogs_code_collapse">临时表搜索</span></div>
+<p>1、创建视图</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('a13424f0-6d9d-4320-aa59-26c4c8e796c1')"><img id="code_img_closed_a13424f0-6d9d-4320-aa59-26c4c8e796c1" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a13424f0-6d9d-4320-aa59-26c4c8e796c1" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a13424f0-6d9d-4320-aa59-26c4c8e796c1',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_a13424f0-6d9d-4320-aa59-26c4c8e796c1" class="cnblogs_code_hide">
+<pre><span style="color: #008080;">--</span><span style="color: #008080;">格式：CREATE VIEW 视图名称 AS  SQL语句</span>
+<span style="color: #0000ff;">CREATE</span> <span style="color: #0000ff;">VIEW</span> v1 <span style="color: #0000ff;">AS</span><span style="color: #000000;"> 
+SELET nid, 
+    name
+</span><span style="color: #0000ff;">FROM</span><span style="color: #000000;">
+    A
+</span><span style="color: #0000ff;">WHERE</span><span style="color: #000000;">
+    nid </span><span style="color: #808080;">&gt;</span> <span style="color: #800000; font-weight: bold;">4</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<p>2、删除视图</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('c0af191e-87f6-451c-af67-edca97bc4e36')"><img id="code_img_closed_c0af191e-87f6-451c-af67-edca97bc4e36" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_c0af191e-87f6-451c-af67-edca97bc4e36" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('c0af191e-87f6-451c-af67-edca97bc4e36',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_c0af191e-87f6-451c-af67-edca97bc4e36" class="cnblogs_code_hide">
+<pre><span style="color: #008080;">--</span><span style="color: #008080;">格式：DROP VIEW 视图名称</span>
+
+<span style="color: #0000ff;">DROP</span> <span style="color: #0000ff;">VIEW</span> v1</pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<p>3、修改视图</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('79c25cca-6add-436a-b4fb-aaeffabf5048')"><img id="code_img_closed_79c25cca-6add-436a-b4fb-aaeffabf5048" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_79c25cca-6add-436a-b4fb-aaeffabf5048" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('79c25cca-6add-436a-b4fb-aaeffabf5048',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_79c25cca-6add-436a-b4fb-aaeffabf5048" class="cnblogs_code_hide">
+<pre><span style="color: #008080;">--</span><span style="color: #008080;"> 格式：ALTER VIEW 视图名称 AS SQL语句</span>
+
+<span style="color: #0000ff;">ALTER</span> <span style="color: #0000ff;">VIEW</span> v1 <span style="color: #0000ff;">AS</span><span style="color: #000000;">
+SELET A.nid,
+    B. NAME
+</span><span style="color: #0000ff;">FROM</span><span style="color: #000000;">
+    A
+</span><span style="color: #808080;">LEFT</span> <span style="color: #808080;">JOIN</span> B <span style="color: #0000ff;">ON</span> A.id <span style="color: #808080;">=</span><span style="color: #000000;"> B.nid
+</span><span style="color: #808080;">LEFT</span> <span style="color: #808080;">JOIN</span> C <span style="color: #0000ff;">ON</span> A.id <span style="color: #808080;">=</span><span style="color: #000000;"> C.nid
+</span><span style="color: #0000ff;">WHERE</span><span style="color: #000000;">
+    A.id </span><span style="color: #808080;">&gt;</span> <span style="color: #800000; font-weight: bold;">2</span>
+<span style="color: #808080;">AND</span> C.nid <span style="color: #808080;">&lt;</span> <span style="color: #800000; font-weight: bold;">5</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<p>4、使用视图</p>
+<p>使用视图时，将其当作表进行操作即可，由于视图是虚拟表，所以无法使用其对真实表进行创建、更新和删除操作，仅能做查询用。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('65664cc2-f795-48a9-bcee-8c73a8b9b7db')"><img id="code_img_closed_65664cc2-f795-48a9-bcee-8c73a8b9b7db" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_65664cc2-f795-48a9-bcee-8c73a8b9b7db" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('65664cc2-f795-48a9-bcee-8c73a8b9b7db',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_65664cc2-f795-48a9-bcee-8c73a8b9b7db" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">select</span> <span style="color: #808080;">*</span> <span style="color: #0000ff;">from</span> v1</pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<h3>触发器</h3>
+<p>对某个表进行【增/删/改】操作的前后如果希望触发某个特定的行为时，可以使用触发器，触发器用于定制用户对表的行进行【增/删/改】前后的行为。</p>
+<p>1、创建基本语法</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('11832bf4-0952-4db9-a90b-97cc7943582e')"><img id="code_img_closed_11832bf4-0952-4db9-a90b-97cc7943582e" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_11832bf4-0952-4db9-a90b-97cc7943582e" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('11832bf4-0952-4db9-a90b-97cc7943582e',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_11832bf4-0952-4db9-a90b-97cc7943582e" class="cnblogs_code_hide">
+<pre><span style="color: #000000;"># 插入前
+</span><span style="color: #0000ff;">CREATE</span> <span style="color: #0000ff;">TRIGGER</span> tri_before_insert_tb1 BEFORE <span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">ON</span> tb1 <span style="color: #0000ff;">FOR</span><span style="color: #000000;"> EACH ROW
+</span><span style="color: #0000ff;">BEGIN</span><span style="color: #000000;">
+    ...
+</span><span style="color: #0000ff;">END</span><span style="color: #000000;">
+
+# 插入后
+</span><span style="color: #0000ff;">CREATE</span> <span style="color: #0000ff;">TRIGGER</span> tri_after_insert_tb1 AFTER <span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">ON</span> tb1 <span style="color: #0000ff;">FOR</span><span style="color: #000000;"> EACH ROW
+</span><span style="color: #0000ff;">BEGIN</span><span style="color: #000000;">
+    ...
+</span><span style="color: #0000ff;">END</span><span style="color: #000000;">
+
+# 删除前
+</span><span style="color: #0000ff;">CREATE</span> <span style="color: #0000ff;">TRIGGER</span> tri_before_delete_tb1 BEFORE <span style="color: #0000ff;">DELETE</span> <span style="color: #0000ff;">ON</span> tb1 <span style="color: #0000ff;">FOR</span><span style="color: #000000;"> EACH ROW
+</span><span style="color: #0000ff;">BEGIN</span><span style="color: #000000;">
+    ...
+</span><span style="color: #0000ff;">END</span><span style="color: #000000;">
+
+# 删除后
+</span><span style="color: #0000ff;">CREATE</span> <span style="color: #0000ff;">TRIGGER</span> tri_after_delete_tb1 AFTER <span style="color: #0000ff;">DELETE</span> <span style="color: #0000ff;">ON</span> tb1 <span style="color: #0000ff;">FOR</span><span style="color: #000000;"> EACH ROW
+</span><span style="color: #0000ff;">BEGIN</span><span style="color: #000000;">
+    ...
+</span><span style="color: #0000ff;">END</span><span style="color: #000000;">
+
+# 更新前
+</span><span style="color: #0000ff;">CREATE</span> <span style="color: #0000ff;">TRIGGER</span> tri_before_update_tb1 BEFORE <span style="color: #0000ff;">UPDATE</span> <span style="color: #0000ff;">ON</span> tb1 <span style="color: #0000ff;">FOR</span><span style="color: #000000;"> EACH ROW
+</span><span style="color: #0000ff;">BEGIN</span><span style="color: #000000;">
+    ...
+</span><span style="color: #0000ff;">END</span><span style="color: #000000;">
+
+# 更新后
+</span><span style="color: #0000ff;">CREATE</span> <span style="color: #0000ff;">TRIGGER</span> tri_after_update_tb1 AFTER <span style="color: #0000ff;">UPDATE</span> <span style="color: #0000ff;">ON</span> tb1 <span style="color: #0000ff;">FOR</span><span style="color: #000000;"> EACH ROW
+</span><span style="color: #0000ff;">BEGIN</span><span style="color: #000000;">
+    ...
+</span><span style="color: #0000ff;">END</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('09841476-8dcd-4040-b2e3-4c74efd1fa08')"><img id="code_img_closed_09841476-8dcd-4040-b2e3-4c74efd1fa08" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_09841476-8dcd-4040-b2e3-4c74efd1fa08" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('09841476-8dcd-4040-b2e3-4c74efd1fa08',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_09841476-8dcd-4040-b2e3-4c74efd1fa08" class="cnblogs_code_hide">
+<pre>delimiter <span style="color: #808080;">//</span>
+<span style="color: #0000ff;">CREATE</span> <span style="color: #0000ff;">TRIGGER</span> tri_before_insert_tb1 BEFORE <span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">ON</span> tb1 <span style="color: #0000ff;">FOR</span><span style="color: #000000;"> EACH ROW
+</span><span style="color: #0000ff;">BEGIN</span>
+
+<span style="color: #0000ff;">IF</span> NEW. NAME <span style="color: #808080;">==</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">alex</span><span style="color: #ff0000;">'</span> <span style="color: #0000ff;">THEN</span>
+    <span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">INTO</span><span style="color: #000000;"> tb2 (NAME)
+</span><span style="color: #0000ff;">VALUES</span><span style="color: #000000;">
+    (</span><span style="color: #ff0000;">'</span><span style="color: #ff0000;">aa</span><span style="color: #ff0000;">'</span><span style="color: #000000;">)
+</span><span style="color: #0000ff;">END</span>
+<span style="color: #0000ff;">END</span><span style="color: #808080;">//</span><span style="color: #000000;">
+delimiter ;</span></pre>
+</div>
+<span class="cnblogs_code_collapse">插入前触发器</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('e0344b71-97b4-4a2b-b922-7810a1ef4db8')"><img id="code_img_closed_e0344b71-97b4-4a2b-b922-7810a1ef4db8" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_e0344b71-97b4-4a2b-b922-7810a1ef4db8" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('e0344b71-97b4-4a2b-b922-7810a1ef4db8',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_e0344b71-97b4-4a2b-b922-7810a1ef4db8" class="cnblogs_code_hide">
+<pre>delimiter <span style="color: #808080;">//</span>
+<span style="color: #0000ff;">CREATE</span> <span style="color: #0000ff;">TRIGGER</span> tri_after_insert_tb1 AFTER <span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">ON</span> tb1 <span style="color: #0000ff;">FOR</span><span style="color: #000000;"> EACH ROW
+</span><span style="color: #0000ff;">BEGIN</span>
+    <span style="color: #0000ff;">IF</span> NEW. num <span style="color: #808080;">=</span> <span style="color: #800000; font-weight: bold;">666</span> <span style="color: #0000ff;">THEN</span>
+        <span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">INTO</span><span style="color: #000000;"> tb2 (NAME)
+        </span><span style="color: #0000ff;">VALUES</span><span style="color: #000000;">
+            (</span><span style="color: #ff0000;">'</span><span style="color: #ff0000;">666</span><span style="color: #ff0000;">'</span><span style="color: #000000;">),
+            (</span><span style="color: #ff0000;">'</span><span style="color: #ff0000;">666</span><span style="color: #ff0000;">'</span><span style="color: #000000;">) ;
+    ELSEIF NEW. num </span><span style="color: #808080;">=</span> <span style="color: #800000; font-weight: bold;">555</span> <span style="color: #0000ff;">THEN</span>
+        <span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">INTO</span><span style="color: #000000;"> tb2 (NAME)
+        </span><span style="color: #0000ff;">VALUES</span><span style="color: #000000;">
+            (</span><span style="color: #ff0000;">'</span><span style="color: #ff0000;">555</span><span style="color: #ff0000;">'</span><span style="color: #000000;">),
+            (</span><span style="color: #ff0000;">'</span><span style="color: #ff0000;">555</span><span style="color: #ff0000;">'</span><span style="color: #000000;">) ;
+    </span><span style="color: #0000ff;">END</span> <span style="color: #0000ff;">IF</span><span style="color: #000000;">;
+</span><span style="color: #0000ff;">END</span><span style="color: #808080;">//</span><span style="color: #000000;">
+delimiter ;</span></pre>
+</div>
+<span class="cnblogs_code_collapse">插入后触发器</span></div>
+<p>特别的：NEW表示即将插入的数据行，OLD表示即将删除的数据行。</p>
+<p>2、删除触发器</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('65578658-0388-4dd6-a85f-6420b900b0df')"><img id="code_img_closed_65578658-0388-4dd6-a85f-6420b900b0df" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_65578658-0388-4dd6-a85f-6420b900b0df" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('65578658-0388-4dd6-a85f-6420b900b0df',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_65578658-0388-4dd6-a85f-6420b900b0df" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">DROP</span> <span style="color: #0000ff;">TRIGGER</span> tri_after_insert_tb1;</pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<p>3、使用触发器</p>
+<p>触发器无法由用户直接调用，而知由于对表的【增/删/改】操作被动引发的。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('fe52806d-e92d-4f14-9fbf-0164be698c16')"><img id="code_img_closed_fe52806d-e92d-4f14-9fbf-0164be698c16" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_fe52806d-e92d-4f14-9fbf-0164be698c16" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('fe52806d-e92d-4f14-9fbf-0164be698c16',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_fe52806d-e92d-4f14-9fbf-0164be698c16" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">insert</span> <span style="color: #0000ff;">into</span> tb1(num) <span style="color: #0000ff;">values</span>(<span style="color: #800000; font-weight: bold;">666</span>)</pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<h3>存储过程</h3>
+<p>存储过程是一个SQL语句集合，当主动去调用存储过程时，其中内部的SQL语句会按照逻辑执行。</p>
+<p>1、创建存储过程</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('a8219f42-793e-4acc-81f7-b3c99e6e5df7')"><img id="code_img_closed_a8219f42-793e-4acc-81f7-b3c99e6e5df7" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a8219f42-793e-4acc-81f7-b3c99e6e5df7" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a8219f42-793e-4acc-81f7-b3c99e6e5df7',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_a8219f42-793e-4acc-81f7-b3c99e6e5df7" class="cnblogs_code_hide">
+<pre><span style="color: #008080;">--</span><span style="color: #008080;"> 创建存储过程</span>
+<span style="color: #000000;">
+delimiter </span><span style="color: #808080;">//</span>
+<span style="color: #0000ff;">create</span> <span style="color: #0000ff;">procedure</span><span style="color: #000000;"> p1()
+</span><span style="color: #0000ff;">BEGIN</span>
+    <span style="color: #0000ff;">select</span> <span style="color: #808080;">*</span> <span style="color: #0000ff;">from</span><span style="color: #000000;"> t1;
+</span><span style="color: #0000ff;">END</span><span style="color: #808080;">//</span><span style="color: #000000;">
+delimiter ;
+
+
+
+</span><span style="color: #008080;">--</span><span style="color: #008080;"> 执行存储过程</span>
+<span style="color: #000000;">
+call p1()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">无参数存储过程</span></div>
+<p>对于存储过程，可以接收参数，其参数有三类：</p>
+<ul>
+<li>in &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;仅用于传入参数用</li>
+<li>out &nbsp; &nbsp; &nbsp; &nbsp;仅用于返回值用</li>
+<li>inout &nbsp; &nbsp; 既可以传入又可以当作返回值</li>
+</ul>
+<div class="cnblogs_code" onclick="cnblogs_code_show('48345a10-2f25-4341-b360-79f4c3a3f21c')"><img id="code_img_closed_48345a10-2f25-4341-b360-79f4c3a3f21c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_48345a10-2f25-4341-b360-79f4c3a3f21c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('48345a10-2f25-4341-b360-79f4c3a3f21c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_48345a10-2f25-4341-b360-79f4c3a3f21c" class="cnblogs_code_hide">
+<pre><span style="color: #008080;">--</span><span style="color: #008080;"> 创建存储过程</span>
+<span style="color: #000000;">delimiter \\
+</span><span style="color: #0000ff;">create</span> <span style="color: #0000ff;">procedure</span><span style="color: #000000;"> p1(
+    </span><span style="color: #808080;">in</span> i1 <span style="color: #0000ff;">int</span><span style="color: #000000;">,
+    </span><span style="color: #808080;">in</span> i2 <span style="color: #0000ff;">int</span><span style="color: #000000;">,
+    inout i3 </span><span style="color: #0000ff;">int</span><span style="color: #000000;">,
+    out r1 </span><span style="color: #0000ff;">int</span><span style="color: #000000;">
+)
+</span><span style="color: #0000ff;">BEGIN</span>
+    <span style="color: #0000ff;">DECLARE</span> temp1 <span style="color: #0000ff;">int</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">DECLARE</span> temp2 <span style="color: #0000ff;">int</span> <span style="color: #0000ff;">default</span> <span style="color: #800000; font-weight: bold;">0</span><span style="color: #000000;">;
+    
+    </span><span style="color: #0000ff;">set</span> temp1 <span style="color: #808080;">=</span> <span style="color: #800000; font-weight: bold;">1</span><span style="color: #000000;">;
+
+    </span><span style="color: #0000ff;">set</span> r1 <span style="color: #808080;">=</span> i1 <span style="color: #808080;">+</span> i2 <span style="color: #808080;">+</span> temp1 <span style="color: #808080;">+</span><span style="color: #000000;"> temp2;
+    
+    </span><span style="color: #0000ff;">set</span> i3 <span style="color: #808080;">=</span> i3 <span style="color: #808080;">+</span> <span style="color: #800000; font-weight: bold;">100</span><span style="color: #000000;">;
+
+</span><span style="color: #0000ff;">end</span><span style="color: #000000;">\\
+delimiter ;
+
+</span><span style="color: #008080;">--</span><span style="color: #008080;"> 执行存储过程</span>
+<span style="color: #0000ff;">set</span> <span style="color: #008000;">@t1</span> <span style="color: #808080;">=</span><span style="color: #800000; font-weight: bold;">4</span><span style="color: #000000;">;
+</span><span style="color: #0000ff;">set</span> <span style="color: #008000;">@t2</span> <span style="color: #808080;">=</span> <span style="color: #800000; font-weight: bold;">0</span><span style="color: #000000;">;
+CALL p1 (</span><span style="color: #800000; font-weight: bold;">1</span>, <span style="color: #800000; font-weight: bold;">2</span> ,<span style="color: #008000;">@t1</span>, <span style="color: #008000;">@t2</span><span style="color: #000000;">);
+</span><span style="color: #0000ff;">SELECT</span> <span style="color: #008000;">@t1</span>,<span style="color: #008000;">@t2</span>;</pre>
+</div>
+<span class="cnblogs_code_collapse">有参数的存储过程</span></div>
+<p>2、删除存储过程</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('e0019c2f-ad3e-4c6d-b344-ca58338035b8')"><img id="code_img_closed_e0019c2f-ad3e-4c6d-b344-ca58338035b8" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_e0019c2f-ad3e-4c6d-b344-ca58338035b8" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('e0019c2f-ad3e-4c6d-b344-ca58338035b8',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_e0019c2f-ad3e-4c6d-b344-ca58338035b8" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">drop</span> <span style="color: #0000ff;">procedure</span> proc_name;</pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<p>3、执行存储过程</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('5d363dfb-cd8b-4af2-9eee-096938e3081f')"><img id="code_img_closed_5d363dfb-cd8b-4af2-9eee-096938e3081f" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_5d363dfb-cd8b-4af2-9eee-096938e3081f" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('5d363dfb-cd8b-4af2-9eee-096938e3081f',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_5d363dfb-cd8b-4af2-9eee-096938e3081f" class="cnblogs_code_hide">
+<pre><span style="color: #008080;">--</span><span style="color: #008080;"> 无参数</span>
+<span style="color: #000000;">call proc_name()
+
+</span><span style="color: #008080;">--</span><span style="color: #008080;"> 有参数，全in</span>
+call proc_name(<span style="color: #800000; font-weight: bold;">1</span>,<span style="color: #800000; font-weight: bold;">2</span><span style="color: #000000;">)
+
+</span><span style="color: #008080;">--</span><span style="color: #008080;"> 有参数，有in，out，inout</span>
+<span style="color: #0000ff;">set</span> <span style="color: #008000;">@t1</span><span style="color: #808080;">=</span><span style="color: #800000; font-weight: bold;">0</span><span style="color: #000000;">;
+</span><span style="color: #0000ff;">set</span> <span style="color: #008000;">@t2</span><span style="color: #808080;">=</span><span style="color: #800000; font-weight: bold;">3</span><span style="color: #000000;">;
+call proc_name(</span><span style="color: #800000; font-weight: bold;">1</span>,<span style="color: #800000; font-weight: bold;">2</span>,<span style="color: #008000;">@t1</span>,<span style="color: #008000;">@t2</span>)</pre>
+</div>
+<span class="cnblogs_code_collapse">执行存储过程</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('09f562fc-2605-458d-93aa-05d55930ce25')"><img id="code_img_closed_09f562fc-2605-458d-93aa-05d55930ce25" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_09f562fc-2605-458d-93aa-05d55930ce25" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('09f562fc-2605-458d-93aa-05d55930ce25',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_09f562fc-2605-458d-93aa-05d55930ce25" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> pymysql
+
+conn </span>= pymysql.connect(host=<span style="color: #800000;">'</span><span style="color: #800000;">127.0.0.1</span><span style="color: #800000;">'</span>, port=3306, user=<span style="color: #800000;">'</span><span style="color: #800000;">root</span><span style="color: #800000;">'</span>, passwd=<span style="color: #800000;">'</span><span style="color: #800000;">123</span><span style="color: #800000;">'</span>, db=<span style="color: #800000;">'</span><span style="color: #800000;">t1</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+cursor </span>= conn.cursor(cursor=<span style="color: #000000;">pymysql.cursors.DictCursor)
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 执行存储过程</span>
+cursor.callproc(<span style="color: #800000;">'</span><span style="color: #800000;">p1</span><span style="color: #800000;">'</span>, args=(1, 22, 3, 4<span style="color: #000000;">))
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 获取执行完存储的参数</span>
+cursor.execute(<span style="color: #800000;">"</span><span style="color: #800000;">select @_p1_0,@_p1_1,@_p1_2,@_p1_3</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+result </span>=<span style="color: #000000;"> cursor.fetchall()
+
+conn.commit()
+cursor.close()
+conn.close()
+
+
+</span><span style="color: #0000ff;">print</span>(result)</pre>
+</div>
+<span class="cnblogs_code_collapse">pymysql执行存储过程</span></div>
+<h3>函数</h3>
+<p>MySQL中提供了许多内置函数，例如：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('96d88f84-d928-49d3-85b8-12a8235c07d8')"><img id="code_img_closed_96d88f84-d928-49d3-85b8-12a8235c07d8" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_96d88f84-d928-49d3-85b8-12a8235c07d8" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('96d88f84-d928-49d3-85b8-12a8235c07d8',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_96d88f84-d928-49d3-85b8-12a8235c07d8" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">    CHAR_LENGTH(str)
+        返回值为字符串str 的长度，长度的单位为字符。一个多字节字符算作一个单字符。
+        对于一个包含五个二字节字符集, LENGTH()返回值为 </span>10<span style="color: #000000;">, 而CHAR_LENGTH()的返回值为5。
+
+    CONCAT(str1,str2,...)
+        字符串拼接
+        如有任何一个参数为NULL ，则返回值为 NULL。
+    CONCAT_WS(separator,str1,str2,...)
+        字符串拼接（自定义连接符）
+        CONCAT_WS()不会忽略任何空字符串。 (然而会忽略所有的 NULL）。
+
+    CONV(N,from_base,to_base)
+        进制转换
+        例如：
+            SELECT CONV(</span><span style="color: #800000;">'</span><span style="color: #800000;">a</span><span style="color: #800000;">'</span>,16,2<span style="color: #000000;">); 表示将 a 由16进制转换为2进制字符串表示
+
+    FORMAT(X,D)
+        将数字X 的格式写为</span><span style="color: #800000;">'</span><span style="color: #800000;">#,###,###.##</span><span style="color: #800000;">'</span><span style="color: #000000;">,以四舍五入的方式保留小数点后 D 位， 并将结果以字符串的形式返回。若  D 为 0, 则返回结果不带有小数点，或不含小数部分。
+        例如：
+            SELECT FORMAT(</span>12332.1,4); 结果为： <span style="color: #800000;">'</span><span style="color: #800000;">12,332.1000</span><span style="color: #800000;">'</span><span style="color: #000000;">
+    INSERT(str,pos,len,newstr)
+        在str的指定位置插入字符串
+            pos：要替换位置其实位置
+            len：替换的长度
+            newstr：新字符串
+        特别的：
+            如果pos超过原字符串长度，则返回原字符串
+            如果len超过原字符串长度，则由新字符串完全替换
+    INSTR(str,substr)
+        返回字符串 str 中子字符串的第一个出现位置。
+
+    LEFT(str,len)
+        返回字符串str 从开始的len位置的子序列字符。
+
+    LOWER(str)
+        变小写
+
+    UPPER(str)
+        变大写
+
+    LTRIM(str)
+        返回字符串 str ，其引导空格字符被删除。
+    RTRIM(str)
+        返回字符串 str ，结尾空格字符被删去。
+    SUBSTRING(str,pos,len)
+        获取字符串子序列
+
+    LOCATE(substr,str,pos)
+        获取子序列索引位置
+
+    REPEAT(str,count)
+        返回一个由重复的字符串str 组成的字符串，字符串str的数目等于count 。
+        若 count </span>&lt;=<span style="color: #000000;"> 0,则返回一个空字符串。
+        若str 或 count 为 NULL，则返回 NULL 。
+    REPLACE(str,from_str,to_str)
+        返回字符串str 以及所有被字符串to_str替代的字符串from_str 。
+    REVERSE(str)
+        返回字符串 str ，顺序和字符顺序相反。
+    RIGHT(str,len)
+        从字符串str 开始，返回从后边开始len个字符组成的子序列
+
+    SPACE(N)
+        返回一个由N空格组成的字符串。
+
+    SUBSTRING(str,pos) , SUBSTRING(str FROM pos) SUBSTRING(str,pos,len) , SUBSTRING(str FROM pos FOR len)
+        不带有len 参数的格式从字符串str返回一个子字符串，起始于位置 pos。带有len参数的格式从字符串str返回一个长度同len字符相同的子字符串，起始于位置 pos。 使用 FROM的格式为标准 SQL 语法。也可能对pos使用一个负值。假若这样，则子字符串的位置起始于字符串结尾的pos 字符，而不是字符串的开头位置。在以下格式的函数中可以对pos 使用一个负值。
+
+        mysql</span>&gt; SELECT SUBSTRING(<span style="color: #800000;">'</span><span style="color: #800000;">Quadratically</span><span style="color: #800000;">'</span>,5<span style="color: #000000;">);
+            </span>-&gt; <span style="color: #800000;">'</span><span style="color: #800000;">ratically</span><span style="color: #800000;">'</span><span style="color: #000000;">
+
+        mysql</span>&gt; SELECT SUBSTRING(<span style="color: #800000;">'</span><span style="color: #800000;">foobarbar</span><span style="color: #800000;">'</span> FROM 4<span style="color: #000000;">);
+            </span>-&gt; <span style="color: #800000;">'</span><span style="color: #800000;">barbar</span><span style="color: #800000;">'</span><span style="color: #000000;">
+
+        mysql</span>&gt; SELECT SUBSTRING(<span style="color: #800000;">'</span><span style="color: #800000;">Quadratically</span><span style="color: #800000;">'</span>,5,6<span style="color: #000000;">);
+            </span>-&gt; <span style="color: #800000;">'</span><span style="color: #800000;">ratica</span><span style="color: #800000;">'</span><span style="color: #000000;">
+
+        mysql</span>&gt; SELECT SUBSTRING(<span style="color: #800000;">'</span><span style="color: #800000;">Sakila</span><span style="color: #800000;">'</span>, -3<span style="color: #000000;">);
+            </span>-&gt; <span style="color: #800000;">'</span><span style="color: #800000;">ila</span><span style="color: #800000;">'</span><span style="color: #000000;">
+
+        mysql</span>&gt; SELECT SUBSTRING(<span style="color: #800000;">'</span><span style="color: #800000;">Sakila</span><span style="color: #800000;">'</span>, -5, 3<span style="color: #000000;">);
+            </span>-&gt; <span style="color: #800000;">'</span><span style="color: #800000;">aki</span><span style="color: #800000;">'</span><span style="color: #000000;">
+
+        mysql</span>&gt; SELECT SUBSTRING(<span style="color: #800000;">'</span><span style="color: #800000;">Sakila</span><span style="color: #800000;">'</span> FROM -4 FOR 2<span style="color: #000000;">);
+            </span>-&gt; <span style="color: #800000;">'</span><span style="color: #800000;">ki</span><span style="color: #800000;">'</span><span style="color: #000000;">
+
+    TRIM([{BOTH </span>| LEADING |<span style="color: #000000;"> TRAILING} [remstr] FROM] str) TRIM(remstr FROM] str)
+        返回字符串 str ， 其中所有remstr 前缀和</span>/<span style="color: #000000;">或后缀都已被删除。若分类符BOTH、LEADIN或TRAILING中没有一个是给定的,则假设为BOTH 。 remstr 为可选项，在未指定情况下，可删除空格。
+
+        mysql</span>&gt; SELECT TRIM(<span style="color: #800000;">'</span><span style="color: #800000;">  bar   </span><span style="color: #800000;">'</span><span style="color: #000000;">);
+                </span>-&gt; <span style="color: #800000;">'</span><span style="color: #800000;">bar</span><span style="color: #800000;">'</span><span style="color: #000000;">
+
+        mysql</span>&gt; SELECT TRIM(LEADING <span style="color: #800000;">'</span><span style="color: #800000;">x</span><span style="color: #800000;">'</span> FROM <span style="color: #800000;">'</span><span style="color: #800000;">xxxbarxxx</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+                </span>-&gt; <span style="color: #800000;">'</span><span style="color: #800000;">barxxx</span><span style="color: #800000;">'</span><span style="color: #000000;">
+
+        mysql</span>&gt; SELECT TRIM(BOTH <span style="color: #800000;">'</span><span style="color: #800000;">x</span><span style="color: #800000;">'</span> FROM <span style="color: #800000;">'</span><span style="color: #800000;">xxxbarxxx</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+                </span>-&gt; <span style="color: #800000;">'</span><span style="color: #800000;">bar</span><span style="color: #800000;">'</span><span style="color: #000000;">
+
+        mysql</span>&gt; SELECT TRIM(TRAILING <span style="color: #800000;">'</span><span style="color: #800000;">xyz</span><span style="color: #800000;">'</span> FROM <span style="color: #800000;">'</span><span style="color: #800000;">barxxyz</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+                </span>-&gt; <span style="color: #800000;">'</span><span style="color: #800000;">barx</span><span style="color: #800000;">'</span></pre>
+</div>
+<span class="cnblogs_code_collapse">部分内置函数</span></div>
+<p>更多函数：<a href="http://doc.mysql.cn/mysql5/refman-5.1-zh.html-chapter/functions.html#encryption-functions" target="_blank">猛击这里</a>&nbsp;OR <a href="http://dev.mysql.com/doc/refman/5.7/en/string-functions.html" target="_blank">猛击这里</a></p>
+<p>1、自定义函数</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('1e5ea93c-0e57-491e-b1e4-0285e7a341bb')"><img id="code_img_closed_1e5ea93c-0e57-491e-b1e4-0285e7a341bb" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_1e5ea93c-0e57-491e-b1e4-0285e7a341bb" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('1e5ea93c-0e57-491e-b1e4-0285e7a341bb',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_1e5ea93c-0e57-491e-b1e4-0285e7a341bb" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">delimiter \\
+</span><span style="color: #0000ff;">create</span> <span style="color: #0000ff;">function</span><span style="color: #000000;"> f1(
+    i1 </span><span style="color: #0000ff;">int</span><span style="color: #000000;">,
+    i2 </span><span style="color: #0000ff;">int</span><span style="color: #000000;">)
+</span><span style="color: #0000ff;">returns</span> <span style="color: #0000ff;">int</span>
+<span style="color: #0000ff;">BEGIN</span>
+    <span style="color: #0000ff;">declare</span> num <span style="color: #0000ff;">int</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">set</span> num <span style="color: #808080;">=</span> i1 <span style="color: #808080;">+</span><span style="color: #000000;"> i2;
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;">(num);
+</span><span style="color: #0000ff;">END</span><span style="color: #000000;"> \\
+delimiter ;</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<p>2、删除函数</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('1e9547ff-5dd6-4c0f-b3f6-aae8779dafb6')"><img id="code_img_closed_1e9547ff-5dd6-4c0f-b3f6-aae8779dafb6" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_1e9547ff-5dd6-4c0f-b3f6-aae8779dafb6" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('1e9547ff-5dd6-4c0f-b3f6-aae8779dafb6',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_1e9547ff-5dd6-4c0f-b3f6-aae8779dafb6" class="cnblogs_code_hide">
+<pre>drop function func_name;</pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<p>3、执行函数</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('b755bfbd-67a4-43f3-a1d4-dde8c0e4983b')"><img id="code_img_closed_b755bfbd-67a4-43f3-a1d4-dde8c0e4983b" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_b755bfbd-67a4-43f3-a1d4-dde8c0e4983b" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('b755bfbd-67a4-43f3-a1d4-dde8c0e4983b',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_b755bfbd-67a4-43f3-a1d4-dde8c0e4983b" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;"> 获取返回值</span>
+declare @i VARCHAR(32<span style="color: #000000;">);
+select UPPER(</span><span style="color: #800000;">'</span><span style="color: #800000;">alex</span><span style="color: #800000;">'</span><span style="color: #000000;">) into @i;
+SELECT @i;
+
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 在查询中使用</span>
+select f1(11,nid) ,name <span style="color: #0000ff;">from</span> tb2;</pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<h3>事务</h3>
+<p>事务用于将某些操作的多个SQL作为原子性操作，一旦有某一个出现错误，即可回滚到原来的状态，从而保证数据库数据完整性。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('1c6d9a0a-36ad-46b5-98f1-11819996c6c6')"><img id="code_img_closed_1c6d9a0a-36ad-46b5-98f1-11819996c6c6" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_1c6d9a0a-36ad-46b5-98f1-11819996c6c6" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('1c6d9a0a-36ad-46b5-98f1-11819996c6c6',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_1c6d9a0a-36ad-46b5-98f1-11819996c6c6" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">delimiter \\
+create PROCEDURE p1(
+    OUT p_return_code tinyint
+)
+BEGIN 
+  DECLARE exit handler </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> sqlexception 
+  BEGIN 
+    </span>--<span style="color: #000000;"> ERROR 
+    set p_return_code </span>= 1<span style="color: #000000;">; 
+    rollback; 
+  END; 
+ 
+  DECLARE exit handler </span><span style="color: #0000ff;">for</span><span style="color: #000000;"> sqlwarning 
+  BEGIN 
+    </span>--<span style="color: #000000;"> WARNING 
+    set p_return_code </span>= 2<span style="color: #000000;">; 
+    rollback; 
+  END; 
+ 
+  START TRANSACTION; 
+    DELETE </span><span style="color: #0000ff;">from</span><span style="color: #000000;"> tb1;
+    insert into tb2(name)values(</span><span style="color: #800000;">'</span><span style="color: #800000;">seven</span><span style="color: #800000;">'</span><span style="color: #000000;">);
+  COMMIT; 
+ 
+  </span>--<span style="color: #000000;"> SUCCESS 
+  set p_return_code </span>=<span style="color: #000000;"> 0; 
+ 
+  END\\
+delimiter ;</span></pre>
+</div>
+<span class="cnblogs_code_collapse">支持事务的存储过程</span></div>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">set @i =0;
+call p1(@i);
+select @i;</pre>
+</div>
+<h3>索引</h3>
+<p>索引，是数据库中专门用于帮助用户快速查询数据的一种数据结构。类似于字典中的目录，查找字典内容时可以根据目录查找到数据的存放位置，然后直接获取即可。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">                        30
+
+            10                        40
+
+       5         15            35             66
+
+    1   6     11    19      21      39     55     100
+</pre>
+</div>
+<p>　　</p>
+<p>MySQL中常见索引有：</p>
+<ul>
+<li>普通索引</li>
+<li>唯一索引</li>
+<li>主键索引</li>
+<li>组合索引</li>
+</ul>
+<p>1、普通索引</p>
+<p>普通索引仅有一个功能：加速查询</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('ab6c55c7-9b85-45a7-ac89-be071b3fdb3c')"><img id="code_img_closed_ab6c55c7-9b85-45a7-ac89-be071b3fdb3c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_ab6c55c7-9b85-45a7-ac89-be071b3fdb3c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('ab6c55c7-9b85-45a7-ac89-be071b3fdb3c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_ab6c55c7-9b85-45a7-ac89-be071b3fdb3c" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">create table in1(
+    nid int </span><span style="color: #0000ff;">not</span><span style="color: #000000;"> null auto_increment primary key,
+    name varchar(</span>32) <span style="color: #0000ff;">not</span><span style="color: #000000;"> null,
+    email varchar(</span>64) <span style="color: #0000ff;">not</span><span style="color: #000000;"> null,
+    extra text,
+    index ix_name (name)
+)</span></pre>
+</div>
+<span class="cnblogs_code_collapse">创建表 + 索引</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('b7643038-b354-4677-b4bd-74d6a670648b')"><img id="code_img_closed_b7643038-b354-4677-b4bd-74d6a670648b" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_b7643038-b354-4677-b4bd-74d6a670648b" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('b7643038-b354-4677-b4bd-74d6a670648b',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_b7643038-b354-4677-b4bd-74d6a670648b" class="cnblogs_code_hide">
+<pre>create index index_name on table_name(column_name)</pre>
+</div>
+<span class="cnblogs_code_collapse">创建索引</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('32bee6ad-e6a8-457c-916a-dbbee0ebe0d9')"><img id="code_img_closed_32bee6ad-e6a8-457c-916a-dbbee0ebe0d9" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_32bee6ad-e6a8-457c-916a-dbbee0ebe0d9" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('32bee6ad-e6a8-457c-916a-dbbee0ebe0d9',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_32bee6ad-e6a8-457c-916a-dbbee0ebe0d9" class="cnblogs_code_hide">
+<pre>drop index_name on table_name;</pre>
+</div>
+<span class="cnblogs_code_collapse">删除索引</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('6fa66438-28e7-4563-9727-7819c8e406bf')"><img id="code_img_closed_6fa66438-28e7-4563-9727-7819c8e406bf" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_6fa66438-28e7-4563-9727-7819c8e406bf" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('6fa66438-28e7-4563-9727-7819c8e406bf',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_6fa66438-28e7-4563-9727-7819c8e406bf" class="cnblogs_code_hide">
+<pre>show index <span style="color: #0000ff;">from</span> table_name;</pre>
+</div>
+<span class="cnblogs_code_collapse">查看索引</span></div>
+<p>注意：对于创建索引时如果是BLOB&nbsp;和&nbsp;TEXT&nbsp;类型，必须指定length。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('961d2a7c-215c-46f9-b4a3-4328e9780cbd')"><img id="code_img_closed_961d2a7c-215c-46f9-b4a3-4328e9780cbd" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_961d2a7c-215c-46f9-b4a3-4328e9780cbd" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('961d2a7c-215c-46f9-b4a3-4328e9780cbd',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_961d2a7c-215c-46f9-b4a3-4328e9780cbd" class="cnblogs_code_hide">
+<pre>create index ix_extra on in1(extra(32));</pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<p>2、唯一索引</p>
+<p>唯一索引有两个功能：加速查询 和 唯一约束（可含null）</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('e3ea3259-033e-476c-a7b2-b74840417aed')"><img id="code_img_closed_e3ea3259-033e-476c-a7b2-b74840417aed" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_e3ea3259-033e-476c-a7b2-b74840417aed" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('e3ea3259-033e-476c-a7b2-b74840417aed',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_e3ea3259-033e-476c-a7b2-b74840417aed" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">create table in1(
+    nid int </span><span style="color: #0000ff;">not</span><span style="color: #000000;"> null auto_increment primary key,
+    name varchar(</span>32) <span style="color: #0000ff;">not</span><span style="color: #000000;"> null,
+    email varchar(</span>64) <span style="color: #0000ff;">not</span><span style="color: #000000;"> null,
+    extra text,
+    unique ix_name (name)
+)</span></pre>
+</div>
+<span class="cnblogs_code_collapse">创建表 + 唯一索引</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('71b63f52-f892-45f3-bedf-acdef4693af3')"><img id="code_img_closed_71b63f52-f892-45f3-bedf-acdef4693af3" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_71b63f52-f892-45f3-bedf-acdef4693af3" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('71b63f52-f892-45f3-bedf-acdef4693af3',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_71b63f52-f892-45f3-bedf-acdef4693af3" class="cnblogs_code_hide">
+<pre>create unique index 索引名 on 表名(列名)</pre>
+</div>
+<span class="cnblogs_code_collapse">创建唯一索引</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('57ce3630-20f7-4b02-bec2-9fd6bdfdc5d9')"><img id="code_img_closed_57ce3630-20f7-4b02-bec2-9fd6bdfdc5d9" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_57ce3630-20f7-4b02-bec2-9fd6bdfdc5d9" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('57ce3630-20f7-4b02-bec2-9fd6bdfdc5d9',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_57ce3630-20f7-4b02-bec2-9fd6bdfdc5d9" class="cnblogs_code_hide">
+<pre>drop unique index 索引名 on 表名</pre>
+</div>
+<span class="cnblogs_code_collapse">删除唯一索引</span></div>
+<p>3、主键索引</p>
+<p>主键有两个功能：加速查询 和 唯一约束（不可含null）</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('9008e761-7a39-45ad-bfa9-d5852192c728')"><img id="code_img_closed_9008e761-7a39-45ad-bfa9-d5852192c728" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_9008e761-7a39-45ad-bfa9-d5852192c728" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('9008e761-7a39-45ad-bfa9-d5852192c728',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_9008e761-7a39-45ad-bfa9-d5852192c728" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">create table in1(
+    nid int </span><span style="color: #0000ff;">not</span><span style="color: #000000;"> null auto_increment primary key,
+    name varchar(</span>32) <span style="color: #0000ff;">not</span><span style="color: #000000;"> null,
+    email varchar(</span>64) <span style="color: #0000ff;">not</span><span style="color: #000000;"> null,
+    extra text,
+    index ix_name (name)
+)
+
+OR
+
+create table in1(
+    nid int </span><span style="color: #0000ff;">not</span><span style="color: #000000;"> null auto_increment,
+    name varchar(</span>32) <span style="color: #0000ff;">not</span><span style="color: #000000;"> null,
+    email varchar(</span>64) <span style="color: #0000ff;">not</span><span style="color: #000000;"> null,
+    extra text,
+    primary key(ni1),
+    index ix_name (name)
+)</span></pre>
+</div>
+<span class="cnblogs_code_collapse">创建表 + 创建主键</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('cd14d785-e7c6-455f-b7e2-f9f03babf847')"><img id="code_img_closed_cd14d785-e7c6-455f-b7e2-f9f03babf847" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_cd14d785-e7c6-455f-b7e2-f9f03babf847" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('cd14d785-e7c6-455f-b7e2-f9f03babf847',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_cd14d785-e7c6-455f-b7e2-f9f03babf847" class="cnblogs_code_hide">
+<pre>alter table 表名 add primary key(列名);</pre>
+</div>
+<span class="cnblogs_code_collapse">创建主键</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('26835204-36e7-45e0-8c96-fdd77535203a')"><img id="code_img_closed_26835204-36e7-45e0-8c96-fdd77535203a" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_26835204-36e7-45e0-8c96-fdd77535203a" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('26835204-36e7-45e0-8c96-fdd77535203a',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_26835204-36e7-45e0-8c96-fdd77535203a" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">alter table 表名 drop primary key;
+alter table 表名  modify  列名 int, drop primary key;</span></pre>
+</div>
+<span class="cnblogs_code_collapse">删除主键</span></div>
+<p>4、组合索引</p>
+<p>组合索引是将n个列组合成一个索引</p>
+<p>其应用场景为：频繁的同时使用n列来进行查询，如：where n1 = 'alex' and n2 = 666。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('aae4edc2-d72c-45c4-bddf-85f1586b9926')"><img id="code_img_closed_aae4edc2-d72c-45c4-bddf-85f1586b9926" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_aae4edc2-d72c-45c4-bddf-85f1586b9926" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('aae4edc2-d72c-45c4-bddf-85f1586b9926',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_aae4edc2-d72c-45c4-bddf-85f1586b9926" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">create table in3(
+    nid int </span><span style="color: #0000ff;">not</span><span style="color: #000000;"> null auto_increment primary key,
+    name varchar(</span>32) <span style="color: #0000ff;">not</span><span style="color: #000000;"> null,
+    email varchar(</span>64) <span style="color: #0000ff;">not</span><span style="color: #000000;"> null,
+    extra text
+)</span></pre>
+</div>
+<span class="cnblogs_code_collapse">创建表</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('cabb2520-e514-496f-951b-31f0d004bce5')"><img id="code_img_closed_cabb2520-e514-496f-951b-31f0d004bce5" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_cabb2520-e514-496f-951b-31f0d004bce5" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('cabb2520-e514-496f-951b-31f0d004bce5',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_cabb2520-e514-496f-951b-31f0d004bce5" class="cnblogs_code_hide">
+<pre>create index ix_name_email on in3(name,email);</pre>
+</div>
+<span class="cnblogs_code_collapse">创建组合索引</span></div>
+<p>如上创建组合索引之后，查询：</p>
+<ul>
+<li>name and email &nbsp;-- 使用索引</li>
+<li>name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -- 使用索引</li>
+<li>email &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -- 不使用索引</li>
+</ul>
+<p>注意：对于同时搜索n个条件时，组合索引的性能好于多个单一索引合并。</p>
+<h3>其他&nbsp;</h3>
+<p>1、条件语句</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('cfef725e-f394-4ef8-9aae-a3951b155a58')"><img id="code_img_closed_cfef725e-f394-4ef8-9aae-a3951b155a58" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_cfef725e-f394-4ef8-9aae-a3951b155a58" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('cfef725e-f394-4ef8-9aae-a3951b155a58',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_cfef725e-f394-4ef8-9aae-a3951b155a58" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">delimiter \\
+CREATE PROCEDURE proc_if ()
+BEGIN
+    
+    declare i int default 0;
+    </span><span style="color: #0000ff;">if</span> i = 1<span style="color: #000000;"> THEN
+        SELECT </span>1<span style="color: #000000;">;
+    ELSEIF i </span>= 2<span style="color: #000000;"> THEN
+        SELECT </span>2<span style="color: #000000;">;
+    ELSE
+        SELECT </span>7<span style="color: #000000;">;
+    END IF;
+
+END\\
+delimiter ;</span></pre>
+</div>
+<span class="cnblogs_code_collapse">if条件语句</span></div>
+<p>2、循环语句</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('796e2f4f-1b5f-4fbb-a69b-9b713776a2e2')"><img id="code_img_closed_796e2f4f-1b5f-4fbb-a69b-9b713776a2e2" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_796e2f4f-1b5f-4fbb-a69b-9b713776a2e2" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('796e2f4f-1b5f-4fbb-a69b-9b713776a2e2',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_796e2f4f-1b5f-4fbb-a69b-9b713776a2e2" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">delimiter \\
+CREATE PROCEDURE proc_while ()
+BEGIN
+
+    DECLARE num INT ;
+    SET num </span>=<span style="color: #000000;"> 0 ;
+    WHILE num </span>&lt; 10<span style="color: #000000;"> DO
+        SELECT
+            num ;
+        SET num </span>= num + 1<span style="color: #000000;"> ;
+    END WHILE ;
+
+END\\
+delimiter ;</span></pre>
+</div>
+<span class="cnblogs_code_collapse">while循环</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('887873cb-eca4-4c10-b4d0-c2bbb61612c6')"><img id="code_img_closed_887873cb-eca4-4c10-b4d0-c2bbb61612c6" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_887873cb-eca4-4c10-b4d0-c2bbb61612c6" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('887873cb-eca4-4c10-b4d0-c2bbb61612c6',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_887873cb-eca4-4c10-b4d0-c2bbb61612c6" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">delimiter \\
+CREATE PROCEDURE proc_repeat ()
+BEGIN
+
+    DECLARE i INT ;
+    SET i </span>=<span style="color: #000000;"> 0 ;
+    repeat
+        select i;
+        set i </span>= i + 1<span style="color: #000000;">;
+        until i </span>&gt;= 5<span style="color: #000000;">
+    end repeat;
+
+END\\
+delimiter ;</span></pre>
+</div>
+<span class="cnblogs_code_collapse">repeat循环</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('c20900ee-55cb-43a8-b6f7-055d936a70d0')"><img id="code_img_closed_c20900ee-55cb-43a8-b6f7-055d936a70d0" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_c20900ee-55cb-43a8-b6f7-055d936a70d0" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('c20900ee-55cb-43a8-b6f7-055d936a70d0',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_c20900ee-55cb-43a8-b6f7-055d936a70d0" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">delimiter \\
+CREATE PROCEDURE proc_loop ()
+BEGIN
+    
+    declare i int default 0;
+    loop_label: loop
+        select i;
+        set i</span>=i+1<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">if</span> i&gt;=5<span style="color: #000000;"> then
+            leave loop_label;
+            end </span><span style="color: #0000ff;">if</span><span style="color: #000000;">;
+    end loop;
+
+END\\
+delimiter ;</span></pre>
+</div>
+<span class="cnblogs_code_collapse">loop</span></div>
+<p>3、动态执行SQL语句</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('c5f3bc3f-b9f3-454b-b966-f8b692bc38bf')"><img id="code_img_closed_c5f3bc3f-b9f3-454b-b966-f8b692bc38bf" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_c5f3bc3f-b9f3-454b-b966-f8b692bc38bf" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('c5f3bc3f-b9f3-454b-b966-f8b692bc38bf',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_c5f3bc3f-b9f3-454b-b966-f8b692bc38bf" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">delimiter \\
+</span><span style="color: #0000ff;">DROP</span> <span style="color: #0000ff;">PROCEDURE</span> <span style="color: #0000ff;">IF</span> <span style="color: #808080;">EXISTS</span><span style="color: #000000;"> proc_sql \\
+</span><span style="color: #0000ff;">CREATE</span> <span style="color: #0000ff;">PROCEDURE</span><span style="color: #000000;"> proc_sql ()
+</span><span style="color: #0000ff;">BEGIN</span>
+    <span style="color: #0000ff;">declare</span> p1 <span style="color: #0000ff;">int</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">set</span> p1 <span style="color: #808080;">=</span> <span style="color: #800000; font-weight: bold;">11</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">set</span> <span style="color: #008000;">@p1</span> <span style="color: #808080;">=</span><span style="color: #000000;"> p1;
+
+    </span><span style="color: #0000ff;">PREPARE</span> prod <span style="color: #0000ff;">FROM</span> <span style="color: #ff0000;">'</span><span style="color: #ff0000;">select * from tb2 where nid &gt; ?</span><span style="color: #ff0000;">'</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">EXECUTE</span> prod USING <span style="color: #008000;">@p1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">DEALLOCATE</span> <span style="color: #0000ff;">prepare</span><span style="color: #000000;"> prod; 
+
+</span><span style="color: #0000ff;">END</span><span style="color: #000000;">\\
+delimiter ;</span></pre>
+</div>
+<span class="cnblogs_code_collapse">动态执行SQL</span></div>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2016-07-28 07:12</span> <a href='http://www.cnblogs.com/wupeiqi/'>武沛齐</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>) &nbsp;<a href="https://i.cnblogs.com/EditArticles.aspx?postid=5713323" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(5713323);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=133379,cb_entryId=5713323,cb_blogApp=currentBlogApp,cb_blogUserGuid='7208b24d-95c9-e111-aa3f-842b2b196315',cb_entryCreatedDate='2016/7/28 7:12:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2017 武沛齐
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

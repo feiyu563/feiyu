@@ -1,0 +1,83 @@
+{%extends 'master/layout.html'%}
+
+{%block page-content%}
+
+<div>
+ <p>当前房间:{{roomobj.name}}</p>
+ <div style='float:left;width:200px;'>
+ 	<ul>
+ 	{% for item in memberlist %}
+ 		<li>{{item.user.username}}</li>
+ 	{% endfor%}
+ 	</ul>
+ </div>
+ <div style='float:left;width:400px;'>
+ 	<div id='chatpool' style='width:400px;height:400px;border:1px solid #ddd;overflow:auto;'></div>
+ 	<div>
+ 	<textarea id='message' style='width:400px;height:50px;'></textarea>
+ 	<input type='button' style='float:right;' value='发送' onclick='sendmsg("{{user}}");' />
+ 	</div>
+ </div>
+</div>
+{%endblock%}
+
+{%block js%}
+var now=new Date();
+var year=now.getFullYear();
+var month=now.getMonth()+1;
+var day=now.getDate();
+var hours=now.getHours();
+var minutes=now.getMinutes();
+var seconds=now.getSeconds();
+var localtime=year+"/"+month+"/"+day+"  "+hours+":"+minutes+":"+seconds;
+//获取系统时间
+function sendmsg(user){
+//将用户聊天数据和系统时间等发送到服务端保存
+	var msg=$('#message').val();
+	var content = '<span style="color:red;">'+user+'</span><span style="color:blue;"> '+localtime +'</span></br><span>'+msg+'</span></br></br>';
+	$('#message').val("");
+	$('#chatpool').append(content);
+	var divheight=document.getElementById('chatpool').scrollHeight //获取div滚动条的高度
+	$('#chatpool').scrollTop(divheight)
+	var id={{ user.id }}
+	var roomid={{roomobj.id}}
+	var data={roomid:roomid,id:id,msg:msg,sendtime:localtime,user:user}
+	syncrequest('/savemsg/',data,'post',null) //发送数据
+}
+function getre(arg){
+	console.log(arg)
+}
+
+//循环获取后台保存的聊天数据
+setInterval(function(){
+	var roomid={{roomobj.id}}
+	data={roomid:roomid}
+	syncrequest('/getmsg/',data,'get',upchat)
+},2000);
+function upchat(arg){
+	var arg=$.parseJSON(arg);
+	console.log(arg);
+	$("#chatpool").empty();
+	$.each(arg,function(k,v){
+		var content = '<span style="color:red;">'+v[3]+'</span><span style="color:blue;"> '+v[2] +'</span></br><span>'+v[1]+'</span></br></br>';
+		$("#chatpool").append(content);
+		var divheight=document.getElementById('chatpool').scrollHeight //获取div滚动条的高度
+		$('#chatpool').scrollTop(divheight)
+	})
+}
+$("#message").keyup(function(event){
+//开启回车发送消息
+	if(event.keyCode == 13){
+	sendmsg("{{user}}");
+	}
+});
+function syncrequest(url,data,type,func){
+	$.ajax({
+		url:url,
+		data:data,
+		type:type,
+		success:func,
+	})
+}
+
+{%endblock%}

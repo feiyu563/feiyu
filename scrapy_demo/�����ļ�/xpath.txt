@@ -1,0 +1,28 @@
+百度的例子 /html[@class='sui-componentWrap']/body[@class=' has-background s-manhattan-index']/div[@id='wrapper']/div[@id='head']/div[@id='s_wrap']/div[@id='s_main']/div[@id='s_mancard_main']/div[@id='s_ctner_contents']/div[@id='s_content_2']/div[@id='s_xmancard_news']/div[@class='s-news-wrapper clearfix']/div[@class='water-container']/div[@class='s-news-list-wrapper']/div[@class='s-news-special s-news-item s-news-special-item-tpl-2 s-opacity-blank8 first news-viewed']/div[@class='s-block-container']/div[@class='s-block-container-own']/div[@class='s-text-content']/h2/a[@class='s-title-yahei']/attribute::href
+例子	选取属性
+child::book	选取所有属于当前节点的子元素的 book 节点。
+attribute::lang	选取当前节点的 lang 属性。
+child::*	选取当前节点的所有子元素。
+attribute::*	选取当前节点的所有属性。
+child::text()	选取当前节点的所有文本子节点。
+child::node()	选取当前节点的所有子节点。
+descendant::book	选取当前节点的所有 book 后代。
+ancestor::book	选择当前节点的所有 book 先辈。
+ancestor-or-self::book	选取当前节点的所有 book 先辈以及当前节点（如果此节点是 book 节点）
+child::*/child::price	选取当前节点的所有 price 孙节点。
+
+
+'''
+xpath 选择器：
+/html[@class='sui-componentWrap']
+/body[@class=' has-background s-manhattan-index']
+/div[@id='wrapper']/div[@id='head']/div[@id='s_wrap']
+/div[@id='s_main']/div[@id='s_mancard_main']
+/div[@id='s_ctner_contents']/div[@id='s_content_2']
+/div[@id='s_xmancard_news']/div[@class='s-news-wrapper clearfix']
+/div[@class='water-container']/div[@class='s-news-list-wrapper']
+/div[@class='s-news-special s-news-item s-news-special-item-tpl-2 s-opacity-blank8 first news-viewed']
+/div[@class='s-block-container']/div[@class='s-block-container-own']
+/div[@class='s-text-content']/h2/a[@class='s-title-yahei']
+/attribute::href
+'''

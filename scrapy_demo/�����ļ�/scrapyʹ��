@@ -1,0 +1,19 @@
+1.创建项目
+2.开发爬虫
+3.调试
+4.运行
+
+1创建项目
+scrapy startproject taobaotp
+
+2.创建爬虫  taobao是爬虫名字
+scrapy genspider taobao http://www.w3school.com.cn/xml/xml_syntax.asp
+
+3.scrapy shell URL地址
+
+4.运行爬虫  taobao是爬虫名字，不是爬虫项目
+ scrapy crawl taobao  
+--logfile taobao.log  自动记录日志 
+
+5.保存爬取对象
+scrapy crawl taobao -o items.json

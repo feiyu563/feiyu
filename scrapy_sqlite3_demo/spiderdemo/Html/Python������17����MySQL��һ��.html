@@ -1,0 +1,716 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python开发【第十七篇】：MySQL（一） - 武沛齐 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=m_FXmwz3wxZoecUwNEK23PAzc-j9vbX_C6MblJ5ouMc1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue.css?v=jJERBFSojhmgst84aaRDal9S3q1WoO-WcNudmMzGJS81"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/133379.css?v=YSNZANkz7eBKoXq2iHYfghvodkY%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue-mobile.css?v=z0BacpCfWeLlXDCM0C158kTP_DMqMbGBapID4f-QztI1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/wupeiqi/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/wupeiqi/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/wupeiqi/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'wupeiqi', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=CPv0EEqm9L2aCgolHxaZfVYM6J-Sn5az_FJXbjzgr-o1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/wupeiqi/">Mr.Seven</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/wupeiqi/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%AD%A6%E6%B2%9B%E9%BD%90">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/wupeiqi/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/wupeiqi/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-126&nbsp;
+文章-137&nbsp;
+评论-259&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/wupeiqi/articles/5713315.html">Python开发【第十七篇】：MySQL（一）</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><h3>一、概述</h3>
+<p>1、什么是数据库 ？<br />　<span style="color: #888888;"><em>答：数据的仓库，如：在ATM的示例中我们创建了一个 db 目录，称其为数据库</em></span></p>
+<p>2、什么是 MySQL、Oracle、SQLite、Access、MS SQL Server等 ？<br />　<span style="color: #888888;"><em>答：他们均是一个软件，都有两个主要的功能：</em></span></p>
+<ul>
+<li><span style="color: #888888;"><em>a. 将数据保存到文件或内存</em></span></li>
+<li><span style="color: #888888;"><em>b. 接收特定的命令，然后对文件进行相应的操作</em></span><br /><br /><span style="color: #888888;"><em>PS：如果有了以上软件，无须自己再去创建文件和文件夹，而是直接传递 命令 给上述软件，让其来进行文件操作，他们统称为数据库管理系统（DBMS，Database Management System）</em></span></li>
+
+
+
+
+
+
+
+
+
+</ul>
+<p>3、什么是SQL ？<br /><span style="color: #888888;"><em>　答：上述提到MySQL等软件可以接受命令，并做出相应的操作，由于命令中可以包含删除文件、获取文件内容等众多操作，对于编写的命令就是是SQL语句。SQL􏰉􏵮􏵯􏰟，是􏵱􏰚􏵲􏵳􏵴􏰇􏰈􏵱􏰚􏵲􏵳􏵴􏰇􏰈结构化语言（Structured Query Language􏰕􏰐􏵵􏰯）的缩写，SQL􏰜􏰖􏰩􏰽􏵶􏱥􏲲􏰄􏰫􏰬􏰭􏵁􏵷􏰐􏰇􏰈是一种专门用来与数据库通信的语言。</em></span></p>
+<h3>二、下载安装</h3>
+<p>MySQL是一个关系型数据库管理系统，由瑞典MySQL AB 公司开发，目前属于 Oracle 旗下公司。MySQL 最流行的关系型数据库管理系统，在 WEB 应用方面MySQL是最好的 RDBMS (Relational Database Management System，关系数据库管理系统) 应用软件之一。</p>
+<p>想要使用MySQL来存储并操作数据，则需要做几件事情：<br /><em><span style="color: #808080;">　　a. 安装MySQL服务端</span></em><br /><em><span style="color: #808080;">　　b. 安装MySQL客户端</span></em><br /><em><span style="color: #808080;">　　b. 【客户端】连接【服务端】</span></em><br /><em><span style="color: #808080;">　　c. 【客户端】发送命令给【服务端MySQL】服务的接受命令并执行相应操作(增删改查等)</span></em></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">下载
+        http://dev.mysql.com/downloads/mysql/
+安装
+        windows:
+            点点点
+        Linux:
+            yum install mysql-server
+        Mac:
+            点点点
+</pre>
+</div>
+<p><strong><span style="font-size: 14pt;">Window版本</span></strong></p>
+<p>1、下载</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">MySQL Community Server 5.7.16
+
+http://dev.mysql.com/downloads/mysql/</pre>
+</div>
+<p>2、解压</p>
+<p><span style="color: #888888;">如果想要让MySQL安装在指定目录，那么就将解压后的文件夹移动到指定目录，如：C:\mysql-5.7.16-winx64</span></p>
+<p>3、初始化</p>
+<p><span style="color: #888888;">MySQL解压后的 bin 目录下有一大堆的可执行文件，执行如下命令初始化数据：</span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">cd c:\mysql-5.7.16-winx64\bin
+
+mysqld --initialize-insecure
+</pre>
+</div>
+<p>4、启动MySQL服务</p>
+<p><span style="color: #888888;">执行命令从而启动MySQL服务</span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;"># 进入可执行文件目录
+cd c:\mysql-5.7.16-winx64\bin
+
+# 启动MySQL服务
+mysqld</pre>
+</div>
+<p>5、启动MySQL客户端并连接MySQL服务</p>
+<p><span style="color: #888888;">由于初始化时使用的【mysqld --initialize-insecure】命令，其默认未给root账户设置密码</span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;"># 进入可执行文件目录
+cd c:\mysql-5.7.16-winx64\bin
+
+# 连接MySQL服务器
+mysql -u root -p
+
+# 提示请输入密码，直接回车</pre>
+</div>
+<p><span style="color: #888888;">输入回车，见下图表示安装成功：</span></p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201610/425762-20161018154428107-712102355.png" alt="" width="654" height="250" /></p>
+<p><span style="color: #888888;">到此为止，MySQL服务端已经安装成功并且客户端已经可以连接上，以后再操作MySQL时，只需要重复上述4、5步骤即可。但是，在4、5步骤中重复的进入可执行文件目录比较繁琐，如想日后操作简便，可以做如下操作。</span></p>
+<blockquote>
+<p>a. 添加环境变量</p>
+<p><span style="color: #888888;">将MySQL可执行文件添加到环境变量中，从而执行执行命令即可</span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">【右键计算机】--》【属性】--》【高级系统设置】--》【高级】--》【环境变量】--》【在第二个内容框中找到 变量名为Path 的一行，双击】 --&gt; 【将MySQL的bin目录路径追加到变值值中，用 ； 分割】
+
+如：
+C:\Program Files (x86)\Parallels\Parallels Tools\Applications;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Python27;C:\Python35;C:\mysql-5.7.16-winx64\bin</pre>
+</div>
+<p><span style="color: #888888;">如此一来，以后再启动服务并连接时，仅需：</span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;"># 启动MySQL服务，在终端输入
+mysqld
+
+# 连接MySQL服务，在终端输入：
+mysql -u root -p</pre>
+</div>
+<p><span style="color: #888888;">b. 将MySQL服务制作成windows服务</span></p>
+<p><span style="color: #888888;">上一步解决了一些问题，但不够彻底，因为在执行【mysqd】启动MySQL服务器时，当前终端会被hang住，那么做一下设置即可解决此问题：</span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;"># 制作MySQL的Windows服务，在终端执行此命令：
+"c:\mysql-5.7.16-winx64\bin\mysqld" --install
+
+# 移除MySQL的Windows服务，在终端执行此命令：
+"c:\mysql-5.7.16-winx64\bin\mysqld" --remove
+</pre>
+</div>
+<p><span style="color: #888888;">注册成服务之后，以后再启动和关闭MySQL服务时，仅需执行如下命令：</span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 启动MySQL服务
+net start mysql
+
+# 关闭MySQL服务
+net stop mysql</pre>
+</div>
+</blockquote>
+<p><span style="font-size: 14pt;"><strong>Linux版本</strong></span></p>
+<p>安装：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">yum install mysql-server　　</pre>
+</div>
+<p>服务端启动</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:sql;gutter:true;">mysql.server start</pre>
+</div>
+<p>客户端连接</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:sql;gutter:true;">    连接：
+        mysql -h host -u user -p
+
+        常见错误：
+            ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2), it means that the MySQL server daemon (Unix) or service (Windows) is not running.
+    退出：
+        QUIT 或者 Control+D</pre>
+</div>
+<h3>三、数据库操作</h3>
+<p>1、显示数据库</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">SHOW DATABASES;
+</pre>
+</div>
+<p>默认数据库：<br />　　mysql - 用户权限相关数据<br />　　test - 用于用户测试数据<br />　　information_schema - MySQL本身架构相关数据</p>
+<p>2、创建数据库</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;"># utf-8
+CREATE DATABASE 数据库名称 DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+
+# gbk
+CREATE DATABASE 数据库名称 DEFAULT CHARACTER SET gbk COLLATE gbk_chinese_ci;
+</pre>
+</div>
+<p>3、使用数据库</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">USE db_name;
+</pre>
+</div>
+<p>显示当前使用的数据库中所有表：SHOW TABLES;</p>
+<p>4、用户管理</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">创建用户
+    create user '用户名'@'IP地址' identified by '密码';
+删除用户
+    drop user '用户名'@'IP地址';
+修改用户
+    rename user '用户名'@'IP地址'; to '新用户名'@'IP地址';;
+修改密码
+    set password for '用户名'@'IP地址' = Password('新密码')
+ 
+PS：用户权限相关数据保存在mysql数据库的user表中，所以也可以直接对其进行操作（不建议）
+</pre>
+</div>
+<p>5、授权管理</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">show grants for '用户'@'IP地址'                  -- 查看权限
+grant  权限 on 数据库.表 to   '用户'@'IP地址'      -- 授权
+revoke 权限 on 数据库.表 from '用户'@'IP地址'      -- 取消权限
+</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('adaa4a9f-08c5-436d-abce-76325b3b42e4')"><img id="code_img_closed_adaa4a9f-08c5-436d-abce-76325b3b42e4" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_adaa4a9f-08c5-436d-abce-76325b3b42e4" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('adaa4a9f-08c5-436d-abce-76325b3b42e4',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_adaa4a9f-08c5-436d-abce-76325b3b42e4" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">            all privileges  除grant外的所有权限
+            select          仅查权限
+            select,insert   查和插入权限
+            ...
+            usage                   无访问权限
+            alter                   使用alter table
+            alter routine           使用alter procedure和drop procedure
+            create                  使用create table
+            create routine          使用create procedure
+            create temporary tables 使用create temporary tables
+            create user             使用create user、drop user、rename user和revoke  all privileges
+            create view             使用create view
+            delete                  使用delete
+            drop                    使用drop table
+            execute                 使用call和存储过程
+            file                    使用select into outfile 和 load data infile
+            grant option            使用grant 和 revoke
+            index                   使用index
+            insert                  使用insert
+            lock tables             使用lock table
+            process                 使用show full processlist
+            select                  使用select
+            show databases          使用show databases
+            show view               使用show view
+            update                  使用update
+            reload                  使用flush
+            shutdown                使用mysqladmin shutdown(关闭MySQL)
+            super                   􏱂􏰈使用change master、kill、logs、purge、master和set </span><span style="color: #0000ff;">global</span><span style="color: #000000;">。还允许mysqladmin􏵗􏵘􏲊􏲋调试登陆
+            replication client      服务器位置的访问
+            replication slave       由复制从属使用</span></pre>
+</div>
+<span class="cnblogs_code_collapse">对于权限</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('2d25146b-e100-45ca-a1d7-fb1ca48d3966')"><img id="code_img_closed_2d25146b-e100-45ca-a1d7-fb1ca48d3966" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_2d25146b-e100-45ca-a1d7-fb1ca48d3966" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('2d25146b-e100-45ca-a1d7-fb1ca48d3966',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_2d25146b-e100-45ca-a1d7-fb1ca48d3966" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">        对于目标数据库以及内部其他：
+            数据库名.</span>*<span style="color: #000000;">           数据库中的所有
+            数据库名.表          指定数据库中的某张表
+            数据库名.存储过程     指定数据库中的存储过程
+            </span>*.*                所有数据库</pre>
+</div>
+<span class="cnblogs_code_collapse">对于数据库</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('6fafb51f-8ab5-4219-8105-68a64fd82197')"><img id="code_img_closed_6fafb51f-8ab5-4219-8105-68a64fd82197" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_6fafb51f-8ab5-4219-8105-68a64fd82197" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('6fafb51f-8ab5-4219-8105-68a64fd82197',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_6fafb51f-8ab5-4219-8105-68a64fd82197" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">            用户名@IP地址         用户只能在改IP下才能访问
+            用户名@</span>192.168.1.%   用户只能在改IP段下才能访问(通配符%<span style="color: #000000;">表示任意)
+            用户名@</span>%             用户可以再任意IP下访问(默认IP地址为%)</pre>
+</div>
+<span class="cnblogs_code_collapse">对于用户和IP</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('e1f400b8-1e17-4a2c-8ea8-94ed3cdba5e4')"><img id="code_img_closed_e1f400b8-1e17-4a2c-8ea8-94ed3cdba5e4" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_e1f400b8-1e17-4a2c-8ea8-94ed3cdba5e4" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('e1f400b8-1e17-4a2c-8ea8-94ed3cdba5e4',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_e1f400b8-1e17-4a2c-8ea8-94ed3cdba5e4" class="cnblogs_code_hide">
+<pre>            grant all privileges on db1.tb1 TO <span style="color: #800000;">'</span><span style="color: #800000;">用户名</span><span style="color: #800000;">'</span>@<span style="color: #800000;">'</span><span style="color: #800000;">IP</span><span style="color: #800000;">'</span><span style="color: #000000;">
+
+            grant select on db1.</span>* TO <span style="color: #800000;">'</span><span style="color: #800000;">用户名</span><span style="color: #800000;">'</span>@<span style="color: #800000;">'</span><span style="color: #800000;">IP</span><span style="color: #800000;">'</span><span style="color: #000000;">
+
+            grant select,insert on </span>*.* TO <span style="color: #800000;">'</span><span style="color: #800000;">用户名</span><span style="color: #800000;">'</span>@<span style="color: #800000;">'</span><span style="color: #800000;">IP</span><span style="color: #800000;">'</span><span style="color: #000000;">
+
+            revoke select on db1.tb1 </span><span style="color: #0000ff;">from</span> <span style="color: #800000;">'</span><span style="color: #800000;">用户名</span><span style="color: #800000;">'</span>@<span style="color: #800000;">'</span><span style="color: #800000;">IP</span><span style="color: #800000;">'</span></pre>
+</div>
+<span class="cnblogs_code_collapse">示例</span></div>
+<p><span>特殊的：</span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">flush privileges，将数据读取到内存中，从而立即生效。</pre>
+</div>
+<h3>四、数据表基本</h3>
+<p>1、创建表</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">create table 表名(
+    列名  类型  是否可以为空，
+    列名  类型  是否可以为空
+)ENGINE=InnoDB DEFAULT CHARSET=utf8</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('dc9d2c67-643b-482c-a7f9-bb192cd2366f')"><img id="code_img_closed_dc9d2c67-643b-482c-a7f9-bb192cd2366f" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_dc9d2c67-643b-482c-a7f9-bb192cd2366f" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('dc9d2c67-643b-482c-a7f9-bb192cd2366f',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_dc9d2c67-643b-482c-a7f9-bb192cd2366f" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">        是否可空，null表示空，非字符串
+            </span><span style="color: #0000ff;">not</span> null    -<span style="color: #000000;"> 不可空
+            null        </span>- 可空</pre>
+</div>
+<span class="cnblogs_code_collapse">是否可以为空</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('0c95f48b-525a-408d-b86d-6a514da9fc59')"><img id="code_img_closed_0c95f48b-525a-408d-b86d-6a514da9fc59" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_0c95f48b-525a-408d-b86d-6a514da9fc59" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('0c95f48b-525a-408d-b86d-6a514da9fc59',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_0c95f48b-525a-408d-b86d-6a514da9fc59" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">        默认值，创建列时可以指定默认值，当插入数据时如果未主动设置，则自动添加默认值
+            create table tb1(
+                nid int </span><span style="color: #0000ff;">not</span> null defalut 2<span style="color: #000000;">,
+                num int </span><span style="color: #0000ff;">not</span><span style="color: #000000;"> null
+            )</span></pre>
+</div>
+<span class="cnblogs_code_collapse">默认值</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('b7149ad7-a020-4e29-a30a-4b35f8054e65')"><img id="code_img_closed_b7149ad7-a020-4e29-a30a-4b35f8054e65" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_b7149ad7-a020-4e29-a30a-4b35f8054e65" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('b7149ad7-a020-4e29-a30a-4b35f8054e65',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_b7149ad7-a020-4e29-a30a-4b35f8054e65" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">       自增，如果为某列设置自增列，插入数据时无需设置此列，默认将自增（表中只能有一个自增列）
+            create table tb1(
+                nid int </span><span style="color: #0000ff;">not</span><span style="color: #000000;"> null auto_increment primary key,
+                num int null
+            )
+            或
+            create table tb1(
+                nid int </span><span style="color: #0000ff;">not</span><span style="color: #000000;"> null auto_increment,
+                num int null,
+                index(nid)
+            )
+            注意：</span>1<span style="color: #000000;">、对于自增列，必须是索引（含主键）。
+                 </span>2<span style="color: #000000;">、对于自增可以设置步长和起始值
+                     show session variables like </span><span style="color: #800000;">'</span><span style="color: #800000;">auto_inc%</span><span style="color: #800000;">'</span><span style="color: #000000;">;
+                     set session auto_increment_increment</span>=2<span style="color: #000000;">;
+                     set session auto_increment_offset</span>=10<span style="color: #000000;">;
+
+                     shwo </span><span style="color: #0000ff;">global</span>  variables like <span style="color: #800000;">'</span><span style="color: #800000;">auto_inc%</span><span style="color: #800000;">'</span><span style="color: #000000;">;
+                     set </span><span style="color: #0000ff;">global</span> auto_increment_increment=2<span style="color: #000000;">;
+                     set </span><span style="color: #0000ff;">global</span> auto_increment_offset=10;</pre>
+</div>
+<span class="cnblogs_code_collapse">自增</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('5cdcec6e-72e1-4e69-bdba-cf5b85dc0784')"><img id="code_img_closed_5cdcec6e-72e1-4e69-bdba-cf5b85dc0784" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_5cdcec6e-72e1-4e69-bdba-cf5b85dc0784" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('5cdcec6e-72e1-4e69-bdba-cf5b85dc0784',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_5cdcec6e-72e1-4e69-bdba-cf5b85dc0784" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">        主键，一种特殊的唯一索引，不允许有空值，如果主键使用单个列，则它的值必须唯一，如果是多列，则其组合必须唯一。
+            create table tb1(
+                nid int </span><span style="color: #0000ff;">not</span><span style="color: #000000;"> null auto_increment primary key,
+                num int null
+            )
+            或
+            create table tb1(
+                nid int </span><span style="color: #0000ff;">not</span><span style="color: #000000;"> null,
+                num int </span><span style="color: #0000ff;">not</span><span style="color: #000000;"> null,
+                primary key(nid,num)
+            )</span></pre>
+</div>
+<span class="cnblogs_code_collapse">主键</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('a6a359d1-467d-4fe0-b06c-33d7cf425ec1')"><img id="code_img_closed_a6a359d1-467d-4fe0-b06c-33d7cf425ec1" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a6a359d1-467d-4fe0-b06c-33d7cf425ec1" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a6a359d1-467d-4fe0-b06c-33d7cf425ec1',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_a6a359d1-467d-4fe0-b06c-33d7cf425ec1" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">        外键，一个特殊的索引，只能是指定内容
+            creat table color(
+                nid int </span><span style="color: #0000ff;">not</span><span style="color: #000000;"> null primary key,
+                name char(</span>16) <span style="color: #0000ff;">not</span><span style="color: #000000;"> null
+            )
+
+            create table fruit(
+                nid int </span><span style="color: #0000ff;">not</span><span style="color: #000000;"> null primary key,
+                smt char(</span>32<span style="color: #000000;">) null ,
+                color_id int </span><span style="color: #0000ff;">not</span><span style="color: #000000;"> null,
+                constraint fk_cc foreign key (color_id) references color(nid)
+            )</span></pre>
+</div>
+<span class="cnblogs_code_collapse">外键</span></div>
+<p>2、删除表</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">drop table 表名
+</pre>
+</div>
+<p>3、清空表</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">delete from 表名
+truncate table 表名
+</pre>
+</div>
+<p>4、修改表</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:javascript;gutter:true;">添加列：alter table 表名 add 列名 类型
+删除列：alter table 表名 drop column 列名
+修改列：
+        alter table 表名 modify column 列名 类型;  -- 类型
+        alter table 表名 change 原列名 新列名 类型; -- 列名，类型
+ 
+添加主键：
+        alter table 表名 add primary key(列名);
+删除主键：
+        alter table 表名 drop primary key;
+        alter table 表名  modify  列名 int, drop primary key;
+ 
+添加外键：alter table 从表 add constraint 外键名称（形如：FK_从表_主表） foreign key 从表(外键字段) references 主表(主键字段);
+删除外键：alter table 表名 drop foreign key 外键名称
+ 
+修改默认值：ALTER TABLE testalter_tbl ALTER i SET DEFAULT 1000;
+删除默认值：ALTER TABLE testalter_tbl ALTER i DROP DEFAULT;
+</pre>
+</div>
+<p>5、基本数据类型</p>
+<p>MySQL的数据类型大致分为：数值、时间和字符串</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('df056706-8a9f-468f-8818-2d167999a3ac')"><img id="code_img_closed_df056706-8a9f-468f-8818-2d167999a3ac" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_df056706-8a9f-468f-8818-2d167999a3ac" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('df056706-8a9f-468f-8818-2d167999a3ac',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_df056706-8a9f-468f-8818-2d167999a3ac" class="cnblogs_code_hide">
+<pre>        <span style="color: #0000ff;">bit</span><span style="color: #ff0000;">[</span><span style="color: #ff0000;">(M)</span><span style="color: #ff0000;">]</span><span style="color: #000000;">
+            二进制位（</span><span style="color: #800000; font-weight: bold;">101001</span>），m表示二进制位的长度（<span style="color: #800000; font-weight: bold;">1</span><span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">64</span>），默认m＝<span style="color: #800000; font-weight: bold;">1</span>
+
+        <span style="color: #0000ff;">tinyint</span><span style="color: #ff0000;">[</span><span style="color: #ff0000;">(m)</span><span style="color: #ff0000;">]</span> <span style="color: #ff0000;">[</span><span style="color: #ff0000;">unsigned</span><span style="color: #ff0000;">]</span> <span style="color: #ff0000;">[</span><span style="color: #ff0000;">zerofill</span><span style="color: #ff0000;">]</span><span style="color: #000000;">
+
+            小整数，数据类型用于保存一些范围的整数数值范围：
+            有符号：
+                </span><span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">128</span> ～ <span style="color: #800000; font-weight: bold;">127</span><span style="color: #000000;">.
+            无符号：
+                </span><span style="color: #800000; font-weight: bold;">0</span> ～ <span style="color: #800000; font-weight: bold;">255</span><span style="color: #000000;">
+
+            特别的： MySQL中无布尔值，使用tinyint(</span><span style="color: #800000; font-weight: bold;">1</span><span style="color: #000000;">)构造。
+
+        </span><span style="color: #0000ff;">int</span><span style="color: #ff0000;">[</span><span style="color: #ff0000;">(m)</span><span style="color: #ff0000;">][</span><span style="color: #ff0000;">unsigned</span><span style="color: #ff0000;">][</span><span style="color: #ff0000;">zerofill</span><span style="color: #ff0000;">]</span><span style="color: #000000;">
+
+            整数，数据类型用于保存一些范围的整数数值范围：
+                有符号：
+                    </span><span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">2147483648</span> ～ <span style="color: #800000; font-weight: bold;">2147483647</span><span style="color: #000000;">
+                无符号：
+                    </span><span style="color: #800000; font-weight: bold;">0</span> ～ <span style="color: #800000; font-weight: bold;">4294967295</span><span style="color: #000000;">
+
+            特别的：整数类型中的m仅用于显示，对存储范围无限制。例如： </span><span style="color: #0000ff;">int</span>(<span style="color: #800000; font-weight: bold;">5</span>),当插入数据2时，<span style="color: #0000ff;">select</span> 时数据显示为： <span style="color: #800000; font-weight: bold;">00002</span>
+
+        <span style="color: #0000ff;">bigint</span><span style="color: #ff0000;">[</span><span style="color: #ff0000;">(m)</span><span style="color: #ff0000;">][</span><span style="color: #ff0000;">unsigned</span><span style="color: #ff0000;">][</span><span style="color: #ff0000;">zerofill</span><span style="color: #ff0000;">]</span><span style="color: #000000;">
+            大整数，数据类型用于保存一些范围的整数数值范围：
+                有符号：
+                    </span><span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">9223372036854775808</span> ～ <span style="color: #800000; font-weight: bold;">9223372036854775807</span><span style="color: #000000;">
+                无符号：
+                    </span><span style="color: #800000; font-weight: bold;">0</span>  ～  <span style="color: #800000; font-weight: bold;">18446744073709551615</span>
+
+        <span style="color: #0000ff;">decimal</span><span style="color: #ff0000;">[</span><span style="color: #ff0000;">(m[,d</span><span style="color: #ff0000;">]</span>)] <span style="color: #ff0000;">[</span><span style="color: #ff0000;">unsigned</span><span style="color: #ff0000;">]</span> <span style="color: #ff0000;">[</span><span style="color: #ff0000;">zerofill</span><span style="color: #ff0000;">]</span><span style="color: #000000;">
+            准确的小数值，m是数字总个数（负号不算），d是小数点后个数。 m最大值为65，d最大值为30。
+
+            特别的：对于精确数值计算时需要用此类型
+                   decaimal能够存储精确值的原因在于其内部按照字符串存储。
+
+        </span><span style="color: #0000ff;">FLOAT</span><span style="color: #ff0000;">[</span><span style="color: #ff0000;">(M,D)</span><span style="color: #ff0000;">]</span> <span style="color: #ff0000;">[</span><span style="color: #ff0000;">UNSIGNED</span><span style="color: #ff0000;">]</span> <span style="color: #ff0000;">[</span><span style="color: #ff0000;">ZEROFILL</span><span style="color: #ff0000;">]</span><span style="color: #000000;">
+            单精度浮点数（非准确小数值），m是数字总个数，d是小数点后个数。
+                无符号：
+                    </span><span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">3</span>.402823466E<span style="color: #808080;">+</span><span style="color: #800000; font-weight: bold;">38</span> <span style="color: #0000ff;">to</span> <span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">1</span>.175494351E<span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">38</span><span style="color: #000000;">,
+                    </span><span style="color: #800000; font-weight: bold;">0</span>
+                    <span style="color: #800000; font-weight: bold;">1</span>.175494351E<span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">38</span> <span style="color: #0000ff;">to</span> <span style="color: #800000; font-weight: bold;">3</span>.402823466E<span style="color: #808080;">+</span><span style="color: #800000; font-weight: bold;">38</span><span style="color: #000000;">
+                有符号：
+                    </span><span style="color: #800000; font-weight: bold;">0</span>
+                    <span style="color: #800000; font-weight: bold;">1</span>.175494351E<span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">38</span> <span style="color: #0000ff;">to</span> <span style="color: #800000; font-weight: bold;">3</span>.402823466E<span style="color: #808080;">+</span><span style="color: #800000; font-weight: bold;">38</span>
+
+            <span style="color: #808080;">****</span> 数值越大，越不准确 <span style="color: #808080;">****</span>
+
+        <span style="color: #0000ff;">DOUBLE</span><span style="color: #ff0000;">[</span><span style="color: #ff0000;">(M,D)</span><span style="color: #ff0000;">]</span> <span style="color: #ff0000;">[</span><span style="color: #ff0000;">UNSIGNED</span><span style="color: #ff0000;">]</span> <span style="color: #ff0000;">[</span><span style="color: #ff0000;">ZEROFILL</span><span style="color: #ff0000;">]</span><span style="color: #000000;">
+            双精度浮点数（非准确小数值），m是数字总个数，d是小数点后个数。
+
+                无符号：
+                    </span><span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">1</span>.7976931348623157E<span style="color: #808080;">+</span><span style="color: #800000; font-weight: bold;">308</span> <span style="color: #0000ff;">to</span> <span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">2</span>.2250738585072014E<span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">308</span>
+                    <span style="color: #800000; font-weight: bold;">0</span>
+                    <span style="color: #800000; font-weight: bold;">2</span>.2250738585072014E<span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">308</span> <span style="color: #0000ff;">to</span> <span style="color: #800000; font-weight: bold;">1</span>.7976931348623157E<span style="color: #808080;">+</span><span style="color: #800000; font-weight: bold;">308</span><span style="color: #000000;">
+                有符号：
+                    </span><span style="color: #800000; font-weight: bold;">0</span>
+                    <span style="color: #800000; font-weight: bold;">2</span>.2250738585072014E<span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">308</span> <span style="color: #0000ff;">to</span> <span style="color: #800000; font-weight: bold;">1</span>.7976931348623157E<span style="color: #808080;">+</span><span style="color: #800000; font-weight: bold;">308</span>
+            <span style="color: #808080;">****</span> 数值越大，越不准确 <span style="color: #808080;">****</span>
+
+
+        <span style="color: #0000ff;">char</span><span style="color: #000000;"> (m)
+            char数据类型用于表示固定长度的字符串，可以包含最多达255个字符。其中m代表字符串的长度。
+            PS: 即使数据小于m长度，也会占用m长度
+        </span><span style="color: #0000ff;">varchar</span><span style="color: #000000;">(m)
+            varchars数据类型用于变长的字符串，可以包含最多达255个字符。其中m代表该数据类型所允许保存的字符串的最大长度，只要长度小于该最大值的字符串都可以被保存在该数据类型中。
+
+            注：虽然varchar使用起来较为灵活，但是从整个系统的性能角度来说，char数据类型的处理速度更快，有时甚至可以超出varchar处理速度的50</span><span style="color: #808080;">%</span><span style="color: #000000;">。因此，用户在设计数据库时应当综合考虑各方面的因素，以求达到最佳的平衡
+
+        </span><span style="color: #0000ff;">text</span><span style="color: #000000;">
+            text数据类型用于保存变长的大字符串，可以组多到65535 (</span><span style="color: #800000; font-weight: bold;">2</span><span style="color: #808080;">**</span><span style="color: #800000; font-weight: bold;">16</span> &minus; <span style="color: #800000; font-weight: bold;">1</span><span style="color: #000000;">)个字符。
+
+        mediumtext
+            A </span><span style="color: #0000ff;">TEXT</span> <span style="color: #0000ff;">column</span> <span style="color: #0000ff;">with</span> a maximum length <span style="color: #0000ff;">of</span> <span style="color: #800000; font-weight: bold;">16</span>,<span style="color: #800000; font-weight: bold;">777</span>,<span style="color: #800000; font-weight: bold;">215</span> (<span style="color: #800000; font-weight: bold;">2</span><span style="color: #808080;">**</span><span style="color: #800000; font-weight: bold;">24</span> &minus; <span style="color: #800000; font-weight: bold;">1</span><span style="color: #000000;">) characters.
+
+        longtext
+            A </span><span style="color: #0000ff;">TEXT</span> <span style="color: #0000ff;">column</span> <span style="color: #0000ff;">with</span> a maximum length <span style="color: #0000ff;">of</span> <span style="color: #800000; font-weight: bold;">4</span>,<span style="color: #800000; font-weight: bold;">294</span>,<span style="color: #800000; font-weight: bold;">967</span>,<span style="color: #800000; font-weight: bold;">295</span> <span style="color: #808080;">or</span> 4GB (<span style="color: #800000; font-weight: bold;">2</span><span style="color: #808080;">**</span><span style="color: #800000; font-weight: bold;">32</span> &minus; <span style="color: #800000; font-weight: bold;">1</span><span style="color: #000000;">) characters.
+
+
+        enum
+            枚举类型，
+            An ENUM </span><span style="color: #0000ff;">column</span> can have a maximum <span style="color: #0000ff;">of</span> <span style="color: #800000; font-weight: bold;">65</span>,<span style="color: #800000; font-weight: bold;">535</span> <span style="color: #0000ff;">distinct</span> elements. (The practical limit <span style="color: #0000ff;">is</span> less than <span style="color: #800000; font-weight: bold;">3000</span><span style="color: #000000;">.)
+            示例：
+                </span><span style="color: #0000ff;">CREATE</span> <span style="color: #0000ff;">TABLE</span><span style="color: #000000;"> shirts (
+                    name </span><span style="color: #0000ff;">VARCHAR</span>(<span style="color: #800000; font-weight: bold;">40</span><span style="color: #000000;">),
+                    size ENUM(</span><span style="color: #ff0000;">'</span><span style="color: #ff0000;">x-small</span><span style="color: #ff0000;">'</span>, <span style="color: #ff0000;">'</span><span style="color: #ff0000;">small</span><span style="color: #ff0000;">'</span>, <span style="color: #ff0000;">'</span><span style="color: #ff0000;">medium</span><span style="color: #ff0000;">'</span>, <span style="color: #ff0000;">'</span><span style="color: #ff0000;">large</span><span style="color: #ff0000;">'</span>, <span style="color: #ff0000;">'</span><span style="color: #ff0000;">x-large</span><span style="color: #ff0000;">'</span><span style="color: #000000;">)
+                );
+                </span><span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">INTO</span> shirts (name, size) <span style="color: #0000ff;">VALUES</span> (<span style="color: #ff0000;">'</span><span style="color: #ff0000;">dress shirt</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">large</span><span style="color: #ff0000;">'</span>), (<span style="color: #ff0000;">'</span><span style="color: #ff0000;">t-shirt</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">medium</span><span style="color: #ff0000;">'</span>),(<span style="color: #ff0000;">'</span><span style="color: #ff0000;">polo shirt</span><span style="color: #ff0000;">'</span>,<span style="color: #ff0000;">'</span><span style="color: #ff0000;">small</span><span style="color: #ff0000;">'</span><span style="color: #000000;">);
+
+        </span><span style="color: #0000ff;">set</span><span style="color: #000000;">
+            集合类型
+            A </span><span style="color: #0000ff;">SET</span> <span style="color: #0000ff;">column</span> can have a maximum <span style="color: #0000ff;">of</span> <span style="color: #800000; font-weight: bold;">64</span> <span style="color: #0000ff;">distinct</span><span style="color: #000000;"> members.
+            示例：
+                </span><span style="color: #0000ff;">CREATE</span> <span style="color: #0000ff;">TABLE</span> myset (col <span style="color: #0000ff;">SET</span>(<span style="color: #ff0000;">'</span><span style="color: #ff0000;">a</span><span style="color: #ff0000;">'</span>, <span style="color: #ff0000;">'</span><span style="color: #ff0000;">b</span><span style="color: #ff0000;">'</span>, <span style="color: #ff0000;">'</span><span style="color: #ff0000;">c</span><span style="color: #ff0000;">'</span>, <span style="color: #ff0000;">'</span><span style="color: #ff0000;">d</span><span style="color: #ff0000;">'</span><span style="color: #000000;">));
+                </span><span style="color: #0000ff;">INSERT</span> <span style="color: #0000ff;">INTO</span> myset (col) <span style="color: #0000ff;">VALUES</span> (<span style="color: #ff0000;">'</span><span style="color: #ff0000;">a,d</span><span style="color: #ff0000;">'</span>), (<span style="color: #ff0000;">'</span><span style="color: #ff0000;">d,a</span><span style="color: #ff0000;">'</span>), (<span style="color: #ff0000;">'</span><span style="color: #ff0000;">a,d,a</span><span style="color: #ff0000;">'</span>), (<span style="color: #ff0000;">'</span><span style="color: #ff0000;">a,d,d</span><span style="color: #ff0000;">'</span>), (<span style="color: #ff0000;">'</span><span style="color: #ff0000;">d,a,d</span><span style="color: #ff0000;">'</span><span style="color: #000000;">);
+
+        DATE
+            YYYY</span><span style="color: #808080;">-</span>MM<span style="color: #808080;">-</span>DD（<span style="color: #800000; font-weight: bold;">1000</span><span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">01</span><span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">01</span><span style="color: #808080;">/</span><span style="color: #800000; font-weight: bold;">9999</span><span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">12</span><span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">31</span><span style="color: #000000;">）
+
+        TIME
+            HH:MM:SS（</span><span style="color: #ff0000;">'</span><span style="color: #ff0000;">-838:59:59</span><span style="color: #ff0000;">'</span><span style="color: #808080;">/</span><span style="color: #ff0000;">'</span><span style="color: #ff0000;">838:59:59</span><span style="color: #ff0000;">'</span><span style="color: #000000;">）
+
+        </span><span style="color: #ff00ff;">YEAR</span><span style="color: #000000;">
+            YYYY（</span><span style="color: #800000; font-weight: bold;">1901</span><span style="color: #808080;">/</span><span style="color: #800000; font-weight: bold;">2155</span><span style="color: #000000;">）
+
+        </span><span style="color: #0000ff;">DATETIME</span><span style="color: #000000;">
+
+            YYYY</span><span style="color: #808080;">-</span>MM<span style="color: #808080;">-</span>DD HH:MM:SS（<span style="color: #800000; font-weight: bold;">1000</span><span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">01</span><span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">01</span> <span style="color: #800000; font-weight: bold;">00</span>:<span style="color: #800000; font-weight: bold;">00</span>:<span style="color: #800000; font-weight: bold;">00</span><span style="color: #808080;">/</span><span style="color: #800000; font-weight: bold;">9999</span><span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">12</span><span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">31</span> <span style="color: #800000; font-weight: bold;">23</span>:<span style="color: #800000; font-weight: bold;">59</span>:<span style="color: #800000; font-weight: bold;">59</span><span style="color: #000000;">    Y）
+
+        </span><span style="color: #0000ff;">TIMESTAMP</span><span style="color: #000000;">
+
+            YYYYMMDD HHMMSS（</span><span style="color: #800000; font-weight: bold;">1970</span><span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">01</span><span style="color: #808080;">-</span><span style="color: #800000; font-weight: bold;">01</span> <span style="color: #800000; font-weight: bold;">00</span>:<span style="color: #800000; font-weight: bold;">00</span>:<span style="color: #800000; font-weight: bold;">00</span><span style="color: #808080;">/</span><span style="color: #800000; font-weight: bold;">2037</span> 年某时）</pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<p><span style="color: #888888;"><em>二进制数据：TinyBlob、Blob、MediumBlob、LongBlob</em></span></p>
+<p>更多参考：</p>
+<ul>
+<li>http://www.runoob.com/mysql/mysql-data-types.html</li>
+<li>http://dev.mysql.com/doc/refman/5.7/en/data-type-overview.html</li>
+</ul>
+<h3>五、表内容操作</h3>
+<p>1、增</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:sql;gutter:true;">insert into 表 (列名,列名...) values (值,值,值...)
+insert into 表 (列名,列名...) values (值,值,值...),(值,值,值...)
+insert into 表 (列名,列名...) select (列名,列名...) from 表</pre>
+</div>
+<p>2、删</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:sql;gutter:true;">delete from 表
+delete from 表 where id＝1 and name＝'alex'</pre>
+</div>
+<p>3、改</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:sql;gutter:true;">update 表 set name ＝ 'alex' where id&gt;1
+</pre>
+</div>
+<p>4、查</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:sql;gutter:true;">select * from 表
+select * from 表 where id &gt; 1
+select nid,name,gender as gg from 表 where id &gt; 1
+</pre>
+</div>
+<p>5、其他</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:sql;collapse:true;;gutter:true;">    a、条件
+        select * from 表 where id &gt; 1 and name != 'alex' and num = 12;
+
+        select * from 表 where id between 5 and 16;
+
+        select * from 表 where id in (11,22,33)
+        select * from 表 where id not in (11,22,33)
+        select * from 表 where id in (select nid from 表)
+
+    b、通配符
+        select * from 表 where name like 'ale%'  - ale开头的所有（多个字符串）
+        select * from 表 where name like 'ale_'  - ale开头的所有（一个字符）
+
+    c、限制
+        select * from 表 limit 5;            - 前5行
+        select * from 表 limit 4,5;          - 从第4行开始的5行
+        select * from 表 limit 5 offset 4    - 从第4行开始的5行
+
+    d、排序
+        select * from 表 order by 列 asc              - 根据 &ldquo;列&rdquo; 从小到大排列
+        select * from 表 order by 列 desc             - 根据 &ldquo;列&rdquo; 从大到小排列
+        select * from 表 order by 列1 desc,列2 asc    - 根据 &ldquo;列1&rdquo; 从大到小排列，如果相同则按列2从小到大排序
+
+    e、分组
+        select num from 表 group by num
+        select num,nid from 表 group by num,nid
+        select num,nid from 表  where nid &gt; 10 group by num,nid order nid desc
+        select num,nid,count(*),sum(score),max(score),min(score) from 表 group by num,nid
+
+        select num from 表 group by num having max(id) &gt; 10
+
+        特别的：group by 必须在where之后，order by之前
+
+    f、连表
+        无对应关系则不显示
+        select A.num, A.name, B.name
+        from A,B
+        Where A.nid = B.nid
+
+        无对应关系则不显示
+        select A.num, A.name, B.name
+        from A inner join B
+        on A.nid = B.nid
+
+        A表所有显示，如果B中无对应关系，则值为null
+        select A.num, A.name, B.name
+        from A left join B
+        on A.nid = B.nid
+
+        B表所有显示，如果B中无对应关系，则值为null
+        select A.num, A.name, B.name
+        from A right join B
+        on A.nid = B.nid
+
+    g、组合
+        组合，自动处理重合
+        select nickname
+        from A
+        union
+        select name
+        from B
+
+        组合，不处理重合
+        select nickname
+        from A
+        union all
+        select name
+        from B
+</pre>
+</div>
+<p>　　</p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2016-07-28 06:40</span> <a href='http://www.cnblogs.com/wupeiqi/'>武沛齐</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>) &nbsp;<a href="https://i.cnblogs.com/EditArticles.aspx?postid=5713315" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(5713315);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=133379,cb_entryId=5713315,cb_blogApp=currentBlogApp,cb_blogUserGuid='7208b24d-95c9-e111-aa3f-842b2b196315',cb_entryCreatedDate='2016/7/28 6:40:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2017 武沛齐
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

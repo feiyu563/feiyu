@@ -1,0 +1,1540 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+     
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    
+<head>  
+
+            <link rel="canonical" href="http://blog.csdn.net/kkkloveyou/article/details/53875987"/> 
+ <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+
+    <title>为什么我们迫切需要持续集成（Continuous Integration） - kkkloveyou
+        - 博客频道 - CSDN.NET</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="持续集成（Continuous Integration），也就是我们经常说的 CI，是现代软件开发技术的基础。本文论述了当前软件开发过程中存在的问题，讲解了持续集成、持续集成服务器的概念，最终探讨了为什么我们需要持续集成来解决这些问题。" />
+   
+    <script src="http://static.blog.csdn.net/scripts/blog_static_head.min.js" type="text/javascript"></script>
+
+    
+        <!--new top-->
+               <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/css/index.css">        <!--new top-->
+    
+      <!-- ad begin -->
+         <script language="javascript" type="text/javascript" src="http://ads.csdn.net/js/tracking.js"></script>
+    <!-- ad end-->
+
+    <link rel="Stylesheet" type="text/css" href="http://static.blog.csdn.net/skin/dark1/css/style.css?v=1.1" />
+
+    
+
+    <link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="/kkkloveyou/rss/list" />
+    <link rel="shortcut icon" href="http://c.csdnimg.cn/public/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+ 
+
+     
+    <link rel="stylesheet" href="http://static.blog.csdn.net/css/csdn_blog_detail.min.css" />
+
+</head>
+
+
+<body>
+       
+
+
+
+    <!-- 广告位开始 -->
+        
+    <!-- 广告位结束 -->
+
+    
+   
+      <!--new top-->
+    <script id="toolbar-tpl-scriptId" fixed="true" prod="blog" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/html.js" type="text/javascript"></script>
+     <!--new top-->
+    <div id="container">
+        <div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h2>
+                <a href="http://blog.csdn.net/kkkloveyou">kkkloveyou</a></h2>
+            <h3>关注Web编程的那点事</h3>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+        
+     
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg">
+    </div>
+    <div class="navigator">
+        <ul>           
+                <li id="btnContents"><a href="http://blog.csdn.net/kkkloveyou?viewmode=contents"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_mulu'])">
+                    <img src="http://static.blog.csdn.net/images/ico_list.gif">目录视图</span></a></li>
+                <li id="btnView"><a href="http://blog.csdn.net/kkkloveyou?viewmode=list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_zhaiyao'])">
+                    <img src="http://static.blog.csdn.net/images/ico_summary.gif">摘要视图</span></a></li>
+                <li id="btnRss"><a href="http://blog.csdn.net/kkkloveyou/rss/list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_RSS'])">
+                    <img src="http://static.blog.csdn.net/images/ico_rss.gif">订阅</span></a></li>                
+            
+
+            </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "kkkloveyou";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/kkkloveyou";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "";  
+</script>
+
+        <div id="body">
+            <div id="main">
+                <div class="main">
+                        <div class="ad_class">
+<div class="notice tracking-ad" data-mod='popu_3' > 
+
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/71710010">
+<font color=blue><strong>【活动】2017 CSDN博客专栏评选</strong></font></a>
+
+&nbsp;&nbsp;&nbsp;&nbsp
+
+<a href=" http://blog.csdn.net/turingbooks/article/details/72416875">
+<font color=red><strong>【5月书讯】流畅的Python，终于等到你！</strong></font></a>
+&nbsp;&nbsp;&nbsp;&nbsp
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/72638703">
+<font color=blue><strong>CSDN日报20170523 ——《技术合伙人，千万别做！》
+</strong>
+&nbsp;&nbsp;&nbsp;&nbsp
+
+
+</div>                        </div>
+                        
+
+
+
+  
+
+
+
+
+
+
+<script   type="text/javascript" src="http://static.blog.csdn.net/scripts/category.js"></script>
+
+  <script type="text/ecmascript">
+      window.quickReplyflag = true;
+           
+            var isBole = false;
+            
+      
+      var fasrc="http://my.csdn.net/my/favorite/miniadd?t=%e4%b8%ba%e4%bb%80%e4%b9%88%e6%88%91%e4%bb%ac%e8%bf%ab%e5%88%87%e9%9c%80%e8%a6%81%e6%8c%81%e7%bb%ad%e9%9b%86%e6%88%90%ef%bc%88Continuous+Integration%ef%bc%89&u=http://blog.csdn.net/kkkloveyou/article/details/53875987"
+
+    </script>
+<div id="article_details" class="details">
+    <div class="article_title">   
+         <span class="ico ico_type_Original"></span>
+
+
+    <h1>
+        <span class="link_title"><a href="/kkkloveyou/article/details/53875987">
+        为什么我们迫切需要持续集成（Continuous Integration）            
+        </a></span>
+    </h1>
+</div>
+
+   
+
+        <div class="article_manage clearfix">
+        <div class="article_l">
+            <span class="link_categories">
+            标签：
+              <a href='http://www.csdn.net/tag/%e6%8c%81%e7%bb%ad%e9%9b%86%e6%88%90' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">持续集成</a><a href='http://www.csdn.net/tag/CI' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">CI</a>
+            </span>
+        </div>
+        <div class="article_r">
+            <span class="link_postdate">2016-12-25 22:40</span>
+            <span class="link_view" title="阅读次数">5435人阅读</span>
+            <span class="link_comments" title="评论次数"> <a href="#comments" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_pinglun'])">评论</a>(0)</span>
+            <span class="link_collect tracking-ad" data-mod="popu_171"> <a href="javascript:void(0);" onclick="javascript:collectArticle('%e4%b8%ba%e4%bb%80%e4%b9%88%e6%88%91%e4%bb%ac%e8%bf%ab%e5%88%87%e9%9c%80%e8%a6%81%e6%8c%81%e7%bb%ad%e9%9b%86%e6%88%90%ef%bc%88Continuous+Integration%ef%bc%89','53875987');return false;" title="收藏">收藏</a></span>
+             <span class="link_report"> <a href="#report" onclick="javascript:report(53875987,2);return false;" title="举报">举报</a></span>
+
+        </div>
+    </div>
+    <div class="embody"  style="display:none" id="embody">
+        <span class="embody_t">本文章已收录于：</span>
+        <div class="embody_c" id="lib" value="{&quot;err&quot;:0,&quot;msg&quot;:&quot;ok&quot;,&quot;data&quot;:[]}"></div>
+    </div>
+    <style type="text/css">        
+            .embody{
+                padding:10px 10px 10px;
+                margin:0 -20px;
+                border-bottom:solid 1px #ededed;                
+            }
+            .embody_b{
+                margin:0 ;
+                padding:10px 0;
+            }
+            .embody .embody_t,.embody .embody_c{
+                display: inline-block;
+                margin-right:10px;
+            }
+            .embody_t{
+                font-size: 12px;
+                color:#999;
+            }
+            .embody_c{
+                font-size: 12px;
+            }
+            .embody_c img,.embody_c em{
+                display: inline-block;
+                vertical-align: middle;               
+            }
+             .embody_c img{               
+                width:30px;
+                height:30px;
+            }
+            .embody_c em{
+                margin: 0 20px 0 10px;
+                color:#333;
+                font-style: normal;
+            }
+    </style>
+    <script  type="text/javascript">
+        $(function () {
+            try
+            {
+                var lib = eval("("+$("#lib").attr("value")+")");
+                var html = "";
+                if (lib.err == 0) {
+                    $.each(lib.data, function (i) {
+                        var obj = lib.data[i];
+                        //html += '<img src="' + obj.logo + '"/>' + obj.name + "&nbsp;&nbsp;";
+                        html += ' <a href="' + obj.url + '" target="_blank">';
+                        html += ' <img src="' + obj.logo + '">';
+                        html += ' <em><b>' + obj.name + '</b></em>';
+                        html += ' </a>';
+                    });
+                    if (html != "") {
+                        setTimeout(function () {
+                            $("#lib").html(html);                      
+                            $("#embody").show();
+                        }, 100);
+                    }
+                }      
+            } catch (err)
+            { }
+            
+        });
+    </script>
+      <div class="category clearfix">
+        <div class="category_l">
+           <img src="http://static.blog.csdn.net/images/category_icon.jpg">
+            <span>分类：</span>
+        </div>
+        <div class="category_r">
+                    <label>
+                        <span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_fenlei']);">持续集成<em></em></span>                       
+                    </label>      
+        </div>
+    </div>
+        <div   class="bog_copyright">         
+            <p  class="copyright_p" >版权声明：本文为博主原创文章，未经博主允许不得转载。</p>
+        </div>
+
+  
+
+  
+  
+     
+
+
+<div id="article_content" class="article_content tracking-ad" data-mod=popu_307  data-dsm = "post" >
+        <div class="markdown_views"><h2 id="原文同步至-httpswaylaucomwhy-we-need-continuous-integration">原文同步至 <a href="https://waylau.com/why-we-need-continuous-integration/">https://waylau.com/why-we-need-continuous-integration/</a></h2>
+
+<p>持续集成（Continuous Integration），也就是我们经常说的 CI，是现代软件开发技术的基础。本文论述了当前软件开发过程中存在的问题，讲解了持续集成、持续集成服务器的概念，最终探讨了为什么我们需要持续集成来解决这些问题。</p>
+
+
+
+<h2 id="当前软件开发过程存在的问题">当前软件开发过程存在的问题</h2>
+
+<p>在没有应用持续集成之前，传统的开发模式是这样的：</p>
+
+<ul>
+<li>项目一开始是先划分好模块，分配模块给相应的开发人员；</li>
+<li>开发人员开发好一个模块就进行单元测试；</li>
+<li>等所有的模块都开发完成之后，由项目经理对所有代码进行集成；</li>
+<li>集成后的项目由项目经理部署到测试服务器上，被交由测试人员进行集成测试；</li>
+<li>测试过程中出现 Bug 就提把问题记录进行 Bug 列表中；</li>
+<li>项目经理分配 Bug 给相应的责任人进行修改；</li>
+<li>修改完成后，项目经理再次对项目进行集成，并部署到测试服务器上；</li>
+<li>测试人员在下一次的集成测试中进行回归测试；</li>
+<li>通过通过之后就部署到生产环境中；</li>
+<li>如果测试不通过，则重复上述“分配 Bug -&gt; 修改 Bug -&gt; 集成代码 -&gt; 部署到测试服务器上 -&gt; 集成测试”工作。</li>
+</ul>
+
+<p>这个过程中可能会出现如下问题：</p>
+
+
+
+<h3 id="1-bug-总是在最后才发现">1. Bug 总是在最后才发现</h3>
+
+<p>随着软件技术的发展，软件规模也在扩大，软件需求越来越复杂，软件已经不能简单地通过划分模块的方式来开发，往往需要在项目内部互相合作，模块之间存在一定的依赖关系，那么早期就存在的 Bug 往往会在最后集成的时候才被发现。</p>
+
+
+
+<h3 id="2-越到项目后期问题越难解决">2. 越到项目后期，问题越难解决</h3>
+
+<p>很多开发者需要在集成阶段花费大量的时间来寻找 Bug 的根源，加上软件的复杂性，问题的根源很难定位。而且我们都清楚，间隔的时间越久，Bug 修复的成本越高，因为连开发人员自己都忘了当初写得是什么鬼代码，从而不得不从头阅读代码、理解代码。</p>
+
+
+
+<h3 id="3-软件交付时机无法保障">3. 软件交付时机无法保障</h3>
+
+<p>正是因为我们无法及时修复 Bug，或者是没能在早期就修复 Bug，从而令整个修复 Bug 的周期拉长了。不管怎么样，我们不可能把明知存在 Bug 的软件交付给客户。</p>
+
+<p>而且，大量没有在前期预估到的工作量产生了——开发人员不得不花费大把时间在查找 Bug 上；测试人员不断的需要进行回归测试；项目经理不得不疲命于该死的代码的集成、部署这些重复性工作——最终导致整个项目的周期拉长，交付时间点往后拖。</p>
+
+
+
+<h3 id="4-程序经常需要变更">4. 程序经常需要变更</h3>
+
+<p>某些项目，程序会经常需要变更，特别是敏捷开发的实践者。由于产品经理在与客户交流过程中，往往实际的软件就是最好的原型，所以软件会被当作原型作为跟客户交流的工具。当然，客户最希望的当然是客户的想法能够马上反映到原型上，这会导致程序会经常被修改的。那么也就意味着“分配 Bug -&gt; 修改 Bug -&gt; 集成代码 -&gt; 部署到测试服务器上 -&gt; 集成测试”工作无形又爆增了。</p>
+
+
+
+<h3 id="5-无效的等待变多">5. 无效的等待变多</h3>
+
+<p>有可能开发在等集成其他人的模块；测试人员在等待开发人员修复 Bug；产品经理在等待新版本上线好给客户做演示；项目经理在等待其他人提交代码。不管怎么样，等待意味低效。</p>
+
+
+
+<h3 id="6-用户的满足度低">6. 用户的满足度低</h3>
+
+<p>这里的用户是广义的，可以指最终的客户，也可以是产品经理、公司领导、测试人员，甚至可能是开发人员自己。你想想看，本来三个月做完的项目被拉长到了九个月甚至一年，用户能满意吗！产品经理、公司领导经常需要拿项目作为演示的原型，结果告诉我在演示前一刻发现还有很多 Bug 没有解决，项目启动不了无法访问，这叫人情何以堪。</p>
+
+
+
+<h2 id="持续集成持续集成服务器的概念">持续集成、持续集成服务器的概念</h2>
+
+<p>那么好了，在上面论述的这些问题中，我们发现有些工作是无法避免的，比如测试工作、修改程序、集成工作、部署工作。但其实在整个工作流程上，是存在可以优化的空间的，比如，集成测试的工作是否可以提前做？可否有自动化的手段来代替测试、集成、部署工作？围绕这些，软件行业的大师们提出“持续集成”口号。</p>
+
+
+
+<h3 id="1-什么是持续集成持续集成服务器">1. 什么是持续集成、持续集成服务器</h3>
+
+<p>在软件工程中，持续集成（CI）是指将所有开发者工作副本每天多次合并到主干的做法。 Grady Booch 在1991年的 Booch method 中首次命名并提出了 CI 的概念，尽管在当时他并不主张每天多次集成。而 XP（Extreme programming，极限编程）采用了 CI 的概念，并提倡每天不止一次集成。</p>
+
+<p>而持续集成服务器就是能够采用自动化的手段，来解放人的双手，实现项目持续集成的工具。与之配套的软件有 TeamCity、Jenkins、Go 等。</p>
+
+
+
+<h3 id="2-怎么样才算是持续">2. 怎么样才算是“持续”</h3>
+
+<p>对于一天需要集成多少次数，并没有一个明确的定义。一般就是按照自己项目的实际需要来设置一定的频率，少则可能几次，多则可能达几十次。可以设置按照代码的变更来触发集成，或者设置一个固定时间周期来集成，也可以手工点击集成的按钮来“一键集成”。</p>
+
+
+
+<h3 id="3-持续集成的工作流程">3. 持续集成的工作流程</h3>
+
+<ul>
+<li>当开始更改代码时，开发人员会从代码库（如 SVN、Git 等）获取当前代码库的副本。</li>
+<li>当其他开发人员将更改的代码提交到代码库时，此副本将逐渐停止反映代码库中的代码。代码分支保持检出的时间越长，当开发人员分支重新集成到主线时，多个集成冲突和故障的风险就越大。</li>
+<li>当开发人员向代码库提交代码时，他们必须首先更新他们的代码，以反映代码库中的最新更改。</li>
+<li>当存储库与开发人员的副本不同，他们必须要花时间来先处理冲突。</li>
+</ul>
+
+
+
+<h2 id="持续集成的好处">持续集成的好处</h2>
+
+
+
+<h3 id="1-解放了重复性劳动">1. 解放了重复性劳动</h3>
+
+<p>自动化部署工作可以解放了集成、测试、部署等重复性劳动，而且机器集成的频率明显可以比手工的高很多。</p>
+
+
+
+<h3 id="2-更快地修复问题">2. 更快地修复问题</h3>
+
+<p>由于持续集成更早的获取变更，更早的进入测试，也就能更早的发现问题，解决问题的成本显著下降。</p>
+
+
+
+<h3 id="3-更快地交付成果">3. 更快地交付成果</h3>
+
+<p>及早集成、及早测试减少了缺陷遗留到部署环节的机会。在某些情况下，更早地查找错误还会减少解决错误所需的工作量。</p>
+
+<p>如果集成服务器对代码进行构建过程中发现错误，可以及时发送邮件或者短信提供给开发人员进行修复。</p>
+
+<p>如果集成服务器在部署环节发现当前版本有问题不可用，集成服务器会将部署回退到上一个版本。这样服务器上始终都会有一个可用的版本。</p>
+
+
+
+<h3 id="4-减少手工的错误">4. 减少手工的错误</h3>
+
+<p>人与机器的一个最大的区别是，在重复性动作上，人容易犯错，而机器犯错的几率几乎为零。所以，当我们搭建完成集成服务器后，以后的事就交给集成服务器来打理吧。</p>
+
+
+
+<h3 id="5-减少了等待时间">5. 减少了等待时间</h3>
+
+<p>持续集成缩短了从开发、集成、测试、部署各个环节的时间，从而也就缩短了中间可以出现的等待时间。持续集成，意味着开发、集成、测试、部署也得以持续。</p>
+
+
+
+<h3 id="6-更高的产品质量">6. 更高的产品质量</h3>
+
+<p>集成服务器往往提供 Code review、代码质量检测等功能。对代码不规范或者有错误的地方会进行标识，也可以设置邮件、短信等进行告警。而开发人员通过 Code review 也可以持续提高编程的能力。</p>
+
+
+
+<h2 id="持续集成的最佳实践">持续集成的最佳实践</h2>
+
+
+
+<h3 id="1-频繁检出代码">1. 频繁检出代码</h3>
+
+<p>为了让你本地的副本和代码库中的版本最小差异化，建议频繁检出代码。有时候代码冲突无可避免，但最小差异化最容易解决。而且，越早发现的问题，解决成本也最低。</p>
+
+
+
+<h3 id="2-频繁提交代码">2. 频繁提交代码</h3>
+
+<p>这个与第1条的原理类似，频繁提交代码，可以让其他人的检出副本和代码库中的版本最小差异化。</p>
+
+
+
+<h3 id="3-减少分支回归主干">3. 减少分支，回归主干</h3>
+
+<p>虽然代码管理工具都支持分支的概念，但应尽量减少其使用。假设有多个分支并行，应及早将变更集成到主干中，而不是同时维护软件的多个版本。主干作为软件开发的工作版本。</p>
+
+
+
+<h3 id="4-使用自动化构建">4. 使用自动化构建</h3>
+
+<p>可以使用 Maven、Ant 等来实现自动化构建，这些工具可以帮助你在构建过程中实现自动化测试。前提是你有写单元测试用例，比如 <a href="http://junit.org/">JUnit</a> 等。</p>
+
+
+
+<h3 id="5-提交自测">5. 提交自测</h3>
+
+<p>在提交工作之前，每个程序员必须本地集成所有的代码，做一个完整的构建和运行，并通过所有单元测试。这样就减少了集成测试在集成服务器上构建失败的风险。</p>
+
+
+
+<h3 id="6-当前状态对于每个人都可见">6. 当前状态对于每个人都可见</h3>
+
+<p>集成服务器在持续集成过程中发现问题，应能发送告警给相关的干系人。同时，也可以在墙上等醒目的位置设置一个大屏显示器，将集成服务器的状态实时展现在大屏上，方便提醒组员“赶紧回去解决问题”！</p>
+
+
+
+<h2 id="持续集成可能会面临的挑战">持续集成可能会面临的挑战</h2>
+
+
+
+<h3 id="1-团队人员思想上的抵触">1. 团队人员思想上的抵触</h3>
+
+<ul>
+<li>无法接受新事物：不管怎么样，求稳心态的人还是多。总是有人认为老的技术代表稳定，新的事物往往会带来问题。</li>
+<li>认为手工集成也没有多少工作量：不是所有的人都参与到了整个持续集成的环节，所以没有办法认识到问题全貌。</li>
+</ul>
+
+<p>针对这个问题，可以通过设置一定的持续集成技术培训、宣讲得到改观。</p>
+
+
+
+<h3 id="2-管理层的抵触">2. 管理层的抵触</h3>
+
+<ul>
+<li>培训持续集成需要投入资金啊，没钱。</li>
+<li>持续集成服务器要增加软硬件成本啊，没钱。</li>
+<li>开发人员领了那么高的工资，多干活多加班应该啊。</li>
+</ul>
+
+<p>针对这一点，可以从开发人员的成本和持续集成的投入（软硬件）的成本上两者做下估算。</p>
+
+
+
+<h3 id="3-生产环境的复杂">3. 生产环境的复杂</h3>
+
+<ul>
+<li>比如部署的生成环境是在政务外网，无法从互联网直接访问等。</li>
+</ul>
+
+<p>目前，这个是最麻烦的，还在研究中。初步设想是让政务外网开辟一个白名单，给持续集成服务器设置一个单独的通道。只是思路，未验证。</p>
+
+<p>当然，考虑到目前的工作的实际，可以先持续部署软件到自己公司的演示服务器上，这样，起码先解决了客户和产品经理沟通所使用的原型问题。 毕竟，客户真实使用的软件在更新的频率上可以适度的放宽。</p>
+
+
+
+<h2 id="参考资料">参考资料</h2>
+
+<ul>
+<li>Grady Booch. Object-Oriented Design with Applications.Benjamin Cummings，1991，3(5):209</li>
+<li>Paul M. Duvall，Steve Matyas，Andrew Glover.Continuous Integration：Improving Software Quality and Reducing Risk.Upper Saddle River：Addison-Wesley，2007</li>
+<li><a href="http://martinfowler.com/articles/continuousIntegration.html">http://martinfowler.com/articles/continuousIntegration.html</a></li>
+</ul></div>
+        <script  type="text/javascript">
+            $(function () {
+                $('pre.prettyprint code').each(function () {
+                    var lines = $(this).text().split('\n').length;
+                    var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+                    $(this).addClass('has-numbering').parent().append($numbering);
+                    for (i = 1; i <= lines; i++) {
+                        $numbering.append($('<li/>').text(i));
+                    };
+                    $numbering.fadeIn(1700);
+                });
+            });
+        </script>
+   
+</div>
+
+
+
+
+<!-- Baidu Button BEGIN -->
+
+
+
+
+<div class="bdsharebuttonbox tracking-ad" style="float: right;" data-mod="popu_172">
+<a href="#" class="bds_more" data-cmd="more" style="background-position:0 0 !important; background-image: url(http://bdimg.share.baidu.com/static/api/img/share/icons_0_16.png?v=d754dcc0.png) !important"></a>
+<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"  style="background-position:0 -52px !important"></a>
+<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"style="background-position:0 -104px !important"></a>
+<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"style="background-position:0 -260px !important"></a>
+<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"style="background-position:0 -208px !important"></a>
+<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"style="background-position:0 -1612px !important" ></a>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<!-- Baidu Button END -->
+
+   
+
+    
+<!--172.16.140.11-->
+
+<!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=1536434" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->
+
+<script type="text/javascript">
+    var fromjs = $("#fromjs");
+    if (fromjs.length > 0) {
+            $("#fromjs .markdown_views pre").addClass("prettyprint");
+            prettyPrint();
+
+            $('pre.prettyprint code').each(function () {
+                var lines = $(this).text().split('\n').length;
+                var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+                $(this).addClass('has-numbering').parent().append($numbering);
+                for (i = 1; i <= lines; i++) {
+                    $numbering.append($('<li/>').text(i));
+                };
+                $numbering.fadeIn(1700);
+            });
+
+            $('.pre-numbering li').css("color", "#999");
+        }
+
+    
+    $(".markdown_views a[target!='_blank']").attr("target", "_blank");
+
+    $(".toc a[target='_blank']").attr("target", "");
+
+
+
+</script>
+
+ 
+
+
+        <div id="digg" ArticleId="53875987" >
+            <dl id="btnDigg" class="digg digg_disable"  onclick="btndigga();">
+               
+                 <dt>顶</dt>
+                <dd>1</dd>
+            </dl>
+           
+              
+            <dl id="btnBury" class="digg digg_disable"  onclick="btnburya();">
+              
+                  <dt>踩</dt>
+                <dd>0</dd>               
+            </dl>
+            
+        </div>
+     <div class="tracking-ad" data-mod="popu_222"><a href="javascript:void(0);" >&nbsp;</a>   </div>
+    <div class="tracking-ad" data-mod="popu_223"> <a href="javascript:void(0);" >&nbsp;</a></div>
+    <script type="text/javascript">
+                function btndigga() {
+                    $(".tracking-ad[data-mod='popu_222'] a").click();
+                }
+                function btnburya() {
+                    $(".tracking-ad[data-mod='popu_223'] a").click();
+                }
+            </script>
+
+   <ul class="article_next_prev">
+                <li class="prev_article"><span  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian']);location.href='/kkkloveyou/article/details/52578058';">上一篇</span><a href="/kkkloveyou/article/details/52578058" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian'])">Redis 数据类型及抽象</a></li>
+                <li class="next_article"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian']);location.href='/kkkloveyou/article/details/54897586';">下一篇</span><a href="/kkkloveyou/article/details/54897586" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian'])">通过 WSL在Windows下愉快的玩耍Linux</a></li>
+    </ul>
+
+    <div style="clear:both; height:10px;"></div>
+
+
+    <div id="articlecommend"  style="display:none"></div>
+        <div class="similar_article"   >
+                <h4></h4>
+                <div class="similar_c"style="margin:20px 0px 0px 0px">
+                    <div class="similar_c_t">
+                      &nbsp;&nbsp;相关文章推荐
+                    </div>
+                   
+                    <div class="similar_wrap tracking-ad" data-mod="popu_36"  style="max-height:195px;">                       
+                        <ul class="similar_list fl">                          
+                        </ul>
+                          <ul class="similar_list fr">                          
+                        </ul>
+                    </div>
+                </div>
+            </div>    
+      
+</div>
+
+     <div>
+           
+
+         <script type="text/javascript">
+             /*博客内容页下方Banner1-960*90，创建于2016-12-13*/
+             var cpro_id = "u2843955";
+        </script>
+        <script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js"></script>
+    </div>
+
+<div id="suggest"></div>
+         <script  language="javascript" type='text/javascript'>     
+             $(function(){
+                 $.get("/kkkloveyou/svc/GetSuggestContent/53875987",function(data){
+                     $("#suggest").html(data);
+                 });     
+             });             
+         </script>  
+
+
+<style>
+.blog-ass-articl dd {
+color: #369;
+width: 99%; /*修改行*/
+float: left;
+overflow: hidden;
+font: normal normal 12px/23px "SimSun";
+height: 23px;
+margin: 0;
+padding: 0 0 0 10px;
+margin-right: 30px;
+background: url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;
+}
+</style>
+
+ 
+<div id="relate" data-mod="popu_218"  class="tracking-ad">
+        <div class="relate_t">
+            <h3><span>参考知识库</span></h3>
+        </div>
+        <div class="relate_c">
+        </div>
+</div>
+ 
+
+<dl class="blog-ass-articl tracking-ad" id="res-relatived" data-mod="popu_84"  > 
+    <div class="embody embody_b" id="libkeyparent"  style="display:none">
+            <span class="embody_t">更多资料请参考：</span>
+            <div class="embody_c" id="libkey"></div>
+    </div>
+
+
+     <dt><span>猜你在找</span></dt>    
+
+
+   
+
+
+    <div id="adcollegedata" style="display:none"></div>
+
+    <div id="adCollege" style="width: 42%;float: left;"> 
+    </div>  
+
+    
+     <div id="resforAd"  style="width: 42%;float: left;margin-right: 30px;"></div>
+
+     <script src="http://csdnimg.cn/jobreco/job_reco.js" type="text/javascript"></script> 
+     <script type="text/javascript">
+         csdn.position.showEdu({
+             sourceType: "blog",
+             searchType: "detail",
+             searchKey: "53875987",
+                username: "",
+                recordcount: "10",
+                containerId: "adcollegedata" //容器DIV的id。 
+            });
+
+            //setEduLoc();
+
+            //function setEduLoc() {
+            //    var edus = $("#adCollege div dd a");
+            //    if (edus.length == 0) {
+            //        setTimeout(function () {
+            //            setEduLoc();
+            //        }, 500);
+            //    }
+            //    else {
+            //        var eduLoc = "?ref=blog&loc=0";
+            //        $.each(edus, function (index, item) {
+            //            var href = $(this).attr("href") + eduLoc;
+            //            $(this).attr("href", href);
+            //        });
+            //    }
+            //}
+
+
+            setTimeout(function () {
+                var adcolleges = $("#adcollegedata div dd");
+                for (var i = 0; i < adcolleges.length; i++) {
+                    if (i < 5) {
+                        $("#adCollege").append("<dd>" + $(adcolleges[i]).html() + "</dd");
+                    }
+                    else {
+                        $("#resforAd").append("<dd>" + $(adcolleges[i]).html() + "</dd");
+                    }
+                }
+            }, 1500);
+                    
+
+        </script> 
+   
+</dl>
+
+
+
+
+
+    <div id="ad_cen">        
+                <div>
+                                    <div class="J_adv" data-view="true" data-mod="ad_popu_199" data-mtp="43" data-order="114" data-con="ad_content_1843" style="width: 960px; height: 90px;">
+                                             <script type="text/javascript">
+                                                 /*博客内容页下方Banner2-960*90，创建于,2016-11-28*/
+                                                 var cpro_id = "u2831143";
+                                            </script>
+                                            <script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js"></script>
+                                   </div>
+                    </div>
+    </div>  
+
+        <!-- 广告位开始 -->
+        <!-- 广告位结束 -->
+<div class="J_adv" data-view="true" data-mod="ad_popu_72" data-mtp="62" data-order="40" data-con="ad_content_2072">
+                 <script id="popuLayer_js_q" src="http://ads.csdn.net/js/popuLayer.js" defer="defer"  type="text/javascript"></script>
+            <div id="layerd" style="position: fixed;bottom:0px;right:0px;line-height:0px;z-index:1000">
+    	            <div class="J_close layer_close" style="display:;background-color:#efefef;padding:0px;color:#333;font:12px/24px Helvetica,Tahoma,Arial,sans-serif;text-align:right;">关闭</div><!-- 广告占位容器 --><div id="cpro_u2895327"></div></div>
+            <script>  document.getElementById("popuLayer_js_q").onload=function(){      var styObjd=styObj={width:"300px","height":parseInt(250)+28};window.CSDN.Layer.PopuLayer("#layerd",{storageName:"layerd",styleObj:styObjd,total:50,expoire:1000*60});  }</script><!-- 投放代码 --><script type="text/javascript">                /*服务器频道首页置顶Banner960*90，创建于2014-7-3*/    (window.cproArray = window.cproArray || []).push({        id: "u2895327"      });  </script>  <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+     
+</div>
+
+<div class="comment_class">
+    <div id="comment_title" class="panel_head">
+        <span class="see_comment">查看评论</span><a name="comments"></a></div>
+    <div id="comment_list">
+    </div>
+    <div id="comment_bar">
+    </div>
+    <div id="comment_form">
+    </div>
+    <div class="announce">
+        * 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+</div>
+
+<script type="text/javascript">
+    var fileName = '53875987';
+    var commentscount = 0;
+    var islock = false
+</script>
+
+    <div id="ad_bot">
+    </div>
+<div id="report_dialog">
+</div>
+
+<div id="d-top"  style="bottom:60px;">
+
+        <a id="quick-reply" class="btn btn-top q-reply" title="快速回复" style="display:none;">
+            <img src="http://static.blog.csdn.net/images/blog-icon-reply.png" alt="快速回复">
+        </a>    
+    <a id="d-top-a" class="btn btn-top backtop"  style="display: none;" title="返回顶部" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_huidaodingbu'])" style="">         
+         <img src="http://static.blog.csdn.net/images/top.png" alt="TOP">
+    </a>
+</div>
+<script type="text/javascript">
+    $(function ()
+    {
+        $("#ad_frm_0").height("90px");
+        
+        setTimeout(function(){
+            $("#ad_frm_2").height("200px");
+        },1000);    
+    });
+  
+</script>
+<style type="text/css">
+    .tag_list
+    {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #D7CBC1;
+        color: #000000;
+        font-size: 12px;
+        line-height: 20px;
+        list-style: none outside none;
+        margin: 10px 2% 0 1%;
+        padding: 1px;
+    }
+    .tag_list h5
+    {
+        background: none repeat scroll 0 0 #E0DBD3;
+        color: #47381C;
+        font-size: 12px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 5px;
+        margin: 0;
+    }
+    .tag_list h5 a
+    {
+        color: #47381C;
+    }
+    .classify
+    {
+        margin: 10px 0;
+        padding: 4px 12px 8px;
+    }
+    .classify a
+    {
+        margin-right: 20px;
+        white-space: nowrap;
+    }
+</style>
+
+
+<div class="tag_list" style="display:none"></div>
+  <script  type='text/javascript'>     
+      $(function(){
+              setTimeout(function(){
+                  $.get("/kkkloveyou/svc/GetTagContent",function(data){
+                      $(".tag_list").html(data).show();
+                  });     
+              });
+          },500);                       
+ </script> 
+
+
+<div id="pop_win" style="display:none ;position: absolute; z-index: 10000; border: 1px solid rgb(220, 220, 220); top: 222.5px; left: 630px; opacity: 1; background: none 0px 0px repeat scroll rgb(255, 255, 255);">
+    
+</div>
+<div id="popup_mask"></div>
+<style>
+    #popup_mask
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        left: 0px;
+        top: 0px;
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+        display: none;
+    }
+
+</style>
+
+
+
+
+<script type="text/javascript">
+    $(function(){        
+        
+        setTimeout(function(){
+            $(".comment_body:contains('回复')").each(function(index,item){
+                var u=$(this).text().split('：')[0].toString().replace("回复","")
+                var thisComment=$(this);
+                if(u)
+                {
+                    $.getJSON("https://passport.csdn.net/get/nick?callback=?", {users: u}, function(a) {
+                        if(a!=null&&a.data!=null&&a.data.length>0)
+                        {
+                            nick=a.data[0].n; 
+                            if(u!=nick)
+                            {
+                                thisComment.text(thisComment.text().replace(u,nick));  
+                            }
+                        }       
+                    });  
+                }
+            });         
+
+        },200);  
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },5000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },10000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },15000);
+        
+        setTimeout(function(){
+            $("a img[src='http://js.tongji.linezing.com/stats.gif']").parent().css({"position":"absolute","left":"50%"});
+        },300);
+    });
+
+    function loginbox(){
+        var $logpop=$("#pop_win");
+        $logpop.html('<iframe src="https://passport.csdn.net/account/loginbox?service=http://static.blog.csdn.net/callback.htm" frameborder="0" height="600" width="400" scrolling="no"></iframe>');
+
+        $('#popup_mask').css({
+            opacity: 0.5,
+            width: $( document ).width() + 'px',
+            height:  $( document ).height() + 'px'
+        });
+        $('#popup_mask').css("display","block");
+ 
+        $logpop.css( {
+            top: ($( window ).height() - $logpop.height())/ 2  + $( window 
+       ).scrollTop() + 'px',
+            left:($( window ).width() - $logpop.width())/ 2
+        } );
+ 
+        setTimeout( function () {
+            $logpop.show();
+            $logpop.css( {
+                opacity: 1
+            } );
+        }, 200 );
+ 
+        $('#popup_mask').unbind("click");
+        $('#popup_mask').bind("click", function(){
+            $('#popup_mask').hide();
+            var $clopop = $("#pop_win");
+            $("#common_ask_div_sc").css("display","none");
+            $clopop.css( {
+                opacity: 0
+            } );
+            setTimeout( function () {
+                $clopop.hide();
+            }, 350 );
+            return false;
+        });
+    }   
+
+    var articletitle='为什么我们迫切需要持续集成（Continuous Integration）';
+
+</script>
+
+
+
+
+
+
+
+
+                        <div class="clear">
+                        </div>
+                    </div>                   
+                
+            </div>
+                   
+           <div id="side">
+               
+    <div class="side">
+<div id="panel_Profile" class="panel">
+<ul class="panel_head"><span>个人资料</span></ul>
+<ul class="panel_body profile">
+<div id="blog_userface">
+    <a href="http://my.csdn.net/kkkloveyou" target="_blank">
+    <img src="http://avatar.csdn.net/E/1/F/1_kkkloveyou.jpg" title="访问我的空间" style="max-width:90%"/>
+    </a>
+    <br />
+    <span><a href="http://my.csdn.net/kkkloveyou" class="user_name" target="_blank">kkkloveyou</a></span>
+</div>
+<div class="interact">
+
+    <a href="javascript:void(0);" class="attent" id="span_add_follow" title="[加关注]"></a>
+
+ <a href="javascript:void(0);" class="letter"  title="[发私信]" onclick="window.open('http://msg.csdn.net/letters/model?receiver=kkkloveyou','_blank','height=350,width=700');_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_sixin'])"></a>  
+</div>
+<div id="blog_medal">
+                       <div class="ico_expert"  onclick="javascript:location='http://blog.csdn.net/experts/rule.html'" title="CSDN认证专家" style="cursor:pointer;width:60px;height:60px;background:url('http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/bokezhuanjiamiddle.png') no-repeat" ></div>
+                <div id="bms_box">
+                                            <a  target="_blank">
+                                                    <img src="http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/zhuanlandaren.png" onmouseover="m_over_m(this,2)" onmouseout="m_out_m()" alt="1" >
+                                            </a>
+               </div>
+</div>
+<ul id="blog_rank">
+    <li>访问：<span>470669次</span></li>
+    <li>积分：<span>4967</span> </li>    
+    <li >等级： <span style="position:relative;display:inline-block;z-index:1" >
+            <img src="http://c.csdnimg.cn/jifen/images/xunzhang/jianzhang/blog5.png" alt="" style="vertical-align: middle;" id="leveImg">
+            <div id="smallTittle" style=" position: absolute;  left: -24px;  top: 25px;  text-align: center;  width: 101px;  height: 32px;  background-color: #fff;  line-height: 32px;  border: 2px #DDDDDD solid;  box-shadow: 0px 2px 2px rgba (0,0,0,0.1);  display: none;   z-index: 999;">
+            <div style="left: 42%;  top: -8px;  position: absolute;  width: 0;  height: 0;  border-left: 10px solid transparent;  border-right: 10px solid transparent;  border-bottom: 8px solid #EAEAEA;"></div>
+            积分：4967 </div>
+        </span>  </li>
+    <li>排名：<span>第5103名</span></li>
+</ul>
+<ul id="blog_statistics">
+    <li>原创：<span>101篇</span></li>
+    <li>转载：<span>0篇</span></li>
+    <li>译文：<span>5篇</span></li>
+    <li>评论：<span>184条</span></li>
+</ul>
+</ul>
+</div>
+
+
+<div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body" class="form_search">
+        <form id="frmSearch" action="http://so.csdn.net/search" class="form_search csdn-tracking-statistics" target="_blank"  data-mod="popu_306">
+        <span><input id="inputSearch" type="text" class="blogsearch" title="请输入关键字" /></span>
+        <input id="btnSubmit" type="button" value="搜索" title="search in blog" />
+        <input type="hidden" name="q" id="inputQ" />
+        <input type="hidden" name="t" value="blog" />
+        <a id="btnSearchBlog" target="_blank"></a>
+        </form>
+    </ul>
+</div>
+
+<script type="text/javascript">
+
+   
+    $(function () {
+        $("#btnSubmit").unbind("click");
+        $("#btnSubmit").click(function () {           
+            search();
+        });
+
+        $("#frmSearch").submit(function () {           
+            search();
+            return false;
+        });
+
+        function search()
+        {
+            if ($("#inputSearch").val() == "") {               
+                alert("请录入搜索关键词！");                         
+                return false;
+            }
+            //var url = "http://so.csdn.net/so/search/s.do?q=" + encodeURIComponent($("#inputSearch").val()) + "&u=" + username + "&t=blog";           
+            var url = "https://www.baidu.com/s?wd=" + encodeURIComponent($("#inputSearch").val()) + "%20site%3Ablog.csdn.net"
+            window.location.href = url;
+        }   
+    });
+</script><div id="panel_Category" class="panel">
+    <ul class="panel_head"><span>博客专栏</span></ul>
+    <ul class="panel_body" id="sp_column">
+    <table cellpadding="0" cellspacing="0"><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/jersey-rest.html" target="_blank"><img src="http://img.blog.csdn.net/20160125200402661" style="width:75px;height:75px;" /></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/jersey-rest.html" target="_blank">用 Jersey 构建 RESTful 服务</a>
+    <p>文章：7篇</p>
+    <span>阅读：90447</span>
+    </td>
+    </tr></table>
+    </ul>
+</div><div id="panel_Category" class="panel">
+<ul class="panel_head"><span>文章分类</span></ul>
+<ul class="panel_body">    
+                 <li>
+                    <a href="/kkkloveyou/article/category/838110" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Java</a><span>(34)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/841041" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">java 算法</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/847608" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Java 核心 应用</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/848368" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Java试题</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/860711" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">ActionScript3.0</a><span>(9)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/928425" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Office</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/928432" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">数据</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/949177" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">网络</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/958266" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Flex</a><span>(18)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1094868" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Spring</a><span>(6)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1141550" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Webservice</a><span>(7)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1171113" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">悟</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1184759" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">搜索</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1213808" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">技术</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1288434" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Golang</a><span>(6)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1573677" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Mysql</a><span>(4)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1654903" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Windows</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2135125" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Hibernate</a><span>(6)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2270791" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">JasperReports</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2300159" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">SVG</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2492673" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">REST</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2697461" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Github</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2801515" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">maven</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2801517" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">tomcat</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2912119" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Jersey</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/3055451" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">netty</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/3083679" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Mina</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6089794" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Web</a><span>(5)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6092268" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">系统架构设计师</a><span>(0)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6092271" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">架构师</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6100851" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Microservices</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6104733" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Docker</a><span>(4)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6389608" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Hadoop</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6414832" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">HBase</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6422827" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Redis</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6641307" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">持续集成</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6703316" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Linux</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6768077" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Distribute</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6930850" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">NGINX</a><span>(0)</span>
+                </li>
+</ul>
+</div><div id="panel_Archive" class="panel">
+<ul class="panel_head"><span>文章存档</span></ul>
+<ul class="panel_body">
+<div id="archive_list">
+<!--归档统计-->
+<li><a href="/kkkloveyou/article/month/2017/05">2017年05月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2017/04">2017年04月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2017/03">2017年03月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2017/02">2017年02月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/12">2016年12月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/09">2016年09月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2016/08">2016年08月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/07">2016年07月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/05">2016年05月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/04">2016年04月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/03">2016年03月</a><span>(4)</span></li><li><a href="/kkkloveyou/article/month/2016/02">2016年02月</a><span>(8)</span></li><li><a href="/kkkloveyou/article/month/2016/01">2016年01月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2015/04">2015年04月</a><span>(5)</span></li><li><a href="/kkkloveyou/article/month/2015/03">2015年03月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2014/12">2014年12月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2014/11">2014年11月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2014/08">2014年08月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2014/06">2014年06月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2014/05">2014年05月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2014/03">2014年03月</a><span>(8)</span></li><li><a href="/kkkloveyou/article/month/2013/10">2013年10月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/09">2013年09月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/08">2013年08月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/07">2013年07月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/06">2013年06月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/05">2013年05月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2013/03">2013年03月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2013/01">2013年01月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2012/12">2012年12月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2012/11">2012年11月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/10">2012年10月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/09">2012年09月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2012/08">2012年08月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/07">2012年07月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/06">2012年06月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/05">2012年05月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/03">2012年03月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2012/02">2012年02月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2012/01">2012年01月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2011/12">2011年12月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2011/11">2011年11月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2011/09">2011年09月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2011/08">2011年08月</a><span>(5)</span></li><li><a href="/kkkloveyou/article/month/2011/07">2011年07月</a><span>(10)</span></li><li><a href="/kkkloveyou/article/month/2011/06">2011年06月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2011/05">2011年05月</a><span>(6)</span></li>
+</div>
+</ul>
+</div>
+<div id="hotarticls" class="panel">
+<ul class="panel_head">
+    <span>       
+阅读排行    </span>
+</ul>
+
+<ul class="panel_body itemlist">
+<li>
+<a href="/kkkloveyou/article/details/6724083" title="java多线程编程技术 +代码实例">java多线程编程技术 +代码实例</a><span>(35966)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/44836609" title="如何查看 JAR 包的源代码">如何查看 JAR 包的源代码</a><span>(32603)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21391033" title="用Jersey构建RESTful服务1--HelloWorld">用Jersey构建RESTful服务1--HelloWorld</a><span>(28937)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21517165" title="用Jersey构建RESTful服务4--通过jersey-client客户端调用Jersey的Web服务模拟CURD">用Jersey构建RESTful服务4--通过jersey-client客户端调用Jersey的Web服务模拟CURD</a><span>(26370)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/7870572" title="“笔记本无线网络搜索不到自家信号,却能搜到其他公司的信号”解决方法">“笔记本无线网络搜索不到自家信号,却能搜到其他公司的信号”解决方法</a><span>(20967)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21485243" title="用Jersey构建RESTful服务3--JAVA对象转成JSON输出">用Jersey构建RESTful服务3--JAVA对象转成JSON输出</a><span>(15556)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/6564625" title="java软件开发工程师实习求职常见面试题">java软件开发工程师实习求职常见面试题</a><span>(12731)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/44656325" title="Netty 实现 WebSocket 聊天功能">Netty 实现 WebSocket 聊天功能</a><span>(12369)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/6624070" title="Install error &quot;Exit Code: 6&quot; or &quot;Exit Code: 7&quot; | Creative Adobe Production(安装Adobe产品时出错及解决方案)">Install error &quot;Exit Code: 6&quot; or &quot;Exit Code: 7&quot; | Creative Adobe Production(安装Adobe产品时出错及解决方案)</a><span>(12273)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/51874354" title="远程过程调用(RPC)详解">远程过程调用(RPC)详解</a><span>(11656)</span>
+</li>
+</ul>
+</div>
+<div id="hotarticls2" class="panel">
+<ul class="panel_head"><span>评论排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="/kkkloveyou/article/details/21391033" title="用Jersey构建RESTful服务1--HelloWorld">用Jersey构建RESTful服务1--HelloWorld</a><span>(34)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21517165" title="用Jersey构建RESTful服务4--通过jersey-client客户端调用Jersey的Web服务模拟CURD">用Jersey构建RESTful服务4--通过jersey-client客户端调用Jersey的Web服务模拟CURD</a><span>(26)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/6628871" title="什么是“面向对象编程”？用邓小平理论指导编程思想">什么是“面向对象编程”？用邓小平理论指导编程思想</a><span>(17)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/44836609" title="如何查看 JAR 包的源代码">如何查看 JAR 包的源代码</a><span>(12)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21485243" title="用Jersey构建RESTful服务3--JAVA对象转成JSON输出">用Jersey构建RESTful服务3--JAVA对象转成JSON输出</a><span>(11)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/44656325" title="Netty 实现 WebSocket 聊天功能">Netty 实现 WebSocket 聊天功能</a><span>(8)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21888283" title="用Jersey构建RESTful服务5--Jersey+MySQL5.6+Hibernate4.3">用Jersey构建RESTful服务5--Jersey+MySQL5.6+Hibernate4.3</a><span>(8)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/50745623" title="Docker 在 CentOS 下的安装、使用">Docker 在 CentOS 下的安装、使用</a><span>(6)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/60493832" title="用大白话聊聊分布式系统">用大白话聊聊分布式系统</a><span>(6)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/6724083" title="java多线程编程技术 +代码实例">java多线程编程技术 +代码实例</a><span>(4)</span>
+</li>
+</ul>
+</div>
+<div id="homepageArticles" class="panel tracking-ad" data-mod="popu_4">
+<ul class="panel_head"><span>推荐文章</span></ul>
+<ul class="panel_body" id="ad_commend">
+<ul>
+<li><a href="http://blog.csdn.net/turingbooks/article/details/72416875" target="_blank">* 5月书讯：流畅的Python，终于等到你！</a></li>
+<li><a href="http://blog.csdn.net/blogdevteam/article/details/72526177" 
+target="_blank">*【新收录】CSDN日报 —— Kotlin 专场</a></li>
+<li><a href="http://blog.csdn.net/jiangwei0910410003/article/details/70483088"target="_blank">* Android中带你开发一款自动爆破签名校验工具kstools</a></li>
+<li><a href="http://blog.csdn.net/javazejian/article/details/71860633" 
+target="_blank">* 深入理解Java注解类型(@Annotation)</a></li>
+<li><a href="http://blog.csdn.net/c406495762/article/details/72597755" 
+target="_blank">* Python3 网络爬虫——这个帅哥、肌肉男横行的世界</a></li>
+<li><a href="http://blog.csdn.net/mindfloating/article/details/72614855" 
+target="_blank">* 从个人习惯到真正的好方法</a></li>
+
+</ul></ul>
+</div>
+
+
+<div id="newcomments" class="panel">
+<ul class="panel_head"><span>最新评论</span></ul>
+<ul class="panel_body itemlist">
+    <li>
+   
+         <a href="/kkkloveyou/article/details/7334309#comments">org.hibernate.MappingException: Unknown entity: com.pkms.entity.User</a>
+    <p style="margin:0px;"><a href="/kkkloveyou" class="user_name">kkkloveyou</a>:
+@CDW2328:没想这么多年前的问题，近期我又遇到。温故而知新啊
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/7334309#comments">org.hibernate.MappingException: Unknown entity: com.pkms.entity.User</a>
+    <p style="margin:0px;"><a href="/CDW2328" class="user_name">CDW2328</a>:
+博主很给力！大赞
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/70164177#comments">分布式系统常见的事务处理机制</a>
+    <p style="margin:0px;"><a href="/daigualu" class="user_name">daigualu</a>:
+感谢分享，学习了。。
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21485243#comments">用Jersey构建RESTful服务3--JAVA对象转成JSON输出</a>
+    <p style="margin:0px;"><a href="/kingDpu" class="user_name">kingDpu</a>:
+@kkkloveyou:谢谢，已经解决了
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/u014308105" class="user_name">u014308105</a>:
+@kkkloveyou:嗯，多谢
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/kkkloveyou" class="user_name">kkkloveyou</a>:
+@u014308105:1. 多个参数可以封装成一个对象来作为一个参数2. 多个参数也可以接收，比如...
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/u014308105" class="user_name">u014308105</a>:
+请问：如果要传递多个参数，也用get方式，该怎么写？
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/kkkloveyou" class="user_name">kkkloveyou</a>:
+@hnn_neil:应该是你的 JDK 版本太低了
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/hnn_neil" class="user_name">hnn_neil</a>:
+你好，我按照步骤操作，发布项目时报错：java.lang.UnsupportedClassVersi...
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/52348883#comments">Apache Hadoop 入门教程</a>
+    <p style="margin:0px;"><a href="/qq_20579895" class="user_name">qq_20579895</a>:
+羊肉串 羊肉串 。。
+    </p>
+    </li>
+</ul>
+</div>
+    </div>
+    <div class="clear">
+    </div>
+
+
+                   <!-- 广告位开始 -->                    <!-- 广告位结束 -->
+                   <div class="J_adv" data-view="true"  data-mtp="63" data-order="40" data-con="ad_content_1260" style="width: 200px; height: 200px;">
+                         <div id="nav_show_top_stop" style="width: 200px;height: 200px;z-index:1000"><div id="cpro_u2734128"></div></div>
+                   </div>
+    <script type="text/javascript">    
+        setTimeout(function () {
+            var naviga_offsetTop = 0;
+            function naviga_stay_top() { var scrollTop = jQuery(document).scrollTop(); if (scrollTop > naviga_offsetTop) { jQuery("#nav_show_top_stop").css({ "position": "fixed" }); jQuery("#nav_show_top_stop").css({ "top": "0px" }); } else { jQuery("#nav_show_top_stop").css({ "position": "fixed" }); jQuery("#nav_show_top_stop").css({ "top": naviga_offsetTop - scrollTop + "px" }); } }
+            function onload_function() { naviga_offsetTop = jQuery("#nav_show_top_stop").position().top; jQuery(window).bind("scroll", naviga_stay_top); jQuery(window).bind("mousewheel", naviga_stay_top); jQuery(document).bind("scroll", naviga_stay_top); jQuery(document).bind("mousewheel", naviga_stay_top); } jQuery(document).ready(onload_function);
+               
+        }, 200);    
+    </script>
+<script type="text/javascript">(window.cproArray = window.cproArray || []).push({ id: "u2734128" });  </script> 
+                    <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script> 
+
+           </div>   
+
+            <div class="clear">
+            </div>
+        </div>
+
+        
+
+<script type="text/javascript" src="http://c.csdnimg.cn/rabbit/cnick/cnick.js"></script>
+
+
+
+
+
+
+    <script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+<script type="text/javascript">
+    $(function () {
+        function __get_code_toolbar(snippet_id) {
+            return $("<span class='tracking-ad' data-mod='popu_167'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "' target='_blank' title='在CODE上查看代码片'  style='text-indent:0;'><img src='https://code.csdn.net/assets/CODE_ico.png' width=12 height=12 alt='在CODE上查看代码片' style='position:relative;top:1px;left:2px;'/></a></span>"
+                    + "<span class='tracking-ad' data-mod='popu_170'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "/fork' target='_blank' title='派生到我的代码片' style='text-indent:0;'><img src='https://code.csdn.net/assets/ico_fork.svg' width=12 height=12 alt='派生到我的代码片' style='position:relative;top:2px;left:2px;'/></a></span>");
+        }
+        
+        $("[code_snippet_id]").each(function () {
+            __s_id = $(this).attr("code_snippet_id");
+            if (__s_id != null && __s_id != "" && __s_id != 0 && parseInt(__s_id) > 70020) {
+                __code_tool = __get_code_toolbar(__s_id);
+                $(this).prev().find(".tools").append(__code_tool);
+            }
+        });
+
+        $(".bar").show();
+    });
+</script>
+
+
+
+
+
+    </div>
+      <!--new top-->
+    
+
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>  
+
+   
+        <!--new top-->
+   
+    <link href="http://c.csdnimg.cn/comm_ask/css/ask_float_block.css" type="text/css" rel="stylesheet" />
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/wmd.js'></script>
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/showdown.js'></script>
+    
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/apps/ask_float_block.js'></script>
+   
+
+   
+
+
+        <script type="text/javascript" src="http://ads.csdn.net/js/async_new.js"></script>
+       <script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+        <script type="text/javascript" src="http://c.csdnimg.cn/rabbit/search-service/main.js"></script>
+          <script type="text/javascript">
+              //$(function () {
+              //    setTimeout(function () {
+              //        var searchtitletags = articletitle + ',' + $("#tags").html();
+              //        searchService({
+              //            index: 'blog',
+              //            query: searchtitletags,
+              //            from: 5,
+              //            size: 5,
+              //            appendTo: '#res',
+              //            url: 'recommend',
+              //            his: 2,
+              //            client: "blog_cf_enhance",
+              //            tmpl: '<dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;"><a href="#{ url }" title="#{ title }" strategy="#{ strategy }">#{ title }</a></dd>'
+              //        });
+              //    }, 1000);
+              //});
+
+         </script>   
+          <script type="text/javascript">
+              $(function () {
+                  setTimeout(function () {
+                      var searchtitletags = articletitle + ',' + $("#tags").html();
+                      searchService({
+                          index: 'blog',
+                          query: searchtitletags,
+                          from: 0,
+                          size: 5,
+                          appendTo: '#articlecommend',
+                          url: 'recommend',
+                          his: 2,
+                          client: "blog_cf_enhance",
+                          tmpl: '<li><em>•</em><a href="#{ url }" title="#{ title }" strategy="#{ strategy }">#{ title }</a></li>'
+                      });
+
+                      setTimeout(function () {
+                          var articles=$("#articlecommend li");
+                          for (var i = 0; i < articles.length; i++)
+                          {
+                              $(articles[i]).find("a").css("width", "290px");
+                              if (i < 5) {
+                                  $(".similar_list.fl").append("<li>" + $(articles[i]).html() + "</li");
+                              }
+                              else {
+                                  $(".similar_list.fr").append("<li>" + $(articles[i]).html() + "</li");
+                              }
+                          }
+                      }, 2000);                     
+
+                  }, 1000);
+              });
+
+         </script>
+    <script src="http://static.blog.csdn.net/scripts/csdn_blog_detail.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=1070877"></script>
+
+     <script id="csdn-toolbar-id" btnId="header_notice_num" wrapId="note1" count="5" subCount="5" type="text/javascript" src="http://c.csdnimg.cn/public/common/toolbar/js/toolbar.js"></script>
+    
+
+
+  <div id="a52b5334d" style="width: 1px; height: 1px; display: none;">
+                    <script id="adJs52b5334"></script>
+                    <script>document.getElementById("adJs52b5334").src = "http://ads.csdn.net/js/opt/52b5334.js?t=" + Math.random();</script>
+   </div>
+
+    
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/saveToCode.js"></script>
+      <script type="text/javascript" src="//c.csdnimg.cn/rabbit/tracking-ad/main.js?75eacd8"></script>
+        
+     
+
+    
+          
+    <div class="pop_CA_cover"  style="display:none"></div>
+    <div class="pop pop_CA"  style="display:none">
+          <div class="CA_header">
+            收藏助手
+            <span class="cancel_icon"  id="fapancle"  onclick="$('.pop_CA').hide();$('.pop_CA_cover').hide();"></span>
+          </div>
+          <iframe src="" id="fa" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+    </div>
+
+</body>
+</html>   
+ 

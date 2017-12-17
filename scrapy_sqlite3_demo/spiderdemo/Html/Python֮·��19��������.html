@@ -1,0 +1,1092 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python之路【第十九篇】：爬虫 - 武沛齐 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=m_FXmwz3wxZoecUwNEK23PAzc-j9vbX_C6MblJ5ouMc1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue.css?v=jJERBFSojhmgst84aaRDal9S3q1WoO-WcNudmMzGJS81"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/133379.css?v=YSNZANkz7eBKoXq2iHYfghvodkY%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue-mobile.css?v=z0BacpCfWeLlXDCM0C158kTP_DMqMbGBapID4f-QztI1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/wupeiqi/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/wupeiqi/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/wupeiqi/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'wupeiqi', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=CPv0EEqm9L2aCgolHxaZfVYM6J-Sn5az_FJXbjzgr-o1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/wupeiqi/">Mr.Seven</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/wupeiqi/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%AD%A6%E6%B2%9B%E9%BD%90">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/wupeiqi/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/wupeiqi/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-126&nbsp;
+文章-137&nbsp;
+评论-259&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/wupeiqi/articles/5354900.html">Python之路【第十九篇】：爬虫</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><p>网络爬虫（又被称为网页蜘蛛，网络机器人，在FOAF社区中间，更经常的称为网页追逐者），是一种按照一定的规则，自动地抓取万维网信息的程序或者脚本。另外一些不常使用的名字还有蚂蚁、自动索引、模拟程序或者蠕虫。</p>
+<h3>Requests</h3>
+<p>Python标准库中提供了：urllib、urllib2、httplib等模块以供Http请求，<span style="font-size: 14pt;">但是</span>，它的 API 太渣了。它是为另一个时代、另一个互联网所创建的。它需要巨量的工作，甚至包括各种方法覆盖，来完成最简单的任务。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('a72cd822-54d1-4be6-9e2b-6517559e8eaa')"><img id="code_img_closed_a72cd822-54d1-4be6-9e2b-6517559e8eaa" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a72cd822-54d1-4be6-9e2b-6517559e8eaa" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a72cd822-54d1-4be6-9e2b-6517559e8eaa',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_a72cd822-54d1-4be6-9e2b-6517559e8eaa" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> urllib2
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> json
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> cookielib
+
+
+</span><span style="color: #0000ff;">def</span> urllib2_request(url, method=<span style="color: #800000;">"</span><span style="color: #800000;">GET</span><span style="color: #800000;">"</span>, cookie=<span style="color: #800000;">""</span>, headers={}, data=<span style="color: #000000;">None):
+    </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+    :param url: 要请求的url
+    :param cookie: 请求方式，GET、POST、DELETE、PUT..
+    :param cookie: 要传入的cookie，cookie= 'k1=v1;k1=v2'
+    :param headers: 发送数据时携带的请求头，headers = {'ContentType':'application/json; charset=UTF-8'}
+    :param data: 要发送的数据GET方式需要传入参数，data={'d1': 'v1'}
+    :return: 返回元祖，响应的字符串内容 和 cookiejar对象
+    对于cookiejar对象，可以使用for循环访问：
+        for item in cookiejar:
+            print item.name,item.value
+    </span><span style="color: #800000;">"""</span>
+    <span style="color: #0000ff;">if</span><span style="color: #000000;"> data:
+        data </span>=<span style="color: #000000;"> json.dumps(data)
+
+    cookie_jar </span>=<span style="color: #000000;"> cookielib.CookieJar()
+    handler </span>=<span style="color: #000000;"> urllib2.HTTPCookieProcessor(cookie_jar)
+    opener </span>=<span style="color: #000000;"> urllib2.build_opener(handler)
+    opener.addheaders.append([</span><span style="color: #800000;">'</span><span style="color: #800000;">Cookie</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">k1=v1;k1=v2</span><span style="color: #800000;">'</span><span style="color: #000000;">])
+    request </span>= urllib2.Request(url=url, data=data, headers=<span style="color: #000000;">headers)
+    request.get_method </span>= <span style="color: #0000ff;">lambda</span><span style="color: #000000;">: method
+
+    response </span>=<span style="color: #000000;"> opener.open(request)
+    origin </span>=<span style="color: #000000;"> response.read()
+
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> origin, cookie_jar
+
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> GET</span>
+result = urllib2_request(<span style="color: #800000;">'</span><span style="color: #800000;">http://127.0.0.1:8001/index/</span><span style="color: #800000;">'</span>, method=<span style="color: #800000;">"</span><span style="color: #800000;">GET</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> POST</span>
+result = urllib2_request(<span style="color: #800000;">'</span><span style="color: #800000;">http://127.0.0.1:8001/index/</span><span style="color: #800000;">'</span>,  method=<span style="color: #800000;">"</span><span style="color: #800000;">POST</span><span style="color: #800000;">"</span>, data= {<span style="color: #800000;">'</span><span style="color: #800000;">k1</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">v1</span><span style="color: #800000;">'</span><span style="color: #000000;">})
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> PUT</span>
+result = urllib2_request(<span style="color: #800000;">'</span><span style="color: #800000;">http://127.0.0.1:8001/index/</span><span style="color: #800000;">'</span>,  method=<span style="color: #800000;">"</span><span style="color: #800000;">PUT</span><span style="color: #800000;">"</span>, data= {<span style="color: #800000;">'</span><span style="color: #800000;">k1</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">v1</span><span style="color: #800000;">'</span>})</pre>
+</div>
+<span class="cnblogs_code_collapse">封装urllib请求</span></div>
+<p>Requests 是使用 Apache2 Licensed 许可证的 基于Python开发的HTTP 库，其在Python内置模块的基础上进行了高度的封装，从而使得Pythoner进行网络请求时，变得美好了许多，使用Requests可以轻而易举的完成浏览器可有的任何操作。</p>
+<p><span style="font-size: 18px;"><strong>1、GET请求</strong></span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 1、无参数实例
+
+import requests
+
+ret = requests.get('https://github.com/timeline.json')
+
+print ret.url
+print ret.text
+
+
+
+# 2、有参数实例
+
+import requests
+
+payload = {'key1': 'value1', 'key2': 'value2'}
+ret = requests.get("http://httpbin.org/get", params=payload)
+
+print ret.url
+print ret.text
+</pre>
+</div>
+<p>向 https://github.com/timeline.json 发送一个GET请求，将请求和响应相关均封装在 ret 对象中。</p>
+<p><span style="font-size: 18px;"><strong>2、POST请求</strong></span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 1、基本POST实例
+
+import requests
+
+payload = {'key1': 'value1', 'key2': 'value2'}
+ret = requests.post("http://httpbin.org/post", data=payload)
+
+print ret.text
+
+
+# 2、发送请求头和数据实例
+
+import requests
+import json
+
+url = 'https://api.github.com/some/endpoint'
+payload = {'some': 'data'}
+headers = {'content-type': 'application/json'}
+
+ret = requests.post(url, data=json.dumps(payload), headers=headers)
+
+print ret.text
+print ret.cookies
+</pre>
+</div>
+<p>向https://api.github.com/some/endpoint发送一个POST请求，将请求和相应相关的内容封装在 ret 对象中。</p>
+<p><span style="font-size: 18px;"><strong>3、其他请求</strong></span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">requests.get(url, params=None, **kwargs)
+requests.post(url, data=None, json=None, **kwargs)
+requests.put(url, data=None, **kwargs)
+requests.head(url, **kwargs)
+requests.delete(url, **kwargs)
+requests.patch(url, data=None, **kwargs)
+requests.options(url, **kwargs)
+
+# 以上方法均是在此方法的基础上构建
+requests.request(method, url, **kwargs)
+</pre>
+</div>
+<p>requests模块已经将常用的Http请求方法为用户封装完成，用户直接调用其提供的相应方法即可，其中方法的所有参数有：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('fb5d705b-efd3-43c2-a307-f4c16d06351c')"><img id="code_img_closed_fb5d705b-efd3-43c2-a307-f4c16d06351c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_fb5d705b-efd3-43c2-a307-f4c16d06351c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('fb5d705b-efd3-43c2-a307-f4c16d06351c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_fb5d705b-efd3-43c2-a307-f4c16d06351c" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">def</span> request(method, url, **<span style="color: #000000;">kwargs):
+    </span><span style="color: #800000;">"""</span><span style="color: #800000;">Constructs and sends a :class:`Request &lt;Request&gt;`.
+
+    :param method: method for the new :class:`Request` object.
+    :param url: URL for the new :class:`Request` object.
+    :param params: (optional) Dictionary or bytes to be sent in the query string for the :class:`Request`.
+    :param data: (optional) Dictionary, bytes, or file-like object to send in the body of the :class:`Request`.
+    :param json: (optional) json data to send in the body of the :class:`Request`.
+    :param headers: (optional) Dictionary of HTTP Headers to send with the :class:`Request`.
+    :param cookies: (optional) Dict or CookieJar object to send with the :class:`Request`.
+    :param files: (optional) Dictionary of ``'name': file-like-objects`` (or ``{'name': ('filename', fileobj)}``) for multipart encoding upload.
+    :param auth: (optional) Auth tuple to enable Basic/Digest/Custom HTTP Auth.
+    :param timeout: (optional) How long to wait for the server to send data
+        before giving up, as a float, or a :ref:`(connect timeout, read
+        timeout) &lt;timeouts&gt;` tuple.
+    :type timeout: float or tuple
+    :param allow_redirects: (optional) Boolean. Set to True if POST/PUT/DELETE redirect following is allowed.
+    :type allow_redirects: bool
+    :param proxies: (optional) Dictionary mapping protocol to the URL of the proxy.
+    :param verify: (optional) whether the SSL cert will be verified. A CA_BUNDLE path can also be provided. Defaults to ``True``.
+    :param stream: (optional) if ``False``, the response content will be immediately downloaded.
+    :param cert: (optional) if String, path to ssl client cert file (.pem). If Tuple, ('cert', 'key') pair.
+    :return: :class:`Response &lt;Response&gt;` object
+    :rtype: requests.Response
+
+    Usage::
+
+      &gt;&gt;&gt; import requests
+      &gt;&gt;&gt; req = requests.request('GET', 'http://httpbin.org/get')
+      &lt;Response [200]&gt;
+    </span><span style="color: #800000;">"""</span>
+
+    <span style="color: #008000;">#</span><span style="color: #008000;"> By using the 'with' statement we are sure the session is closed, thus we</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;"> avoid leaving sockets open which can trigger a ResourceWarning in some</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;"> cases, and look like a memory leak in others.</span>
+<span style="color: #000000;">    with sessions.Session() as session:
+        </span><span style="color: #0000ff;">return</span> session.request(method=method, url=url, **kwargs)</pre>
+</div>
+<span class="cnblogs_code_collapse">更多参数</span></div>
+<p>更多requests模块相关的文档见：http://cn.python-requests.org/zh_CN/latest/</p>
+<h3>自动登陆抽屉并点赞</h3>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">### 1、首先登陆任何页面，获取cookie
+
+i1 = requests.get(url= "http://dig.chouti.com/help/service")
+
+### 2、用户登陆，携带上一次的cookie，后台对cookie中的 gpsd 进行授权
+i2 = requests.post(
+    url= "http://dig.chouti.com/login",
+    data= {
+        'phone': "86手机号",
+        'password': "密码",
+        'oneMonth': ""
+    },
+    cookies = i1.cookies.get_dict()
+)
+
+### 3、点赞（只需要携带已经被授权的gpsd即可）
+gpsd = i1.cookies.get_dict()['gpsd']
+i3 = requests.post(
+    url="http://dig.chouti.com/link/vote?linksId=8589523",
+    cookies={'gpsd': gpsd}
+)
+print(i3.text)</pre>
+</div>
+<h3>&ldquo;破解&rdquo;微信公众号</h3>
+<p><span style="line-height: 1.5;">&ldquo;破解&rdquo;微信公众号其实就是使用Python代码自动实现【登陆公众号】-&gt;【获取观众用户】-&gt; 【向关注用户发送消息】。</span></p>
+<p><span style="color: #888888;"><em><span style="line-height: 1.5;">注：只能向48小时内有互动的粉丝主动推送消息</span></em></span></p>
+<p><strong><span style="line-height: 1.5; font-size: 18px;">1、自动登陆</span></strong></p>
+<p><span style="line-height: 1.5;"><img src="http://images2015.cnblogs.com/blog/425762/201604/425762-20160424150628320-1165907317.png" alt="" width="611" height="299" /></span></p>
+<p><span style="line-height: 1.5;">分析对于Web登陆页面，用户登陆验证时仅做了如下操作：</span></p>
+<ul>
+<li><span style="line-height: 1.5;">登陆的URL：<span style="font-size: 12px;">https://mp.weixin.qq.com/cgi-bin/login?lang=zh_CN</span></span></li>
+<li><span style="line-height: 1.5;"><span style="line-height: 1.5;">POST的数据为：<br /></span></span>
+<p>&nbsp; &nbsp; {<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'username': 用户名,<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'pwd': 密码的MD5值,<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'imgcode': "",&nbsp;<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;'f': 'json'<br />&nbsp; &nbsp; }<br /><span style="font-size: 12px;"><em><span style="color: #888888;">注：imgcode是需要提供的验证码，默认无需验证码，只有在多次登陆未成功时，才需要用户提供验证码才能登陆</span></em></span></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</li>
+<li>POST的请求头的Referer值，微信后台用次来检查是谁发送来的请求</li>
+<li>请求发送并登陆成功后，获取用户响应的cookie，以后操作其他页面时需要携带此cookie&nbsp;</li>
+<li>请求发送并登陆成功后，获取用户相应的内容中的token</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+<div class="cnblogs_code" onclick="cnblogs_code_show('dedb9600-3b38-4cd7-84c9-e8887e7887bf')"><img id="code_img_closed_dedb9600-3b38-4cd7-84c9-e8887e7887bf" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_dedb9600-3b38-4cd7-84c9-e8887e7887bf" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('dedb9600-3b38-4cd7-84c9-e8887e7887bf',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_dedb9600-3b38-4cd7-84c9-e8887e7887bf" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;"> -*- coding:utf-8 -*- </span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> requests
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> time
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> hashlib
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> _password(pwd):
+    ha </span>=<span style="color: #000000;"> hashlib.md5()
+    ha.update(pwd)
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ha.hexdigest()
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> login():
+    
+    login_dict </span>=<span style="color: #000000;"> {
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">username</span><span style="color: #800000;">'</span>: <span style="color: #800000;">"</span><span style="color: #800000;">用户名</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">pwd</span><span style="color: #800000;">'</span>: _password(<span style="color: #800000;">"</span><span style="color: #800000;">密码</span><span style="color: #800000;">"</span><span style="color: #000000;">),
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">imgcode</span><span style="color: #800000;">'</span>: <span style="color: #800000;">""</span><span style="color: #000000;">,
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">f</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">json</span><span style="color: #800000;">'</span><span style="color: #000000;">
+    }
+
+    login_res </span>=<span style="color: #000000;"> requests.post(
+        url</span>= <span style="color: #800000;">"</span><span style="color: #800000;">https://mp.weixin.qq.com/cgi-bin/login?lang=zh_CN</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+        data</span>=<span style="color: #000000;">login_dict,
+        headers</span>={<span style="color: #800000;">'</span><span style="color: #800000;">Referer</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">https://mp.weixin.qq.com/cgi-bin/login?lang=zh_CN</span><span style="color: #800000;">'</span><span style="color: #000000;">})
+
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> 登陆成功之后获取服务器响应的cookie</span>
+    resp_cookies_dict =<span style="color: #000000;"> login_res.cookies.get_dict()
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> 登陆成功后，获取服务器响应的内容</span>
+    resp_text =<span style="color: #000000;"> login_res.text
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> 登陆成功后，获取token</span>
+    token = re.findall(<span style="color: #800000;">"</span><span style="color: #800000;">.*token=(\d+)</span><span style="color: #800000;">"</span><span style="color: #000000;">, resp_text)[0]
+
+    </span><span style="color: #0000ff;">print</span><span style="color: #000000;"> resp_text
+    </span><span style="color: #0000ff;">print</span><span style="color: #000000;"> token
+    </span><span style="color: #0000ff;">print</span><span style="color: #000000;"> resp_cookies_dict
+
+login()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">登陆代码</span></div>
+<p>登陆成功获取的相应内容如下：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">响应内容：
+{"base_resp":{"ret":0,"err_msg":"ok"},"redirect_url":"\/cgi-bin\/home?t=home\/index&amp;lang=zh_CN&amp;token=537908795"}
+
+响应cookie：
+{'data_bizuin': '3016804678', 'bizuin': '3016804678', 'data_ticket': 'CaoX+QA0ZA9LRZ4YM3zZkvedyCY8mZi0XlLonPwvBGkX0/jY/FZgmGTq6xGuQk4H', 'slave_user': 'gh_5abeaed48d10', 'slave_sid': 'elNLbU1TZHRPWDNXSWdNc2FjckUxalM0Y000amtTamlJOUliSnRnWGRCdjFseV9uQkl5cUpHYkxqaGJNcERtYnM2WjdFT1pQckNwMFNfUW5fUzVZZnFlWGpSRFlVRF9obThtZlBwYnRIVGt6cnNGbUJsNTNIdTlIc2JJU29QM2FPaHZjcTcya0F6UWRhQkhO'}
+</pre>
+</div>
+<p><strong><span style="font-size: 18px;">2、访问其他页面获取用户信息</span></strong></p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201604/425762-20160424155632804-1020240742.png" alt="" width="611" height="320" /></p>
+<p>分析用户管理页面，通过Pyhton代码以Get方式访问此页面，分析响应到的 HTML 代码，从中获取用户信息：</p>
+<ul>
+<li>获取用户的URL：<span style="font-size: 12px;">https://mp.weixin.qq.com/cgi-bin/user_tag?action=get_all_data&amp;lang=zh_CN&amp;token=登陆时获取的token</span></li>
+<li>发送GET请求时，需要携带登陆成功后获取的cookie<br />
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">{'data_bizuin': '3016804678', 'bizuin': '3016804678', 'data_ticket': 'C4YM3zZ...</pre>
+</div>
+</li>
+<li>获取当前请求的响应的html代码</li>
+<li>通过正则表达式获取html中的指定内容（Python的模块Beautiful Soup）</li>
+<li>获取html中每个用户的 data-fakeid属性，该值是用户的唯一标识，通过它可向用户推送消息</li>
+</ul>
+<div class="cnblogs_code" onclick="cnblogs_code_show('6b0108d8-89bd-4134-9c92-9a1098a6d91a')"><img id="code_img_closed_6b0108d8-89bd-4134-9c92-9a1098a6d91a" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_6b0108d8-89bd-4134-9c92-9a1098a6d91a" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('6b0108d8-89bd-4134-9c92-9a1098a6d91a',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_6b0108d8-89bd-4134-9c92-9a1098a6d91a" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;"> -*- coding:utf-8 -*- </span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> requests
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> time
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> hashlib
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> json
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> re
+
+LOGIN_COOKIES_DICT </span>=<span style="color: #000000;"> {}
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> _password(pwd):
+    ha </span>=<span style="color: #000000;"> hashlib.md5()
+    ha.update(pwd)
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ha.hexdigest()
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> login():
+    
+    login_dict </span>=<span style="color: #000000;"> {
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">username</span><span style="color: #800000;">'</span>: <span style="color: #800000;">"</span><span style="color: #800000;">用户名</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">pwd</span><span style="color: #800000;">'</span>: _password(<span style="color: #800000;">"</span><span style="color: #800000;">密码</span><span style="color: #800000;">"</span><span style="color: #000000;">),
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">imgcode</span><span style="color: #800000;">'</span>: <span style="color: #800000;">""</span><span style="color: #000000;">,
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">f</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">json</span><span style="color: #800000;">'</span><span style="color: #000000;">
+    }
+
+    login_res </span>=<span style="color: #000000;"> requests.post(
+        url</span>= <span style="color: #800000;">"</span><span style="color: #800000;">https://mp.weixin.qq.com/cgi-bin/login?lang=zh_CN</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+        data</span>=<span style="color: #000000;">login_dict,
+        headers</span>={<span style="color: #800000;">'</span><span style="color: #800000;">Referer</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">https://mp.weixin.qq.com/cgi-bin/login?lang=zh_CN</span><span style="color: #800000;">'</span><span style="color: #000000;">})
+
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> 登陆成功之后获取服务器响应的cookie</span>
+    resp_cookies_dict =<span style="color: #000000;"> login_res.cookies.get_dict()
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> 登陆成功后，获取服务器响应的内容</span>
+    resp_text =<span style="color: #000000;"> login_res.text
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> 登陆成功后，获取token</span>
+    token = re.findall(<span style="color: #800000;">"</span><span style="color: #800000;">.*token=(\d+)</span><span style="color: #800000;">"</span><span style="color: #000000;">, resp_text)[0]
+
+    </span><span style="color: #0000ff;">return</span> {<span style="color: #800000;">'</span><span style="color: #800000;">token</span><span style="color: #800000;">'</span>: token, <span style="color: #800000;">'</span><span style="color: #800000;">cookies</span><span style="color: #800000;">'</span><span style="color: #000000;">: resp_cookies_dict}
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> standard_user_list(content):
+    content </span>= re.sub(<span style="color: #800000;">'</span><span style="color: #800000;">\s*</span><span style="color: #800000;">'</span>, <span style="color: #800000;">''</span><span style="color: #000000;">, content)
+    content </span>= re.sub(<span style="color: #800000;">'</span><span style="color: #800000;">\n*</span><span style="color: #800000;">'</span>, <span style="color: #800000;">''</span><span style="color: #000000;">, content)
+    data </span>= re.findall(<span style="color: #800000;">"""</span><span style="color: #800000;">cgiData=(.*);seajs</span><span style="color: #800000;">"""</span><span style="color: #000000;">, content)[0]
+    data </span>=<span style="color: #000000;"> data.strip()
+    </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+        temp </span>= re.split(<span style="color: #800000;">'</span><span style="color: #800000;">({)(\w+)(:)</span><span style="color: #800000;">'</span>, data, 1<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> len(temp) == 5<span style="color: #000000;">:
+            temp[</span>2] = <span style="color: #800000;">'</span><span style="color: #800000;">"</span><span style="color: #800000;">'</span> + temp[2] + <span style="color: #800000;">'</span><span style="color: #800000;">"</span><span style="color: #800000;">'</span><span style="color: #000000;">
+            data </span>= <span style="color: #800000;">''</span><span style="color: #000000;">.join(temp)
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            </span><span style="color: #0000ff;">break</span>
+
+    <span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+        temp </span>= re.split(<span style="color: #800000;">'</span><span style="color: #800000;">(,)(\w+)(:)</span><span style="color: #800000;">'</span>, data, 1<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> len(temp) == 5<span style="color: #000000;">:
+            temp[</span>2] = <span style="color: #800000;">'</span><span style="color: #800000;">"</span><span style="color: #800000;">'</span> + temp[2] + <span style="color: #800000;">'</span><span style="color: #800000;">"</span><span style="color: #800000;">'</span><span style="color: #000000;">
+            data </span>= <span style="color: #800000;">''</span><span style="color: #000000;">.join(temp)
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">
+
+    data </span>= re.sub(<span style="color: #800000;">'</span><span style="color: #800000;">\*\d+</span><span style="color: #800000;">'</span>, <span style="color: #800000;">""</span><span style="color: #000000;">, data)
+    ret </span>=<span style="color: #000000;"> json.loads(data)
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> get_user_list():
+
+    login_dict </span>=<span style="color: #000000;"> login()
+    LOGIN_COOKIES_DICT.update(login_dict)
+
+    login_cookie_dict </span>= login_dict[<span style="color: #800000;">'</span><span style="color: #800000;">cookies</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+    res_user_list </span>=<span style="color: #000000;"> requests.get(
+        url</span>= <span style="color: #800000;">"</span><span style="color: #800000;">https://mp.weixin.qq.com/cgi-bin/user_tag</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+        params </span>= {<span style="color: #800000;">"</span><span style="color: #800000;">action</span><span style="color: #800000;">"</span>: <span style="color: #800000;">"</span><span style="color: #800000;">get_all_data</span><span style="color: #800000;">"</span>, <span style="color: #800000;">"</span><span style="color: #800000;">lang</span><span style="color: #800000;">"</span>: <span style="color: #800000;">"</span><span style="color: #800000;">zh_CN</span><span style="color: #800000;">"</span>, <span style="color: #800000;">"</span><span style="color: #800000;">token</span><span style="color: #800000;">"</span>: login_dict[<span style="color: #800000;">'</span><span style="color: #800000;">token</span><span style="color: #800000;">'</span><span style="color: #000000;">]},
+        cookies </span>=<span style="color: #000000;"> login_cookie_dict,
+        headers</span>={<span style="color: #800000;">'</span><span style="color: #800000;">Referer</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">https://mp.weixin.qq.com/cgi-bin/login?lang=zh_CN</span><span style="color: #800000;">'</span><span style="color: #000000;">}
+    )
+    user_info </span>=<span style="color: #000000;"> standard_user_list(res_user_list.text)
+    </span><span style="color: #0000ff;">for</span> item <span style="color: #0000ff;">in</span> user_info[<span style="color: #800000;">'</span><span style="color: #800000;">user_list</span><span style="color: #800000;">'</span><span style="color: #000000;">]:
+        </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">"</span><span style="color: #800000;">%s %s </span><span style="color: #800000;">"</span> % (item[<span style="color: #800000;">'</span><span style="color: #800000;">nick_name</span><span style="color: #800000;">'</span>],item[<span style="color: #800000;">'</span><span style="color: #800000;">id</span><span style="color: #800000;">'</span><span style="color: #000000;">],)
+    
+get_user_list()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">代码实现</span></div>
+<p><strong><span style="font-size: 18px;">3、发送消息</span></strong></p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201604/425762-20160424184811991-715073640.png" alt="" width="624" height="327" /></p>
+<p>分析给用户发送消息的页面，从网络请求中剖析得到发送消息的URL，从而使用Python代码发送消息：</p>
+<ul>
+<li>发送消息的URL：<span style="font-size: 12px;">https://mp.weixin.qq.com/cgi-bin/singlesend?t=ajax-response&amp;f=json&amp;token=登陆时获取的token放在此处&amp;lang=zh_CN</span></li>
+<li>从登陆时相应的内容中获取：token和cookie</li>
+<li>从用户列表中获取某个用户唯一标识： fake_id</li>
+<li>封装消息，并发送POST请求<br />
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">    send_dict = {
+        'token': 登陆时获取的token,
+        'lang': "zh_CN",
+        'f': 'json',
+        'ajax': 1,
+        'random': "0.5322618900912392",
+        'type': 1,
+        'content': 要发送的内容,
+        'tofakeid': 用户列表中获取的用户的ID,
+        'imgcode': ''
+    }</pre>
+</div>
+</li>
+</ul>
+<div class="cnblogs_code" onclick="cnblogs_code_show('145faaf3-d639-464d-a74b-b98d1f1b6556')"><img id="code_img_closed_145faaf3-d639-464d-a74b-b98d1f1b6556" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_145faaf3-d639-464d-a74b-b98d1f1b6556" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('145faaf3-d639-464d-a74b-b98d1f1b6556',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_145faaf3-d639-464d-a74b-b98d1f1b6556" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;"> -*- coding:utf-8 -*- </span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> requests
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> time
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> hashlib
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> json
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> re
+
+LOGIN_COOKIES_DICT </span>=<span style="color: #000000;"> {}
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> _password(pwd):
+    ha </span>=<span style="color: #000000;"> hashlib.md5()
+    ha.update(pwd)
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ha.hexdigest()
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> login():
+    
+    login_dict </span>=<span style="color: #000000;"> {
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">username</span><span style="color: #800000;">'</span>: <span style="color: #800000;">"</span><span style="color: #800000;">用户名</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">pwd</span><span style="color: #800000;">'</span>: _password(<span style="color: #800000;">"</span><span style="color: #800000;">密码</span><span style="color: #800000;">"</span><span style="color: #000000;">),
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">imgcode</span><span style="color: #800000;">'</span>: <span style="color: #800000;">""</span><span style="color: #000000;">,
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">f</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">json</span><span style="color: #800000;">'</span><span style="color: #000000;">
+    }
+
+    login_res </span>=<span style="color: #000000;"> requests.post(
+        url</span>= <span style="color: #800000;">"</span><span style="color: #800000;">https://mp.weixin.qq.com/cgi-bin/login?lang=zh_CN</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+        data</span>=<span style="color: #000000;">login_dict,
+        headers</span>={<span style="color: #800000;">'</span><span style="color: #800000;">Referer</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">https://mp.weixin.qq.com/cgi-bin/login?lang=zh_CN</span><span style="color: #800000;">'</span><span style="color: #000000;">})
+
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> 登陆成功之后获取服务器响应的cookie</span>
+    resp_cookies_dict =<span style="color: #000000;"> login_res.cookies.get_dict()
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> 登陆成功后，获取服务器响应的内容</span>
+    resp_text =<span style="color: #000000;"> login_res.text
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> 登陆成功后，获取token</span>
+    token = re.findall(<span style="color: #800000;">"</span><span style="color: #800000;">.*token=(\d+)</span><span style="color: #800000;">"</span><span style="color: #000000;">, resp_text)[0]
+
+    </span><span style="color: #0000ff;">return</span> {<span style="color: #800000;">'</span><span style="color: #800000;">token</span><span style="color: #800000;">'</span>: token, <span style="color: #800000;">'</span><span style="color: #800000;">cookies</span><span style="color: #800000;">'</span><span style="color: #000000;">: resp_cookies_dict}
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> standard_user_list(content):
+    content </span>= re.sub(<span style="color: #800000;">'</span><span style="color: #800000;">\s*</span><span style="color: #800000;">'</span>, <span style="color: #800000;">''</span><span style="color: #000000;">, content)
+    content </span>= re.sub(<span style="color: #800000;">'</span><span style="color: #800000;">\n*</span><span style="color: #800000;">'</span>, <span style="color: #800000;">''</span><span style="color: #000000;">, content)
+    data </span>= re.findall(<span style="color: #800000;">"""</span><span style="color: #800000;">cgiData=(.*);seajs</span><span style="color: #800000;">"""</span><span style="color: #000000;">, content)[0]
+    data </span>=<span style="color: #000000;"> data.strip()
+    </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+        temp </span>= re.split(<span style="color: #800000;">'</span><span style="color: #800000;">({)(\w+)(:)</span><span style="color: #800000;">'</span>, data, 1<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> len(temp) == 5<span style="color: #000000;">:
+            temp[</span>2] = <span style="color: #800000;">'</span><span style="color: #800000;">"</span><span style="color: #800000;">'</span> + temp[2] + <span style="color: #800000;">'</span><span style="color: #800000;">"</span><span style="color: #800000;">'</span><span style="color: #000000;">
+            data </span>= <span style="color: #800000;">''</span><span style="color: #000000;">.join(temp)
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            </span><span style="color: #0000ff;">break</span>
+
+    <span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+        temp </span>= re.split(<span style="color: #800000;">'</span><span style="color: #800000;">(,)(\w+)(:)</span><span style="color: #800000;">'</span>, data, 1<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> len(temp) == 5<span style="color: #000000;">:
+            temp[</span>2] = <span style="color: #800000;">'</span><span style="color: #800000;">"</span><span style="color: #800000;">'</span> + temp[2] + <span style="color: #800000;">'</span><span style="color: #800000;">"</span><span style="color: #800000;">'</span><span style="color: #000000;">
+            data </span>= <span style="color: #800000;">''</span><span style="color: #000000;">.join(temp)
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            </span><span style="color: #0000ff;">break</span><span style="color: #000000;">
+
+    data </span>= re.sub(<span style="color: #800000;">'</span><span style="color: #800000;">\*\d+</span><span style="color: #800000;">'</span>, <span style="color: #800000;">""</span><span style="color: #000000;">, data)
+    ret </span>=<span style="color: #000000;"> json.loads(data)
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> ret
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> get_user_list():
+
+    login_dict </span>=<span style="color: #000000;"> login()
+    LOGIN_COOKIES_DICT.update(login_dict)
+
+    login_cookie_dict </span>= login_dict[<span style="color: #800000;">'</span><span style="color: #800000;">cookies</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+    res_user_list </span>=<span style="color: #000000;"> requests.get(
+        url</span>= <span style="color: #800000;">"</span><span style="color: #800000;">https://mp.weixin.qq.com/cgi-bin/user_tag</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+        params </span>= {<span style="color: #800000;">"</span><span style="color: #800000;">action</span><span style="color: #800000;">"</span>: <span style="color: #800000;">"</span><span style="color: #800000;">get_all_data</span><span style="color: #800000;">"</span>, <span style="color: #800000;">"</span><span style="color: #800000;">lang</span><span style="color: #800000;">"</span>: <span style="color: #800000;">"</span><span style="color: #800000;">zh_CN</span><span style="color: #800000;">"</span>, <span style="color: #800000;">"</span><span style="color: #800000;">token</span><span style="color: #800000;">"</span>: login_dict[<span style="color: #800000;">'</span><span style="color: #800000;">token</span><span style="color: #800000;">'</span><span style="color: #000000;">]},
+        cookies </span>=<span style="color: #000000;"> login_cookie_dict,
+        headers</span>={<span style="color: #800000;">'</span><span style="color: #800000;">Referer</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">https://mp.weixin.qq.com/cgi-bin/login?lang=zh_CN</span><span style="color: #800000;">'</span><span style="color: #000000;">}
+    )
+    user_info </span>=<span style="color: #000000;"> standard_user_list(res_user_list.text)
+    </span><span style="color: #0000ff;">for</span> item <span style="color: #0000ff;">in</span> user_info[<span style="color: #800000;">'</span><span style="color: #800000;">user_list</span><span style="color: #800000;">'</span><span style="color: #000000;">]:
+        </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">"</span><span style="color: #800000;">%s %s </span><span style="color: #800000;">"</span> % (item[<span style="color: #800000;">'</span><span style="color: #800000;">nick_name</span><span style="color: #800000;">'</span>],item[<span style="color: #800000;">'</span><span style="color: #800000;">id</span><span style="color: #800000;">'</span><span style="color: #000000;">],)
+    
+
+</span><span style="color: #0000ff;">def</span> send_msg(user_fake_id, content=<span style="color: #800000;">'</span><span style="color: #800000;">啥也没发</span><span style="color: #800000;">'</span><span style="color: #000000;">):
+
+    login_dict </span>=<span style="color: #000000;"> LOGIN_COOKIES_DICT
+    
+    token </span>= login_dict[<span style="color: #800000;">'</span><span style="color: #800000;">token</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+    login_cookie_dict </span>= login_dict[<span style="color: #800000;">'</span><span style="color: #800000;">cookies</span><span style="color: #800000;">'</span><span style="color: #000000;">]
+
+    send_dict </span>=<span style="color: #000000;"> {
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">token</span><span style="color: #800000;">'</span><span style="color: #000000;">: token,
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">lang</span><span style="color: #800000;">'</span>: <span style="color: #800000;">"</span><span style="color: #800000;">zh_CN</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">f</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">json</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">ajax</span><span style="color: #800000;">'</span>: 1<span style="color: #000000;">,
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">random</span><span style="color: #800000;">'</span>: <span style="color: #800000;">"</span><span style="color: #800000;">0.5322618900912392</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">type</span><span style="color: #800000;">'</span>: 1<span style="color: #000000;">,
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">content</span><span style="color: #800000;">'</span><span style="color: #000000;">: content,
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">tofakeid</span><span style="color: #800000;">'</span><span style="color: #000000;">: user_fake_id,
+        </span><span style="color: #800000;">'</span><span style="color: #800000;">imgcode</span><span style="color: #800000;">'</span>: <span style="color: #800000;">''</span><span style="color: #000000;">
+    }
+   
+    send_url </span>= <span style="color: #800000;">"</span><span style="color: #800000;">https://mp.weixin.qq.com/cgi-bin/singlesend?t=ajax-response&amp;f=json&amp;token=%s&amp;lang=zh_CN</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> (token,)
+    message_list </span>=<span style="color: #000000;"> requests.post(
+        url</span>=<span style="color: #000000;">send_url, 
+        data</span>=<span style="color: #000000;">send_dict, 
+        cookies</span>=<span style="color: #000000;">login_cookie_dict, 
+        headers</span>={<span style="color: #800000;">'</span><span style="color: #800000;">Referer</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">https://mp.weixin.qq.com/cgi-bin/login?lang=zh_CN</span><span style="color: #800000;">'</span><span style="color: #000000;">}
+    )
+
+
+get_user_list()
+fake_id </span>= raw_input(<span style="color: #800000;">'</span><span style="color: #800000;">请输入用户ID:</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+content </span>= raw_input(<span style="color: #800000;">'</span><span style="color: #800000;">请输入消息内容:</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+send_msg(fake_id, content)</span></pre>
+</div>
+<span class="cnblogs_code_collapse">发送消息代码</span></div>
+<p><span style="line-height: 1.5;">以上就是&ldquo;破解&rdquo;微信公众号的整个过程，通过Python代码实现了自动【登陆微信公众号平台】【获取用户列表】【指定用户发送消息】。</span></p>
+<h3>Scrapy</h3>
+<p>Scrapy是一个为了爬取网站数据，提取结构性数据而编写的应用框架。 其可以应用在数据挖掘，信息处理或存储历史数据等一系列的程序中。<br />其最初是为了页面抓取 (更确切来说, 网络抓取 )所设计的， 也可以应用在获取API所返回的数据(例如 Amazon Associates Web Services ) 或者通用的网络爬虫。Scrapy用途广泛，可以用于数据挖掘、监测和自动化测试。</p>
+<p>Scrapy 使用了 Twisted异步网络库来处理网络通讯。整体架构大致如下</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201605/425762-20160507220247421-1722096301.png" alt="" /></p>
+<p>Scrapy主要包括了以下组件：</p>
+<ul>
+<li><strong>引擎(Scrapy)</strong><br /><em><span style="color: #888888;">用来处理整个系统的数据流处理, 触发事务(框架核心)</span></em></li>
+<li><strong>调度器(Scheduler)</strong><br /><em><span style="color: #888888;">用来接受引擎发过来的请求, 压入队列中, 并在引擎再次请求的时候返回. 可以想像成一个URL（抓取网页的网址或者说是链接）的优先队列, 由它来决定下一个要抓取的网址是什么, 同时去除重复的网址</span></em></li>
+<li><strong>下载器(Downloader)</strong><br /><span style="color: #888888;"><em>用于下载网页内容, 并将网页内容返回给蜘蛛(Scrapy下载器是建立在twisted这个高效的异步模型上的)</em></span></li>
+<li><strong>爬虫(Spiders)</strong><br /><span style="color: #888888;"><em>爬虫是主要干活的, 用于从特定的网页中提取自己需要的信息, 即所谓的实体(Item)。用户也可以从中提取出链接,让Scrapy继续抓取下一个页面</em></span></li>
+<li><strong>项目管道(Pipeline)</strong><br /><span style="color: #888888;"><em>负责处理爬虫从网页中抽取的实体，主要的功能是持久化实体、验证实体的有效性、清除不需要的信息。当页面被爬虫解析后，将被发送到项目管道，并经过几个特定的次序处理数据。</em></span></li>
+<li><strong>下载器中间件(Downloader Middlewares)</strong><br /><em><span style="color: #888888;">位于Scrapy引擎和下载器之间的框架，主要是处理Scrapy引擎与下载器之间的请求及响应。</span></em></li>
+<li><strong>爬虫中间件(Spider Middlewares)</strong><br /><span style="color: #888888;"><em>介于Scrapy引擎和爬虫之间的框架，主要工作是处理蜘蛛的响应输入和请求输出。</em></span></li>
+<li><strong>调度中间件(Scheduler Middewares)</strong><br /><span style="color: #888888;"><em>介于Scrapy引擎和调度之间的中间件，从Scrapy引擎发送到调度的请求和响应。</em></span></li>
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+<p>Scrapy运行流程大概如下：</p>
+<ol>
+<li>引擎从调度器中取出一个链接(URL)用于接下来的抓取</li>
+<li>引擎把URL封装成一个请求(Request)传给下载器</li>
+<li>下载器把资源下载下来，并封装成应答包(Response)</li>
+<li>爬虫解析Response</li>
+<li>解析出实体（Item）,则交给实体管道进行进一步的处理</li>
+<li>解析出的是链接（URL）,则把URL交给调度器等待抓取</li>
+
+
+
+
+
+
+
+
+
+
+
+</ol>
+<p>一、安装</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">pip install Scrapy
+</pre>
+</div>
+<p>注：windows平台需要依赖pywin32，请根据自己系统32/64位选择下载安装，https://sourceforge.net/projects/pywin32/</p>
+<p>二、基本使用</p>
+<p>1、创建项目</p>
+<p>运行命令:</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">scrapy startproject your_project_name
+</pre>
+</div>
+<p>自动创建目录：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"> project_name/
+    scrapy.cfg
+    project_name/
+        __init__.py
+        items.py
+        pipelines.py
+        settings.py
+        spiders/
+            __init__.py
+</pre>
+</div>
+<p>文件说明：</p>
+<ul>
+<li>scrapy.cfg &nbsp;项目的配置信息，主要为Scrapy命令行工具提供一个基础的配置信息。（真正爬虫相关的配置信息在settings.py文件中）</li>
+<li>items.py &nbsp; &nbsp;设置数据存储模板，用于结构化数据，如：Django的Model</li>
+<li>pipelines &nbsp; &nbsp;数据处理行为，如：一般结构化的数据持久化</li>
+<li>settings.py 配置文件，如：递归的层数、并发数，延迟下载等</li>
+<li>spiders &nbsp; &nbsp; &nbsp;爬虫目录，如：创建文件，编写爬虫规则</li>
+</ul>
+<p>注意：一般创建爬虫文件时，以网站域名命名</p>
+<p>2、编写爬虫</p>
+<p>在spiders目录中新建 xiaohuar_spider.py 文件</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+import scrapy
+
+class XiaoHuarSpider(scrapy.spiders.Spider):
+    name = "xiaohuar"
+    allowed_domains = ["xiaohuar.com"]
+    start_urls = [
+        "http://www.xiaohuar.com/hua/",
+    ]
+
+    def parse(self, response):
+        # print(response, type(response))
+        # from scrapy.http.response.html import HtmlResponse
+        # print(response.body_as_unicode())
+
+        current_url = response.url
+        body = response.body
+        unicode_body = response.body_as_unicode()
+</pre>
+</div>
+<p>3、运行</p>
+<p>进入project_name目录，运行命令</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">scrapy crawl spider_name --nolog</pre>
+</div>
+<p>4、递归的访问</p>
+<p>以上的爬虫仅仅是爬去初始页，而我们爬虫是需要源源不断的执行下去，直到所有的网页被执行完毕</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+import scrapy
+from scrapy.http import Request
+from scrapy.selector import HtmlXPathSelector
+import re
+import urllib
+import os
+
+
+class XiaoHuarSpider(scrapy.spiders.Spider):
+    name = "xiaohuar"
+    allowed_domains = ["xiaohuar.com"]
+    start_urls = [
+        "http://www.xiaohuar.com/list-1-1.html",
+    ]
+
+    def parse(self, response):
+        # 分析页面
+        # 找到页面中符合规则的内容（校花图片），保存
+        # 找到所有的a标签，再访问其他a标签，一层一层的搞下去
+
+        hxs = HtmlXPathSelector(response)
+
+        # 如果url是 http://www.xiaohuar.com/list-1-\d+.html
+        if re.match('http://www.xiaohuar.com/list-1-\d+.html', response.url):
+            items = hxs.select('//div[@class="item_list infinite_scroll"]/div')
+            for i in range(len(items)):
+                src = hxs.select('//div[@class="item_list infinite_scroll"]/div[%d]//div[@class="img"]/a/img/@src' % i).extract()
+                name = hxs.select('//div[@class="item_list infinite_scroll"]/div[%d]//div[@class="img"]/span/text()' % i).extract()
+                school = hxs.select('//div[@class="item_list infinite_scroll"]/div[%d]//div[@class="img"]/div[@class="btns"]/a/text()' % i).extract()
+                if src:
+                    ab_src = "http://www.xiaohuar.com" + src[0]
+                    file_name = "%s_%s.jpg" % (school[0].encode('utf-8'), name[0].encode('utf-8'))
+                    file_path = os.path.join("/Users/wupeiqi/PycharmProjects/beauty/pic", file_name)
+                    urllib.urlretrieve(ab_src, file_path)
+
+        # 获取所有的url，继续访问，并在其中寻找相同的url
+        all_urls = hxs.select('//a/@href').extract()
+        for url in all_urls:
+            if url.startswith('http://www.xiaohuar.com/list-1-'):
+                yield Request(url, callback=self.parse)
+</pre>
+</div>
+<p>以上代码将符合规则的页面中的图片保存在指定目录，并且在HTML源码中找到所有的其他 a 标签的href属性，从而&ldquo;递归&rdquo;的执行下去，直到所有的页面都被访问过为止。以上代码之所以可以进行&ldquo;递归&rdquo;的访问相关URL，关键在于parse方法使用了 yield Request对象。</p>
+<p><span style="color: #888888;">注：可以修改settings.py 中的配置文件，以此来指定&ldquo;递归&rdquo;的层数，如：&nbsp;DEPTH_LIMIT = 1</span></p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('9ec5af6f-b8b1-439f-9b56-e4159919f1a9')"><img id="code_img_closed_9ec5af6f-b8b1-439f-9b56-e4159919f1a9" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_9ec5af6f-b8b1-439f-9b56-e4159919f1a9" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('9ec5af6f-b8b1-439f-9b56-e4159919f1a9',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_9ec5af6f-b8b1-439f-9b56-e4159919f1a9" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">from</span> scrapy.selector <span style="color: #0000ff;">import</span><span style="color: #000000;"> Selector
+</span><span style="color: #0000ff;">from</span> scrapy.http <span style="color: #0000ff;">import</span><span style="color: #000000;"> HtmlResponse
+html </span>= <span style="color: #800000;">"""</span><span style="color: #800000;">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head lang="en"&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;li class="item-"&gt;&lt;a href="link.html"&gt;first item&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="item-0"&gt;&lt;a href="link1.html"&gt;first item&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="item-1"&gt;&lt;a href="link2.html"&gt;second item&lt;/a&gt;&lt;/li&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</span><span style="color: #800000;">"""</span><span style="color: #000000;">
+response </span>= HtmlResponse(url=<span style="color: #800000;">'</span><span style="color: #800000;">http://example.com</span><span style="color: #800000;">'</span>, body=html,encoding=<span style="color: #800000;">'</span><span style="color: #800000;">utf-8</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+ret </span>= Selector(response=response).xpath(<span style="color: #800000;">'</span><span style="color: #800000;">//li[re:test(@class, "item-\d*")]//@href</span><span style="color: #800000;">'</span><span style="color: #000000;">).extract()
+</span><span style="color: #0000ff;">print</span>(ret)</pre>
+</div>
+<span class="cnblogs_code_collapse">正则选择器</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('9ce4f4c9-24db-4ff5-b411-e006a3b258bb')"><img id="code_img_closed_9ce4f4c9-24db-4ff5-b411-e006a3b258bb" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_9ce4f4c9-24db-4ff5-b411-e006a3b258bb" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('9ce4f4c9-24db-4ff5-b411-e006a3b258bb',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_9ce4f4c9-24db-4ff5-b411-e006a3b258bb" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> scrapy
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> hashlib
+</span><span style="color: #0000ff;">from</span> tutorial.items <span style="color: #0000ff;">import</span><span style="color: #000000;"> JinLuoSiItem
+</span><span style="color: #0000ff;">from</span> scrapy.http <span style="color: #0000ff;">import</span><span style="color: #000000;"> Request
+</span><span style="color: #0000ff;">from</span> scrapy.selector <span style="color: #0000ff;">import</span><span style="color: #000000;"> HtmlXPathSelector
+
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> JinLuoSiSpider(scrapy.spiders.Spider):
+    count </span>=<span style="color: #000000;"> 0
+    url_set </span>=<span style="color: #000000;"> set()
+
+    name </span>= <span style="color: #800000;">"</span><span style="color: #800000;">jluosi</span><span style="color: #800000;">"</span><span style="color: #000000;">
+    domain </span>= <span style="color: #800000;">'</span><span style="color: #800000;">http://www.jluosi.com</span><span style="color: #800000;">'</span><span style="color: #000000;">
+    allowed_domains </span>= [<span style="color: #800000;">"</span><span style="color: #800000;">jluosi.com</span><span style="color: #800000;">"</span><span style="color: #000000;">]
+
+    start_urls </span>=<span style="color: #000000;"> [
+        </span><span style="color: #800000;">"</span><span style="color: #800000;">http://www.jluosi.com:80/ec/goodsDetail.action?jls=QjRDNEIzMzAzOEZFNEE3NQ==</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+    ]
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> parse(self, response):
+        md5_obj </span>=<span style="color: #000000;"> hashlib.md5()
+        md5_obj.update(response.url)
+        md5_url </span>=<span style="color: #000000;"> md5_obj.hexdigest()
+        </span><span style="color: #0000ff;">if</span> md5_url <span style="color: #0000ff;">in</span><span style="color: #000000;"> JinLuoSiSpider.url_set:
+            </span><span style="color: #0000ff;">pass</span>
+        <span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            JinLuoSiSpider.url_set.add(md5_url)
+            hxs </span>=<span style="color: #000000;"> HtmlXPathSelector(response)
+            </span><span style="color: #0000ff;">if</span> response.url.startswith(<span style="color: #800000;">'</span><span style="color: #800000;">http://www.jluosi.com:80/ec/goodsDetail.action</span><span style="color: #800000;">'</span><span style="color: #000000;">):
+                item </span>=<span style="color: #000000;"> JinLuoSiItem()
+                item[</span><span style="color: #800000;">'</span><span style="color: #800000;">company</span><span style="color: #800000;">'</span>] = hxs.select(<span style="color: #800000;">'</span><span style="color: #800000;">//div[@class="ShopAddress"]/ul/li[1]/text()</span><span style="color: #800000;">'</span><span style="color: #000000;">).extract()
+                item[</span><span style="color: #800000;">'</span><span style="color: #800000;">link</span><span style="color: #800000;">'</span>] = hxs.select(<span style="color: #800000;">'</span><span style="color: #800000;">//div[@class="ShopAddress"]/ul/li[2]/text()</span><span style="color: #800000;">'</span><span style="color: #000000;">).extract()
+                item[</span><span style="color: #800000;">'</span><span style="color: #800000;">qq</span><span style="color: #800000;">'</span>] = hxs.select(<span style="color: #800000;">'</span><span style="color: #800000;">//div[@class="ShopAddress"]//a/@href</span><span style="color: #800000;">'</span>).re(<span style="color: #800000;">'</span><span style="color: #800000;">.*uin=(?P&lt;qq&gt;\d*)&amp;</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+                item[</span><span style="color: #800000;">'</span><span style="color: #800000;">address</span><span style="color: #800000;">'</span>] = hxs.select(<span style="color: #800000;">'</span><span style="color: #800000;">//div[@class="ShopAddress"]/ul/li[4]/text()</span><span style="color: #800000;">'</span><span style="color: #000000;">).extract()
+
+                item[</span><span style="color: #800000;">'</span><span style="color: #800000;">title</span><span style="color: #800000;">'</span>] = hxs.select(<span style="color: #800000;">'</span><span style="color: #800000;">//h1[@class="goodsDetail_goodsName"]/text()</span><span style="color: #800000;">'</span><span style="color: #000000;">).extract()
+
+                item[</span><span style="color: #800000;">'</span><span style="color: #800000;">unit</span><span style="color: #800000;">'</span>] = hxs.select(<span style="color: #800000;">'</span><span style="color: #800000;">//table[@class="R_WebDetail_content_tab"]//tr[1]//td[3]/text()</span><span style="color: #800000;">'</span><span style="color: #000000;">).extract()
+                product_list </span>=<span style="color: #000000;"> []
+                product_tr </span>= hxs.select(<span style="color: #800000;">'</span><span style="color: #800000;">//table[@class="R_WebDetail_content_tab"]//tr</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+                </span><span style="color: #0000ff;">for</span> i <span style="color: #0000ff;">in</span> range(2<span style="color: #000000;">,len(product_tr)):
+                    temp </span>=<span style="color: #000000;"> {
+                        </span><span style="color: #800000;">'</span><span style="color: #800000;">standard</span><span style="color: #800000;">'</span>:hxs.select(<span style="color: #800000;">'</span><span style="color: #800000;">//table[@class="R_WebDetail_content_tab"]//tr[%d]//td[2]/text()</span><span style="color: #800000;">'</span> %<span style="color: #000000;">i).extract()[0].strip(),
+                        </span><span style="color: #800000;">'</span><span style="color: #800000;">price</span><span style="color: #800000;">'</span>:hxs.select(<span style="color: #800000;">'</span><span style="color: #800000;">//table[@class="R_WebDetail_content_tab"]//tr[%d]//td[3]/text()</span><span style="color: #800000;">'</span> %<span style="color: #000000;">i).extract()[0].strip(),
+                    }
+                    product_list.append(temp)
+
+                item[</span><span style="color: #800000;">'</span><span style="color: #800000;">product_list</span><span style="color: #800000;">'</span>] =<span style="color: #000000;"> product_list
+                </span><span style="color: #0000ff;">yield</span><span style="color: #000000;"> item
+
+            current_page_urls </span>= hxs.select(<span style="color: #800000;">'</span><span style="color: #800000;">//a/@href</span><span style="color: #800000;">'</span><span style="color: #000000;">).extract()
+            </span><span style="color: #0000ff;">for</span> i <span style="color: #0000ff;">in</span><span style="color: #000000;"> range(len(current_page_urls)):
+                url </span>=<span style="color: #000000;"> current_page_urls[i]
+                </span><span style="color: #0000ff;">if</span> url.startswith(<span style="color: #800000;">'</span><span style="color: #800000;">http://www.jluosi.com</span><span style="color: #800000;">'</span><span style="color: #000000;">):
+                    url_ab </span>=<span style="color: #000000;"> url
+                    </span><span style="color: #0000ff;">yield</span> Request(url_ab, callback=self.parse)</pre>
+</div>
+<span class="cnblogs_code_collapse">选择器规则Demo</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('e703a359-b985-4066-94aa-d52a78f76c0c')"><img id="code_img_closed_e703a359-b985-4066-94aa-d52a78f76c0c" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_e703a359-b985-4066-94aa-d52a78f76c0c" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('e703a359-b985-4066-94aa-d52a78f76c0c',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_e703a359-b985-4066-94aa-d52a78f76c0c" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">def</span><span style="color: #000000;"> parse(self, response):
+    </span><span style="color: #0000ff;">from</span> scrapy.http.cookies <span style="color: #0000ff;">import</span><span style="color: #000000;"> CookieJar
+    cookieJar </span>=<span style="color: #000000;"> CookieJar()
+    cookieJar.extract_cookies(response, response.request)
+    </span><span style="color: #0000ff;">print</span>(cookieJar._cookies)</pre>
+</div>
+<span class="cnblogs_code_collapse">获取响应cookies</span></div>
+<p>更多选择器规则：http://scrapy-chs.readthedocs.io/zh_CN/latest/topics/selectors.html</p>
+<p>5、格式化处理</p>
+<p>上述实例只是简单的图片处理，所以在parse方法中直接处理。如果对于想要获取更多的数据（获取页面的价格、商品名称、QQ等），则可以利用Scrapy的items将数据格式化，然后统一交由pipelines来处理。</p>
+<p>在items.py中创建类：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># -*- coding: utf-8 -*-
+
+# Define here the models for your scraped items
+#
+# See documentation in:
+# http://doc.scrapy.org/en/latest/topics/items.html
+
+import scrapy
+
+class JieYiCaiItem(scrapy.Item):
+
+    company = scrapy.Field()
+    title = scrapy.Field()
+    qq = scrapy.Field()
+    info = scrapy.Field()
+    more = scrapy.Field()
+</pre>
+</div>
+<p>上述定义模板，以后对于从请求的源码中获取的数据同意按照此结构来获取，所以在spider中需要有一下操作：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('2b3b2f3b-fe65-4798-92f8-df2ea7732f18')"><img id="code_img_closed_2b3b2f3b-fe65-4798-92f8-df2ea7732f18" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_2b3b2f3b-fe65-4798-92f8-df2ea7732f18" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('2b3b2f3b-fe65-4798-92f8-df2ea7732f18',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_2b3b2f3b-fe65-4798-92f8-df2ea7732f18" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> scrapy
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> hashlib
+</span><span style="color: #0000ff;">from</span> beauty.items <span style="color: #0000ff;">import</span><span style="color: #000000;"> JieYiCaiItem
+</span><span style="color: #0000ff;">from</span> scrapy.http <span style="color: #0000ff;">import</span><span style="color: #000000;"> Request
+</span><span style="color: #0000ff;">from</span> scrapy.selector <span style="color: #0000ff;">import</span><span style="color: #000000;"> HtmlXPathSelector
+</span><span style="color: #0000ff;">from</span> scrapy.spiders <span style="color: #0000ff;">import</span><span style="color: #000000;"> CrawlSpider, Rule
+</span><span style="color: #0000ff;">from</span> scrapy.linkextractors <span style="color: #0000ff;">import</span><span style="color: #000000;"> LinkExtractor
+
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> JieYiCaiSpider(scrapy.spiders.Spider):
+    count </span>=<span style="color: #000000;"> 0
+    url_set </span>=<span style="color: #000000;"> set()
+
+    name </span>= <span style="color: #800000;">"</span><span style="color: #800000;">jieyicai</span><span style="color: #800000;">"</span><span style="color: #000000;">
+    domain </span>= <span style="color: #800000;">'</span><span style="color: #800000;">http://www.jieyicai.com</span><span style="color: #800000;">'</span><span style="color: #000000;">
+    allowed_domains </span>= [<span style="color: #800000;">"</span><span style="color: #800000;">jieyicai.com</span><span style="color: #800000;">"</span><span style="color: #000000;">]
+
+    start_urls </span>=<span style="color: #000000;"> [
+        </span><span style="color: #800000;">"</span><span style="color: #800000;">http://www.jieyicai.com</span><span style="color: #800000;">"</span><span style="color: #000000;">,
+    ]
+
+    rules </span>=<span style="color: #000000;"> [
+        </span><span style="color: #008000;">#</span><span style="color: #008000;">下面是符合规则的网址,但是不抓取内容,只是提取该页的链接(这里网址是虚构的,实际使用时请替换)</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;">Rule(SgmlLinkExtractor(allow=(r'http://test_url/test?page_index=\d+'))),</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;">下面是符合规则的网址,提取内容,(这里网址是虚构的,实际使用时请替换)</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;">Rule(LinkExtractor(allow=(r'http://www.jieyicai.com/Product/Detail.aspx?pid=\d+')), callback="parse"),</span>
+<span style="color: #000000;">    ]
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> parse(self, response):
+        md5_obj </span>=<span style="color: #000000;"> hashlib.md5()
+        md5_obj.update(response.url)
+        md5_url </span>=<span style="color: #000000;"> md5_obj.hexdigest()
+        </span><span style="color: #0000ff;">if</span> md5_url <span style="color: #0000ff;">in</span><span style="color: #000000;"> JieYiCaiSpider.url_set:
+            </span><span style="color: #0000ff;">pass</span>
+        <span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            JieYiCaiSpider.url_set.add(md5_url)
+            
+            hxs </span>=<span style="color: #000000;"> HtmlXPathSelector(response)
+            </span><span style="color: #0000ff;">if</span> response.url.startswith(<span style="color: #800000;">'</span><span style="color: #800000;">http://www.jieyicai.com/Product/Detail.aspx</span><span style="color: #800000;">'</span><span style="color: #000000;">):
+                item </span>=<span style="color: #000000;"> JieYiCaiItem()
+                item[</span><span style="color: #800000;">'</span><span style="color: #800000;">company</span><span style="color: #800000;">'</span>] = hxs.select(<span style="color: #800000;">'</span><span style="color: #800000;">//span[@class="username g-fs-14"]/text()</span><span style="color: #800000;">'</span><span style="color: #000000;">).extract()
+                item[</span><span style="color: #800000;">'</span><span style="color: #800000;">qq</span><span style="color: #800000;">'</span>] = hxs.select(<span style="color: #800000;">'</span><span style="color: #800000;">//span[@class="g-left bor1qq"]/a/@href</span><span style="color: #800000;">'</span>).re(<span style="color: #800000;">'</span><span style="color: #800000;">.*uin=(?P&lt;qq&gt;\d*)&amp;</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+                item[</span><span style="color: #800000;">'</span><span style="color: #800000;">info</span><span style="color: #800000;">'</span>] = hxs.select(<span style="color: #800000;">'</span><span style="color: #800000;">//div[@class="padd20 bor1 comard"]/text()</span><span style="color: #800000;">'</span><span style="color: #000000;">).extract()
+                item[</span><span style="color: #800000;">'</span><span style="color: #800000;">more</span><span style="color: #800000;">'</span>] = hxs.select(<span style="color: #800000;">'</span><span style="color: #800000;">//li[@class="style4"]/a/@href</span><span style="color: #800000;">'</span><span style="color: #000000;">).extract()
+                item[</span><span style="color: #800000;">'</span><span style="color: #800000;">title</span><span style="color: #800000;">'</span>] = hxs.select(<span style="color: #800000;">'</span><span style="color: #800000;">//div[@class="g-left prodetail-text"]/h2/text()</span><span style="color: #800000;">'</span><span style="color: #000000;">).extract()
+                </span><span style="color: #0000ff;">yield</span><span style="color: #000000;"> item
+
+            current_page_urls </span>= hxs.select(<span style="color: #800000;">'</span><span style="color: #800000;">//a/@href</span><span style="color: #800000;">'</span><span style="color: #000000;">).extract()
+            </span><span style="color: #0000ff;">for</span> i <span style="color: #0000ff;">in</span><span style="color: #000000;"> range(len(current_page_urls)):
+                url </span>=<span style="color: #000000;"> current_page_urls[i]
+                </span><span style="color: #0000ff;">if</span> url.startswith(<span style="color: #800000;">'</span><span style="color: #800000;">/</span><span style="color: #800000;">'</span><span style="color: #000000;">):
+                    url_ab </span>= JieYiCaiSpider.domain +<span style="color: #000000;"> url
+                    </span><span style="color: #0000ff;">yield</span> Request(url_ab, callback=self.parse)</pre>
+</div>
+<span class="cnblogs_code_collapse">spider</span></div>
+<p>此处代码的关键在于：</p>
+<ul>
+<li>将获取的数据封装在了Item对象中</li>
+<li>yield Item对象 （一旦parse中执行yield Item对象，则自动将该对象交个pipelines的类来处理）</li>
+</ul>
+<div class="cnblogs_code" onclick="cnblogs_code_show('18091193-923f-40e4-a5c4-be5f243fd382')"><img id="code_img_closed_18091193-923f-40e4-a5c4-be5f243fd382" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_18091193-923f-40e4-a5c4-be5f243fd382" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('18091193-923f-40e4-a5c4-be5f243fd382',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_18091193-923f-40e4-a5c4-be5f243fd382" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;"> -*- coding: utf-8 -*-</span>
+
+<span style="color: #008000;">#</span><span style="color: #008000;"> Define your item pipelines here</span><span style="color: #008000;">
+#
+#</span><span style="color: #008000;"> Don't forget to add your pipeline to the ITEM_PIPELINES setting</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html</span>
+
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> json
+</span><span style="color: #0000ff;">from</span> twisted.enterprise <span style="color: #0000ff;">import</span><span style="color: #000000;"> adbapi
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> MySQLdb.cursors
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> re
+
+mobile_re </span>= re.compile(r<span style="color: #800000;">'</span><span style="color: #800000;">(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+phone_re </span>= re.compile(r<span style="color: #800000;">'</span><span style="color: #800000;">(\d+-\d+|\d+)</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> JsonPipeline(object):
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span><span style="color: #000000;">(self):
+        self.file </span>= open(<span style="color: #800000;">'</span><span style="color: #800000;">/Users/wupeiqi/PycharmProjects/beauty/beauty/jieyicai.json</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">wb</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> process_item(self, item, spider):
+        line </span>= <span style="color: #800000;">"</span><span style="color: #800000;">%s  %s\n</span><span style="color: #800000;">"</span> % (item[<span style="color: #800000;">'</span><span style="color: #800000;">company</span><span style="color: #800000;">'</span>][0].encode(<span style="color: #800000;">'</span><span style="color: #800000;">utf-8</span><span style="color: #800000;">'</span>), item[<span style="color: #800000;">'</span><span style="color: #800000;">title</span><span style="color: #800000;">'</span>][0].encode(<span style="color: #800000;">'</span><span style="color: #800000;">utf-8</span><span style="color: #800000;">'</span><span style="color: #000000;">))
+        self.file.write(line)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> item
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> DBPipeline(object):
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span><span style="color: #000000;">(self):
+        self.db_pool </span>= adbapi.ConnectionPool(<span style="color: #800000;">'</span><span style="color: #800000;">MySQLdb</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                                             db</span>=<span style="color: #800000;">'</span><span style="color: #800000;">DbCenter</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                                             user</span>=<span style="color: #800000;">'</span><span style="color: #800000;">root</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                                             passwd</span>=<span style="color: #800000;">'</span><span style="color: #800000;">123</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                                             cursorclass</span>=<span style="color: #000000;">MySQLdb.cursors.DictCursor,
+                                             use_unicode</span>=<span style="color: #000000;">True)
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> process_item(self, item, spider):
+        query </span>=<span style="color: #000000;"> self.db_pool.runInteraction(self._conditional_insert, item)
+        query.addErrback(self.handle_error)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> item
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> _conditional_insert(self, tx, item):
+        tx.execute(</span><span style="color: #800000;">"</span><span style="color: #800000;">select nid from company where company = %s</span><span style="color: #800000;">"</span>, (item[<span style="color: #800000;">'</span><span style="color: #800000;">company</span><span style="color: #800000;">'</span><span style="color: #000000;">][0], ))
+        result </span>=<span style="color: #000000;"> tx.fetchone()
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> result:
+            </span><span style="color: #0000ff;">pass</span>
+        <span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            phone_obj </span>= phone_re.search(item[<span style="color: #800000;">'</span><span style="color: #800000;">info</span><span style="color: #800000;">'</span><span style="color: #000000;">][0].strip())
+            phone </span>= phone_obj.group() <span style="color: #0000ff;">if</span> phone_obj <span style="color: #0000ff;">else</span> <span style="color: #800000;">'</span> <span style="color: #800000;">'</span><span style="color: #000000;">
+
+            mobile_obj </span>= mobile_re.search(item[<span style="color: #800000;">'</span><span style="color: #800000;">info</span><span style="color: #800000;">'</span>][1<span style="color: #000000;">].strip())
+            mobile </span>= mobile_obj.group() <span style="color: #0000ff;">if</span> mobile_obj <span style="color: #0000ff;">else</span> <span style="color: #800000;">'</span> <span style="color: #800000;">'</span><span style="color: #000000;">
+
+            values </span>=<span style="color: #000000;"> (
+                item[</span><span style="color: #800000;">'</span><span style="color: #800000;">company</span><span style="color: #800000;">'</span><span style="color: #000000;">][0],
+                item[</span><span style="color: #800000;">'</span><span style="color: #800000;">qq</span><span style="color: #800000;">'</span><span style="color: #000000;">][0],
+                phone,
+                mobile,
+                item[</span><span style="color: #800000;">'</span><span style="color: #800000;">info</span><span style="color: #800000;">'</span>][2<span style="color: #000000;">].strip(),
+                item[</span><span style="color: #800000;">'</span><span style="color: #800000;">more</span><span style="color: #800000;">'</span><span style="color: #000000;">][0])
+            tx.execute(</span><span style="color: #800000;">"</span><span style="color: #800000;">insert into company(company,qq,phone,mobile,address,more) values(%s,%s,%s,%s,%s,%s)</span><span style="color: #800000;">"</span><span style="color: #000000;">, values)
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> handle_error(self, e):
+        </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">error</span><span style="color: #800000;">'</span>,e</pre>
+</div>
+<span class="cnblogs_code_collapse">pipelines</span></div>
+<p>上述中的pipelines中有多个类，到底Scapy会自动执行那个？哈哈哈哈，当然需要先配置了，不然Scapy就蒙逼了。。。</p>
+<p>在settings.py中做如下配置：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">ITEM_PIPELINES = {
+    'beauty.pipelines.DBPipeline': 300,
+    'beauty.pipelines.JsonPipeline': 100,
+}
+# 每行后面的整型值，确定了他们运行的顺序，item按数字从低到高的顺序，通过pipeline，通常将这些数字定义在0-1000范围内。
+</pre>
+</div>
+<p>&nbsp;</p>
+<p>更多请参见Scrapy文档：http://scrapy-chs.readthedocs.io/zh_CN/latest/index.html</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2016-04-05 14:16</span> <a href='http://www.cnblogs.com/wupeiqi/'>武沛齐</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>) &nbsp;<a href="https://i.cnblogs.com/EditArticles.aspx?postid=5354900" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(5354900);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=133379,cb_entryId=5354900,cb_blogApp=currentBlogApp,cb_blogUserGuid='7208b24d-95c9-e111-aa3f-842b2b196315',cb_entryCreatedDate='2016/4/5 14:16:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2017 武沛齐
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

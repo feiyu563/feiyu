@@ -1,0 +1,611 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python开发【第十九篇】：Python操作MySQL - 武沛齐 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=m_FXmwz3wxZoecUwNEK23PAzc-j9vbX_C6MblJ5ouMc1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue.css?v=jJERBFSojhmgst84aaRDal9S3q1WoO-WcNudmMzGJS81"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/133379.css?v=YSNZANkz7eBKoXq2iHYfghvodkY%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue-mobile.css?v=z0BacpCfWeLlXDCM0C158kTP_DMqMbGBapID4f-QztI1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/wupeiqi/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/wupeiqi/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/wupeiqi/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'wupeiqi', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=CPv0EEqm9L2aCgolHxaZfVYM6J-Sn5az_FJXbjzgr-o1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/wupeiqi/">Mr.Seven</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/wupeiqi/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%AD%A6%E6%B2%9B%E9%BD%90">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/wupeiqi/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/wupeiqi/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-126&nbsp;
+文章-137&nbsp;
+评论-259&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/wupeiqi/articles/5713330.html">Python开发【第十九篇】：Python操作MySQL</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><p>本篇对于Python操作MySQL主要使用两种方式：</p>
+<ul>
+<li>原生模块 pymsql</li>
+<li>ORM框架 SQLAchemy</li>
+</ul>
+<h3>pymsql</h3>
+<p>pymsql是Python中操作MySQL的模块，其使用方法和MySQLdb几乎相同。</p>
+<p><span style="font-size: 18px;"><strong><strong>下载安装</strong></strong></span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:sql;gutter:true;">pip3 install pymysql
+</pre>
+</div>
+<p><span style="font-size: 18px;"><strong>使用操作</strong></span></p>
+<p>1、执行SQL</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:sql;collapse:true;;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+import pymysql
+ 
+# 创建连接
+conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='123', db='t1')
+# 创建游标
+cursor = conn.cursor()
+ 
+# 执行SQL，并返回收影响行数
+effect_row = cursor.execute("update hosts set host = '1.1.1.2'")
+ 
+# 执行SQL，并返回受影响行数
+#effect_row = cursor.execute("update hosts set host = '1.1.1.2' where nid &gt; %s", (1,))
+ 
+# 执行SQL，并返回受影响行数
+#effect_row = cursor.executemany("insert into hosts(host,color_id)values(%s,%s)", [("1.1.1.11",1),("1.1.1.11",2)])
+ 
+ 
+# 提交，不然无法保存新建或者修改的数据
+conn.commit()
+ 
+# 关闭游标
+cursor.close()
+# 关闭连接
+conn.close()
+</pre>
+</div>
+<p>2、获取新创建数据自增ID</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:sql;collapse:true;;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+import pymysql
+ 
+conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='123', db='t1')
+cursor = conn.cursor()
+cursor.executemany("insert into hosts(host,color_id)values(%s,%s)", [("1.1.1.11",1),("1.1.1.11",2)])
+conn.commit()
+cursor.close()
+conn.close()
+ 
+# 获取最新自增ID
+new_id = cursor.lastrowid
+</pre>
+</div>
+<p>3、获取查询数据</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:sql;collapse:true;;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+import pymysql
+ 
+conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='123', db='t1')
+cursor = conn.cursor()
+cursor.execute("select * from hosts")
+ 
+# 获取第一行数据
+row_1 = cursor.fetchone()
+ 
+# 获取前n行数据
+# row_2 = cursor.fetchmany(3)
+# 获取所有数据
+# row_3 = cursor.fetchall()
+ 
+conn.commit()
+cursor.close()
+conn.close()
+</pre>
+</div>
+<p>注：在fetch数据时按照顺序进行，可以使用cursor.scroll(num,mode)来移动游标位置，如：</p>
+<ul>
+<li>cursor.scroll(1,mode='relative') &nbsp;# 相对当前位置移动</li>
+<li>cursor.scroll(2,mode='absolute') # 相对绝对位置移动</li>
+</ul>
+<p>4、fetch数据类型</p>
+<p>　　关于默认获取的数据是元祖类型，如果想要或者字典类型的数据，即：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:sql;collapse:true;;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+import pymysql
+ 
+conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='123', db='t1')
+ 
+# 游标设置为字典类型
+cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+r = cursor.execute("call p1()")
+ 
+result = cursor.fetchone()
+ 
+conn.commit()
+cursor.close()
+conn.close()
+</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('8eb3ee2e-c528-43ef-bf2e-836e8481c2b6')"><img id="code_img_closed_8eb3ee2e-c528-43ef-bf2e-836e8481c2b6" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_8eb3ee2e-c528-43ef-bf2e-836e8481c2b6" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('8eb3ee2e-c528-43ef-bf2e-836e8481c2b6',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_8eb3ee2e-c528-43ef-bf2e-836e8481c2b6" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">    作业：
+        参考表结构：
+            用户类型
+
+            用户信息
+
+            权限
+
+            用户类型</span><span style="color: #808080;">&amp;</span><span style="color: #000000;">权限
+        功能：
+
+            # 登陆、注册、找回密码
+            # 用户管理
+            # 用户类型
+            # 权限管理
+            # 分配权限
+
+        特别的：程序仅一个可执行文件</span></pre>
+</div>
+<span class="cnblogs_code_collapse">练习题</span></div>
+<h3>SQLAchemy</h3>
+<p>SQLAlchemy是<a href="http://baike.baidu.com/subview/21087/21087.htm" target="_blank">Python</a>编程语言下的一款ORM框架，该框架建立在数据库API之上，使用关系对象映射进行数据库操作，简言之便是：将对象转换成SQL，然后使用数据API执行SQL并获取执行结果。</p>
+<p>安装：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:sql;gutter:true;">pip3 install SQLAlchemy</pre>
+</div>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201607/425762-20160723192854919-886727948.png" alt="" width="455" height="307" /></p>
+<p>&nbsp;</p>
+<p>SQLAlchemy本身无法操作数据库，其必须以来pymsql等第三方插件，Dialect用于和数据API进行交流，根据配置文件的不同调用不同的数据库API，从而实现对数据库的操作，如：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:sql;gutter:true;">MySQL-Python
+    mysql+mysqldb://&lt;user&gt;:&lt;password&gt;@&lt;host&gt;[:&lt;port&gt;]/&lt;dbname&gt;
+  
+pymysql
+    mysql+pymysql://&lt;username&gt;:&lt;password&gt;@&lt;host&gt;/&lt;dbname&gt;[?&lt;options&gt;]
+  
+MySQL-Connector
+    mysql+mysqlconnector://&lt;user&gt;:&lt;password&gt;@&lt;host&gt;[:&lt;port&gt;]/&lt;dbname&gt;
+  
+cx_Oracle
+    oracle+cx_oracle://user:pass@host:port/dbname[?key=value&amp;key=value...]
+  
+更多详见：http://docs.sqlalchemy.org/en/latest/dialects/index.html
+</pre>
+</div>
+<p><strong>一、内部处理</strong></p>
+<p>使用 Engine/ConnectionPooling/Dialect 进行数据库操作，Engine使用ConnectionPooling连接数据库，然后再通过Dialect执行SQL语句。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:sql;collapse:true;;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+from sqlalchemy import create_engine
+ 
+ 
+engine = create_engine("mysql+pymysql://root:123@127.0.0.1:3306/t1", max_overflow=5)
+ 
+# 执行SQL
+# cur = engine.execute(
+#     "INSERT INTO hosts (host, color_id) VALUES ('1.1.1.22', 3)"
+# )
+ 
+# 新插入行自增ID
+# cur.lastrowid
+ 
+# 执行SQL
+# cur = engine.execute(
+#     "INSERT INTO hosts (host, color_id) VALUES(%s, %s)",[('1.1.1.22', 3),('1.1.1.221', 3),]
+# )
+ 
+ 
+# 执行SQL
+# cur = engine.execute(
+#     "INSERT INTO hosts (host, color_id) VALUES (%(host)s, %(color_id)s)",
+#     host='1.1.1.99', color_id=3
+# )
+ 
+# 执行SQL
+# cur = engine.execute('select * from hosts')
+# 获取第一行数据
+# cur.fetchone()
+# 获取第n行数据
+# cur.fetchmany(3)
+# 获取所有数据
+# cur.fetchall()
+</pre>
+</div>
+<p><strong>二、ORM功能使用</strong></p>
+<p>使用 ORM/Schema Type/SQL Expression Language/Engine/ConnectionPooling/Dialect 所有组件对数据进行操作。根据类创建对象，对象转换成SQL，执行SQL。</p>
+<p>1、创建表</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:sql;collapse:true;;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, ForeignKey, UniqueConstraint, Index
+from sqlalchemy.orm import sessionmaker, relationship
+from sqlalchemy import create_engine
+
+engine = create_engine("mysql+pymysql://root:123@127.0.0.1:3306/t1", max_overflow=5)
+
+Base = declarative_base()
+
+# 创建单表
+class Users(Base):
+    __tablename__ = 'users'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(32))
+    extra = Column(String(16))
+
+    __table_args__ = (
+    UniqueConstraint('id', 'name', name='uix_id_name'),
+        Index('ix_id_name', 'name', 'extra'),
+    )
+
+
+# 一对多
+class Favor(Base):
+    __tablename__ = 'favor'
+    nid = Column(Integer, primary_key=True)
+    caption = Column(String(50), default='red', unique=True)
+
+
+class Person(Base):
+    __tablename__ = 'person'
+    nid = Column(Integer, primary_key=True)
+    name = Column(String(32), index=True, nullable=True)
+    favor_id = Column(Integer, ForeignKey("favor.nid"))
+
+
+# 多对多
+class Group(Base):
+    __tablename__ = 'group'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(64), unique=True, nullable=False)
+    port = Column(Integer, default=22)
+
+
+class Server(Base):
+    __tablename__ = 'server'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    hostname = Column(String(64), unique=True, nullable=False)
+
+
+class ServerToGroup(Base):
+    __tablename__ = 'servertogroup'
+    nid = Column(Integer, primary_key=True, autoincrement=True)
+    server_id = Column(Integer, ForeignKey('server.id'))
+    group_id = Column(Integer, ForeignKey('group.id'))
+
+
+def init_db():
+    Base.metadata.create_all(engine)
+
+
+def drop_db():
+    Base.metadata.drop_all(engine)
+</pre>
+</div>
+<p><span style="color: #888888;"><em>注：设置外检的另一种方式 ForeignKeyConstraint(['other_id'], ['othertable.other_id'])</em></span></p>
+<p>2、操作表</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('ddee4b26-56bb-43a2-a776-c4d4907319ea')"><img id="code_img_closed_ddee4b26-56bb-43a2-a776-c4d4907319ea" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_ddee4b26-56bb-43a2-a776-c4d4907319ea" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('ddee4b26-56bb-43a2-a776-c4d4907319ea',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_ddee4b26-56bb-43a2-a776-c4d4907319ea" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+<span style="color: #0000ff;">from</span> sqlalchemy.ext.declarative <span style="color: #0000ff;">import</span><span style="color: #000000;"> declarative_base
+</span><span style="color: #0000ff;">from</span> sqlalchemy <span style="color: #0000ff;">import</span><span style="color: #000000;"> Column, Integer, String, ForeignKey, UniqueConstraint, Index
+</span><span style="color: #0000ff;">from</span> sqlalchemy.orm <span style="color: #0000ff;">import</span><span style="color: #000000;"> sessionmaker, relationship
+</span><span style="color: #0000ff;">from</span> sqlalchemy <span style="color: #0000ff;">import</span><span style="color: #000000;"> create_engine
+
+engine </span>= create_engine(<span style="color: #800000;">"</span><span style="color: #800000;">mysql+pymysql://root:123@127.0.0.1:3306/t1</span><span style="color: #800000;">"</span>, max_overflow=5<span style="color: #000000;">)
+
+Base </span>=<span style="color: #000000;"> declarative_base()
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 创建单表</span>
+<span style="color: #0000ff;">class</span><span style="color: #000000;"> Users(Base):
+    </span><span style="color: #800080;">__tablename__</span> = <span style="color: #800000;">'</span><span style="color: #800000;">users</span><span style="color: #800000;">'</span><span style="color: #000000;">
+    id </span>= Column(Integer, primary_key=<span style="color: #000000;">True)
+    name </span>= Column(String(32<span style="color: #000000;">))
+    extra </span>= Column(String(16<span style="color: #000000;">))
+
+    </span><span style="color: #800080;">__table_args__</span> =<span style="color: #000000;"> (
+    UniqueConstraint(</span><span style="color: #800000;">'</span><span style="color: #800000;">id</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">name</span><span style="color: #800000;">'</span>, name=<span style="color: #800000;">'</span><span style="color: #800000;">uix_id_name</span><span style="color: #800000;">'</span><span style="color: #000000;">),
+        Index(</span><span style="color: #800000;">'</span><span style="color: #800000;">ix_id_name</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">name</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">extra</span><span style="color: #800000;">'</span><span style="color: #000000;">),
+    )
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__repr__</span><span style="color: #000000;">(self):
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800000;">"</span><span style="color: #800000;">%s-%s</span><span style="color: #800000;">"</span> %<span style="color: #000000;">(self.id, self.name)
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 一对多</span>
+<span style="color: #0000ff;">class</span><span style="color: #000000;"> Favor(Base):
+    </span><span style="color: #800080;">__tablename__</span> = <span style="color: #800000;">'</span><span style="color: #800000;">favor</span><span style="color: #800000;">'</span><span style="color: #000000;">
+    nid </span>= Column(Integer, primary_key=<span style="color: #000000;">True)
+    caption </span>= Column(String(50), default=<span style="color: #800000;">'</span><span style="color: #800000;">red</span><span style="color: #800000;">'</span>, unique=<span style="color: #000000;">True)
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__repr__</span><span style="color: #000000;">(self):
+        </span><span style="color: #0000ff;">return</span> <span style="color: #800000;">"</span><span style="color: #800000;">%s-%s</span><span style="color: #800000;">"</span> %<span style="color: #000000;">(self.nid, self.caption)
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Person(Base):
+    </span><span style="color: #800080;">__tablename__</span> = <span style="color: #800000;">'</span><span style="color: #800000;">person</span><span style="color: #800000;">'</span><span style="color: #000000;">
+    nid </span>= Column(Integer, primary_key=<span style="color: #000000;">True)
+    name </span>= Column(String(32), index=True, nullable=<span style="color: #000000;">True)
+    favor_id </span>= Column(Integer, ForeignKey(<span style="color: #800000;">"</span><span style="color: #800000;">favor.nid</span><span style="color: #800000;">"</span><span style="color: #000000;">))
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> 与生成表结构无关，仅用于查询方便</span>
+    favor = relationship(<span style="color: #800000;">"</span><span style="color: #800000;">Favor</span><span style="color: #800000;">"</span>, backref=<span style="color: #800000;">'</span><span style="color: #800000;">pers</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 多对多</span>
+<span style="color: #0000ff;">class</span><span style="color: #000000;"> ServerToGroup(Base):
+    </span><span style="color: #800080;">__tablename__</span> = <span style="color: #800000;">'</span><span style="color: #800000;">servertogroup</span><span style="color: #800000;">'</span><span style="color: #000000;">
+    nid </span>= Column(Integer, primary_key=True, autoincrement=<span style="color: #000000;">True)
+    server_id </span>= Column(Integer, ForeignKey(<span style="color: #800000;">'</span><span style="color: #800000;">server.id</span><span style="color: #800000;">'</span><span style="color: #000000;">))
+    group_id </span>= Column(Integer, ForeignKey(<span style="color: #800000;">'</span><span style="color: #800000;">group.id</span><span style="color: #800000;">'</span><span style="color: #000000;">))
+    group </span>= relationship(<span style="color: #800000;">"</span><span style="color: #800000;">Group</span><span style="color: #800000;">"</span>, backref=<span style="color: #800000;">'</span><span style="color: #800000;">s2g</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    server </span>= relationship(<span style="color: #800000;">"</span><span style="color: #800000;">Server</span><span style="color: #800000;">"</span>, backref=<span style="color: #800000;">'</span><span style="color: #800000;">s2g</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Group(Base):
+    </span><span style="color: #800080;">__tablename__</span> = <span style="color: #800000;">'</span><span style="color: #800000;">group</span><span style="color: #800000;">'</span><span style="color: #000000;">
+    id </span>= Column(Integer, primary_key=<span style="color: #000000;">True)
+    name </span>= Column(String(64), unique=True, nullable=<span style="color: #000000;">False)
+    port </span>= Column(Integer, default=22<span style="color: #000000;">)
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> group = relationship('Group',secondary=ServerToGroup,backref='host_list')</span>
+
+
+<span style="color: #0000ff;">class</span><span style="color: #000000;"> Server(Base):
+    </span><span style="color: #800080;">__tablename__</span> = <span style="color: #800000;">'</span><span style="color: #800000;">server</span><span style="color: #800000;">'</span><span style="color: #000000;">
+
+    id </span>= Column(Integer, primary_key=True, autoincrement=<span style="color: #000000;">True)
+    hostname </span>= Column(String(64), unique=True, nullable=<span style="color: #000000;">False)
+
+
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> init_db():
+    Base.metadata.create_all(engine)
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> drop_db():
+    Base.metadata.drop_all(engine)
+
+
+Session </span>= sessionmaker(bind=<span style="color: #000000;">engine)
+session </span>= Session()</pre>
+</div>
+<span class="cnblogs_code_collapse">表结构 + 数据库连接</span></div>
+<ul>
+<li>增<br />
+<div class="cnblogs_code" onclick="cnblogs_code_show('90339498-551e-4389-9f63-e5e337af6b36')"><img id="code_img_closed_90339498-551e-4389-9f63-e5e337af6b36" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_90339498-551e-4389-9f63-e5e337af6b36" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('90339498-551e-4389-9f63-e5e337af6b36',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_90339498-551e-4389-9f63-e5e337af6b36" class="cnblogs_code_hide">
+<pre>obj = Users(name=<span style="color: #800000;">"</span><span style="color: #800000;">alex0</span><span style="color: #800000;">"</span>, extra=<span style="color: #800000;">'</span><span style="color: #800000;">sb</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+session.add(obj)
+session.add_all([
+    Users(name</span>=<span style="color: #800000;">"</span><span style="color: #800000;">alex1</span><span style="color: #800000;">"</span>, extra=<span style="color: #800000;">'</span><span style="color: #800000;">sb</span><span style="color: #800000;">'</span><span style="color: #000000;">),
+    Users(name</span>=<span style="color: #800000;">"</span><span style="color: #800000;">alex2</span><span style="color: #800000;">"</span>, extra=<span style="color: #800000;">'</span><span style="color: #800000;">sb</span><span style="color: #800000;">'</span><span style="color: #000000;">),
+])
+session.commit()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+</li>
+<li>删<br />
+<div class="cnblogs_code" onclick="cnblogs_code_show('218c2fe3-9b5c-4ec2-9383-bfac3a8ae230')"><img id="code_img_closed_218c2fe3-9b5c-4ec2-9383-bfac3a8ae230" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_218c2fe3-9b5c-4ec2-9383-bfac3a8ae230" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('218c2fe3-9b5c-4ec2-9383-bfac3a8ae230',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_218c2fe3-9b5c-4ec2-9383-bfac3a8ae230" class="cnblogs_code_hide">
+<pre>session.query(Users).filter(Users.id &gt; 2<span style="color: #000000;">).delete()
+session.commit()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+</li>
+<li>改<br />
+<div class="cnblogs_code" onclick="cnblogs_code_show('7d37bfca-b0a8-4ac0-a66b-0d2ca2f2c507')"><img id="code_img_closed_7d37bfca-b0a8-4ac0-a66b-0d2ca2f2c507" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_7d37bfca-b0a8-4ac0-a66b-0d2ca2f2c507" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('7d37bfca-b0a8-4ac0-a66b-0d2ca2f2c507',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_7d37bfca-b0a8-4ac0-a66b-0d2ca2f2c507" class="cnblogs_code_hide">
+<pre>session.query(Users).filter(Users.id &gt; 2).update({<span style="color: #800000;">"</span><span style="color: #800000;">name</span><span style="color: #800000;">"</span> : <span style="color: #800000;">"</span><span style="color: #800000;">099</span><span style="color: #800000;">"</span><span style="color: #000000;">})
+session.query(Users).filter(Users.id </span>&gt; 2).update({Users.name: Users.name + <span style="color: #800000;">"</span><span style="color: #800000;">099</span><span style="color: #800000;">"</span>}, synchronize_session=<span style="color: #000000;">False)
+session.query(Users).filter(Users.id </span>&gt; 2).update({<span style="color: #800000;">"</span><span style="color: #800000;">num</span><span style="color: #800000;">"</span>: Users.num + 1}, synchronize_session=<span style="color: #800000;">"</span><span style="color: #800000;">evaluate</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+session.commit()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+</li>
+<li>查<br />
+<div class="cnblogs_code" onclick="cnblogs_code_show('f86cf3d3-680e-4f39-89b6-ba72b6f6f5c0')"><img id="code_img_closed_f86cf3d3-680e-4f39-89b6-ba72b6f6f5c0" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_f86cf3d3-680e-4f39-89b6-ba72b6f6f5c0" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('f86cf3d3-680e-4f39-89b6-ba72b6f6f5c0',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_f86cf3d3-680e-4f39-89b6-ba72b6f6f5c0" class="cnblogs_code_hide">
+<pre>ret =<span style="color: #000000;"> session.query(Users).all()
+ret </span>=<span style="color: #000000;"> session.query(Users.name, Users.extra).all()
+ret </span>= session.query(Users).filter_by(name=<span style="color: #800000;">'</span><span style="color: #800000;">alex</span><span style="color: #800000;">'</span><span style="color: #000000;">).all()
+ret </span>= session.query(Users).filter_by(name=<span style="color: #800000;">'</span><span style="color: #800000;">alex</span><span style="color: #800000;">'</span>).first()</pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+</li>
+<li>其他<br />
+<div class="cnblogs_code" onclick="cnblogs_code_show('700a42cf-95ba-40af-b471-815c9fa60df6')"><img id="code_img_closed_700a42cf-95ba-40af-b471-815c9fa60df6" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_700a42cf-95ba-40af-b471-815c9fa60df6" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('700a42cf-95ba-40af-b471-815c9fa60df6',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_700a42cf-95ba-40af-b471-815c9fa60df6" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">　条件</span>
+ret = session.query(Users).filter_by(name=<span style="color: #800000;">'</span><span style="color: #800000;">alex</span><span style="color: #800000;">'</span><span style="color: #000000;">).all()
+ret </span>= session.query(Users).filter(Users.id &gt; 1, Users.name == <span style="color: #800000;">'</span><span style="color: #800000;">eric</span><span style="color: #800000;">'</span><span style="color: #000000;">).all()
+ret </span>= session.query(Users).filter(Users.id.between(1, 3), Users.name == <span style="color: #800000;">'</span><span style="color: #800000;">eric</span><span style="color: #800000;">'</span><span style="color: #000000;">).all()
+ret </span>= session.query(Users).filter(Users.id.in_([1,3,4<span style="color: #000000;">])).all()
+ret </span>= session.query(Users).filter(~Users.id.in_([1,3,4<span style="color: #000000;">])).all()
+ret </span>= session.query(Users).filter(Users.id.in_(session.query(Users.id).filter_by(name=<span style="color: #800000;">'</span><span style="color: #800000;">eric</span><span style="color: #800000;">'</span><span style="color: #000000;">))).all()
+</span><span style="color: #0000ff;">from</span> sqlalchemy <span style="color: #0000ff;">import</span><span style="color: #000000;"> and_, or_
+ret </span>= session.query(Users).filter(and_(Users.id &gt; 3, Users.name == <span style="color: #800000;">'</span><span style="color: #800000;">eric</span><span style="color: #800000;">'</span><span style="color: #000000;">)).all()
+ret </span>= session.query(Users).filter(or_(Users.id &lt; 2, Users.name == <span style="color: #800000;">'</span><span style="color: #800000;">eric</span><span style="color: #800000;">'</span><span style="color: #000000;">)).all()
+ret </span>=<span style="color: #000000;"> session.query(Users).filter(
+    or_(
+        Users.id </span>&lt; 2<span style="color: #000000;">,
+        and_(Users.name </span>== <span style="color: #800000;">'</span><span style="color: #800000;">eric</span><span style="color: #800000;">'</span>, Users.id &gt; 3<span style="color: #000000;">),
+        Users.extra </span>!= <span style="color: #800000;">""</span><span style="color: #000000;">
+    )).all()
+
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 通配符</span>
+ret = session.query(Users).filter(Users.name.like(<span style="color: #800000;">'</span><span style="color: #800000;">e%</span><span style="color: #800000;">'</span><span style="color: #000000;">)).all()
+ret </span>= session.query(Users).filter(~Users.name.like(<span style="color: #800000;">'</span><span style="color: #800000;">e%</span><span style="color: #800000;">'</span><span style="color: #000000;">)).all()
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 限制</span>
+ret = session.query(Users)[1:2<span style="color: #000000;">]
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 排序</span>
+ret =<span style="color: #000000;"> session.query(Users).order_by(Users.name.desc()).all()
+ret </span>=<span style="color: #000000;"> session.query(Users).order_by(Users.name.desc(), Users.id.asc()).all()
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 分组</span>
+<span style="color: #0000ff;">from</span> sqlalchemy.sql <span style="color: #0000ff;">import</span><span style="color: #000000;"> func
+
+ret </span>=<span style="color: #000000;"> session.query(Users).group_by(Users.extra).all()
+ret </span>=<span style="color: #000000;"> session.query(
+    func.max(Users.id),
+    func.sum(Users.id),
+    func.min(Users.id)).group_by(Users.name).all()
+
+ret </span>=<span style="color: #000000;"> session.query(
+    func.max(Users.id),
+    func.sum(Users.id),
+    func.min(Users.id)).group_by(Users.name).having(func.min(Users.id) </span>&gt;2<span style="color: #000000;">).all()
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 连表</span>
+<span style="color: #000000;">
+ret </span>= session.query(Users, Favor).filter(Users.id ==<span style="color: #000000;"> Favor.nid).all()
+
+ret </span>=<span style="color: #000000;"> session.query(Person).join(Favor).all()
+
+ret </span>= session.query(Person).join(Favor, isouter=<span style="color: #000000;">True).all()
+
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 组合</span>
+q1 = session.query(Users.name).filter(Users.id &gt; 2<span style="color: #000000;">)
+q2 </span>= session.query(Favor.caption).filter(Favor.nid &lt; 2<span style="color: #000000;">)
+ret </span>=<span style="color: #000000;"> q1.union(q2).all()
+
+q1 </span>= session.query(Users.name).filter(Users.id &gt; 2<span style="color: #000000;">)
+q2 </span>= session.query(Favor.caption).filter(Favor.nid &lt; 2<span style="color: #000000;">)
+ret </span>= q1.union_all(q2).all()</pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+</li>
+</ul>
+<p>更多功能参见文档，<a href="http://files.cnblogs.com/files/wupeiqi/sqlalchemy.pdf.zip" target="_blank">猛击这里</a>下载PDF</p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2016-07-28 07:24</span> <a href='http://www.cnblogs.com/wupeiqi/'>武沛齐</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>) &nbsp;<a href="https://i.cnblogs.com/EditArticles.aspx?postid=5713330" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(5713330);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=133379,cb_entryId=5713330,cb_blogApp=currentBlogApp,cb_blogUserGuid='7208b24d-95c9-e111-aa3f-842b2b196315',cb_entryCreatedDate='2016/7/28 7:24:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2017 武沛齐
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

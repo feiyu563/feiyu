@@ -1,0 +1,724 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python之路【第八篇】：堡垒机实例以及数据库操作 - 武沛齐 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=m_FXmwz3wxZoecUwNEK23PAzc-j9vbX_C6MblJ5ouMc1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue.css?v=jJERBFSojhmgst84aaRDal9S3q1WoO-WcNudmMzGJS81"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/133379.css?v=YSNZANkz7eBKoXq2iHYfghvodkY%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue-mobile.css?v=z0BacpCfWeLlXDCM0C158kTP_DMqMbGBapID4f-QztI1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/wupeiqi/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/wupeiqi/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/wupeiqi/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'wupeiqi', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=CPv0EEqm9L2aCgolHxaZfVYM6J-Sn5az_FJXbjzgr-o1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/wupeiqi/">Mr.Seven</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/wupeiqi/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%AD%A6%E6%B2%9B%E9%BD%90">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/wupeiqi/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/wupeiqi/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-126&nbsp;
+文章-137&nbsp;
+评论-259&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/wupeiqi/articles/5095821.html">Python之路【第八篇】：堡垒机实例以及数据库操作</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><h3>堡垒机前戏</h3>
+<p>开发堡垒机之前，先来学习Python的paramiko模块，该模块机遇SSH用于连接远程服务器并执行相关操作</p>
+<p><span style="font-size: 16px;"><strong>SSHClient</strong></span></p>
+<p>用于连接远程服务器并执行基本命令</p>
+<p><strong>基于用户名密码连接：</strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">import paramiko
+ 
+# 创建SSH对象
+ssh = paramiko.SSHClient()
+# 允许连接不在know_hosts文件中的主机
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+# 连接服务器
+ssh.connect(hostname='c1.salt.com', port=22, username='wupeiqi', password='123')
+ 
+# 执行命令
+stdin, stdout, stderr = ssh.exec_command('df')
+# 获取命令结果
+result = stdout.read()
+ 
+# 关闭连接
+ssh.close()</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('5a3328df-dcc9-4e22-bf41-3e340f8d2926')"><img id="code_img_closed_5a3328df-dcc9-4e22-bf41-3e340f8d2926" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_5a3328df-dcc9-4e22-bf41-3e340f8d2926" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('5a3328df-dcc9-4e22-bf41-3e340f8d2926',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_5a3328df-dcc9-4e22-bf41-3e340f8d2926" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> paramiko
+
+transport </span>= paramiko.Transport((<span style="color: #800000;">'</span><span style="color: #800000;">hostname</span><span style="color: #800000;">'</span>, 22<span style="color: #000000;">))
+transport.connect(username</span>=<span style="color: #800000;">'</span><span style="color: #800000;">wupeiqi</span><span style="color: #800000;">'</span>, password=<span style="color: #800000;">'</span><span style="color: #800000;">123</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+ssh </span>=<span style="color: #000000;"> paramiko.SSHClient()
+ssh._transport </span>=<span style="color: #000000;"> transport
+
+stdin, stdout, stderr </span>= ssh.exec_command(<span style="color: #800000;">'</span><span style="color: #800000;">df</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+</span><span style="color: #0000ff;">print</span><span style="color: #000000;"> stdout.read()
+
+transport.close()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">SSHClient 封装 Transport</span></div>
+<p><strong>基于公钥密钥连接：</strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">import paramiko
+
+private_key = paramiko.RSAKey.from_private_key_file('/home/auto/.ssh/id_rsa')
+
+# 创建SSH对象
+ssh = paramiko.SSHClient()
+# 允许连接不在know_hosts文件中的主机
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+# 连接服务器
+ssh.connect(hostname='c1.salt.com', port=22, username='wupeiqi', key=private_key)
+
+# 执行命令
+stdin, stdout, stderr = ssh.exec_command('df')
+# 获取命令结果
+result = stdout.read()
+
+# 关闭连接
+ssh.close()</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('1ea3611b-b653-463c-82bc-4e837c8d8719')"><img id="code_img_closed_1ea3611b-b653-463c-82bc-4e837c8d8719" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_1ea3611b-b653-463c-82bc-4e837c8d8719" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('1ea3611b-b653-463c-82bc-4e837c8d8719',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_1ea3611b-b653-463c-82bc-4e837c8d8719" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> paramiko
+
+private_key </span>= paramiko.RSAKey.from_private_key_file(<span style="color: #800000;">'</span><span style="color: #800000;">/home/auto/.ssh/id_rsa</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+transport </span>= paramiko.Transport((<span style="color: #800000;">'</span><span style="color: #800000;">hostname</span><span style="color: #800000;">'</span>, 22<span style="color: #000000;">))
+transport.connect(username</span>=<span style="color: #800000;">'</span><span style="color: #800000;">wupeiqi</span><span style="color: #800000;">'</span>, pkey=<span style="color: #000000;">private_key)
+
+ssh </span>=<span style="color: #000000;"> paramiko.SSHClient()
+ssh._transport </span>=<span style="color: #000000;"> transport
+
+stdin, stdout, stderr </span>= ssh.exec_command(<span style="color: #800000;">'</span><span style="color: #800000;">df</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+transport.close()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">SSHClient 封装 Transport</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('aa421c75-07b9-44fc-9d3d-ac6cd259f05e')"><img id="code_img_closed_aa421c75-07b9-44fc-9d3d-ac6cd259f05e" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_aa421c75-07b9-44fc-9d3d-ac6cd259f05e" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('aa421c75-07b9-44fc-9d3d-ac6cd259f05e',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_aa421c75-07b9-44fc-9d3d-ac6cd259f05e" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> paramiko
+</span><span style="color: #0000ff;">from</span> io <span style="color: #0000ff;">import</span><span style="color: #000000;"> StringIO
+
+key_str </span>= <span style="color: #800000;">"""</span><span style="color: #800000;">-----BEGIN RSA PRIVATE KEY-----
+MIIEpQIBAAKCAQEAq7gLsqYArAFco02/55IgNg0r7NXOtEM3qXpb/dabJ5Uyky/8
+NEHhFiQ7deHIRIuTW5Zb0kD6h6EBbVlUMBmwJrC2oSzySLU1w+ZNfH0PE6W6fans
+H80whhuc/YgP+fjiO+VR/gFcqib8Rll5UfYzf5H8uuOnDeIXGCVgyHQSmt8if1+e
+7hn1MVO1Lrm9Fco8ABI7dyv8/ZEwoSfh2C9rGYgA58LT1FkBRkOePbHD43xNfAYC
+tfLvz6LErMnwdOW4sNMEWWAWv1fsTB35PAm5CazfKzmam9n5IQXhmUNcNvmaZtvP
+c4f4g59mdsaWNtNaY96UjOfx83Om86gmdkKcnwIDAQABAoIBAQCnDBGFJuv8aA7A
+ZkBLe+GN815JtOyye7lIS1n2I7En3oImoUWNaJEYwwJ8+LmjxMwDCtAkR0XwbvY+
+c+nsKPEtkjb3sAu6I148RmwWsGncSRqUaJrljOypaW9dS+GO4Ujjz3/lw1lrxSUh
+IqVc0E7kyRW8kP3QCaNBwArYteHreZFFp6XmtKMtXaEA3saJYILxaaXlYkoRi4k8
+S2/K8aw3ZMR4tDCOfB4o47JaeiA/e185RK3A+mLn9xTDhTdZqTQpv17/YRPcgmwz
+zu30fhVXQT/SuI0sO+bzCO4YGoEwoBX718AWhdLJFoFq1B7k2ZEzXTAtjEXQEWm6
+01ndU/jhAasdfasdasdfasdfa3eraszxqwefasdfadasdffsFIfAsjQb4HdkmHuC
+OeJrJOd+CYvdEeqJJNnF6AbHyYHIECkj0Qq1kEfLOEsqzd5nDbtkKBte6M1trbjl
+HtJ2Yb8w6o/q/6Sbj7wf/cW3LIYEdeVCjScozVcQ9R83ea05J+QOAr4nAoGBAMaq
+UzLJfLNWZ5Qosmir2oHStFlZpxspax/ln7DlWLW4wPB4YJalSVovF2Buo8hr8X65
+lnPiE41M+G0Z7icEXiFyDBFDCtzx0x/RmaBokLathrFtI81UCx4gQPLaSVNMlvQA
+539GsubSrO4LpHRNGg/weZ6EqQOXvHvkUkm2bDDJAoGATytFNxen6GtC0ZT3SRQM
+WYfasdf3xbtuykmnluiofasd2sfmjnljkt7khghmghdasSDFGQfgaFoKfaawoYeH
+C2XasVUsVviBn8kPSLSVBPX4JUfQmA6h8HsajeVahxN1U9e0nYJ0sYDQFUMTS2t8
+RT57+WK/0ONwTWHdu+KnaJECgYEAid/ta8LQC3p82iNAZkpWlGDSD2yb/8rH8NQg
+9tjEryFwrbMtfX9qn+8srx06B796U3OjifstjJQNmVI0qNlsJpQK8fPwVxRxbJS/
+pMbNICrf3sUa4sZgDOFfkeuSlgACh4cVIozDXlR59Z8Y3CoiW0uObEgvMDIfenAj
+98pl3ZkCgYEAj/UCSni0dwX4pnKNPm6LUgiS7QvIgM3H9piyt8aipQuzBi5LUKWw
+DlQC4Zb73nHgdREtQYYXTu7p27Bl0Gizz1sW2eSgxFU8eTh+ucfVwOXKAXKU5SeI
++MbuBfUYQ4if2N/BXn47+/ecf3A4KgB37Le5SbLDddwCNxGlBzbpBa0=
+-----END RSA PRIVATE KEY-----</span><span style="color: #800000;">"""</span><span style="color: #000000;">
+
+private_key </span>= paramiko.RSAKey(file_obj=<span style="color: #000000;">StringIO(key_str))
+transport </span>= paramiko.Transport((<span style="color: #800000;">'</span><span style="color: #800000;">10.0.1.40</span><span style="color: #800000;">'</span>, 22<span style="color: #000000;">))
+transport.connect(username</span>=<span style="color: #800000;">'</span><span style="color: #800000;">wupeiqi</span><span style="color: #800000;">'</span>, pkey=<span style="color: #000000;">private_key)
+
+ssh </span>=<span style="color: #000000;"> paramiko.SSHClient()
+ssh._transport </span>=<span style="color: #000000;"> transport
+
+stdin, stdout, stderr </span>= ssh.exec_command(<span style="color: #800000;">'</span><span style="color: #800000;">df</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+result </span>=<span style="color: #000000;"> stdout.read()
+
+transport.close()
+
+</span><span style="color: #0000ff;">print</span>(result)</pre>
+</div>
+<span class="cnblogs_code_collapse">基于私钥字符串进行连接</span></div>
+<p><strong><span style="font-size: 16px;">SFTPClient</span></strong></p>
+<p>用于连接远程服务器并执行上传下载</p>
+<p><strong>基于用户名密码上传下载</strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">import paramiko
+
+transport = paramiko.Transport(('hostname',22))
+transport.connect(username='wupeiqi',password='123')
+
+sftp = paramiko.SFTPClient.from_transport(transport)
+# 将location.py 上传至服务器 /tmp/test.py
+sftp.put('/tmp/location.py', '/tmp/test.py')
+# 将remove_path 下载到本地 local_path
+sftp.get('remove_path', 'local_path')
+
+transport.close()
+</pre>
+</div>
+<p><strong>基于公钥密钥上传下载</strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">import paramiko
+
+private_key = paramiko.RSAKey.from_private_key_file('/home/auto/.ssh/id_rsa')
+
+transport = paramiko.Transport(('hostname', 22))
+transport.connect(username='wupeiqi', pkey=private_key )
+
+sftp = paramiko.SFTPClient.from_transport(transport)
+# 将location.py 上传至服务器 /tmp/test.py
+sftp.put('/tmp/location.py', '/tmp/test.py')
+# 将remove_path 下载到本地 local_path
+sftp.get('remove_path', 'local_path')
+
+transport.close()
+</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('6b10ed1d-705d-423a-a814-94385d1902bc')"><img id="code_img_closed_6b10ed1d-705d-423a-a814-94385d1902bc" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_6b10ed1d-705d-423a-a814-94385d1902bc" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('6b10ed1d-705d-423a-a814-94385d1902bc',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_6b10ed1d-705d-423a-a814-94385d1902bc" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> paramiko
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> uuid
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Haproxy(object):
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span><span style="color: #000000;">(self):
+        self.host </span>= <span style="color: #800000;">'</span><span style="color: #800000;">172.16.103.191</span><span style="color: #800000;">'</span><span style="color: #000000;">
+        self.port </span>= 22<span style="color: #000000;">
+        self.username </span>= <span style="color: #800000;">'</span><span style="color: #800000;">wupeiqi</span><span style="color: #800000;">'</span><span style="color: #000000;">
+        self.pwd </span>= <span style="color: #800000;">'</span><span style="color: #800000;">123</span><span style="color: #800000;">'</span><span style="color: #000000;">
+        self.</span><span style="color: #800080;">__k</span> =<span style="color: #000000;"> None
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> create_file(self):
+        file_name </span>=<span style="color: #000000;"> str(uuid.uuid4())
+        with open(file_name,</span><span style="color: #800000;">'</span><span style="color: #800000;">w</span><span style="color: #800000;">'</span><span style="color: #000000;">) as f:
+            f.write(</span><span style="color: #800000;">'</span><span style="color: #800000;">sb</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> file_name
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> run(self):
+        self.connect()
+        self.upload()
+        self.rename()
+        self.close()
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> connect(self):
+        transport </span>=<span style="color: #000000;"> paramiko.Transport((self.host,self.port))
+        transport.connect(username</span>=self.username,password=<span style="color: #000000;">self.pwd)
+        self.</span><span style="color: #800080;">__transport</span> =<span style="color: #000000;"> transport
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> close(self):
+
+        self.</span><span style="color: #800080;">__transport</span><span style="color: #000000;">.close()
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> upload(self):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 连接，上传</span>
+        file_name =<span style="color: #000000;"> self.create_file()
+
+        sftp </span>= paramiko.SFTPClient.from_transport(self.<span style="color: #800080;">__transport</span><span style="color: #000000;">)
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 将location.py 上传至服务器 /tmp/test.py</span>
+        sftp.put(file_name, <span style="color: #800000;">'</span><span style="color: #800000;">/home/wupeiqi/tttttttttttt.py</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> rename(self):
+
+        ssh </span>=<span style="color: #000000;"> paramiko.SSHClient()
+        ssh._transport </span>= self.<span style="color: #800080;">__transport</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 执行命令</span>
+        stdin, stdout, stderr = ssh.exec_command(<span style="color: #800000;">'</span><span style="color: #800000;">mv /home/wupeiqi/tttttttttttt.py /home/wupeiqi/ooooooooo.py</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 获取命令结果</span>
+        result =<span style="color: #000000;"> stdout.read()
+
+
+ha </span>=<span style="color: #000000;"> Haproxy()
+ha.run()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">Demo</span></div>
+<h3>堡垒机的实现&nbsp;</h3>
+<p>实现思路：</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201601/425762-20160103100859651-138631517.png" alt="" width="512" height="318" /></p>
+<p>堡垒机执行流程：</p>
+<ol>
+<li>管理员为用户在服务器上创建账号（将公钥放置服务器，或者使用用户名密码）</li>
+<li>用户登陆堡垒机，输入堡垒机用户名密码，现实当前用户管理的服务器列表</li>
+<li>用户选择服务器，并自动登陆</li>
+<li>执行操作并同时将用户操作记录</li>
+</ol>
+<p><em><span style="color: #888888;">注：配置.brashrc实现ssh登陆后自动执行脚本，如：/usr/bin/python /home/wupeiqi/menu.py</span></em></p>
+<p>实现过程</p>
+<p>步骤一，实现用户登陆</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">import getpass
+
+user = raw_input('username:')
+pwd = getpass.getpass('password')
+if user == 'alex' and pwd == '123':
+    print '登陆成功'
+else:
+    print '登陆失败'
+</pre>
+</div>
+<p>步骤二，根据用户获取相关服务器列表</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">dic = {
+    'alex': [
+        '172.16.103.189',
+        'c10.puppet.com',
+        'c11.puppet.com',
+    ],
+    'eric': [
+        'c100.puppet.com',
+    ]
+}
+
+host_list = dic['alex']
+
+print 'please select:'
+for index, item in enumerate(host_list, 1):
+    print index, item
+
+inp = raw_input('your select (No):')
+inp = int(inp)
+hostname = host_list[inp-1]
+port = 22
+</pre>
+</div>
+<p>步骤三，根据用户名、私钥登陆服务器</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">tran = paramiko.Transport((hostname, port,))
+tran.start_client()
+default_path = os.path.join(os.environ['HOME'], '.ssh', 'id_rsa')
+key = paramiko.RSAKey.from_private_key_file(default_path)
+tran.auth_publickey('wupeiqi', key)
+
+# 打开一个通道
+chan = tran.open_session()
+# 获取一个终端
+chan.get_pty()
+# 激活器
+chan.invoke_shell()
+
+#########
+# 利用sys.stdin,肆意妄为执行操作
+# 用户在终端输入内容，并将内容发送至远程服务器
+# 远程服务器执行命令，并将结果返回
+# 用户终端显示内容
+#########
+
+chan.close()
+tran.close()</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('9f05e85f-a031-454c-8ca1-8397a656ebd1')"><img id="code_img_closed_9f05e85f-a031-454c-8ca1-8397a656ebd1" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_9f05e85f-a031-454c-8ca1-8397a656ebd1" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('9f05e85f-a031-454c-8ca1-8397a656ebd1',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_9f05e85f-a031-454c-8ca1-8397a656ebd1" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> 监视用户输入和服务器返回数据</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;"> sys.stdin 处理用户输入</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;"> chan 是之前创建的通道，用于接收服务器返回信息</span>
+    readable, writeable, error = select.select([chan, sys.stdin, ],[],[],1<span style="color: #000000;">)
+    </span><span style="color: #0000ff;">if</span> chan <span style="color: #0000ff;">in</span><span style="color: #000000;"> readable:
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;">:
+            x </span>= chan.recv(1024<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> len(x) ==<span style="color: #000000;"> 0:
+                </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">\r\n*** EOF\r\n</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">
+            sys.stdout.write(x)
+            sys.stdout.flush()
+        </span><span style="color: #0000ff;">except</span><span style="color: #000000;"> socket.timeout:
+            </span><span style="color: #0000ff;">pass</span>
+    <span style="color: #0000ff;">if</span> sys.stdin <span style="color: #0000ff;">in</span><span style="color: #000000;"> readable:
+        inp </span>=<span style="color: #000000;"> sys.stdin.readline()
+        chan.sendall(inp)</span></pre>
+</div>
+<span class="cnblogs_code_collapse">肆意妄为方式一</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('0e629c81-7058-4aad-94a4-bdf335454938')"><img id="code_img_closed_0e629c81-7058-4aad-94a4-bdf335454938" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_0e629c81-7058-4aad-94a4-bdf335454938" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('0e629c81-7058-4aad-94a4-bdf335454938',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_0e629c81-7058-4aad-94a4-bdf335454938" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;"> 获取原tty属性</span>
+oldtty =<span style="color: #000000;"> termios.tcgetattr(sys.stdin)
+</span><span style="color: #0000ff;">try</span><span style="color: #000000;">:
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> 为tty设置新属性</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;"> 默认当前tty设备属性：</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;">   输入一行回车，执行</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;">   CTRL+C 进程退出，遇到特殊字符，特殊处理。</span>
+
+    <span style="color: #008000;">#</span><span style="color: #008000;"> 这是为原始模式，不认识所有特殊符号</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;"> 放置特殊字符应用在当前终端，如此设置，将所有的用户输入均发送到远程服务器</span>
+<span style="color: #000000;">    tty.setraw(sys.stdin.fileno())
+    chan.settimeout(</span>0.0<span style="color: #000000;">)
+
+    </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 监视 用户输入 和 远程服务器返回数据（socket）</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> 阻塞，直到句柄可读</span>
+        r, w, e = select.select([chan, sys.stdin], [], [], 1<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> chan <span style="color: #0000ff;">in</span><span style="color: #000000;"> r:
+            </span><span style="color: #0000ff;">try</span><span style="color: #000000;">:
+                x </span>= chan.recv(1024<span style="color: #000000;">)
+                </span><span style="color: #0000ff;">if</span> len(x) ==<span style="color: #000000;"> 0:
+                    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">\r\n*** EOF\r\n</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                    </span><span style="color: #0000ff;">break</span><span style="color: #000000;">
+                sys.stdout.write(x)
+                sys.stdout.flush()
+            </span><span style="color: #0000ff;">except</span><span style="color: #000000;"> socket.timeout:
+                </span><span style="color: #0000ff;">pass</span>
+        <span style="color: #0000ff;">if</span> sys.stdin <span style="color: #0000ff;">in</span><span style="color: #000000;"> r:
+            x </span>= sys.stdin.read(1<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> len(x) ==<span style="color: #000000;"> 0:
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">
+            chan.send(x)
+
+</span><span style="color: #0000ff;">finally</span><span style="color: #000000;">:
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> 重新设置终端属性</span>
+    termios.tcsetattr(sys.stdin, termios.TCSADRAIN, oldtty)</pre>
+</div>
+<span class="cnblogs_code_collapse">肆意妄为方式二</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('5028dd05-7b56-49fe-a6bb-67df1a17b54b')"><img id="code_img_closed_5028dd05-7b56-49fe-a6bb-67df1a17b54b" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_5028dd05-7b56-49fe-a6bb-67df1a17b54b" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('5028dd05-7b56-49fe-a6bb-67df1a17b54b',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_5028dd05-7b56-49fe-a6bb-67df1a17b54b" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">def</span><span style="color: #000000;"> windows_shell(chan):
+    </span><span style="color: #0000ff;">import</span><span style="color: #000000;"> threading
+
+    sys.stdout.write(</span><span style="color: #800000;">"</span><span style="color: #800000;">Line-buffered terminal emulation. Press F6 or ^Z to send EOF.\r\n\r\n</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> writeall(sock):
+        </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+            data </span>= sock.recv(256<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> data:
+                sys.stdout.write(</span><span style="color: #800000;">'</span><span style="color: #800000;">\r\n*** EOF ***\r\n\r\n</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+                sys.stdout.flush()
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">
+            sys.stdout.write(data)
+            sys.stdout.flush()
+
+    writer </span>= threading.Thread(target=writeall, args=<span style="color: #000000;">(chan,))
+    writer.start()
+
+    </span><span style="color: #0000ff;">try</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+            d </span>= sys.stdin.read(1<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> d:
+                </span><span style="color: #0000ff;">break</span><span style="color: #000000;">
+            chan.send(d)
+    </span><span style="color: #0000ff;">except</span><span style="color: #000000;"> EOFError:
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> user hit ^Z or F6</span>
+        <span style="color: #0000ff;">pass</span></pre>
+</div>
+<span class="cnblogs_code_collapse">肆意妄为方式三</span></div>
+<p><em><span style="color: #888888;">注：密码验证 t.auth_password(username, pw)</span></em></p>
+<p><span style="color: #888888;">详见：paramiko源码demo</span></p>
+<h3>数据库操作</h3>
+<p>Python 操作 Mysql 模块的安装</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">linux：
+    yum install MySQL-python
+
+window：
+    http://files.cnblogs.com/files/wupeiqi/py-mysql-win.zip
+</pre>
+</div>
+<p><strong><span style="font-size: 14pt;">SQL基本使用</span></strong></p>
+<p>1、数据库操作</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">    show databases; 
+    use [databasename];
+    create database  [name];
+</pre>
+</div>
+<p>2、数据表操作</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">    show tables;
+
+    create table students
+        (
+            id int  not null auto_increment primary key,
+            name char(8) not null,
+            sex char(4) not null,
+            age tinyint unsigned not null,
+            tel char(13) null default "-"
+        );
+</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('e9585c87-ce2c-4a9f-8149-d0ce5853da3b')"><img id="code_img_closed_e9585c87-ce2c-4a9f-8149-d0ce5853da3b" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_e9585c87-ce2c-4a9f-8149-d0ce5853da3b" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('e9585c87-ce2c-4a9f-8149-d0ce5853da3b',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_e9585c87-ce2c-4a9f-8149-d0ce5853da3b" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">CREATE TABLE `wb_blog` ( 
+    `id` smallint(</span>8<span style="color: #000000;">) unsigned NOT NULL, 
+    `catid` smallint(</span>5) unsigned NOT NULL DEFAULT <span style="color: #800000;">'</span><span style="color: #800000;">0</span><span style="color: #800000;">'</span><span style="color: #000000;">, 
+    `title` varchar(</span>80) NOT NULL DEFAULT <span style="color: #800000;">''</span><span style="color: #000000;">, 
+    `content` text NOT NULL, 
+    PRIMARY KEY (`id`), 
+    UNIQUE KEY `catename` (`catid`) 
+) ; </span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<p>3、数据操作</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">    insert into students(name,sex,age,tel) values('alex','man',18,'151515151')
+
+    delete from students where id =2;
+
+    update students set name = 'sb' where id =1;
+
+    select * from students
+</pre>
+</div>
+<p>4、其他</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">    主键
+    外键
+    左右连接
+</pre>
+</div>
+<p><strong><span style="font-size: 14pt;">Python MySQL API</span></strong></p>
+<p>一、插入数据</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">import MySQLdb
+ 
+conn = MySQLdb.connect(host='127.0.0.1',user='root',passwd='1234',db='mydb')
+ 
+cur = conn.cursor()
+ 
+reCount = cur.execute('insert into UserInfo(Name,Address) values(%s,%s)',('alex','usa'))
+# reCount = cur.execute('insert into UserInfo(Name,Address) values(%(id)s, %(name)s)',{'id':12345,'name':'wupeiqi'})
+ 
+conn.commit()
+ 
+cur.close()
+conn.close()
+ 
+print reCount</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('1325c8dd-e206-4b0f-86f5-1612190a9a23')"><img id="code_img_closed_1325c8dd-e206-4b0f-86f5-1612190a9a23" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_1325c8dd-e206-4b0f-86f5-1612190a9a23" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('1325c8dd-e206-4b0f-86f5-1612190a9a23',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_1325c8dd-e206-4b0f-86f5-1612190a9a23" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> MySQLdb
+
+conn </span>= MySQLdb.connect(host=<span style="color: #800000;">'</span><span style="color: #800000;">127.0.0.1</span><span style="color: #800000;">'</span>,user=<span style="color: #800000;">'</span><span style="color: #800000;">root</span><span style="color: #800000;">'</span>,passwd=<span style="color: #800000;">'</span><span style="color: #800000;">1234</span><span style="color: #800000;">'</span>,db=<span style="color: #800000;">'</span><span style="color: #800000;">mydb</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+cur </span>=<span style="color: #000000;"> conn.cursor()
+
+li </span>=<span style="color: #000000;">[
+     (</span><span style="color: #800000;">'</span><span style="color: #800000;">alex</span><span style="color: #800000;">'</span>,<span style="color: #800000;">'</span><span style="color: #800000;">usa</span><span style="color: #800000;">'</span><span style="color: #000000;">),
+     (</span><span style="color: #800000;">'</span><span style="color: #800000;">sb</span><span style="color: #800000;">'</span>,<span style="color: #800000;">'</span><span style="color: #800000;">usa</span><span style="color: #800000;">'</span><span style="color: #000000;">),
+]
+reCount </span>= cur.executemany(<span style="color: #800000;">'</span><span style="color: #800000;">insert into UserInfo(Name,Address) values(%s,%s)</span><span style="color: #800000;">'</span><span style="color: #000000;">,li)
+
+conn.commit()
+cur.close()
+conn.close()
+
+</span><span style="color: #0000ff;">print</span> reCount</pre>
+</div>
+<span class="cnblogs_code_collapse">批量插入数据</span></div>
+<p>注意：cur.lastrowid</p>
+<p>二、删除数据</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">import MySQLdb
+
+conn = MySQLdb.connect(host='127.0.0.1',user='root',passwd='1234',db='mydb')
+
+cur = conn.cursor()
+
+reCount = cur.execute('delete from UserInfo')
+
+conn.commit()
+
+cur.close()
+conn.close()
+
+print reCount
+</pre>
+</div>
+<p>三、修改数据</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">import MySQLdb
+
+conn = MySQLdb.connect(host='127.0.0.1',user='root',passwd='1234',db='mydb')
+
+cur = conn.cursor()
+
+reCount = cur.execute('update UserInfo set Name = %s',('alin',))
+
+conn.commit()
+cur.close()
+conn.close()
+
+print reCount
+</pre>
+</div>
+<p>四、查数据</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># ############################## fetchone/fetchmany(num)  ##############################
+
+import MySQLdb
+
+conn = MySQLdb.connect(host='127.0.0.1',user='root',passwd='1234',db='mydb')
+cur = conn.cursor()
+
+reCount = cur.execute('select * from UserInfo')
+
+print cur.fetchone()
+print cur.fetchone()
+cur.scroll(-1,mode='relative')
+print cur.fetchone()
+print cur.fetchone()
+cur.scroll(0,mode='absolute')
+print cur.fetchone()
+print cur.fetchone()
+
+cur.close()
+conn.close()
+
+print reCount
+
+
+
+# ############################## fetchall  ##############################
+
+import MySQLdb
+
+conn = MySQLdb.connect(host='127.0.0.1',user='root',passwd='1234',db='mydb')
+#cur = conn.cursor(cursorclass = MySQLdb.cursors.DictCursor)
+cur = conn.cursor()
+
+reCount = cur.execute('select Name,Address from UserInfo')
+
+nRet = cur.fetchall()
+
+cur.close()
+conn.close()
+
+print reCount
+print nRet
+for i in nRet:
+    print i[0],i[1]
+</pre>
+</div>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2016-01-03 10:03</span> <a href='http://www.cnblogs.com/wupeiqi/'>武沛齐</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>) &nbsp;<a href="https://i.cnblogs.com/EditArticles.aspx?postid=5095821" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(5095821);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=133379,cb_entryId=5095821,cb_blogApp=currentBlogApp,cb_blogUserGuid='7208b24d-95c9-e111-aa3f-842b2b196315',cb_entryCreatedDate='2016/1/3 10:03:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2017 武沛齐
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

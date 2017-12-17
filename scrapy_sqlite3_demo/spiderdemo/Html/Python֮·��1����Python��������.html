@@ -1,0 +1,718 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python之路【第一篇】：Python简介和入门 - 武沛齐 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=m_FXmwz3wxZoecUwNEK23PAzc-j9vbX_C6MblJ5ouMc1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue.css?v=jJERBFSojhmgst84aaRDal9S3q1WoO-WcNudmMzGJS81"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/133379.css?v=YSNZANkz7eBKoXq2iHYfghvodkY%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue-mobile.css?v=z0BacpCfWeLlXDCM0C158kTP_DMqMbGBapID4f-QztI1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/wupeiqi/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/wupeiqi/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/wupeiqi/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'wupeiqi', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=CPv0EEqm9L2aCgolHxaZfVYM6J-Sn5az_FJXbjzgr-o1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/wupeiqi/">Mr.Seven</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/wupeiqi/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%AD%A6%E6%B2%9B%E9%BD%90">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/wupeiqi/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/wupeiqi/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-126&nbsp;
+文章-137&nbsp;
+评论-259&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/wupeiqi/articles/4906230.html">Python之路【第一篇】：Python简介和入门</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><h3><span style="font-size: 1.17em; line-height: 1.5;">Python简介&nbsp;</span></h3>
+<p><strong><span style="line-height: 1.5; font-size: 14pt;">Python前世今生</span></strong></p>
+<p><span style="line-height: 1.5;">python的创始人为吉多&middot;范罗苏姆（Guido van Rossum）。1989年的圣诞节期间，吉多&middot;范罗苏姆为了在阿姆斯特丹打发时间，决心开发一个新的脚本解释程序，作为ABC语言的一种继承。&nbsp;</span><span style="line-height: 1.5;">&nbsp;</span></p>
+<div class="page" title="Page 1">
+<p>最新的TIOBE排行榜，Python赶超PHP占据第五！！！</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151024100121958-849306509.png" alt="" width="423" height="292" /><img style="line-height: 1.5;" src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151024100149255-1568022023.png" alt="" width="431" height="290" /></p>
+<p>由上图可见，Python整体呈上升趋势，反映出Python应用越来越广泛并且也逐渐得到业内的认可！！！</p>
+<p>Python可以应用于众多领域，如：数据分析、组件集成、网络服务、图像处理、数值计算和科学计算等众多领域。目前业内几乎所有大中型互联网企业都在使用Python，如：<span style="color: #ff9900;">Youtube、Dropbox、BT、Quora（中国知乎）、豆瓣、知乎</span>、Google、Yahoo!、Facebook、NASA、百度、腾讯、汽车之家、美团等。互联网公司广泛使用Python来做的事一般有：<span style="color: #ff0000;"><strong>自动化运维</strong></span>、<span style="color: #ff0000;"><strong>自动化测试</strong></span>、<span style="color: #ff0000;"><strong>大数据分析、爬虫、Web 等。</strong></span></p>
+<p><span style="color: #888888;">注视：上述重点字体表示该公司主要使用Python语言开发</span></p>
+<p><strong><span style="font-size: 14pt;">为什么是Python而不是其他语言？</span></strong></p>
+<p>C 和 Python、Java、C#等</p>
+<p>&nbsp; &nbsp; C语言： 代码编译得到 机器码 ，机器码在处理器上直接执行，每一条指令控制CPU工作</p>
+<p>其他语言： 代码编译得到 字节码 ，虚拟机执行字节码并转换成机器码再后在处理器上执行</p>
+<p>Python 和 C &nbsp;Python这门语言是由C开发而来</p>
+<p>　　对于使用：Python的类库齐全并且使用简洁，如果要实现同样的功能，Python 10行代码可以解决，C可能就需要100行甚至更多.<br />　　对于速度：Python的运行速度相较与C，绝逼是慢了</p>
+<p>Python 和 Java、C#等</p>
+<p>　　对于使用：Linux原装Python，其他语言没有；以上几门语言都有非常丰富的类库支持<br />　　对于速度：Python在速度上<strong>可能</strong>稍显逊色</p>
+<p>所以，Python和其他语言没有什么本质区别，其他区别在于：擅长某领域、人才丰富、先入为主。</p>
+<p><!--EndFragment--></p>
+<p><strong><span style="font-size: 14pt;">Python的种类</span></strong></p>
+<ul>
+<li>Cpython<br />&nbsp; &nbsp; Python的官方版本，使用C语言实现，使用最为广泛，CPython实现会将源文件（py文件）转换成字节码文件（pyc文件），然后运行在Python虚拟机上。</li>
+<li>Jyhton<br />&nbsp; &nbsp; Python的Java实现，Jython会将Python代码动态编译成Java字节码，然后在JVM上运行。</li>
+<li>IronPython<br />&nbsp; &nbsp; Python的C#实现，IronPython将Python代码编译成C#字节码，然后在CLR上运行。（与Jython类似）</li>
+<li>PyPy（特殊）<br />&nbsp; &nbsp; Python实现的Python，将Python的字节码字节码再编译成机器码。</li>
+<li>RubyPython、Brython ...</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+<p>以上除PyPy之外，其他的Python的对应关系和执行流程如下：</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151024113930614-2128955181.png" alt="" width="385" height="272" />&nbsp;<img style="line-height: 1.5;" src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151024114048849-189055880.png" alt="" width="433" height="269" /></p>
+<p><span style="line-height: 1.5;">PyPy，在Python的基础上对Python的字节码进一步处理，从而提升执行速度！</span></p>
+<p><span style="line-height: 1.5;"><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151024114724817-2135944387.png" alt="" width="826" height="318" /></span></p>
+<h3>Python环境&nbsp;</h3>
+<p><strong><span style="font-size: 14pt;">安装Python</span></strong></p>
+<blockquote>
+<p><strong>windows：</strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">1、下载安装包
+	https://www.python.org/downloads/
+2、安装
+	默认安装路径：C:\python27
+3、配置环境变量
+	【右键计算机】--》【属性】--》【高级系统设置】--》【高级】--》【环境变量】--》【在第二个内容框中找到 变量名为Path 的一行，双击】 --&gt; 【Python安装目录追加到变值值中，用 ； 分割】
+	如：原来的值;C:\python27，切记前面有分号</pre>
+</div>
+<p><strong>linux：</strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">无需安装，原装Python环境
+
+ps：如果自带2.6，请更新至2.7</pre>
+</div>
+</blockquote>
+<p><strong><span style="font-size: 14pt;">更新Python</span></strong></p>
+<blockquote>
+<p><strong>windows:</strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">卸载重装即可
+</pre>
+</div>
+<p><strong>linux:</strong></p>
+<p>Linux的yum依赖自带Python，为防止错误，此处更新其实就是再安装一个Python</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">查看默认Python版本
+python -V
+
+1、安装gcc，用于编译Python源码
+	yum install gcc
+2、下载源码包，https://www.python.org/ftp/python/
+3、解压并进入源码文件
+4、编译安装
+	./configure
+	make all
+	make install
+5、查看版本
+	/usr/local/bin/python2.7 -V
+6、修改默认Python版本
+	mv /usr/bin/python /usr/bin/python2.6
+	ln -s /usr/local/bin/python2.7 /usr/bin/python
+7、防止yum执行异常，修改yum使用的Python版本
+	vi /usr/bin/yum
+	将头部 #!/usr/bin/python 修改为 #!/usr/bin/python2.6</pre>
+</div>
+</blockquote>
+<h3>Python 入门</h3>
+<p><strong><span style="font-size: 14pt;">一、第一句Python代码</span></strong></p>
+<p>在 /home/dev/ 目录下创建 hello.py 文件，内容如下：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">print "hello,world"
+</pre>
+</div>
+<p>执行 hello.py 文件，即： <code>python /home/dev/hello.py</code></p>
+<p>python内部执行过程如下：</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151024160748145-1165720810.png" alt="" width="619" height="348" /></p>
+<p><strong><span style="font-size: 14pt;">二、解释器</span></strong></p>
+<p>上一步中执行 python /home/dev/hello.py&nbsp;时，明确的指出 hello.py 脚本由 python 解释器来执行。</p>
+<p>如果想要类似于执行shell脚本一样执行python脚本，例： <code>./hello.py </code>，那么就需要在 hello.py 文件的头部指定解释器，如下：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+
+print "hello,world"
+</pre>
+</div>
+<p>如此一来，执行：&nbsp;.<code>/hello.py</code> 即可。</p>
+<p>ps：执行前需给予 hello.py 执行权限，chmod 755 hello.py</p>
+<p><strong><span style="font-size: 14pt;">三、内容编码</span></strong></p>
+<p>python解释器在加载 .py 文件中的代码时，会对内容进行编码（默认ascill）</p>
+<p>ASCII（American Standard Code for Information Interchange，美国标准信息交换代码）是基于拉丁字母的一套电脑编码系统，主要用于显示现代英语和其他西欧语言，其最多只能用 8 位来表示（一个字节），即：2**8 = 256，所以，ASCII码最多只能表示 256 个符号。</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151024170543724-275959633.png" alt="" width="624" height="232" /></p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151024170628833-536583386.png" alt="" width="628" height="276" /></p>
+<p>显然ASCII码无法将世界上的各种文字和符号全部表示，所以，就需要新出一种可以代表所有字符和符号的编码，即：Unicode</p>
+<p>Unicode（统一码、万国码、单一码）是一种在计算机上使用的字符编码。Unicode 是为了解决传统的字符编码方案的局限而产生的，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，规定虽有的字符和符号最少由 16 位来表示（2个字节），即：2 **16 =&nbsp;65536，<br />注：此处说的的是最少2个字节，可能更多</p>
+<p>UTF-8，是对Unicode编码的压缩和优化，他不再使用最少使用2个字节，而是将所有的字符和符号进行分类：ascii码中的内容用1个字节保存、欧洲的字符用2个字节保存，东亚的字符用3个字节保存...</p>
+<p>所以，python解释器在加载 .py 文件中的代码时，会对内容进行编码（默认ascill），如果是如下代码的话：</p>
+<p>报错：ascii码无法表示中文</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+
+print "你好，世界"  
+</pre>
+</div>
+<p>改正：应该显示的告诉python解释器，用什么编码来执行源代码，即：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+print "你好，世界"
+</pre>
+</div>
+<p><strong><span style="font-size: 14pt;">四、注释</span></strong></p>
+<p>　　当行注视：# 被注释内容</p>
+<p>　　多行注释：""" 被注释内容 """</p>
+<p><span style="font-size: 14pt;"><strong>五、执行脚本传入参数</strong></span></p>
+<p>Python有大量的模块，从而使得开发Python程序非常简洁。类库有包括三中：</p>
+<ul>
+<li>Python内部提供的模块</li>
+<li>业内开源的模块</li>
+<li>程序员自己开发的模块</li>
+</ul>
+<p>Python内部提供一个 sys 的模块，其中的 sys.argv 用来捕获执行执行python脚本时传入的参数</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import sys
+
+print sys.argv&nbsp;</pre>
+</div>
+<p><strong><span style="font-size: 14pt;">六、 pyc 文件</span></strong></p>
+<p>执行Python代码时，如果导入了其他的 .py 文件，那么，执行过程中会自动生成一个与其同名的 .pyc 文件，该文件就是Python解释器编译之后产生的字节码。</p>
+<p>ps：代码经过编译可以产生字节码；字节码通过反编译也可以得到代码。</p>
+<p><strong><span style="font-size: 14pt;">七、变量</span></strong></p>
+<p>1、声明变量</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+name = "wupeiqi"
+</pre>
+</div>
+<p>上述代码声明了一个变量，变量名为： name，变量name的值为："wupeiqi"</p>
+<p>变量的作用：昵称，其代指内存里某个地址中保存的内容</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151024175921770-1607956958.png" alt="" width="308" height="229" /></p>
+<p>变量定义的规则：</p>
+<ul>
+<li>变量名只能是 字母、数字或下划线的任意组合</li>
+<li>变量名的第一个字符不能是数字</li>
+<li>以下关键字不能声明为变量名<br />['and', 'as', 'assert', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'exec', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'not', 'or', 'pass', 'print', 'raise', 'return', 'try', 'while', 'with', 'yield']</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+<p>2、变量的赋值</p>
+<div>
+<div style="float: left; width: 30%;">
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding: utf-8 -*-</span>
+<span style="color: #000000;">
+name1 </span>= <span style="color: #800000;">"</span><span style="color: #800000;">wupeiqi</span><span style="color: #800000;">"</span><span style="color: #000000;">
+name2 </span>= <span style="color: #800000;">"</span><span style="color: #800000;">alex</span><span style="color: #800000;">"<br /><br /><br /></span></pre>
+</div>
+</div>
+<div style="float: left; width: 60%;"><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151024180236677-1430341076.png" alt="" width="283" height="220" /></div>
+<div style="clear: both;">&nbsp;</div>
+</div>
+<div>
+<div style="float: left; width: 30%;">
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding: utf-8 -*-</span>
+<span style="color: #000000;">
+name1 </span>= <span style="color: #800000;">"</span><span style="color: #800000;">wupeiqi</span><span style="color: #800000;">"</span><span style="color: #000000;">
+name2 </span>= name1<br /><br /><br /></pre>
+</div>
+</div>
+<div style="float: left; width: 60%;"><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151024180334849-979288684.png" alt="" width="283" height="220" /></div>
+<div style="clear: both;"><strong><span style="font-size: 14pt;">八、输入</span></strong></div>
+<div style="clear: both;">
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# 将用户输入的内容赋值给 name 变量
+name = raw_input("请输入用户名：")
+
+# 打印输入的内容
+print name
+</pre>
+</div>
+<p>输入密码时，如果想要不可见，需要利用getpass 模块中的 getpass方法，即：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import getpass
+
+# 将用户输入的内容赋值给 name 变量
+pwd = getpass.getpass("请输入密码：")
+
+# 打印输入的内容
+print pwd
+</pre>
+</div>
+<p><strong><span style="line-height: 1.5; font-size: 14pt;">九、流程控制和缩进</span></strong></p>
+<p><span style="line-height: 1.5;">需求一、用户登陆验证</span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 提示输入用户名和密码
+
+# 验证用户名和密码
+#     如果错误，则输出用户名或密码错误
+#     如果成功，则输出 欢迎，XXX!</pre>
+</div>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">#!/usr/bin/env python
+# -*- coding: encoding -*-
+
+import getpass
+
+
+name = raw_input('请输入用户名：')
+pwd = getpass.getpass('请输入密码：')
+
+if name == "alex" and pwd == "cmd":
+	print "欢迎，alex！"
+else:
+	print "用户名和密码错误"</pre>
+</div>
+<p>需求二、根据用户输入内容输出其权限</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 根据用户输入内容打印其权限
+
+# alex --&gt; 超级管理员
+# eric --&gt; 普通管理员
+# tony --&gt; 业务主管
+# 其他 --&gt; 普通用户
+</pre>
+</div>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">#!/usr/bin/env python
+# -*- coding: encoding -*-
+
+name = raw_input('请输入用户名：')
+
+
+if name == "alex"：
+	print "超级管理员"
+elif name == "eric":
+	print "普通管理员"
+elif name == "tony":
+	print "业务主管"
+else:
+	print "普通用户"</pre>
+</div>
+</div>
+<div style="clear: both;">&nbsp;</div>
+<div style="clear: both;">外层变量，可以被内层变量使用</div>
+<div style="clear: both;">内层变量，无法被外层变量使用</div>
+<div style="clear: both;">&nbsp;</div>
+<div style="clear: both;"><span style="font-size: 14pt;">十、初识基本数据类型</span></div>
+<div style="clear: both;">1、数字</div>
+<div style="clear: both;">
+<blockquote>
+<p>2 是一个整数的例子。<br />长整数 不过是大一些的整数。<br />3.23和52.3E-4是浮点数的例子。E标记表示10的幂。在这里，52.3E-4表示52.3 * 10-4。<br />(-5+4j)和(2.3-4.6j)是复数的例子。</p>
+
+
+
+
+
+</blockquote>
+
+
+
+
+
+</div>
+<div style="clear: both;">
+<p>int（整型）</p>
+<div><span style="color: #888888;">　　在32位机器上，整数的位数为32位，取值范围为-2**31～2**31-1，即-2147483648～2147483647</span><br /><span style="color: #888888;">　　在64位系统上，整数的位数为64位，取值范围为-2**63～2**63-1，即-9223372036854775808～9223372036854775807</span></div>
+<div>long（长整型）<strong><br /></strong><span style="color: #888888;">　　跟C语言不同，Python的长整数没有指定位宽，即：Python没有限制长整数数值的大小，但实际上由于机器内存有限，我们使用的长整数数值不可能无限大。</span><br /><span style="color: #888888;">　　注意，自从Python2.2起，如果整数发生溢出，Python会自动将整数数据转换为长整数，所以如今在长整数数据后面不加字母L也不会导致严重后果了。</span><br />float（浮点型）<strong><br /></strong><span style="color: #888888;">　　浮点数用来处理实数，即带有小数的数字。类似于C语言中的double类型，占8个字节（64位），其中52位表示底，11位表示指数，剩下的一位表示符号。</span><br />complex（复数）<br /><span style="color: #888888;">　　复数由实数部分和虚数部分组成，一般形式为x＋yj，其中的x是复数的实数部分，y是复数的虚数部分，这里的x和y都是实数。</span></div>
+<div><span style="color: #888888;">注：Python中存在小数字池：-5 ～ 257</span></div>
+<div>&nbsp;</div>
+
+
+
+
+
+</div>
+<div style="clear: both;">2、布尔值</div>
+<div style="clear: both;">　　真或假</div>
+<div style="clear: both;">　　1 或 0</div>
+<div style="clear: both;">3、字符串</div>
+<blockquote>
+<div style="clear: both;">"hello world"</div>
+
+
+
+
+
+</blockquote>
+<div style="clear: both;">万恶的字符串拼接：</div>
+<div style="clear: both;"><span style="color: #888888;">　　python中的字符串在C语言中体现为是一个字符数组，每次创建字符串时候需要在内存中开辟一块连续的空，并且一旦需要修改字符串的话，就需要再次开辟空间，万恶的+号每出现一次就会在内从中重新开辟一块空间。</span></div>
+<div style="clear: both;">字符串格式化</div>
+<div style="clear: both;">
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">name = "alex"
+print "i am %s " % name
+
+#输出: i am alex
+</pre>
+</div>
+<p><span style="color: #888888;">PS: 字符串是 %s;整数 %d;浮点数%f</span></p>
+字符串常用功能：</div>
+<div style="clear: both;">
+<ul>
+<li>移除空白</li>
+<li>分割</li>
+<li>长度</li>
+<li>索引</li>
+<li>切片</li>
+</ul>
+</div>
+<div style="clear: both;">4、列表</div>
+<div style="clear: both;">创建列表：</div>
+<div style="clear: both;">
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">name_list = ['alex', 'seven', 'eric']
+或
+name_list ＝ list(['alex', 'seven', 'eric'])
+</pre>
+</div>
+<p>基本操作：</p>
+<ul>
+<li>索引</li>
+<li>切片</li>
+<li>追加</li>
+<li>删除</li>
+<li>长度</li>
+<li>切片</li>
+<li>循环</li>
+<li>包含</li>
+</ul>
+</div>
+<div style="clear: both;">5、元祖</div>
+<div style="clear: both;">创建元祖：</div>
+<div style="clear: both;">
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">ages = (11, 22, 33, 44, 55)
+或
+ages = tuple((11, 22, 33, 44, 55))</pre>
+</div>
+</div>
+<div style="clear: both;">基本操作：</div>
+<div style="clear: both;">
+<ul>
+<li>索引</li>
+<li>切片</li>
+<li>循环</li>
+<li>长度</li>
+<li>包含</li>
+</ul>
+</div>
+<div style="clear: both;">6、字典（无序）</div>
+<div style="clear: both;">创建字典：</div>
+<div style="clear: both;">
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">person = {"name": "mr.wu", 'age': 18}
+或
+person = dict({"name": "mr.wu", 'age': 18})
+</pre>
+</div>
+<p>常用操作：</p>
+<ul>
+<li>索引</li>
+<li>新增</li>
+<li>删除</li>
+<li>键、值、键值对</li>
+<li>循环</li>
+<li>长度</li>
+</ul>
+</div>
+<div style="clear: both;">PS：循环，range，continue 和 break</div>
+<div style="clear: both;">&nbsp;</div>
+<div style="clear: both;"><strong><span style="font-size: 14pt;">十一、运算</span></strong></div>
+<div style="clear: both;">算数运算：</div>
+<div style="clear: both;">
+<p><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151025004451692-544714036.png" alt="" width="649" height="207" /></p>
+<p>比较运算：</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151025004535395-2018056438.png" alt="" width="647" height="229" /></p>
+<p>赋值运算：</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151025004625020-515390534.png" alt="" width="645" height="228" /></p>
+<p>逻辑运算：</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151025004829864-1676917934.png" alt="" width="645" height="100" /></p>
+<p>成员运算：</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151025004934286-1134210223.png" alt="" width="649" height="72" /></p>
+<p>身份运算：</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151025005015567-214206984.png" alt="" width="646" height="75" /></p>
+<p>位运算：</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151025005136817-1018821016.png" alt="" width="645" height="177" /></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">#!/usr/bin/python
+
+a = 60            # 60 = 0011 1100 
+b = 13            # 13 = 0000 1101 
+c = 0
+
+c = a &amp; b;        # 12 = 0000 1100
+print "Line 1 - Value of c is ", c
+
+c = a | b;        # 61 = 0011 1101 
+print "Line 2 - Value of c is ", c
+
+c = a ^ b;        # 49 = 0011 0001
+print "Line 3 - Value of c is ", c
+
+c = ~a;           # -61 = 1100 0011
+print "Line 4 - Value of c is ", c
+
+c = a &lt;&lt; 2;       # 240 = 1111 0000
+print "Line 5 - Value of c is ", c
+
+c = a &gt;&gt; 2;       # 15 = 0000 1111
+print "Line 6 - Value of c is ", c
+</pre>
+</div>
+<p>运算符优先级：</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151025005448536-1963442899.png" alt="" width="649" height="358" /></p>
+<p>更多内容：<a href="http://www.runoob.com/python/python-operators.html" target="_blank">猛击这里</a></p>
+</div>
+<div style="clear: both;"><strong><span style="font-size: 14pt;">十二、初识文本的基本操作</span></strong></div>
+<div style="clear: both;">&nbsp;</div>
+<div style="clear: both;"><strong>打开文件：</strong></div>
+<div style="clear: both;">　　file_obj = file("文件路径","模式")</div>
+<div style="clear: both;"><span style="color: #888888;">打开文件的模式有：</span></div>
+<div style="clear: both;">
+<ul>
+<li><span style="color: #888888;">r，以只读方式打开文件</span></li>
+<li><span style="color: #888888;">w，打开一个文件只用于写入。如果该文件已存在则将其覆盖。如果该文件不存在，创建新文件。</span></li>
+<li><span style="color: #888888;">a，打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。</span></li>
+<li><span style="color: #888888;">w+，打开一个文件用于读写。如果该文件已存在则将其覆盖。如果该文件不存在，创建新文件。</span></li>
+</ul>
+<p><strong>读取文件的内容：</strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;"># 一次性加载所有内容到内存
+obj.read()
+
+# 一次性加载所有内容到内存，并根据行分割成字符串
+obj.readlines()
+
+# 每次仅读取一行数据
+for line in obj:
+　　print line
+</pre>
+</div>
+<p><strong>写文件的内容：</strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">obj.write('内容')
+</pre>
+</div>
+<p><strong>关闭文件句柄：</strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">obj.close()
+</pre>
+</div>
+<h3>&nbsp;作业<span style="line-height: 1.5;">&nbsp;</span>&nbsp;</h3>
+</div>
+</div>
+<p>作业一：博客</p>
+<p>作业二：编写登陆接口</p>
+<div class="O1">
+<ul>
+<li>输入用户名密码</li>
+<li>认证成功后显示欢迎信息</li>
+<li>输错三次后锁定</li>
+</ul>
+</div>
+<div class="O1">作业三：多级菜单</div>
+<div class="O2">
+<ul>
+<li>三级菜单</li>
+<li>可依次选择进入各子菜单</li>
+<li>所需新知识点：列表、字典</li>
+</ul>
+</div>
+<p><span style="line-height: 1.5;">&nbsp;</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</div></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2015-10-24 09:38</span> <a href='http://www.cnblogs.com/wupeiqi/'>武沛齐</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>) &nbsp;<a href="https://i.cnblogs.com/EditArticles.aspx?postid=4906230" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(4906230);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=133379,cb_entryId=4906230,cb_blogApp=currentBlogApp,cb_blogUserGuid='7208b24d-95c9-e111-aa3f-842b2b196315',cb_entryCreatedDate='2015/10/24 9:38:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2017 武沛齐
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

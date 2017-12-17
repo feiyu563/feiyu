@@ -1,0 +1,8 @@
+{%extends 'master/layout.html'%}
+
+{%block page-content%}
+	{% for item in rooms%}
+	<a href='/room/{{item.id}}/'>{{item.name}}</a>
+	<hr>
+	{% endfor %}
+{%endblock%}

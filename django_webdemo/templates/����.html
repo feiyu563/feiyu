@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>遮罩</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<link href="../static/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<style>
+.fuzzy{  
+    filter: url(blur.svg#blur);  
+ /* FireFox, Chrome, Opera */  
+    -webkit-filter: blur(3px);  
+ /* Chrome, Opera */  
+    -moz-filter: blur(3px);  
+    -ms-filter: blur(3px);  
+    filter: blur(3px);  
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false);  
+ /* IE6~IE9 */  
+}
+.modal-g{
+	position:fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background-image:url(../static/img/bg4.jpg);
+	background-size:cover;
+	z-index:1040;
+}
+	
+	</style>
+	<script type='text/javascript' src='../static/jquery-3.2.1.js'></script>
+	<script type="text/javascript" src='../static/zjk-login.js'></script>
+	<script type="text/javascript" src='../static/bootstrap/js/bootstrap.js'></script>
+
+</head>
+<body>
+<!-- Button trigger modal -->
+
+
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</body>
+</html>

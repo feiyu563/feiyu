@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{%block css%}
+{%endblock%}
+
+
+
+
+
+{%block html%}
+
+
+          <h2 class="sub-header">详细信息</h2>
+          <div class="table-responsive">
+            <table class="table table-striped table-hover" style="font-size:10px">
+              <thead>
+                <tr>
+                  <th>项目</th>
+                  <th>详细</th>
+                </tr>
+              </thead>
+              <tbody>
+					<tr>
+					  <td>Container ID</td>
+					  <td>{{ images_d.Container }}</td>
+					</tr>
+					<tr>
+					  <td>DockerVersion</td>
+					  <td>{{ images_d.DockerVersion }}</td>
+					</tr>
+					<tr>
+					  <td>Parent</td>
+					  <td>{{ images_d.Parent }}</td>
+					</tr>
+					<tr>
+					  <td>Created</td>
+					  <td>{{ images_d.Created }}</td>
+					</tr>
+					<tr>
+					  <td>Config</td>
+					  <td>{{ images_d.Config }}</td>
+					</tr>
+					<tr>
+					  <td>Author</td>
+					  <td>{{ images_d.Author }}</td>
+					</tr>
+					<tr>
+					  <td>GraphDriver</td>
+					  <td>{{ images_d.GraphDriver }}</td>
+					</tr>
+					<tr>
+					  <td>VirtualSize</td>
+					  <td>{{ images_d.VirtualSize }}</td>
+					</tr>
+					<tr>
+					  <td>Os</td>
+					  <td>{{ images_d.Os }}</td>
+					</tr>
+					<tr>
+					  <td>Architecture</td>
+					  <td>{{ images_d.Architecture }}</td>
+					</tr>
+					<tr>
+					  <td>RootFS</td>
+					  <td>{{ images_d.RootFS }}</td>
+					</tr>
+              </tbody>
+            </table>
+          </div>
+{%endblock%}
+
+
+
+{%block js%}
+
+{%endblock%}

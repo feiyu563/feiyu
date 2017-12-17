@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{%block css%}
+{%endblock%}
+
+
+
+
+
+{%block html%}
+
+
+          <h2 class="sub-header">详细信息</h2>
+          <div class="table-responsive">
+            <table class="table table-striped table-hover" style="font-size:10px">
+              <thead>
+                <tr>
+                  <th>项目</th>
+                  <th>详细</th>
+                </tr>
+              </thead>
+              <tbody>
+              		<tr>
+					  <td>Name</td>
+					  <td>{{ rongqi_d.Name }}</td>
+					</tr>
+					<tr>
+					  <td>Id</td>
+					  <td>{{ rongqi_d.Id }}</td>
+					</tr>
+					<tr>
+					  <td>ExecIDs</td>
+					  <td>{{ rongqi_d.ExecIDs }}</td>
+					</tr>
+					<tr>
+					  <td>State</td>
+					  <td>{{ rongqi_d.State }}</td>
+					</tr>
+					<tr>
+					  <td>Config</td>
+					  <td>{{ rongqi_d.Config }}</td>
+					</tr>
+					<tr>
+					  <td>HostsPath</td>
+					  <td>{{ rongqi_d.HostsPath }}</td>
+					</tr>
+					<tr>
+					  <td>Args</td>
+					  <td>{{ rongqi_d.Args }}</td>
+					</tr>
+					<tr>
+					  <td>Path</td>
+					  <td>{{ rongqi_d.Path }}</td>
+					</tr>
+					<tr>
+					  <td>HostnamePath</td>
+					  <td>{{ rongqi_d.HostnamePath }}</td>
+					</tr>
+					<tr>
+					  <td>RestartCount</td>
+					  <td>{{ rongqi_d.RestartCount }}</td>
+					</tr>
+					<tr>
+					  <td>Created</td>
+					  <td>{{ rongqi_d.Created }}</td>
+					</tr>
+					<tr>
+					  <td>ResolvConfPath</td>
+					  <td>{{ rongqi_d.ResolvConfPath }}</td>
+					</tr>
+					<tr>
+					  <td>Mounts</td>
+					  <td>{{ rongqi_d.Mounts }}</td>
+					</tr>
+					<tr>
+					  <td>ProcessLabel</td>
+					  <td>{{ rongqi_d.ProcessLabel }}</td>
+					</tr>
+					<tr>
+					  <td>NetworkSettings</td>
+					  <td>{{ rongqi_d.NetworkSettings }}</td>
+					</tr>
+					<tr>
+					  <td>Image</td>
+					  <td>{{ rongqi_d.Image }}</td>
+					</tr>
+					<tr>
+					  <td>LogPath</td>
+					  <td>{{ rongqi_d.LogPath }}</td>
+					</tr>
+					<tr>
+					  <td>HostConfig</td>
+					  <td>{{ rongqi_d.HostConfig }}</td>
+					</tr>
+					
+              </tbody>
+            </table>
+          </div>
+{%endblock%}
+
+
+
+{%block js%}
+
+{%endblock%}

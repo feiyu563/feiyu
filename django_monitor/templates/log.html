@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{%block css%}
+{%endblock%}
+
+
+
+
+
+{%block html%}
+          <h2 class="sub-header">Docker容器日志</h2>
+          <div class="table-responsive">
+          <a href='/rongqi' class="label label-success">返回上一页</a>
+          <hr>
+          <pre><!--  style="white-space: pre-wrap;word-wrap: break-word;" -->
+            {{ logs }}
+          </pre>
+          </div>
+{%endblock%}
+
+
+{%block js%}
+{%endblock%}

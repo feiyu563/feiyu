@@ -1,0 +1,1684 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python开发【第三篇】：Python基本数据类型 - 武沛齐 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=m_FXmwz3wxZoecUwNEK23PAzc-j9vbX_C6MblJ5ouMc1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue.css?v=jJERBFSojhmgst84aaRDal9S3q1WoO-WcNudmMzGJS81"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/133379.css?v=YSNZANkz7eBKoXq2iHYfghvodkY%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue-mobile.css?v=z0BacpCfWeLlXDCM0C158kTP_DMqMbGBapID4f-QztI1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/wupeiqi/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/wupeiqi/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/wupeiqi/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'wupeiqi', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=CPv0EEqm9L2aCgolHxaZfVYM6J-Sn5az_FJXbjzgr-o1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/wupeiqi/">Mr.Seven</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/wupeiqi/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%AD%A6%E6%B2%9B%E9%BD%90">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/wupeiqi/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/wupeiqi/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-126&nbsp;
+文章-137&nbsp;
+评论-259&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/wupeiqi/articles/5444685.html">Python开发【第三篇】：Python基本数据类型</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><h3>运算符</h3>
+<div><span style="font-size: 18px;"><strong>1、算数运算：</strong></span></div>
+<div>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151025004451692-544714036.png" alt="" width="649" height="207" /></p>
+<p><span style="font-size: 18px;"><strong>2、比较运算：</strong></span></p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151025004535395-2018056438.png" alt="" width="647" height="229" /></p>
+<p><span style="font-size: 18px;"><strong>3、赋值运算：</strong></span></p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151025004625020-515390534.png" alt="" width="645" height="228" /></p>
+<p><span style="font-size: 18px;"><strong>4、逻辑运算：</strong></span></p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151025004829864-1676917934.png" alt="" width="645" height="100" /></p>
+<p><span style="font-size: 14pt;"><strong>5、成员运算：</strong></span></p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201510/425762-20151025004934286-1134210223.png" alt="" width="649" height="72" /></p>
+<h3>基本数据类型</h3>
+<div><span style="font-size: 18px;"><strong>1、数字</strong></span></div>
+<div>
+<p>int（整型）</p>
+<div>　　在32位机器上，整数的位数为32位，取值范围为-2**31～2**31-1，即-2147483648～2147483647<br />　　在64位系统上，整数的位数为64位，取值范围为-2**63～2**63-1，即-9223372036854775808～9223372036854775807</div>
+<div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('53e45640-3bfd-4cd5-bee5-47a1858a37b7')"><img id="code_img_closed_53e45640-3bfd-4cd5-bee5-47a1858a37b7" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_53e45640-3bfd-4cd5-bee5-47a1858a37b7" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('53e45640-3bfd-4cd5-bee5-47a1858a37b7',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_53e45640-3bfd-4cd5-bee5-47a1858a37b7" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">class</span><span style="color: #000000;"> int(object):
+    </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+    int(x=0) -&gt; int or long
+    int(x, base=10) -&gt; int or long
+    
+    Convert a number or string to an integer, or return 0 if no arguments
+    are given.  If x is floating point, the conversion truncates towards zero.
+    If x is outside the integer range, the function returns a long instead.
+    
+    If x is not a number or if base is given, then x must be a string or
+    Unicode object representing an integer literal in the given base.  The
+    literal can be preceded by '+' or '-' and be surrounded by whitespace.
+    The base defaults to 10.  Valid bases are 0 and 2-36.  Base 0 means to
+    interpret the base from the string as an integer literal.
+    &gt;&gt;&gt; int('0b100', base=0)
+    4
+    </span><span style="color: #800000;">"""</span>
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> bit_length(self): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 返回表示该数字的时占用的最少位数 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        int.bit_length() -&gt; int
+        
+        Number of bits necessary to represent self in binary.
+        &gt;&gt;&gt; bin(37)
+        '0b100101'
+        &gt;&gt;&gt; (37).bit_length()
+        6
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;"> 0
+
+    </span><span style="color: #0000ff;">def</span> conjugate(self, *args, **kwargs): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> 返回该复数的共轭复数 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> Returns self, the complex conjugate of any int. </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__abs__</span><span style="color: #000000;">(self):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 返回绝对值 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__abs__() &lt;==&gt; abs(x) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__add__</span><span style="color: #000000;">(self, y):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__add__(y) &lt;==&gt; x+y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__and__</span><span style="color: #000000;">(self, y):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__and__(y) &lt;==&gt; x&amp;y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__cmp__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 比较两个数大小 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__cmp__(y) &lt;==&gt; cmp(x,y) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__coerce__</span><span style="color: #000000;">(self, y):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 强制生成一个元组 </span><span style="color: #800000;">"""</span> 
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__coerce__(y) &lt;==&gt; coerce(x, y) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__divmod__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 相除，得到商和余数组成的元组 </span><span style="color: #800000;">"""</span> 
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__divmod__(y) &lt;==&gt; divmod(x, y) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__div__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__div__(y) &lt;==&gt; x/y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__float__</span><span style="color: #000000;">(self): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 转换为浮点类型 </span><span style="color: #800000;">"""</span> 
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__float__() &lt;==&gt; float(x) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__floordiv__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__floordiv__(y) &lt;==&gt; x//y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__format__</span>(self, *args, **kwargs): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__getattribute__</span><span style="color: #000000;">(self, name): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__getattribute__('name') &lt;==&gt; x.name </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__getnewargs__</span>(self, *args, **kwargs): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> 内部调用 __new__方法或创建对象时传入参数使用 </span><span style="color: #800000;">"""</span> 
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__hash__</span><span style="color: #000000;">(self): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">如果对象object为哈希表类型，返回对象object的哈希值。哈希值为整数。在字典查找中，哈希值用于快速比较字典的键。两个数值如果相等，则哈希值也相等。</span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__hash__() &lt;==&gt; hash(x) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__hex__</span><span style="color: #000000;">(self): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 返回当前数的 十六进制 表示 </span><span style="color: #800000;">"""</span> 
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__hex__() &lt;==&gt; hex(x) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__index__</span><span style="color: #000000;">(self): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 用于切片，数字无意义 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x[y:z] &lt;==&gt; x[y.__index__():z.__index__()] </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span>(self, x, base=10): <span style="color: #008000;">#</span><span style="color: #008000;"> known special case of int.__init__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> 构造方法，执行 x = 123 或 x = int(10) 时，自动调用，暂时忽略 </span><span style="color: #800000;">"""</span> 
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        int(x=0) -&gt; int or long
+        int(x, base=10) -&gt; int or long
+        
+        Convert a number or string to an integer, or return 0 if no arguments
+        are given.  If x is floating point, the conversion truncates towards zero.
+        If x is outside the integer range, the function returns a long instead.
+        
+        If x is not a number or if base is given, then x must be a string or
+        Unicode object representing an integer literal in the given base.  The
+        literal can be preceded by '+' or '-' and be surrounded by whitespace.
+        The base defaults to 10.  Valid bases are 0 and 2-36.  Base 0 means to
+        interpret the base from the string as an integer literal.
+        &gt;&gt;&gt; int('0b100', base=0)
+        4
+        # (copied from class doc)
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__int__</span><span style="color: #000000;">(self): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 转换为整数 </span><span style="color: #800000;">"""</span> 
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__int__() &lt;==&gt; int(x) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__invert__</span><span style="color: #000000;">(self): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__invert__() &lt;==&gt; ~x </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__long__</span><span style="color: #000000;">(self): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 转换为长整数 </span><span style="color: #800000;">"""</span> 
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__long__() &lt;==&gt; long(x) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__lshift__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__lshift__(y) &lt;==&gt; x&lt;&lt;y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__mod__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__mod__(y) &lt;==&gt; x%y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__mul__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__mul__(y) &lt;==&gt; x*y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__neg__</span><span style="color: #000000;">(self): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__neg__() &lt;==&gt; -x </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span><span style="color: #000000;">
+
+    @staticmethod </span><span style="color: #008000;">#</span><span style="color: #008000;"> known case of __new__</span>
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__new__</span>(S, *<span style="color: #000000;">more): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> T.__new__(S, ...) -&gt; a new object with type S, a subtype of T </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__nonzero__</span><span style="color: #000000;">(self): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__nonzero__() &lt;==&gt; x != 0 </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__oct__</span><span style="color: #000000;">(self): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 返回改值的 八进制 表示 </span><span style="color: #800000;">"""</span> 
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__oct__() &lt;==&gt; oct(x) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__or__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__or__(y) &lt;==&gt; x|y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__pos__</span><span style="color: #000000;">(self): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__pos__() &lt;==&gt; +x </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__pow__</span>(self, y, z=<span style="color: #000000;">None): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 幂，次方 </span><span style="color: #800000;">"""</span> 
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__pow__(y[, z]) &lt;==&gt; pow(x, y[, z]) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__radd__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__radd__(y) &lt;==&gt; y+x </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__rand__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__rand__(y) &lt;==&gt; y&amp;x </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__rdivmod__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__rdivmod__(y) &lt;==&gt; divmod(y, x) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__rdiv__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__rdiv__(y) &lt;==&gt; y/x </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__repr__</span><span style="color: #000000;">(self): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">转化为解释器可读取的形式 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__repr__() &lt;==&gt; repr(x) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__str__</span><span style="color: #000000;">(self): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">转换为人阅读的形式，如果没有适于人阅读的解释形式的话，则返回解释器课阅读的形式</span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__str__() &lt;==&gt; str(x) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__rfloordiv__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__rfloordiv__(y) &lt;==&gt; y//x </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__rlshift__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__rlshift__(y) &lt;==&gt; y&lt;&lt;x </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__rmod__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__rmod__(y) &lt;==&gt; y%x </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__rmul__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__rmul__(y) &lt;==&gt; y*x </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__ror__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__ror__(y) &lt;==&gt; y|x </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__rpow__</span>(self, x, z=<span style="color: #000000;">None): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> y.__rpow__(x[, z]) &lt;==&gt; pow(x, y[, z]) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__rrshift__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__rrshift__(y) &lt;==&gt; y&gt;&gt;x </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__rshift__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__rshift__(y) &lt;==&gt; x&gt;&gt;y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__rsub__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__rsub__(y) &lt;==&gt; y-x </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__rtruediv__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__rtruediv__(y) &lt;==&gt; y/x </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__rxor__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__rxor__(y) &lt;==&gt; y^x </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__sub__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__sub__(y) &lt;==&gt; x-y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__truediv__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__truediv__(y) &lt;==&gt; x/y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__trunc__</span>(self, *args, **<span style="color: #000000;">kwargs): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 返回数值被截取为整形的值，在整形中无意义 </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__xor__</span><span style="color: #000000;">(self, y): 
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> x.__xor__(y) &lt;==&gt; x^y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span><span style="color: #000000;">
+
+    denominator </span>= property(<span style="color: #0000ff;">lambda</span> self: object(), <span style="color: #0000ff;">lambda</span> self, v: None, <span style="color: #0000ff;">lambda</span> self: None)  <span style="color: #008000;">#</span><span style="color: #008000;"> default</span>
+    <span style="color: #800000;">"""</span><span style="color: #800000;"> 分母 = 1 </span><span style="color: #800000;">"""</span>
+    <span style="color: #800000;">"""</span><span style="color: #800000;">the denominator of a rational number in lowest terms</span><span style="color: #800000;">"""</span><span style="color: #000000;">
+
+    imag </span>= property(<span style="color: #0000ff;">lambda</span> self: object(), <span style="color: #0000ff;">lambda</span> self, v: None, <span style="color: #0000ff;">lambda</span> self: None)  <span style="color: #008000;">#</span><span style="color: #008000;"> default</span>
+    <span style="color: #800000;">"""</span><span style="color: #800000;"> 虚数，无意义 </span><span style="color: #800000;">"""</span>
+    <span style="color: #800000;">"""</span><span style="color: #800000;">the imaginary part of a complex number</span><span style="color: #800000;">"""</span><span style="color: #000000;">
+
+    numerator </span>= property(<span style="color: #0000ff;">lambda</span> self: object(), <span style="color: #0000ff;">lambda</span> self, v: None, <span style="color: #0000ff;">lambda</span> self: None)  <span style="color: #008000;">#</span><span style="color: #008000;"> default</span>
+    <span style="color: #800000;">"""</span><span style="color: #800000;"> 分子 = 数字大小 </span><span style="color: #800000;">"""</span>
+    <span style="color: #800000;">"""</span><span style="color: #800000;">the numerator of a rational number in lowest terms</span><span style="color: #800000;">"""</span><span style="color: #000000;">
+
+    real </span>= property(<span style="color: #0000ff;">lambda</span> self: object(), <span style="color: #0000ff;">lambda</span> self, v: None, <span style="color: #0000ff;">lambda</span> self: None)  <span style="color: #008000;">#</span><span style="color: #008000;"> default</span>
+    <span style="color: #800000;">"""</span><span style="color: #800000;"> 实属，无意义 </span><span style="color: #800000;">"""</span>
+    <span style="color: #800000;">"""</span><span style="color: #800000;">the real part of a complex number</span><span style="color: #800000;">"""</span></pre>
+</div>
+<span class="cnblogs_code_collapse">int</span></div>
+</div>
+</div>
+<div><span style="font-size: 18px;"><strong>2、布尔值</strong></span></div>
+<div>　　真或假</div>
+<div>　　1 或 0</div>
+<div><span style="font-size: 18px;"><strong>3、字符串</strong></span></div>
+<blockquote>
+<div>"hello world"</div>
+</blockquote>
+<div><span style="line-height: 1.5;">字符串常用功能：</span></div>
+<div>
+<ul>
+<li>移除空白</li>
+<li>分割</li>
+<li>长度</li>
+<li>索引</li>
+<li>切片</li>
+</ul>
+</div>
+<div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('1db22239-39ae-4045-803c-3451080eae20')"><img id="code_img_closed_1db22239-39ae-4045-803c-3451080eae20" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_1db22239-39ae-4045-803c-3451080eae20" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('1db22239-39ae-4045-803c-3451080eae20',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_1db22239-39ae-4045-803c-3451080eae20" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">class</span><span style="color: #000000;"> str(basestring):
+    </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+    str(object='') -&gt; string
+    
+    Return a nice string representation of the object.
+    If the argument is a string, the return value is the same object.
+    </span><span style="color: #800000;">"""</span>
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> capitalize(self):  
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 首字母变大写 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        S.capitalize() -&gt; string
+        
+        Return a copy of the string S with only its first character
+        capitalized.
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span> <span style="color: #800000;">""</span>
+
+    <span style="color: #0000ff;">def</span> center(self, width, fillchar=<span style="color: #000000;">None):  
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 内容居中，width：总长度；fillchar：空白处填充内容，默认无 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        S.center(width[, fillchar]) -&gt; string
+        
+        Return S centered in a string of length width. Padding is
+        done using the specified fill character (default is a space)
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span> <span style="color: #800000;">""</span>
+
+    <span style="color: #0000ff;">def</span> count(self, sub, start=None, end=<span style="color: #000000;">None):  
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 子序列个数 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        S.count(sub[, start[, end]]) -&gt; int
+        
+        Return the number of non-overlapping occurrences of substring sub in
+        string S[start:end].  Optional arguments start and end are interpreted
+        as in slice notation.
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;"> 0
+
+    </span><span style="color: #0000ff;">def</span> decode(self, encoding=None, errors=<span style="color: #000000;">None):  
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 解码 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        S.decode([encoding[,errors]]) -&gt; object
+        
+        Decodes S using the codec registered for encoding. encoding defaults
+        to the default encoding. errors may be given to set a different error
+        handling scheme. Default is 'strict' meaning that encoding errors raise
+        a UnicodeDecodeError. Other possible values are 'ignore' and 'replace'
+        as well as any other name registered with codecs.register_error that is
+        able to handle UnicodeDecodeErrors.
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;"> object()
+
+    </span><span style="color: #0000ff;">def</span> encode(self, encoding=None, errors=<span style="color: #000000;">None):  
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 编码，针对unicode </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        S.encode([encoding[,errors]]) -&gt; object
+        
+        Encodes S using the codec registered for encoding. encoding defaults
+        to the default encoding. errors may be given to set a different error
+        handling scheme. Default is 'strict' meaning that encoding errors raise
+        a UnicodeEncodeError. Other possible values are 'ignore', 'replace' and
+        'xmlcharrefreplace' as well as any other name registered with
+        codecs.register_error that is able to handle UnicodeEncodeErrors.
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;"> object()
+
+    </span><span style="color: #0000ff;">def</span> endswith(self, suffix, start=None, end=<span style="color: #000000;">None):  
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 是否以 xxx 结束 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        S.endswith(suffix[, start[, end]]) -&gt; bool
+        
+        Return True if S ends with the specified suffix, False otherwise.
+        With optional start, test S beginning at that position.
+        With optional end, stop comparing S at that position.
+        suffix can also be a tuple of strings to try.
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;"> False
+
+    </span><span style="color: #0000ff;">def</span> expandtabs(self, tabsize=<span style="color: #000000;">None):  
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 将tab转换成空格，默认一个tab转换成8个空格 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        S.expandtabs([tabsize]) -&gt; string
+        
+        Return a copy of S where all tab characters are expanded using spaces.
+        If tabsize is not given, a tab size of 8 characters is assumed.
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span> <span style="color: #800000;">""</span>
+
+    <span style="color: #0000ff;">def</span> find(self, sub, start=None, end=<span style="color: #000000;">None):  
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 寻找子序列位置，如果没找到，返回 -1 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        S.find(sub [,start [,end]]) -&gt; int
+        
+        Return the lowest index in S where substring sub is found,
+        such that sub is contained within S[start:end].  Optional
+        arguments start and end are interpreted as in slice notation.
+        
+        Return -1 on failure.
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;"> 0
+
+    </span><span style="color: #0000ff;">def</span> format(*args, **kwargs): <span style="color: #008000;">#</span><span style="color: #008000;"> known special case of str.format</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> 字符串格式化，动态参数，将函数式编程时细说 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        S.format(*args, **kwargs) -&gt; string
+        
+        Return a formatted version of S, using substitutions from args and kwargs.
+        The substitutions are identified by braces ('{' and '}').
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> index(self, sub, start=None, end=<span style="color: #000000;">None):  
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;"> 子序列位置，如果没找到，报错 </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.index(sub [,start [,end]]) </span>-&gt;<span style="color: #000000;"> int
+        
+        Like S.find() but </span><span style="color: #0000ff;">raise</span> ValueError when the substring <span style="color: #0000ff;">is</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> found.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return 0
+
+    def isalnum(self):  
+        </span><span style="color: #800000;">"""</span> 是否是字母和数字 <span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.isalnum() </span>-&gt;<span style="color: #000000;"> bool
+        
+        Return True </span><span style="color: #0000ff;">if</span> all characters <span style="color: #0000ff;">in</span><span style="color: #000000;"> S are alphanumeric
+        </span><span style="color: #0000ff;">and</span> there <span style="color: #0000ff;">is</span> at least one character <span style="color: #0000ff;">in</span><span style="color: #000000;"> S, False otherwise.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return False
+
+    def isalpha(self):  
+        </span><span style="color: #800000;">"""</span> 是否是字母 <span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.isalpha() </span>-&gt;<span style="color: #000000;"> bool
+        
+        Return True </span><span style="color: #0000ff;">if</span> all characters <span style="color: #0000ff;">in</span><span style="color: #000000;"> S are alphabetic
+        </span><span style="color: #0000ff;">and</span> there <span style="color: #0000ff;">is</span> at least one character <span style="color: #0000ff;">in</span><span style="color: #000000;"> S, False otherwise.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return False
+
+    def isdigit(self):  
+        </span><span style="color: #800000;">"""</span> 是否是数字 <span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.isdigit() </span>-&gt;<span style="color: #000000;"> bool
+        
+        Return True </span><span style="color: #0000ff;">if</span> all characters <span style="color: #0000ff;">in</span><span style="color: #000000;"> S are digits
+        </span><span style="color: #0000ff;">and</span> there <span style="color: #0000ff;">is</span> at least one character <span style="color: #0000ff;">in</span><span style="color: #000000;"> S, False otherwise.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return False
+
+    def islower(self):  
+        </span><span style="color: #800000;">"""</span> 是否小写 <span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.islower() </span>-&gt;<span style="color: #000000;"> bool
+        
+        Return True </span><span style="color: #0000ff;">if</span> all cased characters <span style="color: #0000ff;">in</span> S are lowercase <span style="color: #0000ff;">and</span> there <span style="color: #0000ff;">is</span><span style="color: #000000;">
+        at least one cased character </span><span style="color: #0000ff;">in</span><span style="color: #000000;"> S, False otherwise.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return False
+
+    def isspace(self):  
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.isspace() </span>-&gt;<span style="color: #000000;"> bool
+        
+        Return True </span><span style="color: #0000ff;">if</span> all characters <span style="color: #0000ff;">in</span><span style="color: #000000;"> S are whitespace
+        </span><span style="color: #0000ff;">and</span> there <span style="color: #0000ff;">is</span> at least one character <span style="color: #0000ff;">in</span><span style="color: #000000;"> S, False otherwise.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return False
+
+    def istitle(self):  
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.istitle() </span>-&gt;<span style="color: #000000;"> bool
+        
+        Return True </span><span style="color: #0000ff;">if</span> S <span style="color: #0000ff;">is</span> a titlecased string <span style="color: #0000ff;">and</span> there <span style="color: #0000ff;">is</span><span style="color: #000000;"> at least one
+        character </span><span style="color: #0000ff;">in</span><span style="color: #000000;"> S, i.e. uppercase characters may only follow uncased
+        characters </span><span style="color: #0000ff;">and</span><span style="color: #000000;"> lowercase characters only cased ones. Return False
+        otherwise.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return False
+
+    def isupper(self):  
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.isupper() </span>-&gt;<span style="color: #000000;"> bool
+        
+        Return True </span><span style="color: #0000ff;">if</span> all cased characters <span style="color: #0000ff;">in</span> S are uppercase <span style="color: #0000ff;">and</span> there <span style="color: #0000ff;">is</span><span style="color: #000000;">
+        at least one cased character </span><span style="color: #0000ff;">in</span><span style="color: #000000;"> S, False otherwise.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return False
+
+    def join(self, iterable):  
+        </span><span style="color: #800000;">"""</span> 连接 <span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.join(iterable) </span>-&gt;<span style="color: #000000;"> string
+        
+        Return a string which </span><span style="color: #0000ff;">is</span> the concatenation of the strings <span style="color: #0000ff;">in</span><span style="color: #000000;"> the
+        iterable.  The separator between elements </span><span style="color: #0000ff;">is</span><span style="color: #000000;"> S.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return ""
+
+    def ljust(self, width, fillchar=None):  
+        </span><span style="color: #800000;">"""</span> 内容左对齐，右侧填充 <span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.ljust(width[, fillchar]) </span>-&gt;<span style="color: #000000;"> string
+        
+        Return S left</span>-justified <span style="color: #0000ff;">in</span> a string of length width. Padding <span style="color: #0000ff;">is</span><span style="color: #000000;">
+        done using the specified fill character (default </span><span style="color: #0000ff;">is</span><span style="color: #000000;"> a space).
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return ""
+
+    def lower(self):  
+        </span><span style="color: #800000;">"""</span> 变小写 <span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.lower() </span>-&gt;<span style="color: #000000;"> string
+        
+        Return a copy of the string S converted to lowercase.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return ""
+
+    def lstrip(self, chars=None):  
+        </span><span style="color: #800000;">"""</span> 移除左侧空白 <span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.lstrip([chars]) </span>-&gt; string <span style="color: #0000ff;">or</span><span style="color: #000000;"> unicode
+        
+        Return a copy of the string S with leading whitespace removed.
+        If chars </span><span style="color: #0000ff;">is</span> given <span style="color: #0000ff;">and</span> <span style="color: #0000ff;">not</span> None, remove characters <span style="color: #0000ff;">in</span><span style="color: #000000;"> chars instead.
+        If chars </span><span style="color: #0000ff;">is</span><span style="color: #000000;"> unicode, S will be converted to unicode before stripping
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return ""
+
+    def partition(self, sep):  
+        </span><span style="color: #800000;">"""</span> 分割，前，中，后三部分 <span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.partition(sep) </span>-&gt;<span style="color: #000000;"> (head, sep, tail)
+        
+        Search </span><span style="color: #0000ff;">for</span> the separator sep <span style="color: #0000ff;">in</span> S, <span style="color: #0000ff;">and</span> <span style="color: #0000ff;">return</span><span style="color: #000000;"> the part before it,
+        the separator itself, </span><span style="color: #0000ff;">and</span> the part after it.  If the separator <span style="color: #0000ff;">is</span> <span style="color: #0000ff;">not</span><span style="color: #000000;">
+        found, </span><span style="color: #0000ff;">return</span> S <span style="color: #0000ff;">and</span><span style="color: #000000;"> two empty strings.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def replace(self, old, new, count=None):  
+        </span><span style="color: #800000;">"""</span> 替换 <span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.replace(old, new[, count]) </span>-&gt;<span style="color: #000000;"> string
+        
+        Return a copy of string S with all occurrences of substring
+        old replaced by new.  If the optional argument count </span><span style="color: #0000ff;">is</span><span style="color: #000000;">
+        given, only the first count occurrences are replaced.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return ""
+
+    def rfind(self, sub, start=None, end=None):  
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.rfind(sub [,start [,end]]) </span>-&gt;<span style="color: #000000;"> int
+        
+        Return the highest index </span><span style="color: #0000ff;">in</span> S where substring sub <span style="color: #0000ff;">is</span><span style="color: #000000;"> found,
+        such that sub </span><span style="color: #0000ff;">is</span><span style="color: #000000;"> contained within S[start:end].  Optional
+        arguments start </span><span style="color: #0000ff;">and</span> end are interpreted as <span style="color: #0000ff;">in</span><span style="color: #000000;"> slice notation.
+        
+        Return </span>-1<span style="color: #000000;"> on failure.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return 0
+
+    def rindex(self, sub, start=None, end=None):  
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.rindex(sub [,start [,end]]) </span>-&gt;<span style="color: #000000;"> int
+        
+        Like S.rfind() but </span><span style="color: #0000ff;">raise</span> ValueError when the substring <span style="color: #0000ff;">is</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> found.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return 0
+
+    def rjust(self, width, fillchar=None):  
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.rjust(width[, fillchar]) </span>-&gt;<span style="color: #000000;"> string
+        
+        Return S right</span>-justified <span style="color: #0000ff;">in</span> a string of length width. Padding <span style="color: #0000ff;">is</span><span style="color: #000000;">
+        done using the specified fill character (default </span><span style="color: #0000ff;">is</span><span style="color: #000000;"> a space)
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return ""
+
+    def rpartition(self, sep):  
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.rpartition(sep) </span>-&gt;<span style="color: #000000;"> (head, sep, tail)
+        
+        Search </span><span style="color: #0000ff;">for</span> the separator sep <span style="color: #0000ff;">in</span> S, starting at the end of S, <span style="color: #0000ff;">and</span> <span style="color: #0000ff;">return</span><span style="color: #000000;">
+        the part before it, the separator itself, </span><span style="color: #0000ff;">and</span><span style="color: #000000;"> the part after it.  If the
+        separator </span><span style="color: #0000ff;">is</span> <span style="color: #0000ff;">not</span> found, <span style="color: #0000ff;">return</span> two empty strings <span style="color: #0000ff;">and</span><span style="color: #000000;"> S.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def rsplit(self, sep=None, maxsplit=None):  
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.rsplit([sep [,maxsplit]]) </span>-&gt;<span style="color: #000000;"> list of strings
+        
+        Return a list of the words </span><span style="color: #0000ff;">in</span><span style="color: #000000;"> the string S, using sep as the
+        delimiter string, starting at the end of the string </span><span style="color: #0000ff;">and</span><span style="color: #000000;"> working
+        to the front.  If maxsplit </span><span style="color: #0000ff;">is</span><span style="color: #000000;"> given, at most maxsplit splits are
+        done. If sep </span><span style="color: #0000ff;">is</span> <span style="color: #0000ff;">not</span> specified <span style="color: #0000ff;">or</span> <span style="color: #0000ff;">is</span><span style="color: #000000;"> None, any whitespace string
+        </span><span style="color: #0000ff;">is</span><span style="color: #000000;"> a separator.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return []
+
+    def rstrip(self, chars=None):  
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.rstrip([chars]) </span>-&gt; string <span style="color: #0000ff;">or</span><span style="color: #000000;"> unicode
+        
+        Return a copy of the string S with trailing whitespace removed.
+        If chars </span><span style="color: #0000ff;">is</span> given <span style="color: #0000ff;">and</span> <span style="color: #0000ff;">not</span> None, remove characters <span style="color: #0000ff;">in</span><span style="color: #000000;"> chars instead.
+        If chars </span><span style="color: #0000ff;">is</span><span style="color: #000000;"> unicode, S will be converted to unicode before stripping
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return ""
+
+    def split(self, sep=None, maxsplit=None):  
+        </span><span style="color: #800000;">"""</span> 分割， maxsplit最多分割几次 <span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.split([sep [,maxsplit]]) </span>-&gt;<span style="color: #000000;"> list of strings
+        
+        Return a list of the words </span><span style="color: #0000ff;">in</span><span style="color: #000000;"> the string S, using sep as the
+        delimiter string.  If maxsplit </span><span style="color: #0000ff;">is</span><span style="color: #000000;"> given, at most maxsplit
+        splits are done. If sep </span><span style="color: #0000ff;">is</span> <span style="color: #0000ff;">not</span> specified <span style="color: #0000ff;">or</span> <span style="color: #0000ff;">is</span><span style="color: #000000;"> None, any
+        whitespace string </span><span style="color: #0000ff;">is</span> a separator <span style="color: #0000ff;">and</span><span style="color: #000000;"> empty strings are removed
+        </span><span style="color: #0000ff;">from</span><span style="color: #000000;"> the result.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return []
+
+    def splitlines(self, keepends=False):  
+        </span><span style="color: #800000;">"""</span> 根据换行分割 <span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.splitlines(keepends</span>=False) -&gt;<span style="color: #000000;"> list of strings
+        
+        Return a list of the lines </span><span style="color: #0000ff;">in</span><span style="color: #000000;"> S, breaking at line boundaries.
+        Line breaks are </span><span style="color: #0000ff;">not</span> included <span style="color: #0000ff;">in</span><span style="color: #000000;"> the resulting list unless keepends
+        </span><span style="color: #0000ff;">is</span> given <span style="color: #0000ff;">and</span><span style="color: #000000;"> true.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return []
+
+    def startswith(self, prefix, start=None, end=None):  
+        </span><span style="color: #800000;">"""</span> 是否起始 <span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.startswith(prefix[, start[, end]]) </span>-&gt;<span style="color: #000000;"> bool
+        
+        Return True </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> S starts with the specified prefix, False otherwise.
+        With optional start, test S beginning at that position.
+        With optional end, stop comparing S at that position.
+        prefix can also be a tuple of strings to </span><span style="color: #0000ff;">try</span><span style="color: #000000;">.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return False
+
+    def strip(self, chars=None):  
+        </span><span style="color: #800000;">"""</span> 移除两段空白 <span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.strip([chars]) </span>-&gt; string <span style="color: #0000ff;">or</span><span style="color: #000000;"> unicode
+        
+        Return a copy of the string S with leading </span><span style="color: #0000ff;">and</span><span style="color: #000000;"> trailing
+        whitespace removed.
+        If chars </span><span style="color: #0000ff;">is</span> given <span style="color: #0000ff;">and</span> <span style="color: #0000ff;">not</span> None, remove characters <span style="color: #0000ff;">in</span><span style="color: #000000;"> chars instead.
+        If chars </span><span style="color: #0000ff;">is</span><span style="color: #000000;"> unicode, S will be converted to unicode before stripping
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return ""
+
+    def swapcase(self):  
+        </span><span style="color: #800000;">"""</span> 大写变小写，小写变大写 <span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.swapcase() </span>-&gt;<span style="color: #000000;"> string
+        
+        Return a copy of the string S with uppercase characters
+        converted to lowercase </span><span style="color: #0000ff;">and</span><span style="color: #000000;"> vice versa.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return ""
+
+    def title(self):  
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.title() </span>-&gt;<span style="color: #000000;"> string
+        
+        Return a titlecased version of S, i.e. words start with uppercase
+        characters, all remaining cased characters have lowercase.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return ""
+
+    def translate(self, table, deletechars=None):  
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        转换，需要先做一个对应表，最后一个表示删除字符集合
+        intab </span>= <span style="color: #800000;">"</span><span style="color: #800000;">aeiou</span><span style="color: #800000;">"</span><span style="color: #000000;">
+        outtab </span>= <span style="color: #800000;">"</span><span style="color: #800000;">12345</span><span style="color: #800000;">"</span><span style="color: #000000;">
+        trantab </span>=<span style="color: #000000;"> maketrans(intab, outtab)
+        str </span>= <span style="color: #800000;">"</span><span style="color: #800000;">this is string example....wow!!!</span><span style="color: #800000;">"</span>
+        <span style="color: #0000ff;">print</span> str.translate(trantab, <span style="color: #800000;">'</span><span style="color: #800000;">xm</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        </span><span style="color: #800000;">"""</span>
+
+        <span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.translate(table [,deletechars]) </span>-&gt;<span style="color: #000000;"> string
+        
+        Return a copy of the string S, where all characters occurring
+        </span><span style="color: #0000ff;">in</span> the optional argument deletechars are removed, <span style="color: #0000ff;">and</span><span style="color: #000000;"> the
+        remaining characters have been mapped through the given
+        translation table, which must be a string of length </span>256 <span style="color: #0000ff;">or</span><span style="color: #000000;"> None.
+        If the table argument </span><span style="color: #0000ff;">is</span> None, no translation <span style="color: #0000ff;">is</span> applied <span style="color: #0000ff;">and</span><span style="color: #000000;">
+        the operation simply removes the characters </span><span style="color: #0000ff;">in</span><span style="color: #000000;"> deletechars.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return ""
+
+    def upper(self):  
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.upper() </span>-&gt;<span style="color: #000000;"> string
+        
+        Return a copy of the string S converted to uppercase.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return ""
+
+    def zfill(self, width):  
+        </span><span style="color: #800000;">"""</span>方法返回指定长度的字符串，原字符串右对齐，前面填充0。<span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.zfill(width) </span>-&gt;<span style="color: #000000;"> string
+        
+        Pad a numeric string S with zeros on the left, to fill a field
+        of the specified width.  The string S </span><span style="color: #0000ff;">is</span><span style="color: #000000;"> never truncated.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return ""
+
+    def _formatter_field_name_split(self, *args, **kwargs): # real signature unknown
+        pass
+
+    def _formatter_parser(self, *args, **kwargs): # real signature unknown
+        pass
+
+    def __add__(self, y):  
+        </span><span style="color: #800000;">"""</span> x.<span style="color: #800080;">__add__</span>(y) &lt;==&gt; x+y <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def __contains__(self, y):  
+        </span><span style="color: #800000;">"""</span> x.<span style="color: #800080;">__contains__</span>(y) &lt;==&gt; y <span style="color: #0000ff;">in</span> x <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def __eq__(self, y):  
+        </span><span style="color: #800000;">"""</span> x.<span style="color: #800080;">__eq__</span>(y) &lt;==&gt; x==y <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def __format__(self, format_spec):  
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        S.</span><span style="color: #800080;">__format__</span>(format_spec) -&gt;<span style="color: #000000;"> string
+        
+        Return a formatted version of S as described by format_spec.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        return ""
+
+    def __getattribute__(self, name):  
+        </span><span style="color: #800000;">"""</span> x.<span style="color: #800080;">__getattribute__</span>(<span style="color: #800000;">'</span><span style="color: #800000;">name</span><span style="color: #800000;">'</span>) &lt;==&gt; x.name <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def __getitem__(self, y):  
+        </span><span style="color: #800000;">"""</span> x.<span style="color: #800080;">__getitem__</span>(y) &lt;==&gt; x[y] <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def __getnewargs__(self, *args, **kwargs): # real signature unknown
+        pass
+
+    def __getslice__(self, i, j):  
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        x.</span><span style="color: #800080;">__getslice__</span>(i, j) &lt;==&gt;<span style="color: #000000;"> x[i:j]
+                   
+                   Use of negative indices </span><span style="color: #0000ff;">is</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> supported.
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def __ge__(self, y):  
+        </span><span style="color: #800000;">"""</span> x.<span style="color: #800080;">__ge__</span>(y) &lt;==&gt; x&gt;=y <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def __gt__(self, y):  
+        </span><span style="color: #800000;">"""</span> x.<span style="color: #800080;">__gt__</span>(y) &lt;==&gt; x&gt;y <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def __hash__(self):  
+        </span><span style="color: #800000;">"""</span> x.<span style="color: #800080;">__hash__</span>() &lt;==&gt; hash(x) <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def __init__(self, string=''): # known special case of str.__init__
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        str(object</span>=<span style="color: #800000;">''</span>) -&gt;<span style="color: #000000;"> string
+        
+        Return a nice string representation of the object.
+        If the argument </span><span style="color: #0000ff;">is</span> a string, the <span style="color: #0000ff;">return</span> value <span style="color: #0000ff;">is</span><span style="color: #000000;"> the same object.
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> (copied from class doc)</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def __len__(self):  
+        </span><span style="color: #800000;">"""</span> x.<span style="color: #800080;">__len__</span>() &lt;==&gt; len(x) <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def __le__(self, y):  
+        </span><span style="color: #800000;">"""</span> x.<span style="color: #800080;">__le__</span>(y) &lt;==&gt; x&lt;=y <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def __lt__(self, y):  
+        </span><span style="color: #800000;">"""</span> x.<span style="color: #800080;">__lt__</span>(y) &lt;==&gt; x&lt;y <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def __mod__(self, y):  
+        </span><span style="color: #800000;">"""</span> x.<span style="color: #800080;">__mod__</span>(y) &lt;==&gt; x%y <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def __mul__(self, n):  
+        </span><span style="color: #800000;">"""</span> x.<span style="color: #800080;">__mul__</span>(n) &lt;==&gt; x*n <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    @staticmethod # known case of __new__
+    def __new__(S, *more):  
+        </span><span style="color: #800000;">"""</span> T.<span style="color: #800080;">__new__</span>(S, ...) -&gt; a new object with type S, a subtype of T <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def __ne__(self, y):  
+        </span><span style="color: #800000;">"""</span> x.<span style="color: #800080;">__ne__</span>(y) &lt;==&gt; x!=y <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def __repr__(self):  
+        </span><span style="color: #800000;">"""</span> x.<span style="color: #800080;">__repr__</span>() &lt;==&gt; repr(x) <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def __rmod__(self, y):  
+        </span><span style="color: #800000;">"""</span> x.<span style="color: #800080;">__rmod__</span>(y) &lt;==&gt; y%x <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def __rmul__(self, n):  
+        </span><span style="color: #800000;">"""</span> x.<span style="color: #800080;">__rmul__</span>(n) &lt;==&gt; n*x <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def __sizeof__(self):  
+        </span><span style="color: #800000;">"""</span> S.<span style="color: #800080;">__sizeof__</span>() -&gt; size of S <span style="color: #0000ff;">in</span> memory, <span style="color: #0000ff;">in</span> bytes <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass
+
+    def __str__(self):  
+        </span><span style="color: #800000;">"""</span> x.<span style="color: #800080;">__str__</span>() &lt;==&gt; str(x) <span style="color: #800000;">"""</span><span style="color: #800000;">
+        pass</span></pre>
+</div>
+<span class="cnblogs_code_collapse">str</span></div>
+</div>
+<div><span style="font-size: 18px;"><strong>4、列表</strong></span></div>
+<div>创建列表：</div>
+<div>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">name_list = ['alex', 'seven', 'eric']
+或
+name_list ＝ list(['alex', 'seven', 'eric'])
+</pre>
+</div>
+<div>
+<p>基本操作：</p>
+<ul>
+<li>索引</li>
+<li>切片</li>
+<li>追加</li>
+<li>删除</li>
+<li>长度</li>
+<li>切片</li>
+<li>循环</li>
+<li>包含</li>
+</ul>
+</div>
+<div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('13224955-17a9-47fc-b769-e812006bacdc')"><img id="code_img_closed_13224955-17a9-47fc-b769-e812006bacdc" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_13224955-17a9-47fc-b769-e812006bacdc" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('13224955-17a9-47fc-b769-e812006bacdc',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_13224955-17a9-47fc-b769-e812006bacdc" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">class</span><span style="color: #000000;"> list(object):
+    </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+    list() -&gt; new empty list
+    list(iterable) -&gt; new list initialized from iterable's items
+    </span><span style="color: #800000;">"""</span>
+    <span style="color: #0000ff;">def</span> append(self, p_object): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> L.append(object) -- append object to end </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> count(self, value): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> L.count(value) -&gt; integer -- return number of occurrences of value </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;"> 0
+
+    </span><span style="color: #0000ff;">def</span> extend(self, iterable): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> L.extend(iterable) -- extend list by appending elements from the iterable </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> index(self, value, start=None, stop=None): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        L.index(value, [start, [stop]]) -&gt; integer -- return first index of value.
+        Raises ValueError if the value is not present.
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;"> 0
+
+    </span><span style="color: #0000ff;">def</span> insert(self, index, p_object): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> L.insert(index, object) -- insert object before index </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> pop(self, index=None): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        L.pop([index]) -&gt; item -- remove and return item at index (default last).
+        Raises IndexError if list is empty or index is out of range.
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> remove(self, value): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        L.remove(value) -- remove first occurrence of value.
+        Raises ValueError if the value is not present.
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> reverse(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> L.reverse() -- reverse *IN PLACE* </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> sort(self, cmp=None, key=None, reverse=False): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        L.sort(cmp=None, key=None, reverse=False) -- stable sort *IN PLACE*;
+        cmp(x, y) -&gt; -1, 0, 1
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__add__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__add__(y) &lt;==&gt; x+y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__contains__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__contains__(y) &lt;==&gt; y in x </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__delitem__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__delitem__(y) &lt;==&gt; del x[y] </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__delslice__</span>(self, i, j): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        x.__delslice__(i, j) &lt;==&gt; del x[i:j]
+                   
+                   Use of negative indices is not supported.
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__eq__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__eq__(y) &lt;==&gt; x==y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__getattribute__</span>(self, name): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__getattribute__('name') &lt;==&gt; x.name </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__getitem__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__getitem__(y) &lt;==&gt; x[y] </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__getslice__</span>(self, i, j): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        x.__getslice__(i, j) &lt;==&gt; x[i:j]
+                   
+                   Use of negative indices is not supported.
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__ge__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__ge__(y) &lt;==&gt; x&gt;=y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__gt__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__gt__(y) &lt;==&gt; x&gt;y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__iadd__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__iadd__(y) &lt;==&gt; x+=y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__imul__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__imul__(y) &lt;==&gt; x*=y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span>(self, seq=()): <span style="color: #008000;">#</span><span style="color: #008000;"> known special case of list.__init__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        list() -&gt; new empty list
+        list(iterable) -&gt; new list initialized from iterable's items
+        # (copied from class doc)
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__iter__</span>(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__iter__() &lt;==&gt; iter(x) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__len__</span>(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__len__() &lt;==&gt; len(x) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__le__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__le__(y) &lt;==&gt; x&lt;=y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__lt__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__lt__(y) &lt;==&gt; x&lt;y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__mul__</span>(self, n): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__mul__(n) &lt;==&gt; x*n </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span><span style="color: #000000;">
+
+    @staticmethod </span><span style="color: #008000;">#</span><span style="color: #008000;"> known case of __new__</span>
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__new__</span>(S, *more): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> T.__new__(S, ...) -&gt; a new object with type S, a subtype of T </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__ne__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__ne__(y) &lt;==&gt; x!=y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__repr__</span>(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__repr__() &lt;==&gt; repr(x) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__reversed__</span>(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> L.__reversed__() -- return a reverse iterator over the list </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__rmul__</span>(self, n): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__rmul__(n) &lt;==&gt; n*x </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__setitem__</span>(self, i, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__setitem__(i, y) &lt;==&gt; x[i]=y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__setslice__</span>(self, i, j, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        x.__setslice__(i, j, y) &lt;==&gt; x[i:j]=y
+                   
+                   Use  of negative indices is not supported.
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__sizeof__</span>(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> L.__sizeof__() -- size of L in memory, in bytes </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #800080;">__hash__</span> = None</pre>
+</div>
+<span class="cnblogs_code_collapse">list</span></div>
+</div>
+<div><span style="font-size: 18px;"><strong>5、元祖</strong></span></div>
+<div>创建元祖：</div>
+<div>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">ages = (11, 22, 33, 44, 55)
+或
+ages = tuple((11, 22, 33, 44, 55))
+</pre>
+</div>
+<div>基本操作：</div>
+<div>
+<ul>
+<li>索引</li>
+<li>切片</li>
+<li>循环</li>
+<li>长度</li>
+<li>包含</li>
+</ul>
+</div>
+<div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('34d644c6-65d2-45de-a868-7cecc3586e46')"><img id="code_img_closed_34d644c6-65d2-45de-a868-7cecc3586e46" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_34d644c6-65d2-45de-a868-7cecc3586e46" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('34d644c6-65d2-45de-a868-7cecc3586e46',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_34d644c6-65d2-45de-a868-7cecc3586e46" class="cnblogs_code_hide">
+<pre><span style="color: #000000;">lass tuple(object):
+    </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+    tuple() -&gt; empty tuple
+    tuple(iterable) -&gt; tuple initialized from iterable's items
+    
+    If the argument is a tuple, the return value is the same object.
+    </span><span style="color: #800000;">"""</span>
+    <span style="color: #0000ff;">def</span> count(self, value): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> T.count(value) -&gt; integer -- return number of occurrences of value </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;"> 0
+
+    </span><span style="color: #0000ff;">def</span> index(self, value, start=None, stop=None): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        T.index(value, [start, [stop]]) -&gt; integer -- return first index of value.
+        Raises ValueError if the value is not present.
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;"> 0
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__add__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__add__(y) &lt;==&gt; x+y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__contains__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__contains__(y) &lt;==&gt; y in x </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__eq__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__eq__(y) &lt;==&gt; x==y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__getattribute__</span>(self, name): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__getattribute__('name') &lt;==&gt; x.name </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__getitem__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__getitem__(y) &lt;==&gt; x[y] </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__getnewargs__</span>(self, *args, **kwargs): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__getslice__</span>(self, i, j): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        x.__getslice__(i, j) &lt;==&gt; x[i:j]
+                   
+                   Use of negative indices is not supported.
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__ge__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__ge__(y) &lt;==&gt; x&gt;=y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__gt__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__gt__(y) &lt;==&gt; x&gt;y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__hash__</span>(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__hash__() &lt;==&gt; hash(x) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span>(self, seq=()): <span style="color: #008000;">#</span><span style="color: #008000;"> known special case of tuple.__init__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        tuple() -&gt; empty tuple
+        tuple(iterable) -&gt; tuple initialized from iterable's items
+        
+        If the argument is a tuple, the return value is the same object.
+        # (copied from class doc)
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__iter__</span>(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__iter__() &lt;==&gt; iter(x) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__len__</span>(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__len__() &lt;==&gt; len(x) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__le__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__le__(y) &lt;==&gt; x&lt;=y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__lt__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__lt__(y) &lt;==&gt; x&lt;y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__mul__</span>(self, n): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__mul__(n) &lt;==&gt; x*n </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span><span style="color: #000000;">
+
+    @staticmethod </span><span style="color: #008000;">#</span><span style="color: #008000;"> known case of __new__</span>
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__new__</span>(S, *more): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> T.__new__(S, ...) -&gt; a new object with type S, a subtype of T </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__ne__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__ne__(y) &lt;==&gt; x!=y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__repr__</span>(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__repr__() &lt;==&gt; repr(x) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__rmul__</span>(self, n): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__rmul__(n) &lt;==&gt; n*x </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__sizeof__</span>(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> T.__sizeof__() -- size of T in memory, in bytes </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span></pre>
+</div>
+<span class="cnblogs_code_collapse">tuple</span></div>
+</div>
+<div><span style="font-size: 18px;"><strong>6、字典（无序）</strong></span></div>
+<div>创建字典：</div>
+<div>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">person = {"name": "mr.wu", 'age': 18}
+或
+person = dict({"name": "mr.wu", 'age': 18})
+</pre>
+</div>
+<div>
+<p>常用操作：</p>
+<ul>
+<li>索引</li>
+<li>新增</li>
+<li>删除</li>
+<li>键、值、键值对</li>
+<li>循环</li>
+<li>长度</li>
+</ul>
+</div>
+<div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('75c9a06c-936b-4261-8146-8a9e8626f76a')"><img id="code_img_closed_75c9a06c-936b-4261-8146-8a9e8626f76a" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_75c9a06c-936b-4261-8146-8a9e8626f76a" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('75c9a06c-936b-4261-8146-8a9e8626f76a',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_75c9a06c-936b-4261-8146-8a9e8626f76a" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">class</span><span style="color: #000000;"> dict(object):
+    </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+    dict() -&gt; new empty dictionary
+    dict(mapping) -&gt; new dictionary initialized from a mapping object's
+        (key, value) pairs
+    dict(iterable) -&gt; new dictionary initialized as if via:
+        d = {}
+        for k, v in iterable:
+            d[k] = v
+    dict(**kwargs) -&gt; new dictionary initialized with the name=value pairs
+        in the keyword argument list.  For example:  dict(one=1, two=2)
+    </span><span style="color: #800000;">"""</span>
+
+    <span style="color: #0000ff;">def</span> clear(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> 清除内容 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> D.clear() -&gt; None.  Remove all items from D. </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> copy(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> 浅拷贝 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> D.copy() -&gt; a shallow copy of D </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span><span style="color: #000000;">
+
+    @staticmethod </span><span style="color: #008000;">#</span><span style="color: #008000;"> known case</span>
+    <span style="color: #0000ff;">def</span> fromkeys(S, v=None): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        dict.fromkeys(S[,v]) -&gt; New dict with keys from S and values equal to v.
+        v defaults to None.
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> get(self, k, d=None): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> 根据key获取值，d是默认值 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> D.get(k[,d]) -&gt; D[k] if k in D, else d.  d defaults to None. </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> has_key(self, k): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> 是否有key </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> D.has_key(k) -&gt; True if D has a key k, else False </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;"> False
+
+    </span><span style="color: #0000ff;">def</span> items(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> 所有项的列表形式 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> D.items() -&gt; list of D's (key, value) pairs, as 2-tuples </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;"> []
+
+    </span><span style="color: #0000ff;">def</span> iteritems(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> 项可迭代 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> D.iteritems() -&gt; an iterator over the (key, value) items of D </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> iterkeys(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> key可迭代 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> D.iterkeys() -&gt; an iterator over the keys of D </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> itervalues(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> value可迭代 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> D.itervalues() -&gt; an iterator over the values of D </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> keys(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> 所有的key列表 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> D.keys() -&gt; list of D's keys </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;"> []
+
+    </span><span style="color: #0000ff;">def</span> pop(self, k, d=None): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> 获取并在字典中移除 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        D.pop(k[,d]) -&gt; v, remove specified key and return the corresponding value.
+        If key is not found, d is returned if given, otherwise KeyError is raised
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> popitem(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> 获取并在字典中移除 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        D.popitem() -&gt; (k, v), remove and return some (key, value) pair as a
+        2-tuple; but raise KeyError if D is empty.
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> setdefault(self, k, d=None): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> 如果key不存在，则创建，如果存在，则返回已存在的值且不修改 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> D.setdefault(k[,d]) -&gt; D.get(k,d), also set D[k]=d if k not in D </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> update(self, E=None, **F): <span style="color: #008000;">#</span><span style="color: #008000;"> known special case of dict.update</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> 更新
+            {'name':'alex', 'age': 18000}
+            [('name','sbsbsb'),]
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        D.update([E, ]**F) -&gt; None.  Update D from dict/iterable E and F.
+        If E present and has a .keys() method, does:     for k in E: D[k] = E[k]
+        If E present and lacks .keys() method, does:     for (k, v) in E: D[k] = v
+        In either case, this is followed by: for k in F: D[k] = F[k]
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> values(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> 所有的值 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> D.values() -&gt; list of D's values </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;"> []
+
+    </span><span style="color: #0000ff;">def</span> viewitems(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> 所有项，只是将内容保存至view对象中 </span><span style="color: #800000;">"""</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> D.viewitems() -&gt; a set-like object providing a view on D's items </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> viewkeys(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> D.viewkeys() -&gt; a set-like object providing a view on D's keys </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> viewvalues(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> D.viewvalues() -&gt; an object providing a view on D's values </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__cmp__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__cmp__(y) &lt;==&gt; cmp(x,y) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__contains__</span>(self, k): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> D.__contains__(k) -&gt; True if D has a key k, else False </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;"> False
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__delitem__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__delitem__(y) &lt;==&gt; del x[y] </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__eq__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__eq__(y) &lt;==&gt; x==y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__getattribute__</span>(self, name): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__getattribute__('name') &lt;==&gt; x.name </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__getitem__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__getitem__(y) &lt;==&gt; x[y] </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__ge__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__ge__(y) &lt;==&gt; x&gt;=y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__gt__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__gt__(y) &lt;==&gt; x&gt;y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span>(self, seq=None, **kwargs): <span style="color: #008000;">#</span><span style="color: #008000;"> known special case of dict.__init__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;">
+        dict() -&gt; new empty dictionary
+        dict(mapping) -&gt; new dictionary initialized from a mapping object's
+            (key, value) pairs
+        dict(iterable) -&gt; new dictionary initialized as if via:
+            d = {}
+            for k, v in iterable:
+                d[k] = v
+        dict(**kwargs) -&gt; new dictionary initialized with the name=value pairs
+            in the keyword argument list.  For example:  dict(one=1, two=2)
+        # (copied from class doc)
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__iter__</span>(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__iter__() &lt;==&gt; iter(x) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__len__</span>(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__len__() &lt;==&gt; len(x) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__le__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__le__(y) &lt;==&gt; x&lt;=y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__lt__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__lt__(y) &lt;==&gt; x&lt;y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span><span style="color: #000000;">
+
+    @staticmethod </span><span style="color: #008000;">#</span><span style="color: #008000;"> known case of __new__</span>
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__new__</span>(S, *more): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> T.__new__(S, ...) -&gt; a new object with type S, a subtype of T </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__ne__</span>(self, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__ne__(y) &lt;==&gt; x!=y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__repr__</span>(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__repr__() &lt;==&gt; repr(x) </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__setitem__</span>(self, i, y): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> x.__setitem__(i, y) &lt;==&gt; x[i]=y </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__sizeof__</span>(self): <span style="color: #008000;">#</span><span style="color: #008000;"> real signature unknown; restored from __doc__</span>
+        <span style="color: #800000;">"""</span><span style="color: #800000;"> D.__sizeof__() -&gt; size of D in memory, in bytes </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #800080;">__hash__</span> = None</pre>
+</div>
+<span class="cnblogs_code_collapse">dict</span></div>
+</div>
+<div>PS：循环，range，continue 和 break</div>
+<h3>其他</h3>
+<div><span style="font-size: 18px;"><strong>1、for循环</strong></span></div>
+<div>用户按照顺序循环可迭代对象中的内容，</div>
+<div>PS：break、continue</div>
+<div>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">li = [11,22,33,44]
+for item in li:
+    print item</pre>
+</div>
+</div>
+<div><span style="font-size: 18px;"><strong>2、enumrate</strong></span></div>
+<div>为可迭代的对象添加序号</div>
+<div>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">li = [11,22,33]
+for k,v in enumerate(li, 1):
+    print(k,v)</pre>
+</div>
+</div>
+<div><span style="font-size: 18px;"><strong>3、range和xrange</strong></span></div>
+<div>指定范围，生成指定的数字</div>
+<div>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">print range(1, 10)
+# 结果：[1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+print range(1, 10, 2)
+# 结果：[1, 3, 5, 7, 9]
+
+print range(30, 0, -2)
+# 结果：[30, 28, 26, 24, 22, 20, 18, 16, 14, 12, 10, 8, 6, 4, 2]　　</pre>
+</div>
+</div>
+<h3>练习题</h3>
+<p><span style="font-size: 18px;"><strong>一、元素分类</strong></span></p>
+<p>有如下值集合 [11,22,33,44,55,66,77,88,99,90...]，将所有大于 66 的值保存至字典的第一个key中，将小于 66 的值保存至第二个key的值中。<br />即： {'k1': 大于66的所有值, 'k2': 小于66的所有值}</p>
+<div class="line number3 index2 alt2"><span style="font-size: 18px;"><strong>二、查找</strong></span></div>
+<div class="line number3 index2 alt2">查找列表中元素，移除每个元素的空格，并查找以 a或A开头 并且以 c 结尾的所有元素。</div>
+<div class="line number3 index2 alt2">&nbsp; &nbsp; li = ["alec", " aric", "Alex", "Tony", "rain"]</div>
+<div class="line number3 index2 alt2">&nbsp; &nbsp; tu = ("alec", " aric", "Alex", "Tony", "rain")&nbsp;</div>
+<div class="line number3 index2 alt2">&nbsp; &nbsp; dic = {'k1': "alex", 'k2': ' aric', &nbsp;"k3": "Alex", "k4": "Tony"}</div>
+<div class="line number3 index2 alt2">&nbsp;</div>
+<div class="line number3 index2 alt2"><span style="font-size: 18px;"><strong>三、输出商品列表，用户输入序号，显示用户选中的商品</strong></span></div>
+<div class="line number3 index2 alt2">&nbsp; &nbsp; 商品 li = ["手机", "电脑", '鼠标垫', '游艇']</div>
+<div class="line number3 index2 alt2">&nbsp;</div>
+<div class="line number3 index2 alt2"><span style="font-size: 18px;"><strong>四、购物车</strong></span></div>
+<div class="line number3 index2 alt2">
+<p>功能要求：</p>
+<ul>
+<li>要求用户输入总资产，例如：2000</li>
+<li>显示商品列表，让用户根据序号选择商品，加入购物车</li>
+<li>购买，如果商品总额大于总资产，提示账户余额不足，否则，购买成功。</li>
+<li>附加：可充值、某商品移除购物车</li>
+
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+</div>
+<div class="line number3 index2 alt2">
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">goods = [
+    {"name": "电脑", "price": 1999},
+    {"name": "鼠标", "price": 10},
+    {"name": "游艇", "price": 20},
+    {"name": "美女", "price": 998},
+]
+</pre>
+</div>
+<p><span style="font-size: 18px;"><strong>&nbsp;五、用户交互，显示省市县三级联动的选择</strong></span></p>
+</div>
+<div class="line number3 index2 alt2">
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">dic = {
+    "河北": {
+        "石家庄": ["鹿泉", "藁城", "元氏"],
+        "邯郸": ["永年", "涉县", "磁县"],
+    }
+    "河南": {
+        ...
+    }
+    "山西": {
+        ...
+    }
+
+}</pre>
+</div>
+</div>
+<div class="line number3 index2 alt2">&nbsp;</div>
+<p>&nbsp;</p>
+</div>
+<p>　　</p>
+</div>
+</div>
+</div></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2016-04-28 22:59</span> <a href='http://www.cnblogs.com/wupeiqi/'>武沛齐</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>) &nbsp;<a href="https://i.cnblogs.com/EditArticles.aspx?postid=5444685" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(5444685);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=133379,cb_entryId=5444685,cb_blogApp=currentBlogApp,cb_blogUserGuid='7208b24d-95c9-e111-aa3f-842b2b196315',cb_entryCreatedDate='2016/4/28 22:59:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2017 武沛齐
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

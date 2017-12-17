@@ -1,0 +1,2542 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+     
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    
+<head>  
+
+            <link rel="canonical" href="http://blog.csdn.net/kkkloveyou/article/details/51874354"/> 
+ <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+
+    <title>远程过程调用(RPC)详解 - kkkloveyou
+        - 博客频道 - CSDN.NET</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="本文介绍了什么是远程过程调用(RPC)，RPC 有哪些常用的方法，RPC 经历了哪些发展阶段，以及比较了各种 RPC 技术的优劣。" />
+   
+    <script src="http://static.blog.csdn.net/scripts/blog_static_head.min.js" type="text/javascript"></script>
+
+    
+        <!--new top-->
+               <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/css/index.css">        <!--new top-->
+    
+      <!-- ad begin -->
+         <script language="javascript" type="text/javascript" src="http://ads.csdn.net/js/tracking.js"></script>
+    <!-- ad end-->
+
+    <link rel="Stylesheet" type="text/css" href="http://static.blog.csdn.net/skin/dark1/css/style.css?v=1.1" />
+
+    
+
+    <link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="/kkkloveyou/rss/list" />
+    <link rel="shortcut icon" href="http://c.csdnimg.cn/public/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+ 
+
+     
+    <link rel="stylesheet" href="http://static.blog.csdn.net/css/csdn_blog_detail.min.css" />
+
+</head>
+
+
+<body>
+       
+
+
+
+    <!-- 广告位开始 -->
+        
+    <!-- 广告位结束 -->
+
+    
+   
+      <!--new top-->
+    <script id="toolbar-tpl-scriptId" fixed="true" prod="blog" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/html.js" type="text/javascript"></script>
+     <!--new top-->
+    <div id="container">
+        <div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h2>
+                <a href="http://blog.csdn.net/kkkloveyou">kkkloveyou</a></h2>
+            <h3>关注Web编程的那点事</h3>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+        
+     
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg">
+    </div>
+    <div class="navigator">
+        <ul>           
+                <li id="btnContents"><a href="http://blog.csdn.net/kkkloveyou?viewmode=contents"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_mulu'])">
+                    <img src="http://static.blog.csdn.net/images/ico_list.gif">目录视图</span></a></li>
+                <li id="btnView"><a href="http://blog.csdn.net/kkkloveyou?viewmode=list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_zhaiyao'])">
+                    <img src="http://static.blog.csdn.net/images/ico_summary.gif">摘要视图</span></a></li>
+                <li id="btnRss"><a href="http://blog.csdn.net/kkkloveyou/rss/list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_RSS'])">
+                    <img src="http://static.blog.csdn.net/images/ico_rss.gif">订阅</span></a></li>                
+            
+
+            </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "kkkloveyou";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/kkkloveyou";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "";  
+</script>
+
+        <div id="body">
+            <div id="main">
+                <div class="main">
+                        <div class="ad_class">
+<div class="notice tracking-ad" data-mod='popu_3' > 
+
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/71710010">
+<font color=blue><strong>【活动】2017 CSDN博客专栏评选</strong></font></a>
+
+&nbsp;&nbsp;&nbsp;&nbsp
+
+<a href=" http://blog.csdn.net/turingbooks/article/details/72416875">
+<font color=red><strong>【5月书讯】流畅的Python，终于等到你！</strong></font></a>
+&nbsp;&nbsp;&nbsp;&nbsp
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/72638703">
+<font color=blue><strong>CSDN日报20170523 ——《技术合伙人，千万别做！》
+</strong>
+&nbsp;&nbsp;&nbsp;&nbsp
+
+
+</div>                        </div>
+                        
+
+
+
+  
+
+
+
+
+
+
+<script   type="text/javascript" src="http://static.blog.csdn.net/scripts/category.js"></script>
+
+  <script type="text/ecmascript">
+      window.quickReplyflag = true;
+           
+            var isBole = false;
+            
+      
+      var fasrc="http://my.csdn.net/my/favorite/miniadd?t=%e8%bf%9c%e7%a8%8b%e8%bf%87%e7%a8%8b%e8%b0%83%e7%94%a8(RPC)%e8%af%a6%e8%a7%a3&u=http://blog.csdn.net/kkkloveyou/article/details/51874354"
+
+    </script>
+<div id="article_details" class="details">
+    <div class="article_title">   
+         <span class="ico ico_type_Original"></span>
+
+
+    <h1>
+        <span class="link_title"><a href="/kkkloveyou/article/details/51874354">
+        远程过程调用(RPC)详解            
+        </a></span>
+    </h1>
+</div>
+
+   
+
+        <div class="article_manage clearfix">
+        <div class="article_l">
+            <span class="link_categories">
+            标签：
+              <a href='http://www.csdn.net/tag/RPC-Web' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">RPC-Web</a>
+            </span>
+        </div>
+        <div class="article_r">
+            <span class="link_postdate">2016-07-11 00:12</span>
+            <span class="link_view" title="阅读次数">11685人阅读</span>
+            <span class="link_comments" title="评论次数"> <a href="#comments" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_pinglun'])">评论</a>(0)</span>
+            <span class="link_collect tracking-ad" data-mod="popu_171"> <a href="javascript:void(0);" onclick="javascript:collectArticle('%e8%bf%9c%e7%a8%8b%e8%bf%87%e7%a8%8b%e8%b0%83%e7%94%a8(RPC)%e8%af%a6%e8%a7%a3','51874354');return false;" title="收藏">收藏</a></span>
+             <span class="link_report"> <a href="#report" onclick="javascript:report(51874354,2);return false;" title="举报">举报</a></span>
+
+        </div>
+    </div>
+    <div class="embody"  style="display:none" id="embody">
+        <span class="embody_t">本文章已收录于：</span>
+        <div class="embody_c" id="lib" value="{&quot;err&quot;:0,&quot;msg&quot;:&quot;ok&quot;,&quot;data&quot;:[]}"></div>
+    </div>
+    <style type="text/css">        
+            .embody{
+                padding:10px 10px 10px;
+                margin:0 -20px;
+                border-bottom:solid 1px #ededed;                
+            }
+            .embody_b{
+                margin:0 ;
+                padding:10px 0;
+            }
+            .embody .embody_t,.embody .embody_c{
+                display: inline-block;
+                margin-right:10px;
+            }
+            .embody_t{
+                font-size: 12px;
+                color:#999;
+            }
+            .embody_c{
+                font-size: 12px;
+            }
+            .embody_c img,.embody_c em{
+                display: inline-block;
+                vertical-align: middle;               
+            }
+             .embody_c img{               
+                width:30px;
+                height:30px;
+            }
+            .embody_c em{
+                margin: 0 20px 0 10px;
+                color:#333;
+                font-style: normal;
+            }
+    </style>
+    <script  type="text/javascript">
+        $(function () {
+            try
+            {
+                var lib = eval("("+$("#lib").attr("value")+")");
+                var html = "";
+                if (lib.err == 0) {
+                    $.each(lib.data, function (i) {
+                        var obj = lib.data[i];
+                        //html += '<img src="' + obj.logo + '"/>' + obj.name + "&nbsp;&nbsp;";
+                        html += ' <a href="' + obj.url + '" target="_blank">';
+                        html += ' <img src="' + obj.logo + '">';
+                        html += ' <em><b>' + obj.name + '</b></em>';
+                        html += ' </a>';
+                    });
+                    if (html != "") {
+                        setTimeout(function () {
+                            $("#lib").html(html);                      
+                            $("#embody").show();
+                        }, 100);
+                    }
+                }      
+            } catch (err)
+            { }
+            
+        });
+    </script>
+      <div class="category clearfix">
+        <div class="category_l">
+           <img src="http://static.blog.csdn.net/images/category_icon.jpg">
+            <span>分类：</span>
+        </div>
+        <div class="category_r">
+                    <label  onclick="GetCategoryArticles('6089794','kkkloveyou','top','51874354');">
+                        <span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_fenlei']);">Web<em>（4）</em></span>
+                      <img class="arrow-down" src="http://static.blog.csdn.net/images/arrow_triangle _down.jpg" style="display:inline;">
+                      <img class="arrow-up" src="http://static.blog.csdn.net/images/arrow_triangle_up.jpg" style="display:none;">
+                        <div class="subItem">
+                            <div class="subItem_t"><a  href="http://blog.csdn.net/kkkloveyou/article/category/6089794"  target="_blank">作者同类文章</a><i class="J_close">X</i></div>
+                            <ul class="subItem_l" id="top_6089794">                            
+                            </ul>
+                        </div>
+                    </label>                    
+        </div>
+    </div>
+        <div   class="bog_copyright">         
+            <p  class="copyright_p" >版权声明：本文为博主原创文章，未经博主允许不得转载。</p>
+        </div>
+
+  
+
+  
+  
+     
+
+
+<div id="article_content" class="article_content tracking-ad" data-mod=popu_307  data-dsm = "post" >
+        <div class="markdown_views"><h2 id="原文同步至-httpwaylaucomremote-procedure-calls">原文同步至 <a href="http://waylau.com/remote-procedure-calls/">http://waylau.com/remote-procedure-calls/</a></h2>
+
+<p>本文介绍了什么是远程过程调用(RPC)，RPC 有哪些常用的方法，RPC 经历了哪些发展阶段，以及比较了各种 RPC 技术的优劣。</p>
+
+
+
+<h2 id="什么是-rpc">什么是 RPC</h2>
+
+<p>RPC 是远程过程调用（Remote Procedure Call）的缩写形式，Birrell 和 Nelson 在 1984 发表于 ACM Transactions on Computer Systems 的论文《Implementing remote procedure calls》对 RPC 做了经典的诠释。RPC 是指计算机 A 上的进程，调用另外一台计算机 B 上的进程，其中 A 上的调用进程被挂起，而 B 上的被调用进程开始执行，当值返回给 A 时，A 进程继续执行。调用方可以通过使用参数将信息传送给被调用方，而后可以通过传回的结果得到信息。而这一过程，对于开发人员来说是透明的。</p>
+
+<p><img src="http://waylau.com/images/post/20160630-rpc.png" alt="图1 描述了数据报在一个简单的RPC传递的过程" title=""></p>
+
+<p>图1 描述了数据报在一个简单的RPC传递的过程</p>
+
+<p>注：上述论文，可以在线阅读 <a href="http://www.cs.virginia.edu/~zaher/classes/CS656/birrel.pdf">http://www.cs.virginia.edu/~zaher/classes/CS656/birrel.pdf</a>。</p>
+
+<p>远程过程调用采用客户机/服务器(C/S)模式。请求程序就是一个客户机，而服务提供程序就是一台服务器。和常规或本地过程调用一样，远程过程调用是同步操作，在远程过程结果返回之前，需要暂时中止请求程序。使用相同地址空间的低权进程或低权线程允许同时运行多个远程过程调用。</p>
+
+
+
+<h2 id="rpc-的基本操作">RPC 的基本操作</h2>
+
+<p>让我们看看本地过程调用是如何实现的。考虑下面的 C 语言的调用：</p>
+
+
+
+<pre class="prettyprint"><code class="language-c hljs ">count = read(fd, buf, nbytes);</code></pre>
+
+<p>其中，fd 为一个整型数，表示一个文件。buf 为一个字符数组，用于存储读入的数据。 nbytes 为另一个整型数，用于记录实际读入的字节数。如果该调用位于主程序中，那么在调用之前堆栈的状态如图2(a)所示。为了进行调用，调用方首先把参数反序压入堆栈，即为最后一个参数先压入，如图2(b)所示。在 read 操作运行完毕后，它将返回值放在某个寄存器中，移出返回地址，并将控制权交回给调用方。调用方随后将参数从堆栈中移出，使堆栈还原到最初的状态。</p>
+
+<p><img src="http://waylau.com/images/post/20160630-lpc.png" alt="图2 过程调用中的参数传递" title=""></p>
+
+<p>图2 过程调用中的参数传递</p>
+
+<p>RPC 背后的思想是尽量使远程过程调用具有与本地调用相同的形式。假设程序需要从某个文件读取数据，程序员在代码中执行 read 调用来取得数据。在传统的系统中， read 例程由链接器从库中提取出来，然后链接器再将它插入目标程序中。 read 过程是一个短过程，一般通过执行一个等效的 read 系统调用来实现。即，read 过程是一个位于用户代码与本地操作系统之间的接口。</p>
+
+<p>虽然 read 中执行了系统调用，但它本身依然是通过将参数压入堆栈的常规方式调用的。如图2(b)所示，程序员并不知道 read 干了啥。</p>
+
+<p>RPC 是通过类似的途径来获得透明性。当 read 实际上是一个远程过程时（比如在文件服务器所在的机器上运行的过程），库中就放入 read 的另外一个版本，称为客户存根（client stub）。这种版本的 read 过程同样遵循图2(b)的调用次序，这点与原来的 read 过程相同。另一个相同点是其中也执行了本地操作系统调用。唯一不同点是它不要求操作系统提供数据，而是将参数打包成消息，而后请求此消息发送到服务器，如图3所示。在对 send 的调用后，客户存根调用 receive 过程，随即阻塞自己，直到收到响应消息。</p>
+
+<p><img src="http://waylau.com/images/post/20160630-cs-rpc.png" alt="图3 客户与服务器之间的RPC原理" title=""></p>
+
+<p>图3 客户与服务器之间的RPC原理</p>
+
+<p>当消息到达服务器时，服务器上的操作系统将它传递给服务器存根（server stub）。服务器存根是客户存根在服务器端的等价物，也是一段代码，用来将通过网络输入的请求转换为本地过程调用。服务器存根一般先调用 receive ，然后被阻塞，等待消息输入。收到消息后，服务器将参数由消息中提取出来，然后以常规方式调用服务器上的相应过程（如图3所示）。从服务器角度看，过程好像是由客户直接调用的一样：参数和返回地址都位于堆栈中，一切都很正常。服务器执行所要求的操作，随后将得到的结果以常规的方式返回给调用方。以 read 为例，服务器将用数据填充 read 中第二个参数指向的缓冲区，该缓存区是属于服务器存根内部的。</p>
+
+<p>调用完后，服务器存根要将控制权教会给客户发出调用的过程，它将结果（缓冲区）打包成消息，随后调用 send 将结果返回给客户。事后，服务器存根一般会再次调用 receive，等待下一个输入的请求。</p>
+
+<p>客户机器接收到消息后，客户操作系统发现该消息属于某个客户进程（实际上该进程是客户存根，知识操作系统无法区分二者）。操作系统将消息复制到相应的缓存区中，随后解除对客户进程的阻塞。客户存根检查该消息，将结果提取出来并复制给调用者，而后以通常的方式返回。当调用者在 read 调用进行完毕后重新获得控制权时，它所知道的唯一事就是已经得到了所需的数据。它不指导操作是在本地操作系统进行，还是远程完成。</p>
+
+<p>整个方法，客户方可以简单地忽略不关心的内容。客户所涉及的操作只是执行普通的（本地）过程调用来访问远程服务，它并不需要直接调用 send 和 receive 。消息传递的所有细节都隐藏在双方的库过程中，就像传统库隐藏了执行实际系统调用的细节一样。</p>
+
+<p>概况来说，远程过程调用包含如下步骤：</p>
+
+<ol>
+<li>客户过程以正常的方式调用客户存根；</li>
+<li>客户存根生成一个消息，然后调用本地操作系统；</li>
+<li>客户端操作系统将消息发送给远程操作系统；</li>
+<li>远程操作系统将消息交给服务器存根；</li>
+<li>服务器存根调将参数提取出来，而后调用服务器；</li>
+<li>服务器执行要求的操作，操作完成后将结果返回给服务器存根；</li>
+<li>服务器存根将结果打包成一个消息，而后调用本地操作系统；</li>
+<li>服务器操作系统将含有结果的消息发送给客户端操作系统；</li>
+<li>客户端操作系统将消息交给客户存根；</li>
+<li>客户存根将结果从消息中提取出来，返回给调用它的客户存根。</li>
+</ol>
+
+<p>以上步骤就是将客户过程对客户存根发出的本地调用转换成对服务器过程的本地调用，而客户端和服务器都不会意识到中间步骤的存在。</p>
+
+<p>RPC 的主要好处是双重的。首先,程序员可以使用过程调用语义来调用远程函数并获取响应。其次,简化了编写分布式应用程序的难度,因为 RPC 隐藏了所有的网络代码存根函数。应用程序不必担心一些细节,比如 socket、端口号以及数据的转换和解析。在 OSI 参考模型,RPC 跨越了会话层和表示层。</p>
+
+
+
+<h2 id="实现远程过程调用">实现远程过程调用</h2>
+
+<p>要实现远程过程调用，需考虑以下几个问题。</p>
+
+
+
+<h3 id="如何传递参数">如何传递参数</h3>
+
+
+
+<h4 id="传递值参数">传递值参数</h4>
+
+<p>传递值参数比较简单，下图图展示了一个简单 RPC 进行远程计算的例子。其中，远程过程 add(i,j) 有两个参数 i 和 j， 其结果是返回 i 和 j 的算术和。</p>
+
+<p><img src="http://waylau.com/images/post/20160630-rpc-compute.png" alt="图4 通过RPC进行远程计算的步骤" title=""></p>
+
+<p>图4 通过RPC进行远程计算的步骤</p>
+
+<p>通过 RPC 进行远程计算的步骤有：</p>
+
+<ol>
+<li>将参数放入消息中，并在消息中添加要调用的过程的名称或者编码。</li>
+<li>消息到达服务器后，服务器存根堆该消息进行分析，以判明需要调用哪个过程，随后执行相应的调用。</li>
+<li>服务器运行完毕后，服务器存根将服务器得到的结果打包成消息送回客户存根，客户存根将结果从消息中提取出来，把结果值返回给客户端。</li>
+</ol>
+
+<p>当然，这里只是做了简单的演示，在实际分布式系统中，还需要考虑其他情况，因为不同的机器对于数字、字符和其他类型的数据项的表示方式常有差异。比如整数型，就有 Big Endian 和 Little Endian 之分。</p>
+
+
+
+<h4 id="传递引用参数">传递引用参数</h4>
+
+<p>传递引用参数相对来说比较困难。单纯传递参数的引用（也包含指针）是完全没有意义的，因为引用地址传递给远程计算机,其指向的内存位置可能跟远程系统上完全不同。如果你想支持传递引用参数,你必须发送参数的副本,将它们放置在远程系统内存中，向他们传递一个指向服务器函数的指针，然后将对象发送回客户端，复制它的引用。如果远程过程调用必须支持引用复杂的结构，比如树和链表，他们需要将结构复制到一个无指针的表示里面（比如，一个扁平的树)，并传输到在远程端来重建数据结构。</p>
+
+
+
+<h3 id="如何表示数据">如何表示数据</h3>
+
+<p>在本地系统上不存在数据不相容的问题，因为数据格式总是相同的。而在分布式系统中，不同远程机器上可能有不同的字节顺序，不同大小的整数，以及不同的浮点表示。对于 RPC，如果想与异构系统通信，我们就需要想出一个“标准”来对所有数据类型进行编码，并可以作为参数传递。例如，ONC RPC 使用 XDR (eXternal Data Representation) 格式 。这些数据表示格式可以使用隐式或显式类型。隐式类型，是指只传递值，而不传递变量的名称或类型。常见的例子是 ONC RPC 的 XDR 和 DCE RPC 的 NDR。显式类型，指需要传递每个字段的类型以及值。常见的例子是 ISO 标准 ASN.1 (Abstract Syntax Notation)、JSON (JavaScript Object Notation)、Google Protocol Buffers、以及各种基于 XML 的数据表示格式。</p>
+
+
+
+<h3 id="如何选用传输协议">如何选用传输协议</h3>
+
+<p>有些实现只允许使用一个协议(例如 TCP )。大多数 RPC 实现支持几个，并允许用户选择。</p>
+
+
+
+<h3 id="出错时会发生什么">出错时,会发生什么</h3>
+
+<p>相比于本地过程调用，远程过程调用出错的机会将会更多。由于本地过程调用没有过程调用失败的概念，项目使用远程过程调用必须准备测试远程过程调用的失败或捕获异常。</p>
+
+
+
+<h3 id="远程调用的语义是什么">远程调用的语义是什么</h3>
+
+<p>调用一个普通的过程语义很简单:当我们调用时，过程被执行。远程过程完全一次性调用成功是非常难以实现。执行远程过程可以有如下结果:</p>
+
+<ul>
+<li>如果服务器崩溃或进程在运行服务器代码之前就死了，那么远程过程会被执行0次；</li>
+<li>如果一切工作正常，远程过程会被执行1次；</li>
+<li>如果服务器返回服务器存根后在发送响应前就奔溃了，远程过程会被执行1次或者多次。客户端接收不到返回的响应,可以决定再试一次,因此出现多次执行函数。如果没有再试一次,函数执行一次；</li>
+<li>如果客户机超时和重新传输，那么远程过程会被执行多次。也有可能是原始请求延迟了。两者都可能会执行或不执行。</li>
+</ul>
+
+<p>RPC 系统通常会提供至少一次或最多一次的语义，或者在两者之间选择。如果需要了解应用程序的性质和远程过程的功能是否安全，可以通过多次调用同一个函数来验证。如果一个函数可以运行任何次数而不影响结果，这是幂等（idempotent）函数的，如每天的时间、数学函数、读取静态数据等。否则,它是一个非幂等（nonidempotent）函数，如添加或修改一个文件)。</p>
+
+
+
+<h3 id="远程调用的性能怎么样">远程调用的性能怎么样</h3>
+
+<p>毫无疑问,一个远程过程调用将会比常规的本地过程调用慢得多，因为产生了额外的步骤以及网络传输本身存在延迟。然而，这并不应该阻止我们使用远程过程调用。</p>
+
+
+
+<h3 id="远程调用安全吗">远程调用安全吗？</h3>
+
+<p>使用 RPC,我们必须关注各种安全问题:</p>
+
+<ul>
+<li>客户端发送消息到远程过程，那个过程是可信的吗?</li>
+<li>客户端发送消息到远程计算机，那个远程机器是可信的吗?</li>
+<li>服务器如何验证接收的消息是来自合法的客户端吗?服务器如何识别客户端?</li>
+<li>消息在网络中传播如何防止时被其他进程嗅探?</li>
+<li>可以由其他进程消息被拦截和修改时遍历网络从客户端到服务器或服务器端?</li>
+<li>协议能防止重播攻击吗?</li>
+<li>如何防止消息在网络传播中被意外损坏或截断?</li>
+</ul>
+
+
+
+<h2 id="远程过程调用的优点">远程过程调用的优点</h2>
+
+<p>远程过程调用有诸多的优点：</p>
+
+<ul>
+<li>你不必担心传输地址问题。服务器可以绑定到任何可用的端口,然后用 RPC 名称服务来注册端口。客户端将通过该名称服务来找到对应的端口号所需要的程序。而这一切对于程序员来说是透明的。</li>
+<li>系统可以独立于传输提供者。自动生成服务器存根使其可以在系统上的任何一个传输提供者上可用,包括 TCP 和 UDP，而这些，客户端可以动态选择的。当代码发送以后，接收消息是自动生成的，而不需要额外的编程代码。</li>
+<li>应用程序在客户端只需要知道一个传输地址——名称服务，负责告诉应用程序去哪里连接服务器函数集。</li>
+<li>使用函数调用模型来代替 socket 的发送/接收(读/写)接口。用户不需要处理参数的解析。</li>
+</ul>
+
+
+
+<h2 id="rpc-api">RPC API</h2>
+
+<p>任何 RPC 实现都需要提供一组支持库。这些包括:</p>
+
+<ul>
+<li>名称服务操作： <br>
+注册和查找绑定信息(端口、机器)。允许一个应用程序使用动态端口(操作系统分配的)；</li>
+<li>绑定操作：使用适当的协议建立客户机/服务器通信(建立通信端点)；</li>
+<li>终端操作：注册端点信息(协议、端口号、机器名)到名称服务并监听过程调用请求。这些函数通常被自动生成的主程序——服务器存根(骨架)所调用；</li>
+<li>安全操作：系统应该提供机制保证客户端和服务器之间能够相互验证,两者之间提供一个安全的通信通道；</li>
+<li>国际化操作(可能)：这是很少的一部分 RPC 包可能包括了转换时间格式、货币格式和特定于语言的在字符串表的字符串的功能；</li>
+<li>封送处理/数据转换操作：函数将数据序列化为一个普通的的字节数组，通过网络进行传递，并能够重建；</li>
+<li>存根内存管理和垃圾收集：存根可能需要分配内存来存储参数，特别是模拟引用传递语义。RPC 包需要分配和清理任何这样的分配。他们也可能需要为创建网络缓冲区而分配内存。RPC 包支持对象，RPC 系统需要一种跟踪远程客户端是否仍有引用对象或一个对象是否可以删除。</li>
+<li>程序标识操作：允许应用程序访问(或处理) RPC 接口集的标识符，这样的服务器提供的接口集可以被用来交流和使用。</li>
+<li>对象和函数的标识操作： <br>
+允许将远程函数或远程对象的引用传递给其他进程。并不是所有的 RPC 系统都支持。</li>
+</ul>
+
+<p>所以，判断一种通信方式是否是 RPC，就看它是否提供上述的 API。</p>
+
+
+
+<h2 id="第一代-rpc">第一代 RPC</h2>
+
+
+
+<h3 id="onc-rpc以前称为-sun-rpc">ONC RPC(以前称为 Sun RPC)</h3>
+
+<p>Sun 公司是第一个提供商业化 RPC 库和 RPC 编译器。在1980年代中期 Sun 计算机提供 RPC，并在 Sun Network File System(NFS) 得到支持。该协议被主要以 Sun 和 AT&amp;T 为首的 Open Network Computing （开放网络计算）作为一个标准来推动。这是一个非常轻量级 RPC 系统可用在大多数 POSIX 和类 POSIX 操作系统中使用，包括 Linux、SunOS、OS X 和各种发布版本的 BSD。这样的系统被称为 Sun RPC 或 ONC RPC。</p>
+
+<p>ONC RPC 提供了一个编译器，需要一个远程过程接口的定义来生成客户机和服务器的存根函数。这个编译器叫做 rpcgen。在运行此编译器之前，程序员必须提供接口定义。包含函数声明的接口定义，通过版本号进行分组，并被一个独特的程序编码来标识。该程序编码能够让客户来确定所需的接口。版本号是非常有用的,即使客户没有更新到最新的代码仍然可以连接到一个新的服务器，只要该服务器还支持旧接口。</p>
+
+<p>参数通过网络转化成一种隐式类型序列化格式被称为 XDR  (eXternal Data Representation)。这将确保参数能够发送到异构系统可以被正常使用，及时这些系统可能使用了不同的字节顺序，不同大小的整数，或不同的浮点或字符串表示。最后，Sun RPC 提供了一个实现必要的支持 RPC 协议和 socket 例程的运行时库。</p>
+
+<p>所有的程序员都需要写是一个客户端程序(<a href="https://www.cs.rutgers.edu/~pxk/417/notes/rpc/client.c">client.c</a>),服务器功能(<a href="https://www.cs.rutgers.edu/~pxk/417/notes/rpc/server.c">server.c</a>)和 RPC 接口定义(<a href="https://www.cs.rutgers.edu/~pxk/417/notes/rpc/date.x">date.x</a>)。当 RPC 接口定义(后缀为.x 的文件，例如 date.x)是用 rpcgen 编译的,会创建三个或四个文件。下面是 date.x 的例子:</p>
+
+<ul>
+<li>date.h：包含项目的定义、版本和声明的函数。客户端和服务器端功能应该包括这个文件。</li>
+<li>date_svc.c ：C 语言代码来实现服务器存根。</li>
+<li>date_clnt.c ：C 语言代码来实现客户端存根。</li>
+<li>date_xdr.c ：包含 XDR 例程来将数据转化为 XDR 格式。如果这个文件生成,它应该编译并用来链接在客户端和服务器的函数。</li>
+</ul>
+
+<p>创建客户端和服务器可执行文件的第一步是定义在文件 <a href="https://www.cs.rutgers.edu/~pxk/417/notes/rpc/date.x">date.x</a> 里的编译数据。之后，客户端和服务器端函数可能被编译，并链接各自 rpcgen 生成的存根函数。</p>
+
+<p>在旧版本里，传输协议只能将字符串“tcp”或字符串“udp”来指定各自的 IP 服务 RPC，且仅限于 Linux 实现的 RPC。为了使接口更加灵活，UNIX 系统从版本 4 (SunOS 从版本 5)开始网络选择程序允许一个更普通的规范。他们搜索文件(/etc/netconfig)，来查找第一个满足您需求的提供者。最后一个参数可以是:</p>
+
+<ul>
+<li>“netpath”：搜索 NETPATH 环境变量用于首选传输提供者的序列；</li>
+<li>“circuit_n”：找到第一个在 NETPATH 列表中的虚拟电路提供者；</li>
+<li>“datagram_n”：找到第一个 NETPATH 列表中的数据报提供者；</li>
+<li>“visible”：找到第一个在 /etc/netconfig 的可见传输提供者；</li>
+<li>“circuit_v”：找到第一个在 /etc/netconfig 的可见虚拟电路传输提供者；</li>
+<li>“datagram_v”：找到第一个在 /etc/netconfig 的可见数据报传输提供者；</li>
+</ul>
+
+<p>每个远程过程调用最初仅限于接受一个输入参数。系统只是后来修改为支持多个参数。支持单一参数 RPC 在一些 rpcgen 的版本中仍然是默认的，比如苹果的 OS X。传递多个参数必须通过定义一个结构，包含所需的参数，初始化它，并传递这个结构。</p>
+
+<p>远程过程调用返回一个指针指向结果而不是期望的结果。服务器函数必须修改来能接受一个 RPC 定义（.x 文件）中声明的值的指针作为输入，并返回一个结果值的指针。在服务器上，一个指针必须是指向静态数据的指针。否则，当过程返回或释放过程的框架所指出的区域将未定义。在客户端,返回指针可以让我们区分一个失败的 RPC(空指针)和一个空返回从服务器(间接空指针)。</p>
+
+<p>RPC 过程的名称若在 RPC 定义文件中做了定义，则会转换为小写，并在后缀价下划线，后跟一个版本号。例如，BIN_DATE 转成为引用函数  bin_date_1 。您的服务器必须实现 bin_date_1。</p>
+
+
+
+<h3 id="当我们运行这个程序时会发生什么">当我们运行这个程序时,会发生什么?</h3>
+
+
+
+<h4 id="服务器">服务器</h4>
+
+<p>当我们启动服务器，服务器存根代码(程序)在后台运行运行。它创建一个 socket 并可绑定任何本地端口到 socket。然后调用一个在 RPC 库的函数 svc_register，来注册程序编号和版本。这个是用来联系 port mapper（端口映射器）。port mapper 是一个独立的进程，通常是在系统启动时启动。它跟踪端口号、版本号以及程序编号。在 UNIX 系统版本4中，这个进程称为 rpcbind。在 Linux 、OS X 和 BSD 系统,它被称为 portmap。</p>
+
+<p><img src="http://waylau.com/images/post/20160630-rpc-onc_lookup.png" alt="图5 ONC RPC 中的函数查找" title=""></p>
+
+<p>图5 ONC RPC 中的函数查找</p>
+
+
+
+<h4 id="客户端">客户端</h4>
+
+<p>当我们开始客户端程序时，它首先用远程系统的名称、程序编号、版本号和协议来调用 clnt_create 。它接触远程系统上的端口映射器,来为系统找到合适的端口。</p>
+
+<p>然后客户端调用 RPC 存根函数(在本例中为 bin_date_1)。该函数发送一条消息(如，数据报)到服务器(使用早些时候发现的端口号)并等待响应。对于数据报服务来说，若没有接收到响应，它将重新发送一个固定的次数请求。</p>
+
+<p>消息接着被远程系统接收到，它调用服务器函数(bin_date_1)并将返回值返回给客户端存根。客户端存根而后返回到客户端发出调用的代码。</p>
+
+
+
+<h2 id="分布式计算环境中的-rpcdce-rpc">分布式计算环境中的 RPC(DCE RPC)</h2>
+
+<p>DCE(Distributed Computing Environment，分布式计算环境)是一组由OFS(Open Software Foundation，开放软件基金会)设计的组件，用来提供支持分布式应用和分布式环境。与 X/Open 合并后,这组织成为了 The Open Group （开放式开发组）。DCE 提供的组件包括一个分布式文件服务、时间服务、目录服务以及其他服务。当然，我们感兴趣的是 DCE 的远程过程调用。它非常类似于 Sun RPC。接口是由  Interface Definition Notation (IDN) 定义的。类似于 Sun RPC，接口定义就像函数原型。</p>
+
+<p>Sun RPC 不足之处在于，服务器的标识是一个“独特”的 32-bit 数字。虽然这是一个比在 socket 中 16-bit 可用空间更大的空间，但仍然无法满足数字唯一性的需求。DCE RPC 考虑到了这一缺陷，它无需程序员来处理编码。在编写应用程序时的第一步是从 uuidgen 程序获得一个惟一的 ID。这个程序会生成一个包含 ID 接口的原型 IDN 文件，并保证永远不会再次使用。它是一个 128-bit 的值，其中包含一个位置代码和创建时间的编码。然后用户编辑原型文件，填写远程过程声明。</p>
+
+<p>在这一步后，IDN 的编译器 dceidl（类似于 rpcgen）会生成一个头、客户机存根和服务器存根。</p>
+
+<p>Sun RPC 的另一个缺陷是，客户端必须知道服务器在哪台机器上。当它要访问时，必须要询问机器上的 RPC 名称服务程序编码所对应的端口号。DCE 支持将多个机器组织成为管理实体，称为 cells。cell 目录服务器使得每台机器知道如何与另外一台负责维护 cell 信息服务机器交互。</p>
+
+<p>在 Sun RPC 中，服务器只能用本地名称服务(端口映射器)来注册其程序编号到端口映射。而在 DCE 中，服务器用 RPC 守护进程(名称服务器)来注册其端点(端口)到本地机器，并且用 cell  目录服务器注册其程序名字到机器的映射。当客户机想要与一个 RPC 服务器建立通信，它首先要求其 cell 目录服务器来定位服务器所在的机器。然后客户端从 RPC 守护进程处获得机器上服务器进程的端口号。DCE 的跨 cell 还支持更复杂的搜索。</p>
+
+<p>DCE RPC 定义了 NDR (Network Data Representation) 用于对网络进行编码来封送信息。与用一个单一的规范来表示不同的数据类型相比，NDR 支持多规范（multi-canonical）格式。允许客户端来选择使用哪种格式，理想的情况是不需要将它从本地类型来转换。如果这不同于服务器的本地数据表示,服务器将仍然需要转换，但多规范格式可以避免当客户端和服务器都共享相同的本地格式的情况下转换为其他外部格式。例如,在一个规定了大端字节序网络数据格式的情况下，客户端和服务器只支持小端字节序，那么客户端必须将每个数据从小端字节序转为大端字节序，而当服务器接受到消息后,将每个数据转回小端字节序。多规范网络数据表示将允许客户端发送网络消息包含小端字节序格式的数据。</p>
+
+<p><img src="http://waylau.com/images/post/20160630-dce-rpc-lookup.png" alt="图6  DCE RPC 中的函数查找" title=""></p>
+
+<p>图6  DCE RPC 中的函数查找</p>
+
+
+
+<h2 id="第二代-rpc支持对象">第二代 RPC:支持对象</h2>
+
+<p>面向对象的语言开始在1980年代末兴起，很明显，当时的 Sun ONC 和 DCE RPC 系统都没有提供任何支持诸如从远程类实例化远程对象、跟踪对象的实例或提供支持多态性。现有的 RPC 机制虽然可以运作，但他们仍然不支持自动、透明的方式的面向对象编程技术。</p>
+
+
+
+<h3 id="微软-dcomcom">微软 DCOM(COM+)</h3>
+
+<p>1992年4月,微软发布 Windows 3.1 包括一种机制称为 OLE (Object Linking and Embedding)。这允许一个程序动态链接其他库来支持的其他功能。如将一个电子表格嵌入到 Word 文档。OLE 演变成了 COM (Component Object Model)。一个 COM 对象是一个二进制文件。使用 COM 服务的程序来访问标准化接口的 COM 对象而不是其内部结构。COM 对象用全局唯一标识符(GUID)来命名，用类的 ID 来识别对象的类。几种方法来创建一个 COM 对象(例如 CoGetInstanceFromFile)。COM 库在系统注册表中查找相应的二进制代码(一个 DLL 或可执行文件)，来创建对象，并给调用者返回一个接口指针。COM 的着眼点是在于同一台计算机上不同应用程序之间的通讯需求.</p>
+
+<p>DCOM（ Distributed Component Object Model）是 COM 的扩展，它支持不同的两台机器上的组件间的通信，而且不论它们是运行在局域网、广域网、还是 Internet 上。借助 DCOM 你的应用程序将能够进行任意空间分布。DCOM 于1996年在 Windows NT4.0 中引入的，后来更名为 COM+。由于 DCOM 是为了支持访问远程 COM 对象，需要创建一个对象的过程，此时需要提供服务器的网络名以及类 ID。微软提供了一些机制来实现这一点。最透明的方式是远程计算机的名称固定在注册表（或 DCOM 类存储）里，与特定类 ID 相关联。以此方式，应用程序不知道它正在访问一个远程对象，并且可以使用与访问本地 COM 对象相同的接口指针。另一方面，应用程序也可指定一个机器名作为参数。</p>
+
+<p>由于 DCOM 是 COM 这个组件技术的无缝升级，所以你能够从你现有的有关 COM  得知识中获益，你的以前在 COM 中开发的应用程序、组件、工具都可以移入分布式的环境中。DCOM 将为你屏蔽底层网络协议的细节，你只需要集中精力于你的应用。</p>
+
+<p>DCOM 最大的缺点是这是微软独家的解决办法，在跨防火墙方面的工作做得不是很好（大多数RPC系统也有类似的问题），因为防火墙必须允许某些端口来允许 ORPC 和 DCOM 通过。</p>
+
+
+
+<h3 id="corba">CORBA</h3>
+
+<p>虽然 DCE 修复的一些 Sun RPC 的缺点，但某些缺陷依然存在。例如，如果服务器没有运行，客户端是无法连接到远程过程进行调用的。管理员必须要确保在任何客户端试图连接到服务器之前将服务器启动。如果一个新服务或接口添加到了系统，客户端是不能发现的。最后,面向对象语言期望在函数调用中体现多态性，即不同类型的数据的函数的行为应该有所不同，而这点恰恰是传统的 RPC 所不支持的。</p>
+
+<p>CORBA (Common Object Request Broker Architecture) 就是为了解决上面提到的各种问题。是由 OMG 组织制订的一种标准的面向对象应用程 序体系规范。或者说 CORBA体系结构是对象管理组织（OMG）为解决分布式处理环境(DCE)中，硬件和软件系统的互连而提出的一种解决方案。OMG 成立于1989年，作为一个非营利性组织，集中致力于开发在技术上具有先进性、在商业上具有可行性并且独立于厂商的软件互联规范，推广面向对象模型技术，增强软件的可移植性（Portability）、可重用性（Reusability）和互操作性（Interoperability）。该组织成立之初，成员包括 Unisys、Sun、Cannon、Hewlett-Packard 和 Philips 等在业界享有声誉的软硬件厂商，目前该组织拥有800多家成员。</p>
+
+<p>CORBA 体系的主要内容包括以下几部分：</p>
+
+<ul>
+<li>对象请求代理 （Object Request Broker，ORB）：负责对象在分布环境中透明地收发请求和响应，它是构建分布对象应用、在异构或同构环境下实现应用间互操作的基础。</li>
+<li>对象服务（Object Services）：为使用和实现对象而提供的基本对象集合，这些服务应独立于应用领域。主要的 CORBA 服务有：名录服务（Naming Service）、事件服务（Event Service）、生命周期服务（Life Cycle Service）、关系服务（Relationship Service）以及事务服务（Transaction Service）等。这些服务几乎包括分布系统和面向对象系统的各个方面，每个组成部分都非常复杂。</li>
+<li>公共设施（Common Facilitites）：向终端用户提供一组共享服务接口，例如系统管理、组合文档和电子邮件等。</li>
+<li>应用接口（Application Interfaces）。由销售商提供的可控制其接口的产品，相应于传统的应用层表示，处于参考模型的最高层。</li>
+<li>领域接口（Domain Interfaces）：为应用领域服务而提供的接口，如OMG 组织为 PDM 系统制定的规范。</li>
+</ul>
+
+<p>当客户端发出请求时,ORB 做了如下事情:</p>
+
+<ul>
+<li>在客户端编组参数；</li>
+<li>定位服务器对象。如果有必要的话,它会在服务器创建一个过程来处理请求；</li>
+<li>如果服务器是远程是,就使用 RPC 或 socket 来传送请求；</li>
+<li>在服务器上将参数解析成为服务器格式；</li>
+<li>在服务器上组装返回值；</li>
+<li>如果服务器是远程的，就将返回值传回；</li>
+<li>在客户端对返回结果进行解析；</li>
+</ul>
+
+<p>IDL(Interface Definition Language) 是用于指定类的名字、属性和方法。它不包含对象的实现。IDL 编译器生成代码来处理编组、解封以及ORB与网络之间的交互。它会生成客户机和服务器存根。IDL 是编程语言中立，支持包括C、C++、Java、Perl、Python、Ada、COBOL、Smalltalk、Objective C 和 LISP 等语言。一个示例IDL如下所示:</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs">Module StudentObject {
+    Struct StudentInfo {
+        String name;
+        <span class="hljs-keyword">int</span> id;
+        <span class="hljs-keyword">float</span> gpa;
+    };
+    exception Unknown {};
+    <span class="hljs-keyword">interface</span> Student {
+        StudentInfo getinfo(<span class="hljs-keyword">in</span> <span class="hljs-keyword">string</span> name)
+            raises(unknown);
+        <span class="hljs-keyword">void</span> putinfo(<span class="hljs-keyword">in</span> StudentInfo data);
+    };
+};</code></pre>
+
+<p>IDL数据类型包括:</p>
+
+<ul>
+<li>基本类型:long, short, string, float, …</li>
+<li>构造类型:struct、union、枚举、序列</li>
+<li>对象引用</li>
+<li>any 类型:一个动态类型的值</li>
+</ul>
+
+<p>编程中最常见的实现方式是通过对象引用来实现请求。下面是一个使用 IDL 的例子:</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs r">Student st = <span class="hljs-keyword">...</span> // get object reference
+<span class="hljs-keyword">try</span> {
+    StudentInfo sinfo = st.getinfo(<span class="hljs-string">"Fred Grampp"</span>);
+} catch (Throwable e) {
+    <span class="hljs-keyword">...</span> // error
+}</code></pre>
+
+<p>在 CORBA 规范中，没有明确说明不同厂商的中间件产品要实现所有的服务功能，并且允许厂商开发自己的服务类型。因此, 不同厂商的 ORB 产品对 CORBA 服务的支持能力不同，使我们在针对待开发系统的功能进行中间件产品选择时，有更多的选择余地。</p>
+
+<p>CORBA 的不足有：</p>
+
+<ul>
+<li>尽管有多家供应商提供CORBA产品，但是仍找不到能够单独为异种网络中的所有环境提供实现的供应商。不同的 CORBA 实现之间会出现缺乏互操作性的现象，从而造成一些问题；而且，由于供应商常常会自行定义扩展，而 CORBA 又缺乏针对多线程环境的规范，对于像 C 或 C++ 这样的语言，源码兼容性并未完全实现。</li>
+<li>CORBA 过于复杂，要熟悉 CORBA，并进行相应的设计和编程，需要许多个月来掌握，而要达到专家水平，则需要好几年。</li>
+</ul>
+
+<p>更多有关 CORBA 的优缺点，可以参阅 Michi Henning 的《<a href="http://queue.acm.org/detail.cfm?id=1142044">The rise and fall of CORBA</a>》。 </p>
+
+
+
+<h3 id="java-rmi">Java RMI</h3>
+
+<p>CORBA 旨在提供一组全面的服务来管理在异构环境中(不同语言、操作系统、网络)的对象。Java 在其最初只支持通过 socket 来实现分布式通信。1995年,作为 Java 的缔造者，Sun 公司开始创建一个 Java 的扩展，称为 Java RMI(Remote Method Invocation，远程方法调用)。Java RMI 允许程序员创建分布式应用程序时，可以从其他 Java 虚拟机(JVM)调用远程对象的方法。</p>
+
+<p>一旦应用程序(客户端)引用了远程对象，就可以进行远程调用了。这是通过 RMI 提供的命名服务(RMI 注册中心)来查找远程对象，来接收作为返回值的引用。Java RMI 在概念上类似于 RPC，但能在不同地址空间支持对象调用的语义。</p>
+
+<p>与大多数其他诸如 CORBA 的 RPC 系统不同，RMI 只支持基于 Java 来构建，但也正是这个原因， RMI 对于语言来说更加整洁，无需做额外的数据序列化工作。Java RMI 的设计目标应该是:</p>
+
+<ul>
+<li>能够适应语言、集成到语言、易于使用；</li>
+<li>支持无缝的远程调用对象；</li>
+<li>支持服务器到 applet 的回调；</li>
+<li>保障 Java 对象的安全环境；</li>
+<li>支持分布式垃圾回收；</li>
+<li>支持多种传输。</li>
+</ul>
+
+<p>分布式对象模型与本地 Java 对象模型相似点在于:</p>
+
+<ul>
+<li>引用一个对象可以作为参数传递或作为返回的结果；</li>
+<li>远程对象可以投到任何使用 Java 语法实现的远程接口的集合上；</li>
+<li>内置 Java instanceof 操作符可以用来测试远程对象是否支持远程接口。</li>
+</ul>
+
+<p>不同点在于:</p>
+
+<ul>
+<li>远程对象的类是与远程接口进行交互，而不是与这些接口的实现类交互；</li>
+<li>Non-remote 参数对于远程方法调用来说是通过复制，而不是通过引用；</li>
+<li>远程对象是通过引用来传递，而不是复制实际的远程实现；</li>
+<li>客户端必须处理额外的异常。</li>
+</ul>
+
+
+
+<h4 id="接口和类">接口和类</h4>
+
+<p>所有的远程接口都继承自 <code>java.rmi.Remote</code> 接口。例如:</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">bankaccount</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Remote</span>
+{</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">deposit</span>(<span class="hljs-keyword">float</span> amount)
+        <span class="hljs-keyword">throws</span> java.rmi.RemoteException;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">withdraw</span>(<span class="hljs-keyword">float</span> amount)
+        <span class="hljs-keyword">throws</span> OverdrawnException,
+        java.rmi.RemoteException;
+}</code></pre>
+
+<p>注意,每个方法必须在 throws 里面声明  <code>java.rmi.RemoteException</code> 。 只要客户端调用远程方法出现失败，这个异常就会抛出。</p>
+
+
+
+<h4 id="远程对象类">远程对象类</h4>
+
+<p><code>Java.rmi.server.RemoteObject</code> 类提供了远程对象实现的语义包括hashCode、equals　和　toString。 <code>java.rmi.server.RemoteServer</code>　及其子类提供让对象实现远程可见。<code>java.rmi.server.UnicastRemoteObject</code> 类定义了客户机与服务器对象实例建立一对一的连接.</p>
+
+
+
+<h4 id="存根">存根</h4>
+
+<p>Java RMI 通过创建存根函数来工作。存根由 rmic 编译器生成。自 Java 1.5 以来,Java 支持在运行时动态生成存根类。编译器 rmic 会提供各种编译选项。</p>
+
+
+
+<h4 id="定位对象">定位对象</h4>
+
+<p>引导名称服务提供了用于存储对远程对象的命名引用。一个远程对象引用可以存储使用类 <code>java.rmi.Naming</code> 提供的基于 URL 的方法。例如,</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs avrasm">BankAccount acct = new BankAcctImpl()<span class="hljs-comment">;</span>
+String url = <span class="hljs-string">"rmi://java.sun.com/account"</span><span class="hljs-comment">;</span>
+// bind url to remote object
+java<span class="hljs-preprocessor">.rmi</span><span class="hljs-preprocessor">.Naming</span><span class="hljs-preprocessor">.bind</span>(url, acct)<span class="hljs-comment">;</span>
+
+// look up account
+acct = (BankAccount)java<span class="hljs-preprocessor">.rmi</span><span class="hljs-preprocessor">.Naming</span><span class="hljs-preprocessor">.lookup</span>(url)<span class="hljs-comment">;</span></code></pre>
+
+<p><img src="http://waylau.com/images/post/20160630-rpc-rmi_flow.png" alt="图7 Java RMI 工作流程" title=""></p>
+
+<p>图7 Java RMI 工作流程</p>
+
+
+
+<h4 id="rmi-架构">RMI 架构</h4>
+
+<p>RMI 是一个三层架构(图8)。最上面是 Stub/Skeleton layer（存根/骨架层）。方法调用从 Stub、Remote Reference Layer (远程引用层)和 Transport Layer（传输层）向下，传递给主机，然后再次经传 Transport Layer 层，向上穿过 Remote Reference Layer 和 Skeleton ，到达服务器对象。 Stub 扮演着远程服务器对象的代理的角色，使该对象可被客户激活。Remote Reference Layer 处理语义、管理单一或多重对象的通信，决定调用是应发往一个服务器还是多个。Transport Layer 管理实际的连接，并且追踪可以接受方法调用的远程对象。服务器端的 Skeleton 完成对服务器对象实际的方法调用，并获取返回值。返回值向下经 Remote Reference Layer 、服务器端的 Transport Layer 传递回客户端，再向上经 Transport Layer 和 Remote Reference Layer 返回。最后，Stub 程序获得返回值。 </p>
+
+<p>要完成以上步骤需要有以下几个步骤： </p>
+
+<ul>
+<li>生成一个远程接口；</li>
+<li>实现远程对象(服务器端程序)；</li>
+<li>生成 Stub 和 Skeleton(服务器端程序)；</li>
+<li>编写服务器程序 ；</li>
+<li>编写客户程序 ；</li>
+<li>注册远程对象；</li>
+<li>启动远程对象 </li>
+</ul>
+
+<p><img src="http://waylau.com/images/post/20160630-rpc-rmi_logical.png" alt="图8 Java RMI 架构" title=""></p>
+
+<p>图8 Java RMI 架构</p>
+
+
+
+<h4 id="rmi-分布式垃圾回收">RMI 分布式垃圾回收</h4>
+
+<p>根据 Java 虚拟机的垃圾回收机制原理，在分布式环境下，服务器进程需要知道哪些对象不再由客户端引用，从而可以被删除(垃圾回收)。在 JVM中,Java 使用引用计数。当引用计数归零时，对象将会垃圾回收。在RMI,Java 支持两种操作:dirty 和 clean。本地 JVM 定期发送一个 dirty 到服务器来说明该对象仍在使用。定期重发 dirty 的周期是由服务器租赁时间来决定的。当客户端没有需要更多的本地引用远程对象时,它发送一个 clean 调用给服务器。不像 DCOM,服务器不需要计算每个客户机使用的对象,只是简单的做下通知。如果它租赁时间到期之前没有接收到任何 dirty 或者 clean 的消息，则可以安排将对象删除。</p>
+
+
+
+<h2 id="第三代-rpc-以及-web-services">第三代 RPC 以及 Web Services</h2>
+
+<p>由于互联网的兴起，Web 浏览器成为占主导地位的用于访问信息的模型。现在的应用设计的首要任务大多数是提供用户通过浏览器来访问，而不是编程访问或操作数据。</p>
+
+<p>网页设计关注的是内容。解析展现方面往往是繁琐的。传统 RPC 解决方案可以工作在互联网上，但问题是，他们通常严重依赖于动态端口分配，往往要进行额外的防火墙配置。</p>
+
+<p>Web Services 成为一组协议,允许服务被发布、发现，并用于技术无关的形式。即服务不应该依赖于客户的语言、操作系统或机器架构。</p>
+
+<p>Web Services 的实现一般是使用 Web 服务器作为服务请求的管道。客户端访问该服务，首先是通过一个 HTTP 协议发送请求到服务器上的 Web 服务器。Web 服务器配置识别 URL 的一部分路径名或文件名后缀并将请求传递给特定的浏览器插件模块。这个模块可以除去头、解析数据(如果需要),并根据需要调用其他函数或模块。对于这个实现流，一个常见的例子是浏览器对于 Java Servlet 的支持。HTTP 请求会被转发到 JVM 运行的服务端代码来执行处理。</p>
+
+
+
+<h3 id="xml-rpc">XML-RPC</h3>
+
+<p>XML-RPC 是1998年作为一个 RPC 消息传递协议，将请求和响应封装解析为人类可读的 XML格式。XML 格式基于 HTTP 协议，缓解了传统企业的防火墙需要为 RPC 服务器应用程序打开额外的端口的问题。</p>
+
+<p>下面是一个 XML-RPC 消息的例子:</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">methodCall</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">methodName</span>&gt;</span>
+        sample.sumAndDifference
+    <span class="hljs-tag">&lt;/<span class="hljs-title">methodName</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">params</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">param</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">value</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">int</span>&gt;</span> 5 <span class="hljs-tag">&lt;/<span class="hljs-title">int</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">value</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">param</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">param</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">value</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">int</span>&gt;</span> 3 <span class="hljs-tag">&lt;/<span class="hljs-title">int</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">value</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">param</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">params</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">methodCall</span>&gt;</span></code></pre>
+
+<p>这个例子中，方法 sumAndDifference 有两个整数参数 5 和 3。</p>
+
+<p>XML-RPC 支持的基本数据类型是:int、string、boolean、double 和 dateTime.iso8601。此外,还有 base64 类型用于编码任意二进制数据。array 和 struct 允许定义数组和结构。</p>
+
+<p>XML-RPC 不限制语任何特定的语言，也不是一套完整的软件来处理远程过程，诸如存根生成、对象管理和服务查找都不在协议内。现在有很多库针可以针对不同的语言，比如 Apache XML-RPC 可以用于 Java、Python 和 Perl。 </p>
+
+<p>XML-RPC 是一个简单的规范(约7页)，没有雄心勃勃的目标——它只关注消息，而并不处理诸如垃圾收集、远程对象、远程过程的名称服务和其他方面的问题。然而，即使没有广泛的产业支持，简单的协议却能广泛采用。</p>
+
+
+
+<h3 id="soap">SOAP</h3>
+
+<p>SOAP（Simple Object Access Protocol，简单对象访问协议），是以 XML-RPC 规范作为创建 SOAP 的依据，成立于1998年，获得微软和 IBM 的大力支持。该协议在创建初期只作为一种对象访问协议，但由于 SOAP 的发展，其协议已经不单只是用于简单的访问对象，所以这种 SOAP 缩写已经在标准的1.2版后被废止了。1.2版在2003年6月24日成为 W3C 的推荐版本。SOAP 指定 XML 作为无状态的消息交换格式，包括了 RPC 式的过程调用。</p>
+
+<p>有关 SOAP 的标准可以参阅 <a href="https://www.w3.org/TR/soap/">https://www.w3.org/TR/soap/</a>。</p>
+
+<p>SOAP 只是一种消息格式，并未定义垃圾回收、对象引用、存根生成和传输协议。</p>
+
+<p>下面是一个简单的例子：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs xml"><span class="hljs-pi">&lt;?xml version='1.0' ?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">env:Envelope</span> <span class="hljs-attribute">xmlns:env</span>=<span class="hljs-value">"http://www.w3.org/2003/05/soap-envelope"</span>&gt;</span> 
+ <span class="hljs-tag">&lt;<span class="hljs-title">env:Header</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">m:reservation</span> <span class="hljs-attribute">xmlns:m</span>=<span class="hljs-value">"http://travelcompany.example.org/reservation"</span> 
+          <span class="hljs-attribute">env:role</span>=<span class="hljs-value">"http://www.w3.org/2003/05/soap-envelope/role/next"</span>
+           <span class="hljs-attribute">env:mustUnderstand</span>=<span class="hljs-value">"true"</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-title">m:reference</span>&gt;</span>uuid:093a2da1-q345-739r-ba5d-pqff98fe8j7d<span class="hljs-tag">&lt;/<span class="hljs-title">m:reference</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-title">m:dateAndTime</span>&gt;</span>2001-11-29T13:20:00.000-05:00<span class="hljs-tag">&lt;/<span class="hljs-title">m:dateAndTime</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">m:reservation</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">n:passenger</span> <span class="hljs-attribute">xmlns:n</span>=<span class="hljs-value">"http://mycompany.example.com/employees"</span>
+          <span class="hljs-attribute">env:role</span>=<span class="hljs-value">"http://www.w3.org/2003/05/soap-envelope/role/next"</span>
+           <span class="hljs-attribute">env:mustUnderstand</span>=<span class="hljs-value">"true"</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-title">n:name</span>&gt;</span>Åke Jógvan Øyvind<span class="hljs-tag">&lt;/<span class="hljs-title">n:name</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">n:passenger</span>&gt;</span>
+ <span class="hljs-tag">&lt;/<span class="hljs-title">env:Header</span>&gt;</span>
+ <span class="hljs-tag">&lt;<span class="hljs-title">env:Body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">p:itinerary
+</span>    <span class="hljs-attribute">xmlns:p</span>=<span class="hljs-value">"http://travelcompany.example.org/reservation/travel"</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-title">p:departure</span>&gt;</span>
+     <span class="hljs-tag">&lt;<span class="hljs-title">p:departing</span>&gt;</span>New York<span class="hljs-tag">&lt;/<span class="hljs-title">p:departing</span>&gt;</span>
+     <span class="hljs-tag">&lt;<span class="hljs-title">p:arriving</span>&gt;</span>Los Angeles<span class="hljs-tag">&lt;/<span class="hljs-title">p:arriving</span>&gt;</span>
+     <span class="hljs-tag">&lt;<span class="hljs-title">p:departureDate</span>&gt;</span>2001-12-14<span class="hljs-tag">&lt;/<span class="hljs-title">p:departureDate</span>&gt;</span>
+     <span class="hljs-tag">&lt;<span class="hljs-title">p:departureTime</span>&gt;</span>late afternoon<span class="hljs-tag">&lt;/<span class="hljs-title">p:departureTime</span>&gt;</span>
+     <span class="hljs-tag">&lt;<span class="hljs-title">p:seatPreference</span>&gt;</span>aisle<span class="hljs-tag">&lt;/<span class="hljs-title">p:seatPreference</span>&gt;</span>
+   <span class="hljs-tag">&lt;/<span class="hljs-title">p:departure</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-title">p:return</span>&gt;</span>
+     <span class="hljs-tag">&lt;<span class="hljs-title">p:departing</span>&gt;</span>Los Angeles<span class="hljs-tag">&lt;/<span class="hljs-title">p:departing</span>&gt;</span>
+     <span class="hljs-tag">&lt;<span class="hljs-title">p:arriving</span>&gt;</span>New York<span class="hljs-tag">&lt;/<span class="hljs-title">p:arriving</span>&gt;</span>
+     <span class="hljs-tag">&lt;<span class="hljs-title">p:departureDate</span>&gt;</span>2001-12-20<span class="hljs-tag">&lt;/<span class="hljs-title">p:departureDate</span>&gt;</span>
+     <span class="hljs-tag">&lt;<span class="hljs-title">p:departureTime</span>&gt;</span>mid-morning<span class="hljs-tag">&lt;/<span class="hljs-title">p:departureTime</span>&gt;</span>
+     <span class="hljs-tag">&lt;<span class="hljs-title">p:seatPreference</span>/&gt;</span>
+   <span class="hljs-tag">&lt;/<span class="hljs-title">p:return</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">p:itinerary</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">q:lodging
+</span>   <span class="hljs-attribute">xmlns:q</span>=<span class="hljs-value">"http://travelcompany.example.org/reservation/hotels"</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-title">q:preference</span>&gt;</span>none<span class="hljs-tag">&lt;/<span class="hljs-title">q:preference</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">q:lodging</span>&gt;</span>
+ <span class="hljs-tag">&lt;/<span class="hljs-title">env:Body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">env:Envelope</span>&gt;</span></code></pre>
+
+<p>其中<code>&lt;soap:Envelope&gt;</code>是 SOAP 消息中的根节点，是 SOAP 消息中必须的部分。<code>&lt;soap:Header&gt;</code>是 SOAP 消息中可选部分，是指消息头。<code>&lt;soap:Body&gt;</code>是 SOAP 中必须部分，是指消息体。</p>
+
+<p>上面例子的 SOAP 消息结构如下：</p>
+
+<p><img src="http://waylau.com/images/post/20160630-soap-message-structure.png" alt="图9 SOAP 消息结构" title=""></p>
+
+<p>图9 SOAP 消息结构</p>
+
+<p>SOAP 它只是提供了一个标准化的消息结构，为了实现它往往需要用 WSDL 来描述  Web Services 的方法。WSDL (Web Services Description Language) 是基于 XML 的一种用于描述 Web Services 以及如何访问  Web Services 的语言。</p>
+
+<p>WSDL 文档包括以下几个部分:</p>
+
+<ul>
+<li>类型（Types）:定义了  Web Services 使用的数据类型；</li>
+<li>消息（n/a）:描述使用消息的数据元素或参数；</li>
+<li>接口（Interface）:描述服务提供的操作。这包括操作以及每个操作所使用的输入和输出消息；</li>
+<li>绑定（Binding）:为每个端口定义消息格式和协议细节。例如,它可以定义 RPC 式的消息；</li>
+<li>服务（Service）：系统功能相关的集合，包括其关联的接口、操作、消息等；</li>
+<li>终点（Endpoint）：定义了地址或者 Web Services 的连接点；</li>
+<li>操作（Operation）：定义了 SOAP 的动作，以及消息编码的方式。</li>
+</ul>
+
+<p>下面是一个 WSDL 2.0 版本的例子：</p>
+
+
+
+<pre class="prettyprint"><code class="language-xml hljs "><span class="hljs-pi">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">description</span> <span class="hljs-attribute">xmlns</span>=<span class="hljs-value">"http://www.w3.org/ns/wsdl"</span> 
+             <span class="hljs-attribute">xmlns:tns</span>=<span class="hljs-value">"http://www.tmsws.com/wsdl20sample"</span> 
+             <span class="hljs-attribute">xmlns:whttp</span>=<span class="hljs-value">"http://schemas.xmlsoap.org/wsdl/http/"</span>
+             <span class="hljs-attribute">xmlns:wsoap</span>=<span class="hljs-value">"http://schemas.xmlsoap.org/wsdl/soap/"</span>
+             <span class="hljs-attribute">targetNamespace</span>=<span class="hljs-value">"http://www.tmsws.com/wsdl20sample"</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">documentation</span>&gt;</span>
+    This is a sample WSDL 2.0 document. 
+<span class="hljs-tag">&lt;/<span class="hljs-title">documentation</span>&gt;</span>
+
+   <span class="hljs-comment">&lt;!-- Abstract type --&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-title">types</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">xs:schema</span> <span class="hljs-attribute">xmlns:xs</span>=<span class="hljs-value">"http://www.w3.org/2001/XMLSchema"</span>
+                <span class="hljs-attribute">xmlns</span>=<span class="hljs-value">"http://www.tmsws.com/wsdl20sample"</span>
+                <span class="hljs-attribute">targetNamespace</span>=<span class="hljs-value">"http://www.example.com/wsdl20sample"</span>&gt;</span>
+
+         <span class="hljs-tag">&lt;<span class="hljs-title">xs:element</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"request"</span>&gt;</span> ... <span class="hljs-tag">&lt;/<span class="hljs-title">xs:element</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-title">xs:element</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"response"</span>&gt;</span> ... <span class="hljs-tag">&lt;/<span class="hljs-title">xs:element</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">xs:schema</span>&gt;</span>
+   <span class="hljs-tag">&lt;/<span class="hljs-title">types</span>&gt;</span>
+
+   <span class="hljs-comment">&lt;!-- Abstract interfaces --&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-title">interface</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"Interface1"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">fault</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"Error1"</span> <span class="hljs-attribute">element</span>=<span class="hljs-value">"tns:response"</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">operation</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"Get"</span> <span class="hljs-attribute">pattern</span>=<span class="hljs-value">"http://www.w3.org/ns/wsdl/in-out"</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">messageLabel</span>=<span class="hljs-value">"In"</span> <span class="hljs-attribute">element</span>=<span class="hljs-value">"tns:request"</span>/&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-title">output</span> <span class="hljs-attribute">messageLabel</span>=<span class="hljs-value">"Out"</span> <span class="hljs-attribute">element</span>=<span class="hljs-value">"tns:response"</span>/&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">operation</span>&gt;</span>
+   <span class="hljs-tag">&lt;/<span class="hljs-title">interface</span>&gt;</span>
+
+   <span class="hljs-comment">&lt;!-- Concrete Binding Over HTTP --&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-title">binding</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"HttpBinding"</span> <span class="hljs-attribute">interface</span>=<span class="hljs-value">"tns:Interface1"</span> 
+            <span class="hljs-attribute">type</span>=<span class="hljs-value">"http://www.w3.org/ns/wsdl/http"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">operation</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"tns:Get"</span> <span class="hljs-attribute">whttp:method</span>=<span class="hljs-value">"GET"</span>/&gt;</span>
+   <span class="hljs-tag">&lt;/<span class="hljs-title">binding</span>&gt;</span>
+
+   <span class="hljs-comment">&lt;!-- Concrete Binding with SOAP--&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-title">binding</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"SoapBinding"</span> <span class="hljs-attribute">interface</span>=<span class="hljs-value">"tns:Interface1"</span> 
+            <span class="hljs-attribute">type</span>=<span class="hljs-value">"http://www.w3.org/ns/wsdl/soap"</span> 
+            <span class="hljs-attribute">wsoap:protocol</span>=<span class="hljs-value">"http://www.w3.org/2003/05/soap/bindings/HTTP/"</span>
+            <span class="hljs-attribute">wsoap:mepDefault</span>=<span class="hljs-value">"http://www.w3.org/2003/05/soap/mep/request-response"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">operation</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"tns:Get"</span> /&gt;</span>
+   <span class="hljs-tag">&lt;/<span class="hljs-title">binding</span>&gt;</span>
+
+   <span class="hljs-comment">&lt;!-- Web Service offering endpoints for both bindings--&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-title">service</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"Service1"</span> <span class="hljs-attribute">interface</span>=<span class="hljs-value">"tns:Interface1"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">endpoint</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"HttpEndpoint"</span> 
+                <span class="hljs-attribute">binding</span>=<span class="hljs-value">"tns:HttpBinding"</span> 
+                <span class="hljs-attribute">address</span>=<span class="hljs-value">"http://www.example.com/rest/"</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">endpoint</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"SoapEndpoint"</span> 
+                <span class="hljs-attribute">binding</span>=<span class="hljs-value">"tns:SoapBinding"</span> 
+                <span class="hljs-attribute">address</span>=<span class="hljs-value">"http://www.example.com/soap/"</span>/&gt;</span>
+   <span class="hljs-tag">&lt;/<span class="hljs-title">service</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">description</span>&gt;</span></code></pre>
+
+
+
+<h3 id="microsoft-net-remoting">Microsoft .NET Remoting</h3>
+
+<p>从微软的产品角度来看，可以说 .NET Remoting 就是 DCOM 的一种升级，它改善了很多功能，并极好的融合到 .NET 平台下。Microsoft .NET Remoting 提供了一种允许对象通过应用程序域与另一对象进行交互的框架。</p>
+
+<p>.NET Remoting 提供了一种允许对象通过应用程序域与另一对象进行交互的框架。这种框架提供了多种服务，包括激活和生存期支持，以及负责与远程应用程序进行消息传输的通讯通道。格式化程序用于在消息通过通道传输之前，对其进行编码和解码。应用程序可以在注重性能的场合使用二进制编码，在需要与其他远程处理框架进行交互的场合使用 XML 编码。在从一个应用程序域向另一个应用程序域传输消息时，所有的 XML 编码都使用 SOAP 协议。出于安全性方面的考虑，远程处理提供了大量挂钩，使得在消息流通过通道进行传输之前，安全接收器能够访问消息和序列化流</p>
+
+
+
+<h4 id="net-remoting-对象">.NET Remoting 对象</h4>
+
+<p>有三类对象可以配置为 .NET Remoting 对象。您可以根据应用程序的需要来选择对象类型：</p>
+
+<ul>
+<li>Single Call（单一调用对象）： <br>
+Single Call 能且只能为一个请求提供服务。在需要对象完成的工作量有限的情况下 Single Call 非常有用。Single Call 对象通常不要求存储状态信息，并且不能在方法调用之间保留状态信息。但是，Single Call对象可以配置为负载平衡模式。</li>
+<li>Singleton Objects（单一元素对象）： <br>
+Singleton Objects 可以为多个客户端提供服务，因此可以通过保存客户端调用的状态信息来实现数据共享。当客户端之间需要明确地共享数据，并且不能忽略创建和维护对象的开销时，这类对象非常有用。</li>
+<li>Client-Activated Objects (CAO，客户端激活的对象)： <br>
+CAO 是服务器端的对象，将根据来自客户端的请求激活这些对象。这种激活服务器对象的方法与传统的 COM coclass 激活方法非常相似。当客户端使用“new”运算符提交对服务器对象的请求时，会向远程应用程序发送一个激活请求消息。随后，服务器创建被请求类的实例，并向调用它的客户端应用程序返回 ObjRef。然后，使用此 ObjRef 在客户端上创建代理。客户端的方法调用将在代理上执行。客户端激活的对象可以为特定的客户端（不能跨越不同的客户端对象）保存方法调用之间的状态信息。每个“new”调用都会向服务器类型的独立实例返回代理。</li>
+</ul>
+
+<p>在 .NET Remoting 中，可以通过以下方式在应用程序之间传递对象：</p>
+
+<ul>
+<li>作为方法调用中的参数，例如：<code>public int myRemoteMethod (MyRemoteObject myObj)</code></li>
+<li>方法调用的返回值,例如：<code>public MyRemoteObject myRemoteMethod(String myString)</code></li>
+<li>访问 .NET 组件的属性或字段得到的值,例如：<code>myObj.myNestedObject</code></li>
+</ul>
+
+<p>对于 Marshal By Value (MBV,按值封送)的对象，当它在应用程序之间传递时，将创建一个完整的副本。</p>
+
+<p>对于 Marshal By Reference (MBR，按引用封送)的对象，当它在应用程序之间传递时，将创建该对象的引用。当对象引用 (ObjRef) 到达远程应用程序后，将转变成“代理”返回给原始对象。 <br>
+　　 <br>
+下面是一个简单 .NET Remoting 服务器对象的代码示例：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs"><span class="hljs-keyword">using</span> System;
+<span class="hljs-keyword">using</span> System.Runtime.Remoting;
+namespace myRemoteService
+{
+    <span class="hljs-comment">// Well Known Web Service object</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> myRemoteObject : MarshalByRefObject
+    {
+        <span class="hljs-comment">// Method myRemoteMethod</span>
+        <span class="hljs-keyword">public</span> String <span class="hljs-title">myRemoteMethod</span>(String s) 
+        {
+         <span class="hljs-keyword">return</span> <span class="hljs-string">"Hello World"</span>;
+        }
+    }
+}</code></pre>
+
+<p>下面是客户端代码来访问这个对象：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs"><span class="hljs-keyword">using</span> System;
+<span class="hljs-keyword">using</span> System.Runtime.Remoting;
+<span class="hljs-keyword">using</span> System.Runtime.Remoting.Channels;
+<span class="hljs-keyword">using</span> System.Runtime.Remoting.Channels.Http;
+<span class="hljs-keyword">using</span> myRemoteService;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> Client
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">Main</span>(<span class="hljs-keyword">string</span>[] args)
+    {
+        ChannelServices.RegisterChannel(<span class="hljs-keyword">new</span> HttpChannel());
+      <span class="hljs-comment">// Create an instance of a myRemoteObject class </span>
+   myRemoteObject myObj = ( myRemoteObject)Activator.GetObject(<span class="hljs-keyword">typeof</span>(myRemoteObject),
+            <span class="hljs-string">"http://myHost:7021/host/myRemoteObject.soap"</span>);
+      myObj. myRemoteMethod (<span class="hljs-string">"Hello World"</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+}</code></pre>
+
+
+
+<h4 id="租用生存期">租用生存期</h4>
+
+<p>对于那些具有在应用程序之外传送的对象引用的对象，将创建一个租用。租用具有一个租用时间。如果租用时间为 0，则租用过期，对象就断开与 .NET Romoting 框架的连接。一旦 AppDomain 中的所有对象引用都被释放，则下次垃圾回收时，该对象将被回收。租用控制了对象的生存期。</p>
+
+<p>对象有默认的租用阶段。当客户端要在同一服务器对象中维护状态时，可以通过许多方法扩展租用阶段，使对象继续生存:</p>
+
+<ul>
+<li>服务器对象可以将其租用时间设置为无限，这样 Remoting 在垃圾回收时就不会回收此对象。</li>
+<li>客户端可以调用 <code>RemotingServices.GetLifetimeService</code> 方法，从 AppDomain 的租用管理器获取服务器对象的租用。然后，客户端可以通过 Lease 对象调用 Lease.Renew 方法以延长租用。</li>
+<li>客户端可用 AppDomain 的租用管理器为特定的租用注册负责人。当 Remoting 对象的租用过期时，租用管理器将通知负责人提出续租的申请。</li>
+<li>如果设置了 <code>ILease::RenewOnCallTime</code> 属性，则每次调用 Remoting 对象时，都会用 RenewOnCallTime 属性指定的总时间更新租用。</li>
+</ul>
+
+
+
+<h4 id="集成-net-remoting-对象">集成 .NET Remoting 对象</h4>
+
+<p>.NET Remoting 对象可以集成在：</p>
+
+<ul>
+<li>托管可执行项: <br>
+.NET Remoting 对象可以集成在任何常规的 .NET EXE 或托管服务中。</li>
+<li>.NET 组件服务: <br>
+.NET Remoting 对象可以集成在 .NET 组件服务基础结构中，以便利用各种 COM+ 服务，例如：事务、JIT 和对象池等。</li>
+<li>IIS : .NET Remoting 对象可以集成在 Internet Information Server (IIS) 中。默认情况下，集成在 IIS 中的 Remoting 对象通过 HTTP 通道接收消息。要在 IIS 中集成 Remoting 对象，必须创建一个虚拟的根，并将 remoting.config 文件复制到其中。包含 Remoting 对象的可执行文件或 DLL 应放在 IIS 根指向的目录下的 bin 目录中。需要注意的是，IIS 根名称应该与配置文件中指定的应用程序名称相同。当第一个消息到达应用程序时，Remoting 配置文件会自动加载。使用这种方法，可以提供 .NET Remoting 对象作为 Web 服务。</li>
+</ul>
+
+<p>下面是一个 Remoting.cfg 文件的例子：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">configuration</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">system.runtime.remoting</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">application</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"RemotingHello"</span>&gt;</span>
+
+      <span class="hljs-tag">&lt;<span class="hljs-title">service</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">wellknown</span> <span class="hljs-attribute">mode</span>=<span class="hljs-value">"SingleCall"</span> 
+                   <span class="hljs-attribute">type</span>=<span class="hljs-value">"Hello.HelloService, Hello"</span> 
+                   <span class="hljs-attribute">objectUri</span>=<span class="hljs-value">"HelloService.soap"</span> /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">service</span>&gt;</span>
+
+      <span class="hljs-tag">&lt;<span class="hljs-title">channels</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">channel</span> <span class="hljs-attribute">port</span>=<span class="hljs-value">"8000"</span> 
+<span class="hljs-attribute">type</span>=<span class="hljs-value">"System.Runtime.Remoting.Channels.Http.HttpChannel, 
+System.Runtime.Remoting"</span> /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">channels</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;/<span class="hljs-title">application</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">system.runtime.remoting</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">configuration</span>&gt;</span></code></pre>
+
+
+
+<h4 id="通道服务-systemruntimeremotingchannels">通道服务 (System.Runtime.Remoting.Channels)</h4>
+
+<p>.NET 应用程序和 AppDomain 之间使用消息进行通信。.NET 通道服务为这一通信过程提供了基础传输机制。</p>
+
+<p>.NET 框架提供了 HTTP 和 TCP 通道，但是第三方也可以编写并使用自己的通道。默认情况下，HTTP 通道使用 SOAP 进行通信，TCP 通道使用二进制有效负载。</p>
+
+<p>通过使用可以编写到集成混合应用程序中的自定义通道，可以插入通道服务（使用 IChannel）。</p>
+
+<p>下面是一个加载通道服务的例子：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> myRemotingObj
+{
+    HttpChannel httpChannel;
+    TcpChannel tcpChannel;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">myRemotingMethod</span>()
+    {
+        httpChannel =  <span class="hljs-keyword">new</span> HttpChannel();
+        tcpChannel  =  <span class="hljs-keyword">new</span> TcpChannel();
+        ChannelServices.RegisterChannel(httpChannel);
+        <span class="hljs-comment">// Register the HTTP Channel </span>
+        ChannelServices.RegisterChannel(tcpChannel);
+        <span class="hljs-comment">// Register the TCP Channel  </span>
+
+    }
+} </code></pre>
+
+
+
+<h4 id="序列化格式化程序-systemruntimeserializationformatters">序列化格式化程序 (System.Runtime.Serialization.Formatters)</h4>
+
+<p>.NET 序列化格式化程序对 .NET 应用程序和 AppDomain 之间的消息进行编码和解码。在 .NET 运行时中有两个本地格式化程序，分别为二进制 (<code>System.Runtime.Serialization.Formatters.Binary</code>) 和 SOAP (<code>System.Runtime.Serialization.Formatters.Soap</code>)。</p>
+
+<p>通过实现 IRemotingFormatter 接口，并将其插入到上文介绍的通道中，可以插入序列化格式化程序。这样，您可以灵活地选择通道和格式化程序的组合方式，采用最适合应用程序的方案。</p>
+
+<p>例如：您可以采用 HTTP 通道和二进制格式化程序（串行化二进制数据），也可以采用 TCP 通道和 SOAP 格式。</p>
+
+
+
+<h4 id="remoting-上下文">Remoting 上下文</h4>
+
+<p>上下文是一个包含共享公共运行时属性的对象的范围。某些上下文属性的例子是与同步和线程紧密相关的。当 .NET 对象被激活时，运行时将检查当前上下文是否一致，如果不一致，将创建新的上下文。多个对象可以同时在一个上下文中运行，并且一个 AppDomain 中可以有多个上下文。</p>
+
+<p>一个上下文中的对象调用另一个上下文中的对象时，调用将通过上下文代理来执行，并且会受组合的上下文属性的强制策略影响。新对象的上下文通常是基于类的元数据属性选择的。</p>
+
+<p>可以与上下文绑定的类称作上下文绑定类。上下文绑定类可以具有称为上下文属性的专用自定义属性。上下文属性是完全可扩展的，您可以创建这些属性并将它们附加到自己的类中。与上下文绑定的对象是从 <code>System.ContextBoundObject</code> 导出的。</p>
+
+
+
+<h4 id="net-remoting-元数据和配置文件">.NET Remoting 元数据和配置文件</h4>
+
+
+
+<h5 id="元数据">元数据</h5>
+
+<p>.NET 框架使用元数据和程序集来存储有关组件的信息，使得跨语言编程成为可能。.NET Remoting 使用元数据来动态创建代理对象。在客户端创建的代理对象具有与原始类相同的成员。但是，代理对象的实现仅仅将所有请求通过 .NET Remoting 运行时转发给原始对象。序列化格式化程序使用元数据在方法调用和有效负载数据流之间来回转换。</p>
+
+<p>客户端可以通过以下方法获取访问 Remoting 对象所需的元数据信息：</p>
+
+<ul>
+<li>服务器对象的 .NET 程序集 : 服务器对象可以创建元数据程序集，并将其分发给客户端。在编译客户端对象时，客户端对象可以引用这些程序集。在客户端和服务器都是托管组件的封闭环境中，这种方法非常有用。</li>
+<li>Remoting 对象可以提供 WSDL文件，用于说明对象及其方法。所有可以根据 WSDL 文件读取和生成 SOAP 请求的客户端都可以调用此对象，或使用 SOAP 与之通信。使用与 .NET SDK 一同分发的 SOAPSUDS.EXE 工具，.NET Remoting 服务器对象可以生成具有元数据功能的 WSDL 文件。当某个组织希望提供所有客户都能访问和使用的公共服务时，这种方法非常有用。</li>
+<li>.NET 客户可以使用 SOAPSUDS 工具从服务器上下载 XML 架构（在服务器上生成），生成仅包含元数据（没有代码）的源文件或程序集。您可以根据需要将源文件编译到客户端应用程序中。如果多层应用程序中某一层的对象需要访问其他层的 Remoting 对象，则经常使用此方法。</li>
+</ul>
+
+
+
+<h5 id="配置文件">配置文件</h5>
+
+<p>　　 <br>
+配置文件（.config 文件）用于指定给定对象的各种 Remoting 特有信息。通常情况下，每个 AppDomain 都有自己的配置文件。使用配置文件有助于实现位置的透明性。配置文件中指定的详细信息也可以通过编程来完成。使用配置文件的主要好处在于，它将与客户端代码无关的配置信息分离出来，这样在日后更改时仅需要修改配置文件，而不用编辑和重新编译源文件。.NET Remoting 的客户端和服务器对象都使用配置文件。</p>
+
+<p>典型的配置文件包含以下信息及其他信息：</p>
+
+<ul>
+<li>集成应用程序信息</li>
+<li>对象名称</li>
+<li>对象的 URI</li>
+<li>注册的通道（可以同时注册多个通道）</li>
+<li>服务器对象的租用时间信息</li>
+</ul>
+
+<p>下面是一个配置文件示例：</p>
+
+
+
+<pre class="prettyprint"><code class="language-xml hljs "><span class="hljs-tag">&lt;<span class="hljs-title">configuration</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">system.runtime.remoting</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">application</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"HelloNew"</span>&gt;</span>
+
+      <span class="hljs-tag">&lt;<span class="hljs-title">lifetime</span> <span class="hljs-attribute">leaseTime</span>=<span class="hljs-value">"20ms"</span> <span class="hljs-attribute">sponsorshipTimeout</span>=<span class="hljs-value">"20ms"</span> 
+<span class="hljs-attribute">renewOnCallTime</span>=<span class="hljs-value">"20ms"</span> /&gt;</span>  
+
+      <span class="hljs-tag">&lt;<span class="hljs-title">client</span> <span class="hljs-attribute">url</span>=<span class="hljs-value">"http://localhost:8000/RemotingHello"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">wellknown</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"Hello.HelloService, MyHello"</span> 
+      <span class="hljs-attribute">url</span>=<span class="hljs-value">"http://localhost:8000/RemotingHello/HelloService.soap"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">activated</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"Hello.AddService, MyHello"</span>/&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">client</span>&gt;</span>
+
+      <span class="hljs-tag">&lt;<span class="hljs-title">channels</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">channel</span> <span class="hljs-attribute">port</span>=<span class="hljs-value">"8001"</span> 
+      <span class="hljs-attribute">type</span>=<span class="hljs-value">"System.Runtime.Remoting.Channels.Http.HttpChannel, 
+      System.Runtime.Remoting"</span> /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">channels</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;/<span class="hljs-title">application</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">system.runtime.remoting</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">configuration</span>&gt;</span></code></pre>
+
+
+
+<h4 id="net-remoting-方案">.NET Remoting 方案</h4>
+
+<p>了解 .NET Remoting 如何工作之后，让我们来看一下各种方案，分析如何在不同的方案中充分发挥 .NET Remoting 的优势。下表列出了可能的客户端/服务器组合，以及默认情况下采用的底层协议和有效负载。请注意，.NET Remoting 框架是可扩展的，您可以编写自己的通信通道和序列化格式化程序。</p>
+
+<table>
+<thead>
+<tr>
+  <th>客户端</th>
+  <th>服务器</th>
+  <th>有效负载</th>
+  <th>协议</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>.NET 组件</td>
+  <td>.NET 组件</td>
+  <td>SOAP/XML</td>
+  <td>http</td>
+</tr>
+<tr>
+  <td>.NET 组件</td>
+  <td>.NET 组件</td>
+  <td>二进制</td>
+  <td>TCP</td>
+</tr>
+<tr>
+  <td>托管/非托管</td>
+  <td>.NET Web 服务</td>
+  <td>SOAP/XML</td>
+  <td>http</td>
+</tr>
+<tr>
+  <td>.NET 组件</td>
+  <td>非托管的传统 COM 组件</td>
+  <td>NDR（网络数据表示形式）</td>
+  <td>DCOM</td>
+</tr>
+<tr>
+  <td>非托管的传统 COM 组件</td>
+  <td>.NET 组件</td>
+  <td>NDR</td>
+  <td>DCOM</td>
+</tr>
+</tbody></table>
+
+
+
+
+<h5 id="使用-http-soap">使用 HTTP-SOAP</h5>
+
+<p>Web 服务是可以通过 URL 寻址的资源，并通过编程向需要使用这些资源的客户端返回信息。客户端使用 Web Services 时不必考虑其实现细节。Web Services 使用称为“合约”的严格定义的接口，此接口采用 Web 服务说明语言 (WSDL) 文件描述。</p>
+
+<p>.NET Remoting 对象可以集成在 IIS 中，作为 Web 服务提供。任何可以使用 WSDL 文件的客户端都可以按照 WSDL 文件中指定的合约，对 Remoting 对象执行 SOAP 调用。IIS 使用 ISAPI 扩展将这些请求路由到相应的对象。这样，Remoting 对象就可以作为 Web 服务对象来使用，从而充分发挥 .NET 框架基础结构的作用。如果您希望不同平台/环境的程序均能够访问对象，可以采用这种配置。这种配置便于客户端通过防火墙访问您的 .NET 对象。</p>
+
+<p><img src="http://waylau.com/images/post/20160630-remoting-http-soap.gif" alt="图10 .NET 使用 HTTP-SOAP" title=""></p>
+
+<p>图10 .NET 使用 HTTP-SOAP</p>
+
+
+
+<h5 id="使用-soap-http-通道">使用 SOAP-HTTP 通道</h5>
+
+<p>默认情况下，HTTP 通道使用 SOAP 格式化程序。因此，如果客户端需要通过 Internet 访问对象，可以使用 HTTP 通道。因为这种方法使用 HTTP，所以此配置允许通过防火墙远程访问 .NET 对象。只需要按前一节中介绍的方法将这些对象集成在 IIS 中，即可将它配置为 Web 服务对象。随后，客户端就可以读取这些对象的 WSDL 文件，使用 SOAP 与 Remoting 对象通信。</p>
+
+
+
+<h5 id="使用-tcp-通道">使用 TCP 通道</h5>
+
+<p>默认情况下，TCP 通道使用二进制格式化程序。此格式化程序以二进制格式对数据进行序列化，并使用原始 socket 在网络中传送数据。如果对象部署在受防火墙保护的封闭环境中，此方法是理想的选择。这种方法使用 socket 在对象之间传递二进制数据，因此性能极佳。由于它使用 TCP 通道来提供对象，因此在封闭环境中具有低开销的优点。由于防火墙和配置的问题，此方法不宜在 Internet 上使用。</p>
+
+<p><img src="http://waylau.com/images/post/20160630-remoting-tcp-channel.gif" alt="图11 .NET 使用 TCP 通道" title=""></p>
+
+<p>图11 .NET 使用 TCP 通道</p>
+
+
+
+<h5 id="使用非托管的-com-组件">使用非托管的 COM 组件</h5>
+
+<p>可以通过 COM Interop Service 调用非托管的传统 COM 组件。当 .NET Remoting 客户端对象创建 COM 对象的实例时，该对象通过运行时可调用包装程序 (RCW) 来提供。其中，RCW 担当真正的非托管对象的代理。对于 .NET 客户，这些包装程序看起来和 .NET 客户端的任何其他托管类一样。但实际上，它们仅仅是托管 (.NET) 和非托管 (COM) 代码之间的封送调用。</p>
+
+<p>同样地，您可以将 .NET Remoting 服务器对象提供给传统 COM 客户端。当 COM 客户端创建 .NET 对象的实例时，该对象通过 COM 可调用包装程序 (CCW) 来提供。其中，CCW 担当真正的托管对象的代理。 <br>
+　　 <br>
+这两种方案都使用 DCOM 通信。如果环境中既有传统的 COM 组件，又有 .NET 组件，那么这种互操作性将为您提供便利。 <br>
+　　</p>
+
+
+
+<h4 id="总结">总结</h4>
+
+<p>Microsoft .NET 框架提供了强大、可扩展、独立于语言的框架，适合开发可靠、可伸缩的分布式系统。.NET Romoting 框架提供了根据系统需求进行远程交互的强大手段。.NET Remoting 实现了与 Web 服务的无缝集成，并提供了一种方法，可以提供 .NET 对象以供跨平台访问。</p>
+
+
+
+<h3 id="java-中的-xml-web-services">Java 中的 XML Web Services</h3>
+
+<p>Java RMI 与远程对象进行交互，其实现是需要基于 Java 的模型。此外,它没有使用 Web Services 和基于 HTTP 的消息传递。现在，已经出现了大量的软件来支持基于 Java 的 Web Services。JAX-WS (Java API for XML Web Services) 就是作为 Web Services 消息息和远程过程调用的规范。它允许一个调用基于Java的web服务使用Java RMI(即。,相对透明的程序员)。JAX-WS 的一个目标是平台互操作性。其 API 使用 SOAP 和WSDL。双方不需要 Java 环境。</p>
+
+
+
+<h4 id="创建一个-rpc-端点">创建一个 RPC 端点</h4>
+
+<p>在服务器端,进行下面的步骤来创建一个 RPC 端点:</p>
+
+<ul>
+<li>定义一个接口(Java接口)；</li>
+<li>实现服务；</li>
+<li>创建一个发布者,用于创建服务的实例，并发布一个服务名字。</li>
+</ul>
+
+<p>在客户端:</p>
+
+<ul>
+<li>创建一个代理(客户端存根)。wsimport 命令根据 WSDL 文档,创建一个客户机存根；</li>
+<li>编写一个客户端，通过代理创建远程服务的一个实例(存根),调用它的方法。</li>
+</ul>
+
+<p>JAX-RPC 执行流程如下:</p>
+
+<ul>
+<li>Java 客户机调用存根上的方法(代理)；</li>
+<li>存根调用适当的 Web 服务；</li>
+<li>Web 服务器被调用并指导 JAX-WS 框架；</li>
+<li>框架调用实现；</li>
+<li>实现返回结果给该框架；</li>
+<li>该框架将结果返回给 Web 服务器；</li>
+<li>服务器将结果发送给客户端存根；</li>
+<li>客户端存根返回信息给调用者；</li>
+</ul>
+
+<p><img src="http://waylau.com/images/post/20160630-rpc-jax-ws_flow.png" alt="图12 JAX-WS 调用流程" title=""></p>
+
+<p>图12 JAX-WS 调用流程</p>
+
+
+
+<h3 id="超越-soap">超越 SOAP</h3>
+
+<p>SOAP 虽然仍然是广泛部署应用，但在许多环境中很多厂商已经抛弃了 SOAP，转而使用其他更轻量、更容易理解、或者与 Web 交互模型更干净的机制。例如,Google 的 API 在2006年后就不再支持 SOAP 接口，而是使用AJAX、XML-RPC 和 REST 作为替代。一个匿名的微软员工批评 SOAP 过于复杂，因为“我们希望我们的工具来阅读它,而不是人”。不管上述言论是否准确，有一点是可以肯定的，SOAP 显然是一个复杂和高度冗长的格式。</p>
+
+
+
+<h4 id="ajax">AJAX</h4>
+
+<p>Web 浏览器最初的设计，是为 Web 页面提供非动态的交互模型。Web 浏览器是建立在同步的请求-响应(request-response)的交互模型。发送一个请求到服务器,服务器返回整个页面。在当时没有更新部分页面的好方法，而唯一可行的方法是利用帧，即将不同的页面加载到每一帧，其实现是笨重的，也有很大的限制性。而改变了这一切的关键因素是：</p>
+
+<ul>
+<li>文档对象模型（Document Object Model）和 JavaScript 的出现,使得可以以编程方式来更改 Web 页面的各个部分；</li>
+<li>AJAX 提供了与服务器以非阻塞方式进行交互，即允许底层 JavaScript 在等待服务器结果时，用户仍然可以与页面进行交互。</li>
+</ul>
+
+<p>AJAX 全称是 Asynchronous JavaScript And XML（异步的 JavaScript 和 XML）。让我们看看这些三项:</p>
+
+<ul>
+<li>它是异步的,因为客户端等待服务器结果不会被阻塞；</li>
+<li>AJAX 集成到了 JavaScript，作为浏览器解释 Web 页面的一部分。JavaScript 使用 HTTPRequest 来调用 AJAX 请求。JavaScript 也可能修改文档对象模型，定义了页面的样子；</li>
+<li>数据以 XML 文档形式发送和接收。（在后期发展中，AJAX 也支持其他的数据格式，比如 JSON）</li>
+</ul>
+
+<p>AJAX 在推动 Web 2.0 的过程中发挥了重要的，比如产生了很多高度交互的服务,如Google Maps、Writely等。基本上,它允许 JavaScript 发出HTTP 请求，获取和处理结果，刷新局部页面元素而不是整个页面。在大多数浏览器请求的格式如下:</p>
+
+
+
+<pre class="prettyprint"><code class="language-javascript hljs "><span class="hljs-keyword">new</span> XMLHttpRequest()
+xmlhttp.open(“HEAD”, “index.html”, <span class="hljs-literal">true</span>)Tell object:</code></pre>
+
+
+
+<h3 id="rest">REST</h3>
+
+<p>SOAP 在创建自己的消息传递协议时是基于HTTP，但实际上 REST (REpresentational State Transfer) 的方式才是保持 Web 的原理和使用 HTTP 协议的核心部分。</p>
+
+<p>原始的 HTTP 协议已经定义了四个命令，清晰地映射到各种数据(定义为“资源”)操作:</p>
+
+<ul>
+<li>PUT (插入)</li>
+<li>GET (选择)</li>
+<li>POST (更新)</li>
+<li>DELETE (删除)</li>
+</ul>
+
+<p>REST 其背后的理念是使用这些 HTTP 命令来请求和操作数据。作为 HTTP协议的一部分，REST 使用 URL 来引用对象和操作。考虑这个 HTTP 操作列表的例子:</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs avrasm">HTTP GET //www<span class="hljs-preprocessor">.waylau</span><span class="hljs-preprocessor">.com</span>/parts</code></pre>
+
+<p>这个命令将返回一个 XML 文档,其中包含部分的列表。注意,返回的不是一个网页,只是一个包含所请求的数据 XML 数据结构。</p>
+
+
+
+<pre class="prettyprint"><code class="language-xml hljs "><span class="hljs-pi">&lt;?xml version="1.0"?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p:Parts</span> <span class="hljs-attribute">xmlns:p</span>=<span class="hljs-value">"http://www.waylau.com"</span> 
+         <span class="hljs-attribute">xmlns:xlink</span>=<span class="hljs-value">"http://www.w3.org/1999/xlink"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">Part</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"00345"</span> <span class="hljs-attribute">xlink:href</span>=<span class="hljs-value">"http://www.waylau.com/parts/00345"</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">Part</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"00346"</span> <span class="hljs-attribute">xlink:href</span>=<span class="hljs-value">"http://www.waylau.com/parts/00346"</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">Part</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"00347"</span> <span class="hljs-attribute">xlink:href</span>=<span class="hljs-value">"http://www.waylau.com/parts/00347"</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">Part</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"00348"</span> <span class="hljs-attribute">xlink:href</span>=<span class="hljs-value">"http://www.waylau.com/parts/00348"</span>/&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">p:Parts</span>&gt;</span></code></pre>
+
+<p>要特定部分的详细信息,发送一个HTTP get 命令:</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs avrasm">HTTP GET //www<span class="hljs-preprocessor">.waylau</span><span class="hljs-preprocessor">.com</span>/parts/<span class="hljs-number">00345</span></code></pre>
+
+<p>这将返回一个特定的信息部分:</p>
+
+
+
+<pre class="prettyprint"><code class="language-xml hljs "><span class="hljs-pi">&lt;?xml version="1.0"?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">p:Part</span> <span class="hljs-attribute">xmlns:p</span>=<span class="hljs-value">"http://www.waylau.com"</span>   
+        <span class="hljs-attribute">xmlns:xlink</span>=<span class="hljs-value">"http://www.w3.org/1999/xlink"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">Part-ID</span>&gt;</span>00345<span class="hljs-tag">&lt;/<span class="hljs-title">Part-ID</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">Name</span>&gt;</span>Widget-A<span class="hljs-tag">&lt;/<span class="hljs-title">Name</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">Description</span>&gt;</span>This part is used within the frap assembly<span class="hljs-tag">&lt;/<span class="hljs-title">Description</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">Specification</span> <span class="hljs-attribute">xlink:href</span>=<span class="hljs-value">"http://www.waylau.com/parts/00345/specification"</span>/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">UnitCost</span> <span class="hljs-attribute">currency</span>=<span class="hljs-value">"USD"</span>&gt;</span>0.10<span class="hljs-tag">&lt;/<span class="hljs-title">UnitCost</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">Quantity</span>&gt;</span>10<span class="hljs-tag">&lt;/<span class="hljs-title">Quantity</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">p:Part</span>&gt;</span></code></pre>
+
+<p>注意，上面例子简化了 partid 作为 URL 的参数。例如：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs avrasm">HTTP GET //www<span class="hljs-preprocessor">.waylau</span><span class="hljs-preprocessor">.com</span>/parts?partid=<span class="hljs-number">00345</span></code></pre>
+
+<p>REST 不是 RPC，但也有类似的请求-响应模式。制定透明度请求、封送数据、解析响应这些不属于 REST。REST 应用非常广泛，如 Yahoo! Search API、Ruby on Rails、Twiter 和 Open Zing Services 等。</p>
+
+
+
+<h3 id="google-protocol-buffers封送处理">Google Protocol Buffers:封送处理</h3>
+
+<p>有些时候，不仅仅是为了 RPC 和 Web Services 的需要，程序员只是想简化对网络上的数据的封送编组和解封的操作。Google Protocol Buffers 就是为序列化结构化数据提供了一种有效的机制，使它容易对网络上的数据进行编码和解码。Protocol Buffers 是一个紧凑的二进制格式比 XML 更简单、体积更小、速度更快。他们是独立于语言的，只定义数据类型。每个消息是对数据名称、类型和值的结构化集合。消息结构定义在一个高级别的格式，类似于许多接口定义语言。然后文件可以根据你选择的语言来编译转换成与该语言相应的格式。Protocol Buffers 在 Google 中广泛使用。目前已经有超过48000种不同的消息类型定义。Protocol Buffers 可以被运用在类 RPC 消息传递以及持久性存储(将数据转换成标准的串行形式写入到一个文件中）。下面是一个定义 Protocol Buffers 的例子:</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs vala">message Person {
+  required <span class="hljs-keyword">string</span> name = <span class="hljs-number">1</span>;
+  required <span class="hljs-keyword">int32</span> id = <span class="hljs-number">2</span>;
+  optional <span class="hljs-keyword">string</span> email = <span class="hljs-number">3</span>;
+
+  <span class="hljs-keyword">enum</span> PhoneType {
+   <span class="hljs-constant"> MOBILE </span>= <span class="hljs-number">0</span>;
+   <span class="hljs-constant"> HOME </span>= <span class="hljs-number">1</span>;
+   <span class="hljs-constant"> WORK </span>= <span class="hljs-number">2</span>;
+  }
+
+  message PhoneNumber {
+    required <span class="hljs-keyword">string</span> number = <span class="hljs-number">1</span>;
+    optional PhoneType type = <span class="hljs-number">2</span> [<span class="hljs-keyword">default</span> = HOME];
+  }
+
+  repeated PhoneNumber phone = <span class="hljs-number">4</span>;
+}</code></pre>
+
+<p>请注意，这只定义了数据结构，而不是功能。使用这个结构的例子是:</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs avrasm">Person person<span class="hljs-comment">;</span>
+person<span class="hljs-preprocessor">.set</span>_name(<span class="hljs-string">"John Doe"</span>)<span class="hljs-comment">;</span>
+person<span class="hljs-preprocessor">.set</span>_id(<span class="hljs-number">1234</span>)<span class="hljs-comment">;</span>
+person<span class="hljs-preprocessor">.set</span>_email(<span class="hljs-string">"jdoe@example.com"</span>)<span class="hljs-comment">;</span>
+fstream output(<span class="hljs-string">"myfile"</span>, ios::<span class="hljs-keyword">out</span> | ios::binary)<span class="hljs-comment">;</span>
+person<span class="hljs-preprocessor">.SerializeToOstream</span>(&amp;output)<span class="hljs-comment">;</span></code></pre>
+
+<p>即使与紧凑的 XML 版本相比，Protocol Buffers 在时间和空间方面，解析将更加有效。下面是两者的对比.</p>
+
+<p>这个是 XML 格式：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">person</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">name</span>&gt;</span>John Doe<span class="hljs-tag">&lt;/<span class="hljs-title">name</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">email</span>&gt;</span>jdoe@example.com<span class="hljs-tag">&lt;/<span class="hljs-title">email</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">person</span>&gt;</span></code></pre>
+
+<p>这个没有编译的 Protocol Buffers 格式:</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs css"><span class="hljs-tag">person</span> <span class="hljs-rules">{
+   <span class="hljs-rule"><span class="hljs-attribute">name</span>:<span class="hljs-value"> <span class="hljs-string">"John Doe"</span>
+   email: <span class="hljs-string">"jdoe@example.com"</span>
+</span></span></span>}</code></pre>
+
+<p>Protocol Buffers 产生的二进制消息大约是28字节长，解析耗时大概需要100-200ns。相比之下,XML 版本需要69个字节长(是 Protocol Buffers 的 2.5倍),耗时是5000-10000ns(是 Protocol Buffers 的 50倍)。</p>
+
+
+
+<h3 id="json">JSON</h3>
+
+<p>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。它基于 ECMAScript 的一个子集。JSON 采用完全独立于语言的文本格式，但是也使用了类似于 C 语言家族的习惯（包括C、C++、C#、Java、JavaScript、Perl、Python 等）。这些特性使 JSON 成为理想的数据交换语言。易于人阅读和编写，同时也易于机器解析和生成。JSON 不是一个诸如 Google Protocol Buffers 的二进制格式，因此适合使用基于 HTTP的消息传递。JSON 是可以作为 XML 替代品，在远程过程调用中，很多语言都支持 JSON-RPC。记住，这只是一个消息传递格式，JSON 并没有试图提供 RPC 库来支持服务发现、绑定、托管和垃圾收集。</p>
+
+
+
+<h2 id="参考引用">参考引用</h2>
+
+<ul>
+<li><a href="http://www.cs.virginia.edu/~zaher/classes/CS656/birrel.pdf">http://www.cs.virginia.edu/~zaher/classes/CS656/birrel.pdf</a></li>
+<li><a href="https://www.cs.rutgers.edu/~pxk/417/notes/03-rpc.html">https://www.cs.rutgers.edu/~pxk/417/notes/03-rpc.html</a></li>
+<li><a href="http://queue.acm.org/detail.cfm?id=1142044">http://queue.acm.org/detail.cfm?id=1142044</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Web_Services_Description_Language">https://en.wikipedia.org/wiki/Web_Services_Description_Language</a></li>
+<li><a href="https://msdn.microsoft.com/en-us/library/ms973864.aspx">https://msdn.microsoft.com/en-us/library/ms973864.aspx</a></li>
+<li><a href="https://msdn.microsoft.com/en-us/library/bb985129.aspx">https://msdn.microsoft.com/en-us/library/bb985129.aspx</a></li>
+</ul></div>
+        <script  type="text/javascript">
+            $(function () {
+                $('pre.prettyprint code').each(function () {
+                    var lines = $(this).text().split('\n').length;
+                    var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+                    $(this).addClass('has-numbering').parent().append($numbering);
+                    for (i = 1; i <= lines; i++) {
+                        $numbering.append($('<li/>').text(i));
+                    };
+                    $numbering.fadeIn(1700);
+                });
+            });
+        </script>
+   
+</div>
+
+
+
+
+<!-- Baidu Button BEGIN -->
+
+
+
+
+<div class="bdsharebuttonbox tracking-ad" style="float: right;" data-mod="popu_172">
+<a href="#" class="bds_more" data-cmd="more" style="background-position:0 0 !important; background-image: url(http://bdimg.share.baidu.com/static/api/img/share/icons_0_16.png?v=d754dcc0.png) !important"></a>
+<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"  style="background-position:0 -52px !important"></a>
+<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"style="background-position:0 -104px !important"></a>
+<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"style="background-position:0 -260px !important"></a>
+<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"style="background-position:0 -208px !important"></a>
+<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"style="background-position:0 -1612px !important" ></a>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<!-- Baidu Button END -->
+
+   
+
+    
+<!--172.16.140.11-->
+
+<!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=1536434" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->
+
+<script type="text/javascript">
+    var fromjs = $("#fromjs");
+    if (fromjs.length > 0) {
+            $("#fromjs .markdown_views pre").addClass("prettyprint");
+            prettyPrint();
+
+            $('pre.prettyprint code').each(function () {
+                var lines = $(this).text().split('\n').length;
+                var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+                $(this).addClass('has-numbering').parent().append($numbering);
+                for (i = 1; i <= lines; i++) {
+                    $numbering.append($('<li/>').text(i));
+                };
+                $numbering.fadeIn(1700);
+            });
+
+            $('.pre-numbering li').css("color", "#999");
+        }
+
+    
+    $(".markdown_views a[target!='_blank']").attr("target", "_blank");
+
+    $(".toc a[target='_blank']").attr("target", "");
+
+
+
+</script>
+
+ 
+
+
+        <div id="digg" ArticleId="51874354" >
+            <dl id="btnDigg" class="digg digg_disable"  onclick="btndigga();">
+               
+                 <dt>顶</dt>
+                <dd>0</dd>
+            </dl>
+           
+              
+            <dl id="btnBury" class="digg digg_disable"  onclick="btnburya();">
+              
+                  <dt>踩</dt>
+                <dd>0</dd>               
+            </dl>
+            
+        </div>
+     <div class="tracking-ad" data-mod="popu_222"><a href="javascript:void(0);" >&nbsp;</a>   </div>
+    <div class="tracking-ad" data-mod="popu_223"> <a href="javascript:void(0);" >&nbsp;</a></div>
+    <script type="text/javascript">
+                function btndigga() {
+                    $(".tracking-ad[data-mod='popu_222'] a").click();
+                }
+                function btnburya() {
+                    $(".tracking-ad[data-mod='popu_223'] a").click();
+                }
+            </script>
+
+   <ul class="article_next_prev">
+                <li class="prev_article"><span  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian']);location.href='/kkkloveyou/article/details/51541839';">上一篇</span><a href="/kkkloveyou/article/details/51541839" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian'])">在浏览器里启用混合内容</a></li>
+                <li class="next_article"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian']);location.href='/kkkloveyou/article/details/52348883';">下一篇</span><a href="/kkkloveyou/article/details/52348883" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian'])">Apache Hadoop 入门教程</a></li>
+    </ul>
+
+    <div style="clear:both; height:10px;"></div>
+
+
+    <div id="articlecommend"  style="display:none"></div>
+        <div class="similar_article"   >
+                <h4></h4>
+                <div class="similar_c"style="margin:20px 0px 0px 0px">
+                    <div class="similar_c_t">
+                      &nbsp;&nbsp;相关文章推荐
+                    </div>
+                   
+                    <div class="similar_wrap tracking-ad" data-mod="popu_36"  style="max-height:195px;">                       
+                        <ul class="similar_list fl">                          
+                        </ul>
+                          <ul class="similar_list fr">                          
+                        </ul>
+                    </div>
+                </div>
+            </div>    
+      
+</div>
+
+     <div>
+           
+
+         <script type="text/javascript">
+             /*博客内容页下方Banner1-960*90，创建于2016-12-13*/
+             var cpro_id = "u2843955";
+        </script>
+        <script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js"></script>
+    </div>
+
+<div id="suggest"></div>
+         <script  language="javascript" type='text/javascript'>     
+             $(function(){
+                 $.get("/kkkloveyou/svc/GetSuggestContent/51874354",function(data){
+                     $("#suggest").html(data);
+                 });     
+             });             
+         </script>  
+
+
+<style>
+.blog-ass-articl dd {
+color: #369;
+width: 99%; /*修改行*/
+float: left;
+overflow: hidden;
+font: normal normal 12px/23px "SimSun";
+height: 23px;
+margin: 0;
+padding: 0 0 0 10px;
+margin-right: 30px;
+background: url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;
+}
+</style>
+
+ 
+<div id="relate" data-mod="popu_218"  class="tracking-ad">
+        <div class="relate_t">
+            <h3><span>参考知识库</span></h3>
+        </div>
+        <div class="relate_c">
+        </div>
+</div>
+ 
+
+<dl class="blog-ass-articl tracking-ad" id="res-relatived" data-mod="popu_84"  > 
+    <div class="embody embody_b" id="libkeyparent"  style="display:none">
+            <span class="embody_t">更多资料请参考：</span>
+            <div class="embody_c" id="libkey"></div>
+    </div>
+
+
+     <dt><span>猜你在找</span></dt>    
+
+
+   
+
+
+    <div id="adcollegedata" style="display:none"></div>
+
+    <div id="adCollege" style="width: 42%;float: left;"> 
+    </div>  
+
+    
+     <div id="resforAd"  style="width: 42%;float: left;margin-right: 30px;"></div>
+
+     <script src="http://csdnimg.cn/jobreco/job_reco.js" type="text/javascript"></script> 
+     <script type="text/javascript">
+         csdn.position.showEdu({
+             sourceType: "blog",
+             searchType: "detail",
+             searchKey: "51874354",
+                username: "",
+                recordcount: "10",
+                containerId: "adcollegedata" //容器DIV的id。 
+            });
+
+            //setEduLoc();
+
+            //function setEduLoc() {
+            //    var edus = $("#adCollege div dd a");
+            //    if (edus.length == 0) {
+            //        setTimeout(function () {
+            //            setEduLoc();
+            //        }, 500);
+            //    }
+            //    else {
+            //        var eduLoc = "?ref=blog&loc=0";
+            //        $.each(edus, function (index, item) {
+            //            var href = $(this).attr("href") + eduLoc;
+            //            $(this).attr("href", href);
+            //        });
+            //    }
+            //}
+
+
+            setTimeout(function () {
+                var adcolleges = $("#adcollegedata div dd");
+                for (var i = 0; i < adcolleges.length; i++) {
+                    if (i < 5) {
+                        $("#adCollege").append("<dd>" + $(adcolleges[i]).html() + "</dd");
+                    }
+                    else {
+                        $("#resforAd").append("<dd>" + $(adcolleges[i]).html() + "</dd");
+                    }
+                }
+            }, 1500);
+                    
+
+        </script> 
+   
+</dl>
+
+
+
+
+
+    <div id="ad_cen">        
+                <div>
+                                    <div class="J_adv" data-view="true" data-mod="ad_popu_199" data-mtp="43" data-order="114" data-con="ad_content_1843" style="width: 960px; height: 90px;">
+                                             <script type="text/javascript">
+                                                 /*博客内容页下方Banner2-960*90，创建于,2016-11-28*/
+                                                 var cpro_id = "u2831143";
+                                            </script>
+                                            <script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js"></script>
+                                   </div>
+                    </div>
+    </div>  
+
+        <!-- 广告位开始 -->
+        <!-- 广告位结束 -->
+<div class="J_adv" data-view="true" data-mod="ad_popu_72" data-mtp="62" data-order="40" data-con="ad_content_2072">
+                 <script id="popuLayer_js_q" src="http://ads.csdn.net/js/popuLayer.js" defer="defer"  type="text/javascript"></script>
+            <div id="layerd" style="position: fixed;bottom:0px;right:0px;line-height:0px;z-index:1000">
+    	            <div class="J_close layer_close" style="display:;background-color:#efefef;padding:0px;color:#333;font:12px/24px Helvetica,Tahoma,Arial,sans-serif;text-align:right;">关闭</div><!-- 广告占位容器 --><div id="cpro_u2895327"></div></div>
+            <script>  document.getElementById("popuLayer_js_q").onload=function(){      var styObjd=styObj={width:"300px","height":parseInt(250)+28};window.CSDN.Layer.PopuLayer("#layerd",{storageName:"layerd",styleObj:styObjd,total:50,expoire:1000*60});  }</script><!-- 投放代码 --><script type="text/javascript">                /*服务器频道首页置顶Banner960*90，创建于2014-7-3*/    (window.cproArray = window.cproArray || []).push({        id: "u2895327"      });  </script>  <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+     
+</div>
+
+<div class="comment_class">
+    <div id="comment_title" class="panel_head">
+        <span class="see_comment">查看评论</span><a name="comments"></a></div>
+    <div id="comment_list">
+    </div>
+    <div id="comment_bar">
+    </div>
+    <div id="comment_form">
+    </div>
+    <div class="announce">
+        * 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+</div>
+
+<script type="text/javascript">
+    var fileName = '51874354';
+    var commentscount = 0;
+    var islock = false
+</script>
+
+    <div id="ad_bot">
+    </div>
+<div id="report_dialog">
+</div>
+
+<div id="d-top"  style="bottom:60px;">
+
+        <a id="quick-reply" class="btn btn-top q-reply" title="快速回复" style="display:none;">
+            <img src="http://static.blog.csdn.net/images/blog-icon-reply.png" alt="快速回复">
+        </a>    
+    <a id="d-top-a" class="btn btn-top backtop"  style="display: none;" title="返回顶部" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_huidaodingbu'])" style="">         
+         <img src="http://static.blog.csdn.net/images/top.png" alt="TOP">
+    </a>
+</div>
+<script type="text/javascript">
+    $(function ()
+    {
+        $("#ad_frm_0").height("90px");
+        
+        setTimeout(function(){
+            $("#ad_frm_2").height("200px");
+        },1000);    
+    });
+  
+</script>
+<style type="text/css">
+    .tag_list
+    {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #D7CBC1;
+        color: #000000;
+        font-size: 12px;
+        line-height: 20px;
+        list-style: none outside none;
+        margin: 10px 2% 0 1%;
+        padding: 1px;
+    }
+    .tag_list h5
+    {
+        background: none repeat scroll 0 0 #E0DBD3;
+        color: #47381C;
+        font-size: 12px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 5px;
+        margin: 0;
+    }
+    .tag_list h5 a
+    {
+        color: #47381C;
+    }
+    .classify
+    {
+        margin: 10px 0;
+        padding: 4px 12px 8px;
+    }
+    .classify a
+    {
+        margin-right: 20px;
+        white-space: nowrap;
+    }
+</style>
+
+
+<div class="tag_list" style="display:none"></div>
+  <script  type='text/javascript'>     
+      $(function(){
+              setTimeout(function(){
+                  $.get("/kkkloveyou/svc/GetTagContent",function(data){
+                      $(".tag_list").html(data).show();
+                  });     
+              });
+          },500);                       
+ </script> 
+
+
+<div id="pop_win" style="display:none ;position: absolute; z-index: 10000; border: 1px solid rgb(220, 220, 220); top: 222.5px; left: 630px; opacity: 1; background: none 0px 0px repeat scroll rgb(255, 255, 255);">
+    
+</div>
+<div id="popup_mask"></div>
+<style>
+    #popup_mask
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        left: 0px;
+        top: 0px;
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+        display: none;
+    }
+
+</style>
+
+
+
+
+<script type="text/javascript">
+    $(function(){        
+        
+        setTimeout(function(){
+            $(".comment_body:contains('回复')").each(function(index,item){
+                var u=$(this).text().split('：')[0].toString().replace("回复","")
+                var thisComment=$(this);
+                if(u)
+                {
+                    $.getJSON("https://passport.csdn.net/get/nick?callback=?", {users: u}, function(a) {
+                        if(a!=null&&a.data!=null&&a.data.length>0)
+                        {
+                            nick=a.data[0].n; 
+                            if(u!=nick)
+                            {
+                                thisComment.text(thisComment.text().replace(u,nick));  
+                            }
+                        }       
+                    });  
+                }
+            });         
+
+        },200);  
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },5000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },10000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },15000);
+        
+        setTimeout(function(){
+            $("a img[src='http://js.tongji.linezing.com/stats.gif']").parent().css({"position":"absolute","left":"50%"});
+        },300);
+    });
+
+    function loginbox(){
+        var $logpop=$("#pop_win");
+        $logpop.html('<iframe src="https://passport.csdn.net/account/loginbox?service=http://static.blog.csdn.net/callback.htm" frameborder="0" height="600" width="400" scrolling="no"></iframe>');
+
+        $('#popup_mask').css({
+            opacity: 0.5,
+            width: $( document ).width() + 'px',
+            height:  $( document ).height() + 'px'
+        });
+        $('#popup_mask').css("display","block");
+ 
+        $logpop.css( {
+            top: ($( window ).height() - $logpop.height())/ 2  + $( window 
+       ).scrollTop() + 'px',
+            left:($( window ).width() - $logpop.width())/ 2
+        } );
+ 
+        setTimeout( function () {
+            $logpop.show();
+            $logpop.css( {
+                opacity: 1
+            } );
+        }, 200 );
+ 
+        $('#popup_mask').unbind("click");
+        $('#popup_mask').bind("click", function(){
+            $('#popup_mask').hide();
+            var $clopop = $("#pop_win");
+            $("#common_ask_div_sc").css("display","none");
+            $clopop.css( {
+                opacity: 0
+            } );
+            setTimeout( function () {
+                $clopop.hide();
+            }, 350 );
+            return false;
+        });
+    }   
+
+    var articletitle='远程过程调用(RPC)详解';
+
+</script>
+
+
+
+
+
+
+
+
+                        <div class="clear">
+                        </div>
+                    </div>                   
+                
+            </div>
+                   
+           <div id="side">
+               
+    <div class="side">
+<div id="panel_Profile" class="panel">
+<ul class="panel_head"><span>个人资料</span></ul>
+<ul class="panel_body profile">
+<div id="blog_userface">
+    <a href="http://my.csdn.net/kkkloveyou" target="_blank">
+    <img src="http://avatar.csdn.net/E/1/F/1_kkkloveyou.jpg" title="访问我的空间" style="max-width:90%"/>
+    </a>
+    <br />
+    <span><a href="http://my.csdn.net/kkkloveyou" class="user_name" target="_blank">kkkloveyou</a></span>
+</div>
+<div class="interact">
+
+    <a href="javascript:void(0);" class="attent" id="span_add_follow" title="[加关注]"></a>
+
+ <a href="javascript:void(0);" class="letter"  title="[发私信]" onclick="window.open('http://msg.csdn.net/letters/model?receiver=kkkloveyou','_blank','height=350,width=700');_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_sixin'])"></a>  
+</div>
+<div id="blog_medal">
+                       <div class="ico_expert"  onclick="javascript:location='http://blog.csdn.net/experts/rule.html'" title="CSDN认证专家" style="cursor:pointer;width:60px;height:60px;background:url('http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/bokezhuanjiamiddle.png') no-repeat" ></div>
+                <div id="bms_box">
+                                            <a  target="_blank">
+                                                    <img src="http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/zhuanlandaren.png" onmouseover="m_over_m(this,2)" onmouseout="m_out_m()" alt="1" >
+                                            </a>
+               </div>
+</div>
+<ul id="blog_rank">
+    <li>访问：<span>470669次</span></li>
+    <li>积分：<span>4967</span> </li>    
+    <li >等级： <span style="position:relative;display:inline-block;z-index:1" >
+            <img src="http://c.csdnimg.cn/jifen/images/xunzhang/jianzhang/blog5.png" alt="" style="vertical-align: middle;" id="leveImg">
+            <div id="smallTittle" style=" position: absolute;  left: -24px;  top: 25px;  text-align: center;  width: 101px;  height: 32px;  background-color: #fff;  line-height: 32px;  border: 2px #DDDDDD solid;  box-shadow: 0px 2px 2px rgba (0,0,0,0.1);  display: none;   z-index: 999;">
+            <div style="left: 42%;  top: -8px;  position: absolute;  width: 0;  height: 0;  border-left: 10px solid transparent;  border-right: 10px solid transparent;  border-bottom: 8px solid #EAEAEA;"></div>
+            积分：4967 </div>
+        </span>  </li>
+    <li>排名：<span>第5103名</span></li>
+</ul>
+<ul id="blog_statistics">
+    <li>原创：<span>101篇</span></li>
+    <li>转载：<span>0篇</span></li>
+    <li>译文：<span>5篇</span></li>
+    <li>评论：<span>184条</span></li>
+</ul>
+</ul>
+</div>
+
+
+<div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body" class="form_search">
+        <form id="frmSearch" action="http://so.csdn.net/search" class="form_search csdn-tracking-statistics" target="_blank"  data-mod="popu_306">
+        <span><input id="inputSearch" type="text" class="blogsearch" title="请输入关键字" /></span>
+        <input id="btnSubmit" type="button" value="搜索" title="search in blog" />
+        <input type="hidden" name="q" id="inputQ" />
+        <input type="hidden" name="t" value="blog" />
+        <a id="btnSearchBlog" target="_blank"></a>
+        </form>
+    </ul>
+</div>
+
+<script type="text/javascript">
+
+   
+    $(function () {
+        $("#btnSubmit").unbind("click");
+        $("#btnSubmit").click(function () {           
+            search();
+        });
+
+        $("#frmSearch").submit(function () {           
+            search();
+            return false;
+        });
+
+        function search()
+        {
+            if ($("#inputSearch").val() == "") {               
+                alert("请录入搜索关键词！");                         
+                return false;
+            }
+            //var url = "http://so.csdn.net/so/search/s.do?q=" + encodeURIComponent($("#inputSearch").val()) + "&u=" + username + "&t=blog";           
+            var url = "https://www.baidu.com/s?wd=" + encodeURIComponent($("#inputSearch").val()) + "%20site%3Ablog.csdn.net"
+            window.location.href = url;
+        }   
+    });
+</script><div id="panel_Category" class="panel">
+    <ul class="panel_head"><span>博客专栏</span></ul>
+    <ul class="panel_body" id="sp_column">
+    <table cellpadding="0" cellspacing="0"><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/jersey-rest.html" target="_blank"><img src="http://img.blog.csdn.net/20160125200402661" style="width:75px;height:75px;" /></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/jersey-rest.html" target="_blank">用 Jersey 构建 RESTful 服务</a>
+    <p>文章：7篇</p>
+    <span>阅读：90447</span>
+    </td>
+    </tr></table>
+    </ul>
+</div><div id="panel_Category" class="panel">
+<ul class="panel_head"><span>文章分类</span></ul>
+<ul class="panel_body">    
+                 <li>
+                    <a href="/kkkloveyou/article/category/838110" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Java</a><span>(34)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/841041" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">java 算法</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/847608" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Java 核心 应用</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/848368" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Java试题</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/860711" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">ActionScript3.0</a><span>(9)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/928425" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Office</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/928432" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">数据</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/949177" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">网络</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/958266" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Flex</a><span>(18)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1094868" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Spring</a><span>(6)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1141550" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Webservice</a><span>(7)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1171113" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">悟</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1184759" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">搜索</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1213808" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">技术</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1288434" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Golang</a><span>(6)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1573677" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Mysql</a><span>(4)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/1654903" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Windows</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2135125" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Hibernate</a><span>(6)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2270791" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">JasperReports</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2300159" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">SVG</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2492673" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">REST</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2697461" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Github</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2801515" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">maven</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2801517" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">tomcat</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/2912119" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Jersey</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/3055451" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">netty</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/3083679" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Mina</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6089794" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Web</a><span>(5)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6092268" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">系统架构设计师</a><span>(0)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6092271" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">架构师</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6100851" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Microservices</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6104733" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Docker</a><span>(4)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6389608" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Hadoop</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6414832" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">HBase</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6422827" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Redis</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6641307" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">持续集成</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6703316" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Linux</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6768077" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Distribute</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/kkkloveyou/article/category/6930850" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">NGINX</a><span>(0)</span>
+                </li>
+</ul>
+</div><div id="panel_Archive" class="panel">
+<ul class="panel_head"><span>文章存档</span></ul>
+<ul class="panel_body">
+<div id="archive_list">
+<!--归档统计-->
+<li><a href="/kkkloveyou/article/month/2017/05">2017年05月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2017/04">2017年04月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2017/03">2017年03月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2017/02">2017年02月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/12">2016年12月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/09">2016年09月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2016/08">2016年08月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/07">2016年07月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/05">2016年05月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/04">2016年04月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2016/03">2016年03月</a><span>(4)</span></li><li><a href="/kkkloveyou/article/month/2016/02">2016年02月</a><span>(8)</span></li><li><a href="/kkkloveyou/article/month/2016/01">2016年01月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2015/04">2015年04月</a><span>(5)</span></li><li><a href="/kkkloveyou/article/month/2015/03">2015年03月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2014/12">2014年12月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2014/11">2014年11月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2014/08">2014年08月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2014/06">2014年06月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2014/05">2014年05月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2014/03">2014年03月</a><span>(8)</span></li><li><a href="/kkkloveyou/article/month/2013/10">2013年10月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/09">2013年09月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/08">2013年08月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/07">2013年07月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/06">2013年06月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2013/05">2013年05月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2013/03">2013年03月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2013/01">2013年01月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2012/12">2012年12月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2012/11">2012年11月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/10">2012年10月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/09">2012年09月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2012/08">2012年08月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/07">2012年07月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/06">2012年06月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/05">2012年05月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2012/03">2012年03月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2012/02">2012年02月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2012/01">2012年01月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2011/12">2011年12月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2011/11">2011年11月</a><span>(3)</span></li><li><a href="/kkkloveyou/article/month/2011/09">2011年09月</a><span>(1)</span></li><li><a href="/kkkloveyou/article/month/2011/08">2011年08月</a><span>(5)</span></li><li><a href="/kkkloveyou/article/month/2011/07">2011年07月</a><span>(10)</span></li><li><a href="/kkkloveyou/article/month/2011/06">2011年06月</a><span>(2)</span></li><li><a href="/kkkloveyou/article/month/2011/05">2011年05月</a><span>(6)</span></li>
+</div>
+</ul>
+</div>
+<div id="hotarticls" class="panel">
+<ul class="panel_head">
+    <span>       
+阅读排行    </span>
+</ul>
+
+<ul class="panel_body itemlist">
+<li>
+<a href="/kkkloveyou/article/details/6724083" title="java多线程编程技术 +代码实例">java多线程编程技术 +代码实例</a><span>(35966)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/44836609" title="如何查看 JAR 包的源代码">如何查看 JAR 包的源代码</a><span>(32603)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21391033" title="用Jersey构建RESTful服务1--HelloWorld">用Jersey构建RESTful服务1--HelloWorld</a><span>(28937)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21517165" title="用Jersey构建RESTful服务4--通过jersey-client客户端调用Jersey的Web服务模拟CURD">用Jersey构建RESTful服务4--通过jersey-client客户端调用Jersey的Web服务模拟CURD</a><span>(26370)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/7870572" title="“笔记本无线网络搜索不到自家信号,却能搜到其他公司的信号”解决方法">“笔记本无线网络搜索不到自家信号,却能搜到其他公司的信号”解决方法</a><span>(20967)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21485243" title="用Jersey构建RESTful服务3--JAVA对象转成JSON输出">用Jersey构建RESTful服务3--JAVA对象转成JSON输出</a><span>(15556)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/6564625" title="java软件开发工程师实习求职常见面试题">java软件开发工程师实习求职常见面试题</a><span>(12731)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/44656325" title="Netty 实现 WebSocket 聊天功能">Netty 实现 WebSocket 聊天功能</a><span>(12369)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/6624070" title="Install error &quot;Exit Code: 6&quot; or &quot;Exit Code: 7&quot; | Creative Adobe Production(安装Adobe产品时出错及解决方案)">Install error &quot;Exit Code: 6&quot; or &quot;Exit Code: 7&quot; | Creative Adobe Production(安装Adobe产品时出错及解决方案)</a><span>(12273)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/51874354" title="远程过程调用(RPC)详解">远程过程调用(RPC)详解</a><span>(11656)</span>
+</li>
+</ul>
+</div>
+<div id="hotarticls2" class="panel">
+<ul class="panel_head"><span>评论排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="/kkkloveyou/article/details/21391033" title="用Jersey构建RESTful服务1--HelloWorld">用Jersey构建RESTful服务1--HelloWorld</a><span>(34)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21517165" title="用Jersey构建RESTful服务4--通过jersey-client客户端调用Jersey的Web服务模拟CURD">用Jersey构建RESTful服务4--通过jersey-client客户端调用Jersey的Web服务模拟CURD</a><span>(26)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/6628871" title="什么是“面向对象编程”？用邓小平理论指导编程思想">什么是“面向对象编程”？用邓小平理论指导编程思想</a><span>(17)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/44836609" title="如何查看 JAR 包的源代码">如何查看 JAR 包的源代码</a><span>(12)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21485243" title="用Jersey构建RESTful服务3--JAVA对象转成JSON输出">用Jersey构建RESTful服务3--JAVA对象转成JSON输出</a><span>(11)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/44656325" title="Netty 实现 WebSocket 聊天功能">Netty 实现 WebSocket 聊天功能</a><span>(8)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/21888283" title="用Jersey构建RESTful服务5--Jersey+MySQL5.6+Hibernate4.3">用Jersey构建RESTful服务5--Jersey+MySQL5.6+Hibernate4.3</a><span>(8)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/50745623" title="Docker 在 CentOS 下的安装、使用">Docker 在 CentOS 下的安装、使用</a><span>(6)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/60493832" title="用大白话聊聊分布式系统">用大白话聊聊分布式系统</a><span>(6)</span>
+</li>
+<li>
+<a href="/kkkloveyou/article/details/6724083" title="java多线程编程技术 +代码实例">java多线程编程技术 +代码实例</a><span>(4)</span>
+</li>
+</ul>
+</div>
+<div id="homepageArticles" class="panel tracking-ad" data-mod="popu_4">
+<ul class="panel_head"><span>推荐文章</span></ul>
+<ul class="panel_body" id="ad_commend">
+<ul>
+<li><a href="http://blog.csdn.net/turingbooks/article/details/72416875" target="_blank">* 5月书讯：流畅的Python，终于等到你！</a></li>
+<li><a href="http://blog.csdn.net/blogdevteam/article/details/72526177" 
+target="_blank">*【新收录】CSDN日报 —— Kotlin 专场</a></li>
+<li><a href="http://blog.csdn.net/jiangwei0910410003/article/details/70483088"target="_blank">* Android中带你开发一款自动爆破签名校验工具kstools</a></li>
+<li><a href="http://blog.csdn.net/javazejian/article/details/71860633" 
+target="_blank">* 深入理解Java注解类型(@Annotation)</a></li>
+<li><a href="http://blog.csdn.net/c406495762/article/details/72597755" 
+target="_blank">* Python3 网络爬虫——这个帅哥、肌肉男横行的世界</a></li>
+<li><a href="http://blog.csdn.net/mindfloating/article/details/72614855" 
+target="_blank">* 从个人习惯到真正的好方法</a></li>
+
+</ul></ul>
+</div>
+
+
+<div id="newcomments" class="panel">
+<ul class="panel_head"><span>最新评论</span></ul>
+<ul class="panel_body itemlist">
+    <li>
+   
+         <a href="/kkkloveyou/article/details/7334309#comments">org.hibernate.MappingException: Unknown entity: com.pkms.entity.User</a>
+    <p style="margin:0px;"><a href="/kkkloveyou" class="user_name">kkkloveyou</a>:
+@CDW2328:没想这么多年前的问题，近期我又遇到。温故而知新啊
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/7334309#comments">org.hibernate.MappingException: Unknown entity: com.pkms.entity.User</a>
+    <p style="margin:0px;"><a href="/CDW2328" class="user_name">CDW2328</a>:
+博主很给力！大赞
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/70164177#comments">分布式系统常见的事务处理机制</a>
+    <p style="margin:0px;"><a href="/daigualu" class="user_name">daigualu</a>:
+感谢分享，学习了。。
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21485243#comments">用Jersey构建RESTful服务3--JAVA对象转成JSON输出</a>
+    <p style="margin:0px;"><a href="/kingDpu" class="user_name">kingDpu</a>:
+@kkkloveyou:谢谢，已经解决了
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/u014308105" class="user_name">u014308105</a>:
+@kkkloveyou:嗯，多谢
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/kkkloveyou" class="user_name">kkkloveyou</a>:
+@u014308105:1. 多个参数可以封装成一个对象来作为一个参数2. 多个参数也可以接收，比如...
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/u014308105" class="user_name">u014308105</a>:
+请问：如果要传递多个参数，也用get方式，该怎么写？
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/kkkloveyou" class="user_name">kkkloveyou</a>:
+@hnn_neil:应该是你的 JDK 版本太低了
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/21391033#comments">用Jersey构建RESTful服务1--HelloWorld</a>
+    <p style="margin:0px;"><a href="/hnn_neil" class="user_name">hnn_neil</a>:
+你好，我按照步骤操作，发布项目时报错：java.lang.UnsupportedClassVersi...
+    </p>
+    </li>
+    <li>
+   
+         <a href="/kkkloveyou/article/details/52348883#comments">Apache Hadoop 入门教程</a>
+    <p style="margin:0px;"><a href="/qq_20579895" class="user_name">qq_20579895</a>:
+羊肉串 羊肉串 。。
+    </p>
+    </li>
+</ul>
+</div>
+    </div>
+    <div class="clear">
+    </div>
+
+
+                   <!-- 广告位开始 -->                    <!-- 广告位结束 -->
+                   <div class="J_adv" data-view="true"  data-mtp="63" data-order="40" data-con="ad_content_1260" style="width: 200px; height: 200px;">
+                         <div id="nav_show_top_stop" style="width: 200px;height: 200px;z-index:1000"><div id="cpro_u2734128"></div></div>
+                   </div>
+    <script type="text/javascript">    
+        setTimeout(function () {
+            var naviga_offsetTop = 0;
+            function naviga_stay_top() { var scrollTop = jQuery(document).scrollTop(); if (scrollTop > naviga_offsetTop) { jQuery("#nav_show_top_stop").css({ "position": "fixed" }); jQuery("#nav_show_top_stop").css({ "top": "0px" }); } else { jQuery("#nav_show_top_stop").css({ "position": "fixed" }); jQuery("#nav_show_top_stop").css({ "top": naviga_offsetTop - scrollTop + "px" }); } }
+            function onload_function() { naviga_offsetTop = jQuery("#nav_show_top_stop").position().top; jQuery(window).bind("scroll", naviga_stay_top); jQuery(window).bind("mousewheel", naviga_stay_top); jQuery(document).bind("scroll", naviga_stay_top); jQuery(document).bind("mousewheel", naviga_stay_top); } jQuery(document).ready(onload_function);
+               
+        }, 200);    
+    </script>
+<script type="text/javascript">(window.cproArray = window.cproArray || []).push({ id: "u2734128" });  </script> 
+                    <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script> 
+
+           </div>   
+
+            <div class="clear">
+            </div>
+        </div>
+
+        
+
+<script type="text/javascript" src="http://c.csdnimg.cn/rabbit/cnick/cnick.js"></script>
+
+
+
+
+
+
+    <script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+<script type="text/javascript">
+    $(function () {
+        function __get_code_toolbar(snippet_id) {
+            return $("<span class='tracking-ad' data-mod='popu_167'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "' target='_blank' title='在CODE上查看代码片'  style='text-indent:0;'><img src='https://code.csdn.net/assets/CODE_ico.png' width=12 height=12 alt='在CODE上查看代码片' style='position:relative;top:1px;left:2px;'/></a></span>"
+                    + "<span class='tracking-ad' data-mod='popu_170'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "/fork' target='_blank' title='派生到我的代码片' style='text-indent:0;'><img src='https://code.csdn.net/assets/ico_fork.svg' width=12 height=12 alt='派生到我的代码片' style='position:relative;top:2px;left:2px;'/></a></span>");
+        }
+        
+        $("[code_snippet_id]").each(function () {
+            __s_id = $(this).attr("code_snippet_id");
+            if (__s_id != null && __s_id != "" && __s_id != 0 && parseInt(__s_id) > 70020) {
+                __code_tool = __get_code_toolbar(__s_id);
+                $(this).prev().find(".tools").append(__code_tool);
+            }
+        });
+
+        $(".bar").show();
+    });
+</script>
+
+
+
+
+
+    </div>
+      <!--new top-->
+    
+
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>  
+
+   
+        <!--new top-->
+   
+    <link href="http://c.csdnimg.cn/comm_ask/css/ask_float_block.css" type="text/css" rel="stylesheet" />
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/wmd.js'></script>
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/showdown.js'></script>
+    
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/apps/ask_float_block.js'></script>
+   
+
+   
+
+
+        <script type="text/javascript" src="http://ads.csdn.net/js/async_new.js"></script>
+       <script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+        <script type="text/javascript" src="http://c.csdnimg.cn/rabbit/search-service/main.js"></script>
+          <script type="text/javascript">
+              //$(function () {
+              //    setTimeout(function () {
+              //        var searchtitletags = articletitle + ',' + $("#tags").html();
+              //        searchService({
+              //            index: 'blog',
+              //            query: searchtitletags,
+              //            from: 5,
+              //            size: 5,
+              //            appendTo: '#res',
+              //            url: 'recommend',
+              //            his: 2,
+              //            client: "blog_cf_enhance",
+              //            tmpl: '<dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;"><a href="#{ url }" title="#{ title }" strategy="#{ strategy }">#{ title }</a></dd>'
+              //        });
+              //    }, 1000);
+              //});
+
+         </script>   
+          <script type="text/javascript">
+              $(function () {
+                  setTimeout(function () {
+                      var searchtitletags = articletitle + ',' + $("#tags").html();
+                      searchService({
+                          index: 'blog',
+                          query: searchtitletags,
+                          from: 0,
+                          size: 5,
+                          appendTo: '#articlecommend',
+                          url: 'recommend',
+                          his: 2,
+                          client: "blog_cf_enhance",
+                          tmpl: '<li><em>•</em><a href="#{ url }" title="#{ title }" strategy="#{ strategy }">#{ title }</a></li>'
+                      });
+
+                      setTimeout(function () {
+                          var articles=$("#articlecommend li");
+                          for (var i = 0; i < articles.length; i++)
+                          {
+                              $(articles[i]).find("a").css("width", "290px");
+                              if (i < 5) {
+                                  $(".similar_list.fl").append("<li>" + $(articles[i]).html() + "</li");
+                              }
+                              else {
+                                  $(".similar_list.fr").append("<li>" + $(articles[i]).html() + "</li");
+                              }
+                          }
+                      }, 2000);                     
+
+                  }, 1000);
+              });
+
+         </script>
+    <script src="http://static.blog.csdn.net/scripts/csdn_blog_detail.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=1070877"></script>
+
+     <script id="csdn-toolbar-id" btnId="header_notice_num" wrapId="note1" count="5" subCount="5" type="text/javascript" src="http://c.csdnimg.cn/public/common/toolbar/js/toolbar.js"></script>
+    
+
+
+  <div id="a52b5334d" style="width: 1px; height: 1px; display: none;">
+                    <script id="adJs52b5334"></script>
+                    <script>document.getElementById("adJs52b5334").src = "http://ads.csdn.net/js/opt/52b5334.js?t=" + Math.random();</script>
+   </div>
+
+    
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/saveToCode.js"></script>
+      <script type="text/javascript" src="//c.csdnimg.cn/rabbit/tracking-ad/main.js?75eacd8"></script>
+        
+     
+
+    
+          
+    <div class="pop_CA_cover"  style="display:none"></div>
+    <div class="pop pop_CA"  style="display:none">
+          <div class="CA_header">
+            收藏助手
+            <span class="cancel_icon"  id="fapancle"  onclick="$('.pop_CA').hide();$('.pop_CA_cover').hide();"></span>
+          </div>
+          <iframe src="" id="fa" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+    </div>
+
+</body>
+</html>   
+ 

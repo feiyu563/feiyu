@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+encoding//app01/DataSQL.py=utf8
+encoding//app01/admin.py=utf8
+encoding//app01/forms/accountform.py=utf8
+encoding//app01/models.py=utf8
+encoding//app01/views.py=utf8
+encoding//django_webdemo/sqlload.py=utf8

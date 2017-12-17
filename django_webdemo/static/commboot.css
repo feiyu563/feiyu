@@ -1,0 +1,20 @@
+.fuzzy{  
+    filter: url(blur.svg#blur);  
+ /* FireFox, Chrome, Opera */  
+    -webkit-filter: blur(3px);  
+ /* Chrome, Opera */  
+    -moz-filter: blur(3px);  
+    -ms-filter: blur(3px);  
+    filter: blur(3px);  
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false);  
+ /* IE6~IE9 */  
+}
+.modal-ground{
+	position:fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background-image:url(./img/bg4.jpg);
+	background-size:cover;
+}

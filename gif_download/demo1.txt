@@ -1,0 +1,1 @@
+图片爬虫，工程文件为demo1，爬取网页http://www.win4000.com/wallpaper_2285_0_0_1.html

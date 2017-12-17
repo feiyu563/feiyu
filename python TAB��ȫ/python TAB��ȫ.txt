@@ -1,0 +1,4 @@
+echo "#for python" >>~/.bashrc 
+echo "export PYTHONSTARTUP=/usr/lib64/python2.7/site-packages/tab.py" >>~/.bashrc
+source .bashrc
+cp tab.py /usr/lib64/python2.7/site-packages

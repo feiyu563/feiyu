@@ -1,0 +1,1394 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python之路【第六篇】：socket - 武沛齐 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=m_FXmwz3wxZoecUwNEK23PAzc-j9vbX_C6MblJ5ouMc1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue.css?v=jJERBFSojhmgst84aaRDal9S3q1WoO-WcNudmMzGJS81"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/133379.css?v=YSNZANkz7eBKoXq2iHYfghvodkY%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue-mobile.css?v=z0BacpCfWeLlXDCM0C158kTP_DMqMbGBapID4f-QztI1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/wupeiqi/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/wupeiqi/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/wupeiqi/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'wupeiqi', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=CPv0EEqm9L2aCgolHxaZfVYM6J-Sn5az_FJXbjzgr-o1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/wupeiqi/">Mr.Seven</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/wupeiqi/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%AD%A6%E6%B2%9B%E9%BD%90">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/wupeiqi/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/wupeiqi/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-126&nbsp;
+文章-137&nbsp;
+评论-259&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/wupeiqi/articles/5040823.html">Python之路【第六篇】：socket</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><h3>Socket</h3>
+<p>socket通常也称作"套接字"，用于描述IP地址和端口，是一个通信链的句柄，应用程序通常通过"套接字"向网络发出请求或者应答网络请求。</p>
+<p>socket起源于Unix，而Unix/Linux基本哲学之一就是&ldquo;一切皆文件&rdquo;，对于文件用【打开】【读写】【关闭】模式来操作。socket就是该模式的一个实现，socket即是一种特殊的文件，一些socket函数就是对其进行的操作（读/写IO、打开、关闭）</p>
+<p>socket和file的区别：</p>
+<ul>
+<li>file模块是针对某个指定文件进行【打开】【读写】【关闭】</li>
+<li>socket模块是针对 服务器端 和 客户端Socket 进行【打开】【读写】【关闭】</li>
+</ul>
+<p>&nbsp;<img style="display: block; margin-left: auto; margin-right: auto;" src="http://images2015.cnblogs.com/blog/425762/201512/425762-20151212160019653-1079393936.png" alt="" /></p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('08958fe9-d6e1-4c50-863d-cdfc0acecc82')"><img id="code_img_closed_08958fe9-d6e1-4c50-863d-cdfc0acecc82" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_08958fe9-d6e1-4c50-863d-cdfc0acecc82" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('08958fe9-d6e1-4c50-863d-cdfc0acecc82',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_08958fe9-d6e1-4c50-863d-cdfc0acecc82" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> socket
+
+ip_port </span>= (<span style="color: #800000;">'</span><span style="color: #800000;">127.0.0.1</span><span style="color: #800000;">'</span>,9999<span style="color: #000000;">)
+
+sk </span>=<span style="color: #000000;"> socket.socket()
+sk.bind(ip_port)
+sk.listen(</span>5<span style="color: #000000;">)
+
+</span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">server waiting...</span><span style="color: #800000;">'</span><span style="color: #000000;">
+    conn,addr </span>=<span style="color: #000000;"> sk.accept()
+
+    client_data </span>= conn.recv(1024<span style="color: #000000;">)
+    </span><span style="color: #0000ff;">print</span><span style="color: #000000;"> client_data
+    conn.sendall(</span><span style="color: #800000;">'</span><span style="color: #800000;">不要回答,不要回答,不要回答</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+    conn.close()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">socket server</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('a5740462-ebbc-4723-b4b2-6cd0f31a5907')"><img id="code_img_closed_a5740462-ebbc-4723-b4b2-6cd0f31a5907" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_a5740462-ebbc-4723-b4b2-6cd0f31a5907" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('a5740462-ebbc-4723-b4b2-6cd0f31a5907',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_a5740462-ebbc-4723-b4b2-6cd0f31a5907" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> socket
+ip_port </span>= (<span style="color: #800000;">'</span><span style="color: #800000;">127.0.0.1</span><span style="color: #800000;">'</span>,9999<span style="color: #000000;">)
+
+sk </span>=<span style="color: #000000;"> socket.socket()
+sk.connect(ip_port)
+
+sk.sendall(</span><span style="color: #800000;">'</span><span style="color: #800000;">请求占领地球</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+server_reply </span>= sk.recv(1024<span style="color: #000000;">)
+</span><span style="color: #0000ff;">print</span><span style="color: #000000;"> server_reply
+
+sk.close()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">socket client</span></div>
+<p>WEB服务应用：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+#coding:utf-8
+import socket
+
+def handle_request(client):
+    buf = client.recv(1024)
+    client.send("HTTP/1.1 200 OK\r\n\r\n")
+    client.send("Hello, World")
+
+def main():
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.bind(('localhost',8080))
+    sock.listen(5)
+
+    while True:
+        connection, address = sock.accept()
+        handle_request(connection)
+        connection.close()
+
+if __name__ == '__main__':
+  main()</pre>
+</div>
+<p><span style="font-size: 18pt;"><strong>更多功能</strong></span></p>
+<p><strong>sk = socket.socket(socket.AF_INET,socket.SOCK_STREAM,0)</strong></p>
+<blockquote>
+<p>参数一：地址簇</p>
+<p>　　socket.AF_INET IPv4（默认）<br />　　socket.AF_INET6 IPv6</p>
+<p>　　socket.AF_UNIX 只能够用于单一的Unix系统进程间通信</p>
+<p>参数二：类型</p>
+<p>　　socket.SOCK_STREAM　　流式socket , for TCP （默认）<br />　　socket.SOCK_DGRAM　　 数据报式socket , for UDP</p>
+<p>　　socket.SOCK_RAW 原始套接字，普通的套接字无法处理ICMP、IGMP等网络报文，而SOCK_RAW可以；其次，SOCK_RAW也可以处理特殊的IPv4报文；此外，利用原始套接字，可以通过IP_HDRINCL套接字选项由用户构造IP头。<br />　　socket.SOCK_RDM 是一种可靠的UDP形式，即保证交付数据报但不保证顺序。SOCK_RAM用来提供对原始协议的低级访问，在需要执行某些特殊操作时使用，如发送ICMP报文。SOCK_RAM通常仅限于高级用户或管理员运行的程序使用。<br />　　socket.SOCK_SEQPACKET 可靠的连续数据包服务</p>
+<p>参数三：协议</p>
+<p>　　0　　（默认）与特定的地址家族相关的协议,如果是 0 ，则系统就会根据地址格式和套接类别,自动选择一个合适的协议</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('e17d8031-2ac4-4787-a482-063aea6ca139')"><img id="code_img_closed_e17d8031-2ac4-4787-a482-063aea6ca139" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_e17d8031-2ac4-4787-a482-063aea6ca139" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('e17d8031-2ac4-4787-a482-063aea6ca139',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_e17d8031-2ac4-4787-a482-063aea6ca139" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> socket
+ip_port </span>= (<span style="color: #800000;">'</span><span style="color: #800000;">127.0.0.1</span><span style="color: #800000;">'</span>,9999<span style="color: #000000;">)
+sk </span>=<span style="color: #000000;"> socket.socket(socket.AF_INET,socket.SOCK_DGRAM,0)
+sk.bind(ip_port)
+
+</span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+    data </span>= sk.recv(1024<span style="color: #000000;">)
+    </span><span style="color: #0000ff;">print</span><span style="color: #000000;"> data
+
+
+
+
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> socket
+ip_port </span>= (<span style="color: #800000;">'</span><span style="color: #800000;">127.0.0.1</span><span style="color: #800000;">'</span>,9999<span style="color: #000000;">)
+
+sk </span>=<span style="color: #000000;"> socket.socket(socket.AF_INET,socket.SOCK_DGRAM,0)
+</span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+    inp </span>= raw_input(<span style="color: #800000;">'</span><span style="color: #800000;">数据：</span><span style="color: #800000;">'</span><span style="color: #000000;">).strip()
+    </span><span style="color: #0000ff;">if</span> inp == <span style="color: #800000;">'</span><span style="color: #800000;">exit</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">break</span><span style="color: #000000;">
+    sk.sendto(inp,ip_port)
+
+sk.close()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">UDP Demo</span></div>
+</blockquote>
+<p><strong>sk.bind(address)</strong></p>
+<p>　　s.bind(address) 将套接字绑定到地址。address地址的格式取决于地址族。在AF_INET下，以元组（host,port）的形式表示地址。</p>
+<p><strong>sk.listen(backlog)</strong></p>
+<p>　　开始监听传入连接。backlog指定在拒绝连接之前，可以挂起的最大连接数量。</p>
+<p>&nbsp; &nbsp; &nbsp; backlog等于5，表示内核已经接到了连接请求，但服务器还没有调用accept进行处理的连接个数最大为5<br />&nbsp; &nbsp; &nbsp; 这个值不能无限大，因为要在内核中维护连接队列</p>
+<p><strong>sk.setblocking(bool)</strong></p>
+<p>　　是否阻塞（默认True），如果设置False，那么accept和recv时一旦无数据，则报错。</p>
+<p><strong>sk.accept()</strong></p>
+<p>　　接受连接并返回（conn,address）,其中conn是新的套接字对象，可以用来接收和发送数据。address是连接客户端的地址。</p>
+<p>　　接收TCP 客户的连接（阻塞式）等待连接的到来</p>
+<p><strong>sk.connect(address)</strong></p>
+<p>　　连接到address处的套接字。一般，address的格式为元组（hostname,port）,如果连接出错，返回socket.error错误。</p>
+<p><strong>sk.connect_ex(address)</strong></p>
+<p>　　同上，只不过会有返回值，连接成功时返回 0 ，连接失败时候返回编码，例如：10061</p>
+<p><strong>sk.close()</strong></p>
+<p>　　关闭套接字</p>
+<p><strong>sk.recv(bufsize[,flag])</strong></p>
+<p>　　接受套接字的数据。数据以字符串形式返回，bufsize指定<strong>最多</strong>可以接收的数量。flag提供有关消息的其他信息，通常可以忽略。</p>
+<p><strong>sk.recvfrom(bufsize[.flag])</strong></p>
+<p>　　与recv()类似，但返回值是（data,address）。其中data是包含接收数据的字符串，address是发送数据的套接字地址。</p>
+<p><strong>sk.send(string[,flag])</strong></p>
+<p>　　将string中的数据发送到连接的套接字。返回值是要发送的字节数量，该数量可能小于string的字节大小。即：可能未将指定内容全部发送。</p>
+<p><strong>sk.sendall(string[,flag])</strong></p>
+<p>　　将string中的数据发送到连接的套接字，但在返回之前会尝试发送所有数据。成功返回None，失败则抛出异常。</p>
+<p>&nbsp; &nbsp; &nbsp; 内部通过递归调用send，将所有内容发送出去。</p>
+<p><strong>sk.sendto(string[,flag],address)</strong></p>
+<p>　　将数据发送到套接字，address是形式为（ipaddr，port）的元组，指定远程地址。返回值是发送的字节数。该函数主要用于UDP协议。</p>
+<p><strong>sk.settimeout(timeout)</strong></p>
+<p>　　设置套接字操作的超时期，timeout是一个浮点数，单位是秒。值为None表示没有超时期。一般，超时期应该在刚创建套接字时设置，因为它们可能用于连接的操作（如 client 连接最多等待5s ）</p>
+<p><strong>sk.getpeername()</strong></p>
+<p>　　返回连接套接字的远程地址。返回值通常是元组（ipaddr,port）。</p>
+<p><strong>sk.getsockname()</strong></p>
+<p>　　返回套接字自己的地址。通常是一个元组(ipaddr,port)</p>
+<p><strong>sk.fileno()</strong></p>
+<p>　　套接字的文件描述符</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('e87de707-3f18-4f10-82d1-debd3bf27de6')"><img id="code_img_closed_e87de707-3f18-4f10-82d1-debd3bf27de6" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_e87de707-3f18-4f10-82d1-debd3bf27de6" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('e87de707-3f18-4f10-82d1-debd3bf27de6',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_e87de707-3f18-4f10-82d1-debd3bf27de6" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;"> 服务端</span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> socket
+ip_port </span>= (<span style="color: #800000;">'</span><span style="color: #800000;">127.0.0.1</span><span style="color: #800000;">'</span>,9999<span style="color: #000000;">)
+sk </span>=<span style="color: #000000;"> socket.socket(socket.AF_INET,socket.SOCK_DGRAM,0)
+sk.bind(ip_port)
+
+</span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+    data,(host,port) </span>= sk.recvfrom(1024<span style="color: #000000;">)
+    </span><span style="color: #0000ff;">print</span><span style="color: #000000;">(data,host,port)
+    sk.sendto(bytes(</span><span style="color: #800000;">'</span><span style="color: #800000;">ok</span><span style="color: #800000;">'</span>, encoding=<span style="color: #800000;">'</span><span style="color: #800000;">utf-8</span><span style="color: #800000;">'</span><span style="color: #000000;">), (host,port))
+
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;">客户端</span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> socket
+ip_port </span>= (<span style="color: #800000;">'</span><span style="color: #800000;">127.0.0.1</span><span style="color: #800000;">'</span>,9999<span style="color: #000000;">)
+
+sk </span>=<span style="color: #000000;"> socket.socket(socket.AF_INET,socket.SOCK_DGRAM,0)
+</span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+    inp </span>= input(<span style="color: #800000;">'</span><span style="color: #800000;">数据：</span><span style="color: #800000;">'</span><span style="color: #000000;">).strip()
+    </span><span style="color: #0000ff;">if</span> inp == <span style="color: #800000;">'</span><span style="color: #800000;">exit</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">break</span><span style="color: #000000;">
+    sk.sendto(bytes(inp, encoding</span>=<span style="color: #800000;">'</span><span style="color: #800000;">utf-8</span><span style="color: #800000;">'</span><span style="color: #000000;">),ip_port)
+    data </span>= sk.recvfrom(1024<span style="color: #000000;">)
+    </span><span style="color: #0000ff;">print</span><span style="color: #000000;">(data)
+
+sk.close()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">UDP</span></div>
+<p><span style="font-size: 18pt;"><strong>实例：</strong></span>智能机器人</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('c8290947-1fca-4e86-8333-e81048b3d8d2')"><img id="code_img_closed_c8290947-1fca-4e86-8333-e81048b3d8d2" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_c8290947-1fca-4e86-8333-e81048b3d8d2" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('c8290947-1fca-4e86-8333-e81048b3d8d2',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_c8290947-1fca-4e86-8333-e81048b3d8d2" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> socket
+
+ip_port </span>= (<span style="color: #800000;">'</span><span style="color: #800000;">127.0.0.1</span><span style="color: #800000;">'</span>,8888<span style="color: #000000;">)
+sk </span>=<span style="color: #000000;"> socket.socket()
+sk.bind(ip_port)
+sk.listen(</span>5<span style="color: #000000;">)
+
+</span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+    conn,address </span>=<span style="color: #000000;">  sk.accept()
+    conn.sendall(</span><span style="color: #800000;">'</span><span style="color: #800000;">欢迎致电 10086，请输入1xxx,0转人工服务.</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    Flag </span>=<span style="color: #000000;"> True
+    </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> Flag:
+        data </span>= conn.recv(1024<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> data == <span style="color: #800000;">'</span><span style="color: #800000;">exit</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+            Flag </span>=<span style="color: #000000;"> False
+        </span><span style="color: #0000ff;">elif</span> data == <span style="color: #800000;">'</span><span style="color: #800000;">0</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+            conn.sendall(</span><span style="color: #800000;">'</span><span style="color: #800000;">通过可能会被录音.balabala一大推</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            conn.sendall(</span><span style="color: #800000;">'</span><span style="color: #800000;">请重新输入.</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    conn.close()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">服务端</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('4f99eee9-f139-42c3-844b-f491056e91fc')"><img id="code_img_closed_4f99eee9-f139-42c3-844b-f491056e91fc" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_4f99eee9-f139-42c3-844b-f491056e91fc" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('4f99eee9-f139-42c3-844b-f491056e91fc',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_4f99eee9-f139-42c3-844b-f491056e91fc" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> socket
+
+
+ip_port </span>= (<span style="color: #800000;">'</span><span style="color: #800000;">127.0.0.1</span><span style="color: #800000;">'</span>,8005<span style="color: #000000;">)
+sk </span>=<span style="color: #000000;"> socket.socket()
+sk.connect(ip_port)
+sk.settimeout(</span>5<span style="color: #000000;">)
+
+</span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+    data </span>= sk.recv(1024<span style="color: #000000;">)
+    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">receive:</span><span style="color: #800000;">'</span><span style="color: #000000;">,data
+    inp </span>= raw_input(<span style="color: #800000;">'</span><span style="color: #800000;">please input:</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    sk.sendall(inp)
+    </span><span style="color: #0000ff;">if</span> inp == <span style="color: #800000;">'</span><span style="color: #800000;">exit</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">break</span><span style="color: #000000;">
+
+sk.close()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">客户端</span></div>
+<h3>IO多路复用</h3>
+<p>I/O多路复用指：通过一种机制，可以<span style="color: #ff0000;"><strong>监视多个描述符</strong></span>，一旦某个描述符就绪（一般是读就绪或者写就绪），能够通知程序进行相应的读写操作。</p>
+<p><span style="font-size: 18pt;"><strong>Linux</strong></span></p>
+<p>Linux中的&nbsp;select，poll，epoll 都是IO多路复用的机制。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">select 
+
+select最早于1983年出现在4.2BSD中，它通过一个select()系统调用来监视多个文件描述符的数组，当select()返回后，该数组中就绪的文件描述符便会被内核修改标志位，使得进程可以获得这些文件描述符从而进行后续的读写操作。
+select目前几乎在所有的平台上支持，其良好跨平台支持也是它的一个优点，事实上从现在看来，这也是它所剩不多的优点之一。
+select的一个缺点在于单个进程能够监视的文件描述符的数量存在最大限制，在Linux上一般为1024，不过可以通过修改宏定义甚至重新编译内核的方式提升这一限制。
+另外，select()所维护的存储大量文件描述符的数据结构，随着文件描述符数量的增大，其复制的开销也线性增长。同时，由于网络响应时间的延迟使得大量TCP连接处于非活跃状态，但调用select()会对所有socket进行一次线性扫描，所以这也浪费了一定的开销。
+
+poll 
+
+poll在1986年诞生于System V Release 3，它和select在本质上没有多大差别，但是poll没有最大文件描述符数量的限制。
+poll和select同样存在一个缺点就是，包含大量文件描述符的数组被整体复制于用户态和内核的地址空间之间，而不论这些文件描述符是否就绪，它的开销随着文件描述符数量的增加而线性增大。
+另外，select()和poll()将就绪的文件描述符告诉进程后，如果进程没有对其进行IO操作，那么下次调用select()和poll()的时候将再次报告这些文件描述符，所以它们一般不会丢失就绪的消息，这种方式称为水平触发（Level Triggered）。
+
+epoll 
+
+直到Linux2.6才出现了由内核直接支持的实现方法，那就是epoll，它几乎具备了之前所说的一切优点，被公认为Linux2.6下性能最好的多路I/O就绪通知方法。
+epoll可以同时支持水平触发和边缘触发（Edge Triggered，只告诉进程哪些文件描述符刚刚变为就绪状态，它只说一遍，如果我们没有采取行动，那么它将不会再次告知，这种方式称为边缘触发），理论上边缘触发的性能要更高一些，但是代码实现相当复杂。
+epoll同样只告知那些就绪的文件描述符，而且当我们调用epoll_wait()获得就绪文件描述符时，返回的不是实际的描述符，而是一个代表就绪描述符数量的值，你只需要去epoll指定的一个数组中依次取得相应数量的文件描述符即可，这里也使用了内存映射（mmap）技术，这样便彻底省掉了这些文件描述符在系统调用时复制的开销。
+另一个本质的改进在于epoll采用基于事件的就绪通知方式。在select/poll中，进程只有在调用一定的方法后，内核才对所有监视的文件描述符进行扫描，而epoll事先通过epoll_ctl()来注册一个文件描述符，一旦基于某个文件描述符就绪时，内核会采用类似callback的回调机制，迅速激活这个文件描述符，当进程调用epoll_wait()时便得到通知。 
+</pre>
+</div>
+<p><span style="font-size: 18pt;"><strong>Python</strong></span></p>
+<p>Python中有一个select模块，其中提供了：select、poll、epoll三个方法，分别调用系统的&nbsp;select，poll，epoll 从而实现IO多路复用。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">Windows Python：
+    提供： select
+Mac Python：
+    提供： select
+Linux Python：
+    提供： select、poll、epoll
+</pre>
+</div>
+<p><span style="color: #888888;"><em>注意：网络操作、文件操作、终端操作等均属于IO操作，对于windows只支持Socket操作，其他系统支持其他IO操作，但是无法检测 普通文件操作 自动上次读取是否已经变化。</em></span></p>
+<p><span style="color: #000000;">对于select方法：</span></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">句柄列表11, 句柄列表22, 句柄列表33 = select.select(句柄序列1, 句柄序列2, 句柄序列3, 超时时间)
+
+参数： 可接受四个参数（前三个必须）
+返回值：三个列表
+
+select方法用来监视文件句柄，如果句柄发生变化，则获取该句柄。
+1、当 参数1 序列中的句柄发生可读时（accetp和read），则获取发生变化的句柄并添加到 返回值1 序列中
+2、当 参数2 序列中含有句柄时，则将该序列中所有的句柄添加到 返回值2 序列中
+3、当 参数3 序列中的句柄发生错误时，则将该发生错误的句柄添加到 返回值3 序列中
+4、当 超时时间 未设置，则select会一直阻塞，直到监听的句柄发生变化
+   当 超时时间 ＝ 1时，那么如果监听的句柄均无任何变化，则select会阻塞 1 秒，之后返回三个空列表，如果监听的句柄有变化，则直接执行。</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('4c98742c-c185-4860-9a72-748beab1bc70')"><img id="code_img_closed_4c98742c-c185-4860-9a72-748beab1bc70" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_4c98742c-c185-4860-9a72-748beab1bc70" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('4c98742c-c185-4860-9a72-748beab1bc70',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_4c98742c-c185-4860-9a72-748beab1bc70" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> select
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> threading
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> sys
+
+</span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+    readable, writeable, error </span>= select.select([sys.stdin,],[],[],1<span style="color: #000000;">)
+    </span><span style="color: #0000ff;">if</span> sys.stdin <span style="color: #0000ff;">in</span><span style="color: #000000;"> readable:
+        </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">select get stdin</span><span style="color: #800000;">'</span>,sys.stdin.readline()</pre>
+</div>
+<span class="cnblogs_code_collapse">利用select监听终端操作实例</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('f84d2bd5-f889-4709-9d8e-4a155126f466')"><img id="code_img_closed_f84d2bd5-f889-4709-9d8e-4a155126f466" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_f84d2bd5-f889-4709-9d8e-4a155126f466" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('f84d2bd5-f889-4709-9d8e-4a155126f466',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_f84d2bd5-f889-4709-9d8e-4a155126f466" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> socket
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> select
+
+sk1 </span>=<span style="color: #000000;"> socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sk1.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, </span>1<span style="color: #000000;">)
+sk1.bind((</span><span style="color: #800000;">'</span><span style="color: #800000;">127.0.0.1</span><span style="color: #800000;">'</span>,8002<span style="color: #000000;">))
+sk1.listen(</span>5<span style="color: #000000;">)
+sk1.setblocking(0)
+
+inputs </span>=<span style="color: #000000;"> [sk1,]
+
+</span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+    readable_list, writeable_list, error_list </span>= select.select(inputs, [], inputs, 1<span style="color: #000000;">)
+    </span><span style="color: #0000ff;">for</span> r <span style="color: #0000ff;">in</span><span style="color: #000000;"> readable_list:
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 当客户端第一次连接服务端时</span>
+        <span style="color: #0000ff;">if</span> sk1 ==<span style="color: #000000;"> r:
+            </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">accept</span><span style="color: #800000;">'</span><span style="color: #000000;">
+            request, address </span>=<span style="color: #000000;"> r.accept()
+            request.setblocking(0)
+            inputs.append(request)
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> 当客户端连接上服务端之后，再次发送数据时</span>
+        <span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            received </span>= r.recv(1024<span style="color: #000000;">)
+            </span><span style="color: #008000;">#</span><span style="color: #008000;"> 当正常接收客户端发送的数据时</span>
+            <span style="color: #0000ff;">if</span><span style="color: #000000;"> received:
+                </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">received data:</span><span style="color: #800000;">'</span><span style="color: #000000;">, received
+            </span><span style="color: #008000;">#</span><span style="color: #008000;"> 当客户端关闭程序时</span>
+            <span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                inputs.remove(r)
+
+sk1.close()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">利用select实现伪同时处理多个Socket客户端请求：服务端</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('1c79fa97-92e3-4ac9-80b8-9c089bed2ba4')"><img id="code_img_closed_1c79fa97-92e3-4ac9-80b8-9c089bed2ba4" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_1c79fa97-92e3-4ac9-80b8-9c089bed2ba4" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('1c79fa97-92e3-4ac9-80b8-9c089bed2ba4',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_1c79fa97-92e3-4ac9-80b8-9c089bed2ba4" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> socket
+
+ip_port </span>= (<span style="color: #800000;">'</span><span style="color: #800000;">127.0.0.1</span><span style="color: #800000;">'</span>,8002<span style="color: #000000;">)
+sk </span>=<span style="color: #000000;"> socket.socket()
+sk.connect(ip_port)
+
+</span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+    inp </span>= raw_input(<span style="color: #800000;">'</span><span style="color: #800000;">please input:</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    sk.sendall(inp)
+sk.close()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">利用select实现伪同时处理多个Socket客户端请求：客户端</span></div>
+<p>此处的Socket服务端相比与原生的Socket，他支持当某一个请求不再发送数据时，服务器端不会等待而是可以去处理其他请求的数据。但是，如果每个请求的耗时比较长时，select版本的服务器端也无法完成同时操作。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('eb9a1e23-bcab-4e25-bbb7-04077f39806f')"><img id="code_img_closed_eb9a1e23-bcab-4e25-bbb7-04077f39806f" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_eb9a1e23-bcab-4e25-bbb7-04077f39806f" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('eb9a1e23-bcab-4e25-bbb7-04077f39806f',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_eb9a1e23-bcab-4e25-bbb7-04077f39806f" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;">coding:utf8</span>
+
+<span style="color: #800000;">'''</span><span style="color: #800000;">
+ 服务器的实现 采用select的方式
+</span><span style="color: #800000;">'''</span>
+
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> select
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> socket
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> sys
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> Queue
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;">创建套接字并设置该套接字为非阻塞模式</span>
+<span style="color: #000000;">
+server </span>=<span style="color: #000000;"> socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+server.setblocking(0)
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;">绑定套接字</span>
+server_address = (<span style="color: #800000;">'</span><span style="color: #800000;">localhost</span><span style="color: #800000;">'</span>,10000<span style="color: #000000;">)
+</span><span style="color: #0000ff;">print</span> &gt;&gt;sys.stderr,<span style="color: #800000;">'</span><span style="color: #800000;">starting up on %s port %s</span><span style="color: #800000;">'</span>%<span style="color: #000000;"> server_address
+server.bind(server_address)
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;">将该socket变成服务模式</span><span style="color: #008000;">
+#</span><span style="color: #008000;">backlog等于5，表示内核已经接到了连接请求，但服务器还没有调用accept进行处理的连接个数最大为5</span><span style="color: #008000;">
+#</span><span style="color: #008000;">这个值不能无限大，因为要在内核中维护连接队列</span>
+<span style="color: #000000;">
+server.listen(</span>5<span style="color: #000000;">)
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;">初始化读取数据的监听列表,最开始时希望从server这个套接字上读取数据</span>
+inputs =<span style="color: #000000;"> [server]
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;">初始化写入数据的监听列表，最开始并没有客户端连接进来，所以列表为空</span>
+<span style="color: #000000;">
+outputs </span>=<span style="color: #000000;"> []
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;">要发往客户端的数据</span>
+message_queues =<span style="color: #000000;"> {}
+</span><span style="color: #0000ff;">while</span><span style="color: #000000;"> inputs:
+    </span><span style="color: #0000ff;">print</span> &gt;&gt;sys.stderr,<span style="color: #800000;">'</span><span style="color: #800000;">waiting for the next event</span><span style="color: #800000;">'</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;">调用select监听所有监听列表中的套接字，并将准备好的套接字加入到对应的列表中</span>
+    readable,writable,exceptional = select.select(inputs,outputs,inputs)<span style="color: #008000;">#</span><span style="color: #008000;">列表中的socket 套接字  如果是文件呢？ </span>
+    <span style="color: #008000;">#</span><span style="color: #008000;">监控文件句柄有某一处发生了变化 可写 可读  异常属于Linux中的网络编程 </span>
+    <span style="color: #008000;">#</span><span style="color: #008000;">属于同步I/O操作，属于I/O复用模型的一种</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;">rlist--等待到准备好读</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;">wlist--等待到准备好写</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;">xlist--等待到一种异常</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;">处理可读取的套接字</span>
+
+    <span style="color: #800000;">'''</span><span style="color: #800000;">
+        如果server这个套接字可读，则说明有新链接到来
+        此时在server套接字上调用accept,生成一个与客户端通讯的套接字
+        并将与客户端通讯的套接字加入inputs列表，下一次可以通过select检查连接是否可读
+        然后在发往客户端的缓冲中加入一项，键名为:与客户端通讯的套接字，键值为空队列
+        select系统调用是用来让我们的程序监视多个文件句柄(file descrīptor)的状态变化的。程序会停在select这里等待，
+        直到被监视的文件句柄有某一个或多个发生了状态改变
+        </span><span style="color: #800000;">'''</span>
+
+    <span style="color: #800000;">'''</span><span style="color: #800000;">
+        若可读的套接字不是server套接字,有两种情况:一种是有数据到来，另一种是链接断开
+        如果有数据到来,先接收数据,然后将收到的数据填入往客户端的缓存区中的对应位置，最后
+        将于客户端通讯的套接字加入到写数据的监听列表:
+        如果套接字可读.但没有接收到数据，则说明客户端已经断开。这时需要关闭与客户端连接的套接字
+        进行资源清理
+        </span><span style="color: #800000;">'''</span>
+        
+    <span style="color: #0000ff;">for</span> s <span style="color: #0000ff;">in</span><span style="color: #000000;"> readable: 
+        </span><span style="color: #0000ff;">if</span> s <span style="color: #0000ff;">is</span><span style="color: #000000;"> server:
+            connection,client_address </span>=<span style="color: #000000;"> s.accept()
+            </span><span style="color: #0000ff;">print</span> &gt;&gt;sys.stderr,<span style="color: #800000;">'</span><span style="color: #800000;">connection from</span><span style="color: #800000;">'</span><span style="color: #000000;">,client_address
+            connection.setblocking(0)</span><span style="color: #008000;">#</span><span style="color: #008000;">设置非阻塞</span>
+<span style="color: #000000;">            inputs.append(connection)
+            message_queues[connection] </span>=<span style="color: #000000;"> Queue.Queue()
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            data </span>= s.recv(1024<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> data:
+                </span><span style="color: #0000ff;">print</span> &gt;&gt;sys.stderr,<span style="color: #800000;">'</span><span style="color: #800000;">received "%s" from %s</span><span style="color: #800000;">'</span>%<span style="color: #000000;"> \
+                (data,s.getpeername())
+                message_queues[s].put(data)
+                </span><span style="color: #0000ff;">if</span> s <span style="color: #0000ff;">not</span> <span style="color: #0000ff;">in</span><span style="color: #000000;"> outputs:
+                    outputs.append(s)
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                </span><span style="color: #0000ff;">print</span> &gt;&gt;sys.stderr,<span style="color: #800000;">'</span><span style="color: #800000;">closing</span><span style="color: #800000;">'</span><span style="color: #000000;">,client_address
+                </span><span style="color: #0000ff;">if</span> s <span style="color: #0000ff;">in</span><span style="color: #000000;"> outputs:
+                    outputs.remove(s)
+                inputs.remove(s)
+                s.close()
+                </span><span style="color: #0000ff;">del</span><span style="color: #000000;"> message_queues[s]
+                    
+    </span><span style="color: #008000;">#</span><span style="color: #008000;">处理可写的套接字</span>
+    <span style="color: #800000;">'''</span><span style="color: #800000;">
+        在发送缓冲区中取出响应的数据，发往客户端。
+        如果没有数据需要写，则将套接字从发送队列中移除，select中不再监视
+        </span><span style="color: #800000;">'''</span>
+
+    <span style="color: #0000ff;">for</span> s <span style="color: #0000ff;">in</span><span style="color: #000000;"> writable:
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;">:
+            next_msg </span>=<span style="color: #000000;"> message_queues[s].get_nowait()
+
+        </span><span style="color: #0000ff;">except</span><span style="color: #000000;"> Queue.Empty:
+            </span><span style="color: #0000ff;">print</span> &gt;&gt;sys.stderr,<span style="color: #800000;">'</span>  <span style="color: #800000;">'</span>,s,getpeername(),<span style="color: #800000;">'</span><span style="color: #800000;">queue empty</span><span style="color: #800000;">'</span><span style="color: #000000;">
+            outputs.remove(s)
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            </span><span style="color: #0000ff;">print</span> &gt;&gt;sys.stderr,<span style="color: #800000;">'</span><span style="color: #800000;">sending "%s" to %s</span><span style="color: #800000;">'</span>%<span style="color: #000000;"> \
+            (next_msg,s.getpeername())
+            s.send(next_msg)
+
+
+
+    </span><span style="color: #008000;">#</span><span style="color: #008000;">处理异常情况</span>
+
+    <span style="color: #0000ff;">for</span> s <span style="color: #0000ff;">in</span><span style="color: #000000;"> exceptional:
+        </span><span style="color: #0000ff;">for</span> s <span style="color: #0000ff;">in</span><span style="color: #000000;"> exceptional:
+            </span><span style="color: #0000ff;">print</span> &gt;&gt;sys.stderr,<span style="color: #800000;">'</span><span style="color: #800000;">exception condition on</span><span style="color: #800000;">'</span><span style="color: #000000;">,s.getpeername()
+            inputs.remove(s)
+            </span><span style="color: #0000ff;">if</span> s <span style="color: #0000ff;">in</span><span style="color: #000000;"> outputs:
+                outputs.remove(s)
+            s.close()
+            </span><span style="color: #0000ff;">del</span> message_queues[s]</pre>
+</div>
+<span class="cnblogs_code_collapse">基于select实现socket服务端</span></div>
+<h3>SocketServer模块</h3>
+<p>SocketServer内部使用 IO多路复用 以及 &ldquo;多线程&rdquo; 和 &ldquo;多进程&rdquo; ，从而实现并发处理多个客户端请求的Socket服务端。即：每个客户端请求连接到服务器时，Socket服务端都会在服务器是创建一个&ldquo;线程&rdquo;或者&ldquo;进程&rdquo; 专门负责处理当前客户端的所有请求。</p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="http://images2015.cnblogs.com/blog/425762/201512/425762-20151226114322968-1230975336.jpg" alt="" width="785" height="390" /></p>
+<p><span style="font-size: 18pt;"><strong>ThreadingTCPServer</strong></span></p>
+<p>ThreadingTCPServer实现的Soket服务器内部会为每个client创建一个 &ldquo;<span style="color: #ff0000;"><strong>线程</strong></span>&rdquo;，该线程用来和客户端进行交互。</p>
+<p><span style="font-size: 14px;"><span style="font-size: 16px;"><strong>1、</strong></span>ThreadingTCPServer基础</span></p>
+<p>使用ThreadingTCPServer:</p>
+<ul>
+<li>创建一个继承自 SocketServer.BaseRequestHandler 的类</li>
+<li>类中必须定义一个名称为 handle 的方法</li>
+<li>启动ThreadingTCPServer</li>
+</ul>
+<div class="cnblogs_code" onclick="cnblogs_code_show('c1c0bfd7-0f2b-425b-a997-2e00ea073d77')"><img id="code_img_closed_c1c0bfd7-0f2b-425b-a997-2e00ea073d77" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_c1c0bfd7-0f2b-425b-a997-2e00ea073d77" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('c1c0bfd7-0f2b-425b-a997-2e00ea073d77',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_c1c0bfd7-0f2b-425b-a997-2e00ea073d77" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> SocketServer
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> MyServer(SocketServer.BaseRequestHandler):
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> handle(self):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> print self.request,self.client_address,self.server</span>
+        conn =<span style="color: #000000;"> self.request
+        conn.sendall(</span><span style="color: #800000;">'</span><span style="color: #800000;">欢迎致电 10086，请输入1xxx,0转人工服务.</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        Flag </span>=<span style="color: #000000;"> True
+        </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> Flag:
+            data </span>= conn.recv(1024<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> data == <span style="color: #800000;">'</span><span style="color: #800000;">exit</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+                Flag </span>=<span style="color: #000000;"> False
+            </span><span style="color: #0000ff;">elif</span> data == <span style="color: #800000;">'</span><span style="color: #800000;">0</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+                conn.sendall(</span><span style="color: #800000;">'</span><span style="color: #800000;">通过可能会被录音.balabala一大推</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                conn.sendall(</span><span style="color: #800000;">'</span><span style="color: #800000;">请重新输入.</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+
+</span><span style="color: #0000ff;">if</span> <span style="color: #800080;">__name__</span> == <span style="color: #800000;">'</span><span style="color: #800000;">__main__</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+    server </span>= SocketServer.ThreadingTCPServer((<span style="color: #800000;">'</span><span style="color: #800000;">127.0.0.1</span><span style="color: #800000;">'</span>,8009<span style="color: #000000;">),MyServer)
+    server.serve_forever()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">SocketServer实现服务器</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('2f3433a8-8328-402a-a099-f3951459a9fc')"><img id="code_img_closed_2f3433a8-8328-402a-a099-f3951459a9fc" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_2f3433a8-8328-402a-a099-f3951459a9fc" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('2f3433a8-8328-402a-a099-f3951459a9fc',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_2f3433a8-8328-402a-a099-f3951459a9fc" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> socket
+
+
+ip_port </span>= (<span style="color: #800000;">'</span><span style="color: #800000;">127.0.0.1</span><span style="color: #800000;">'</span>,8009<span style="color: #000000;">)
+sk </span>=<span style="color: #000000;"> socket.socket()
+sk.connect(ip_port)
+sk.settimeout(</span>5<span style="color: #000000;">)
+
+</span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+    data </span>= sk.recv(1024<span style="color: #000000;">)
+    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">receive:</span><span style="color: #800000;">'</span><span style="color: #000000;">,data
+    inp </span>= raw_input(<span style="color: #800000;">'</span><span style="color: #800000;">please input:</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    sk.sendall(inp)
+    </span><span style="color: #0000ff;">if</span> inp == <span style="color: #800000;">'</span><span style="color: #800000;">exit</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">break</span><span style="color: #000000;">
+
+sk.close()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">客户端</span></div>
+<p><span style="font-size: 16px;"><strong>2、</strong></span><span style="font-size: 14px;">ThreadingTCPServer源码剖析</span></p>
+<p><span style="font-size: 14px;">ThreadingTCPServer的类图关系如下：</span></p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201512/425762-20151226133025359-790393993.jpg" alt="" width="738" height="387" />&nbsp;</p>
+<p>内部调用流程为：</p>
+<ul>
+<li>启动服务端程序</li>
+<li>执行 TCPServer.__init__ 方法，创建服务端Socket对象并绑定 IP 和 端口</li>
+<li>执行 BaseServer.__init__ 方法，将自定义的继承自SocketServer.BaseRequestHandler 的类 MyRequestHandle赋值给<span style="color: #ff0000;"> self.RequestHandlerClass</span></li>
+<li>执行 BaseServer.server_forever 方法，While 循环一直监听是否有客户端请求到达 ...</li>
+<li>当客户端连接到达服务器</li>
+<li>执行 ThreadingMixIn.process_request 方法，创建一个 &ldquo;线程&rdquo; 用来处理请求</li>
+<li>执行&nbsp;ThreadingMixIn.process_request_thread 方法</li>
+<li>执行 BaseServer.finish_request 方法，执行&nbsp;<span style="color: #ff0000;">self.RequestHandlerClass() &nbsp;<span style="color: #333333;">即：执行 自定义 MyRequestHandler 的构造方法（自动调用基类BaseRequestHandler的构造方法，在该构造方法中又会调用 MyRequestHandler的handle方法）</span></span></li>
+</ul>
+<p><span style="color: #ff0000;"><span style="color: #333333;">ThreadingTCPServer相关源码：</span></span></p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('8d222912-8181-47b7-96dd-732962f63929')"><img id="code_img_closed_8d222912-8181-47b7-96dd-732962f63929" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_8d222912-8181-47b7-96dd-732962f63929" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('8d222912-8181-47b7-96dd-732962f63929',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_8d222912-8181-47b7-96dd-732962f63929" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">class</span><span style="color: #000000;"> BaseServer:
+
+    </span><span style="color: #800000;">"""</span><span style="color: #800000;">Base class for server classes.
+
+    Methods for the caller:
+
+    - __init__(server_address, RequestHandlerClass)
+    - serve_forever(poll_interval=0.5)
+    - shutdown()
+    - handle_request()  # if you do not use serve_forever()
+    - fileno() -&gt; int   # for select()
+
+    Methods that may be overridden:
+
+    - server_bind()
+    - server_activate()
+    - get_request() -&gt; request, client_address
+    - handle_timeout()
+    - verify_request(request, client_address)
+    - server_close()
+    - process_request(request, client_address)
+    - shutdown_request(request)
+    - close_request(request)
+    - handle_error()
+
+    Methods for derived classes:
+
+    - finish_request(request, client_address)
+
+    Class variables that may be overridden by derived classes or
+    instances:
+
+    - timeout
+    - address_family
+    - socket_type
+    - allow_reuse_address
+
+    Instance variables:
+
+    - RequestHandlerClass
+    - socket
+
+    </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+
+    timeout </span>=<span style="color: #000000;"> None
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span><span style="color: #000000;">(self, server_address, RequestHandlerClass):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Constructor.  May be extended, do not override.</span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        self.server_address </span>=<span style="color: #000000;"> server_address
+        self.RequestHandlerClass </span>=<span style="color: #000000;"> RequestHandlerClass
+        self.</span><span style="color: #800080;">__is_shut_down</span> =<span style="color: #000000;"> threading.Event()
+        self.</span><span style="color: #800080;">__shutdown_request</span> =<span style="color: #000000;"> False
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> server_activate(self):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Called by constructor to activate the server.
+
+        May be overridden.
+
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span> serve_forever(self, poll_interval=0.5<span style="color: #000000;">):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Handle one request at a time until shutdown.
+
+        Polls for shutdown every poll_interval seconds. Ignores
+        self.timeout. If you need to do periodic tasks, do them in
+        another thread.
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        self.</span><span style="color: #800080;">__is_shut_down</span><span style="color: #000000;">.clear()
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;">:
+            </span><span style="color: #0000ff;">while</span> <span style="color: #0000ff;">not</span> self.<span style="color: #800080;">__shutdown_request</span><span style="color: #000000;">:
+                </span><span style="color: #008000;">#</span><span style="color: #008000;"> XXX: Consider using another file descriptor or</span>
+                <span style="color: #008000;">#</span><span style="color: #008000;"> connecting to the socket to wake this up instead of</span>
+                <span style="color: #008000;">#</span><span style="color: #008000;"> polling. Polling reduces our responsiveness to a</span>
+                <span style="color: #008000;">#</span><span style="color: #008000;"> shutdown request and wastes cpu at all other times.</span>
+                r, w, e =<span style="color: #000000;"> _eintr_retry(select.select, [self], [], [],
+                                       poll_interval)
+                </span><span style="color: #0000ff;">if</span> self <span style="color: #0000ff;">in</span><span style="color: #000000;"> r:
+                    self._handle_request_noblock()
+        </span><span style="color: #0000ff;">finally</span><span style="color: #000000;">:
+            self.</span><span style="color: #800080;">__shutdown_request</span> =<span style="color: #000000;"> False
+            self.</span><span style="color: #800080;">__is_shut_down</span><span style="color: #000000;">.set()
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> shutdown(self):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Stops the serve_forever loop.
+
+        Blocks until the loop has finished. This must be called while
+        serve_forever() is running in another thread, or it will
+        deadlock.
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        self.</span><span style="color: #800080;">__shutdown_request</span> =<span style="color: #000000;"> True
+        self.</span><span style="color: #800080;">__is_shut_down</span><span style="color: #000000;">.wait()
+
+    </span><span style="color: #008000;">#</span><span style="color: #008000;"> The distinction between handling, getting, processing and</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;"> finishing a request is fairly arbitrary.  Remember:</span>
+    <span style="color: #008000;">#
+</span>    <span style="color: #008000;">#</span><span style="color: #008000;"> - handle_request() is the top-level call.  It calls</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;">   select, get_request(), verify_request() and process_request()</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;"> - get_request() is different for stream or datagram sockets</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;"> - process_request() is the place that may fork a new process</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;">   or create a new thread to finish the request</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;"> - finish_request() instantiates the request handler class;</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;">   this constructor will handle the request all by itself</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> handle_request(self):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Handle one request, possibly blocking.
+
+        Respects self.timeout.
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> Support people who used socket.settimeout() to escape</span>
+        <span style="color: #008000;">#</span><span style="color: #008000;"> handle_request before self.timeout was available.</span>
+        timeout =<span style="color: #000000;"> self.socket.gettimeout()
+        </span><span style="color: #0000ff;">if</span> timeout <span style="color: #0000ff;">is</span><span style="color: #000000;"> None:
+            timeout </span>=<span style="color: #000000;"> self.timeout
+        </span><span style="color: #0000ff;">elif</span> self.timeout <span style="color: #0000ff;">is</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> None:
+            timeout </span>=<span style="color: #000000;"> min(timeout, self.timeout)
+        fd_sets </span>=<span style="color: #000000;"> _eintr_retry(select.select, [self], [], [], timeout)
+        </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> fd_sets[0]:
+            self.handle_timeout()
+            </span><span style="color: #0000ff;">return</span><span style="color: #000000;">
+        self._handle_request_noblock()
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> _handle_request_noblock(self):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Handle one request, without blocking.
+
+        I assume that select.select has returned that the socket is
+        readable before this function was called, so there should be
+        no risk of blocking in get_request().
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">try</span><span style="color: #000000;">:
+            request, client_address </span>=<span style="color: #000000;"> self.get_request()
+        </span><span style="color: #0000ff;">except</span><span style="color: #000000;"> socket.error:
+            </span><span style="color: #0000ff;">return</span>
+        <span style="color: #0000ff;">if</span><span style="color: #000000;"> self.verify_request(request, client_address):
+            </span><span style="color: #0000ff;">try</span><span style="color: #000000;">:
+                self.process_request(request, client_address)
+            </span><span style="color: #0000ff;">except</span><span style="color: #000000;">:
+                self.handle_error(request, client_address)
+                self.shutdown_request(request)
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> handle_timeout(self):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Called if no new request arrives within self.timeout.
+
+        Overridden by ForkingMixIn.
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> verify_request(self, request, client_address):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Verify the request.  May be overridden.
+
+        Return True if we should proceed with this request.
+
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;"> True
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> process_request(self, request, client_address):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Call finish_request.
+
+        Overridden by ForkingMixIn and ThreadingMixIn.
+
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        self.finish_request(request, client_address)
+        self.shutdown_request(request)
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> server_close(self):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Called to clean-up the server.
+
+        May be overridden.
+
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> finish_request(self, request, client_address):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Finish one request by instantiating RequestHandlerClass.</span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        self.RequestHandlerClass(request, client_address, self)
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> shutdown_request(self, request):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Called to shutdown and close an individual request.</span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        self.close_request(request)
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> close_request(self, request):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Called to clean up an individual request.</span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> handle_error(self, request, client_address):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Handle an error gracefully.  May be overridden.
+
+        The default is to print a traceback and continue.
+
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">-</span><span style="color: #800000;">'</span>*40
+        <span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">Exception happened during processing of request from</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+        </span><span style="color: #0000ff;">print</span><span style="color: #000000;"> client_address
+        </span><span style="color: #0000ff;">import</span><span style="color: #000000;"> traceback
+        traceback.print_exc() </span><span style="color: #008000;">#</span><span style="color: #008000;"> XXX But this goes to stderr!</span>
+        <span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">-</span><span style="color: #800000;">'</span>*40</pre>
+</div>
+<span class="cnblogs_code_collapse">BaseServer</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('b11372e0-53c7-4e02-92ee-59e255a3a097')"><img id="code_img_closed_b11372e0-53c7-4e02-92ee-59e255a3a097" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_b11372e0-53c7-4e02-92ee-59e255a3a097" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('b11372e0-53c7-4e02-92ee-59e255a3a097',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_b11372e0-53c7-4e02-92ee-59e255a3a097" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">class</span><span style="color: #000000;"> TCPServer(BaseServer):
+
+    </span><span style="color: #800000;">"""</span><span style="color: #800000;">Base class for various socket-based server classes.
+
+    Defaults to synchronous IP stream (i.e., TCP).
+
+    Methods for the caller:
+
+    - __init__(server_address, RequestHandlerClass, bind_and_activate=True)
+    - serve_forever(poll_interval=0.5)
+    - shutdown()
+    - handle_request()  # if you don't use serve_forever()
+    - fileno() -&gt; int   # for select()
+
+    Methods that may be overridden:
+
+    - server_bind()
+    - server_activate()
+    - get_request() -&gt; request, client_address
+    - handle_timeout()
+    - verify_request(request, client_address)
+    - process_request(request, client_address)
+    - shutdown_request(request)
+    - close_request(request)
+    - handle_error()
+
+    Methods for derived classes:
+
+    - finish_request(request, client_address)
+
+    Class variables that may be overridden by derived classes or
+    instances:
+
+    - timeout
+    - address_family
+    - socket_type
+    - request_queue_size (only for stream sockets)
+    - allow_reuse_address
+
+    Instance variables:
+
+    - server_address
+    - RequestHandlerClass
+    - socket
+
+    </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+
+    address_family </span>=<span style="color: #000000;"> socket.AF_INET
+
+    socket_type </span>=<span style="color: #000000;"> socket.SOCK_STREAM
+
+    request_queue_size </span>= 5<span style="color: #000000;">
+
+    allow_reuse_address </span>=<span style="color: #000000;"> False
+
+    </span><span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span>(self, server_address, RequestHandlerClass, bind_and_activate=<span style="color: #000000;">True):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Constructor.  May be extended, do not override.</span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        BaseServer.</span><span style="color: #800080;">__init__</span><span style="color: #000000;">(self, server_address, RequestHandlerClass)
+        self.socket </span>=<span style="color: #000000;"> socket.socket(self.address_family,
+                                    self.socket_type)
+        </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> bind_and_activate:
+            </span><span style="color: #0000ff;">try</span><span style="color: #000000;">:
+                self.server_bind()
+                self.server_activate()
+            </span><span style="color: #0000ff;">except</span><span style="color: #000000;">:
+                self.server_close()
+                </span><span style="color: #0000ff;">raise</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> server_bind(self):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Called by constructor to bind the socket.
+
+        May be overridden.
+
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">if</span><span style="color: #000000;"> self.allow_reuse_address:
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, </span>1<span style="color: #000000;">)
+        self.socket.bind(self.server_address)
+        self.server_address </span>=<span style="color: #000000;"> self.socket.getsockname()
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> server_activate(self):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Called by constructor to activate the server.
+
+        May be overridden.
+
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        self.socket.listen(self.request_queue_size)
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> server_close(self):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Called to clean-up the server.
+
+        May be overridden.
+
+        </span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        self.socket.close()
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> fileno(self):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Return socket file number.
+
+        Interface required by select().
+
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;"> self.socket.fileno()
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> get_request(self):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Get the request and client address from the socket.
+
+        May be overridden.
+
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;"> self.socket.accept()
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> shutdown_request(self, request):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Called to shutdown and close an individual request.</span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">try</span><span style="color: #000000;">:
+            </span><span style="color: #008000;">#</span><span style="color: #008000;">explicitly shutdown.  socket.close() merely releases</span>
+            <span style="color: #008000;">#</span><span style="color: #008000;">the socket and waits for GC to perform the actual close.</span>
+<span style="color: #000000;">            request.shutdown(socket.SHUT_WR)
+        </span><span style="color: #0000ff;">except</span><span style="color: #000000;"> socket.error:
+            </span><span style="color: #0000ff;">pass</span> <span style="color: #008000;">#</span><span style="color: #008000;">some platforms may raise ENOTCONN here</span>
+<span style="color: #000000;">        self.close_request(request)
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> close_request(self, request):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Called to clean up an individual request.</span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        request.close()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">TCPServer</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('aa93fdac-b6be-4f6f-9cd6-bf20d895291a')"><img id="code_img_closed_aa93fdac-b6be-4f6f-9cd6-bf20d895291a" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_aa93fdac-b6be-4f6f-9cd6-bf20d895291a" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('aa93fdac-b6be-4f6f-9cd6-bf20d895291a',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_aa93fdac-b6be-4f6f-9cd6-bf20d895291a" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">class</span><span style="color: #000000;"> ThreadingMixIn:
+    </span><span style="color: #800000;">"""</span><span style="color: #800000;">Mix-in class to handle each request in a new thread.</span><span style="color: #800000;">"""</span>
+
+    <span style="color: #008000;">#</span><span style="color: #008000;"> Decides how threads will act upon termination of the</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;"> main process</span>
+    daemon_threads =<span style="color: #000000;"> False
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> process_request_thread(self, request, client_address):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Same as in BaseServer but as a thread.
+
+        In addition, exception handling is done here.
+
+        </span><span style="color: #800000;">"""</span>
+        <span style="color: #0000ff;">try</span><span style="color: #000000;">:
+            self.finish_request(request, client_address)
+            self.shutdown_request(request)
+        </span><span style="color: #0000ff;">except</span><span style="color: #000000;">:
+            self.handle_error(request, client_address)
+            self.shutdown_request(request)
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> process_request(self, request, client_address):
+        </span><span style="color: #800000;">"""</span><span style="color: #800000;">Start a new thread to process the request.</span><span style="color: #800000;">"""</span><span style="color: #000000;">
+        t </span>= threading.Thread(target =<span style="color: #000000;"> self.process_request_thread,
+                             args </span>=<span style="color: #000000;"> (request, client_address))
+        t.daemon </span>=<span style="color: #000000;"> self.daemon_threads
+        t.start()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">ThreadingMixIn</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('b5df71b8-f140-4bc9-b1f8-b5210a9c987f')"><img id="code_img_closed_b5df71b8-f140-4bc9-b1f8-b5210a9c987f" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_b5df71b8-f140-4bc9-b1f8-b5210a9c987f" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('b5df71b8-f140-4bc9-b1f8-b5210a9c987f',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_b5df71b8-f140-4bc9-b1f8-b5210a9c987f" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">class</span> ThreadingTCPServer(ThreadingMixIn, TCPServer): <span style="color: #0000ff;">pass</span></pre>
+</div>
+<span class="cnblogs_code_collapse">ThreadingTCPServer</span></div>
+<p>RequestHandler相关源码</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('138aceea-da9c-47ed-b566-baf827565e71')"><img id="code_img_closed_138aceea-da9c-47ed-b566-baf827565e71" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_138aceea-da9c-47ed-b566-baf827565e71" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('138aceea-da9c-47ed-b566-baf827565e71',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_138aceea-da9c-47ed-b566-baf827565e71" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">class</span><span style="color: #000000;"> BaseRequestHandler:
+
+    </span><span style="color: #800000;">"""</span><span style="color: #800000;">Base class for request handler classes.
+
+    This class is instantiated for each request to be handled.  The
+    constructor sets the instance variables request, client_address
+    and server, and then calls the handle() method.  To implement a
+    specific service, all you need to do is to derive a class which
+    defines a handle() method.
+
+    The handle() method can find the request as self.request, the
+    client address as self.client_address, and the server (in case it
+    needs access to per-server information) as self.server.  Since a
+    separate instance is created for each request, the handle() method
+    can define arbitrary other instance variariables.
+
+    </span><span style="color: #800000;">"""</span>
+
+    <span style="color: #0000ff;">def</span> <span style="color: #800080;">__init__</span><span style="color: #000000;">(self, request, client_address, server):
+        self.request </span>=<span style="color: #000000;"> request
+        self.client_address </span>=<span style="color: #000000;"> client_address
+        self.server </span>=<span style="color: #000000;"> server
+        self.setup()
+        </span><span style="color: #0000ff;">try</span><span style="color: #000000;">:
+            self.handle()
+        </span><span style="color: #0000ff;">finally</span><span style="color: #000000;">:
+            self.finish()
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> setup(self):
+        </span><span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> handle(self):
+        </span><span style="color: #0000ff;">pass</span>
+
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> finish(self):
+        </span><span style="color: #0000ff;">pass</span></pre>
+</div>
+<span class="cnblogs_code_collapse">SocketServer.BaseRequestHandler</span></div>
+<p>实例：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('2d8606ea-2cad-4403-9a46-d36f8e70bcec')"><img id="code_img_closed_2d8606ea-2cad-4403-9a46-d36f8e70bcec" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_2d8606ea-2cad-4403-9a46-d36f8e70bcec" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('2d8606ea-2cad-4403-9a46-d36f8e70bcec',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_2d8606ea-2cad-4403-9a46-d36f8e70bcec" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> SocketServer
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> MyServer(SocketServer.BaseRequestHandler):
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> handle(self):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> print self.request,self.client_address,self.server</span>
+        conn =<span style="color: #000000;"> self.request
+        conn.sendall(</span><span style="color: #800000;">'</span><span style="color: #800000;">欢迎致电 10086，请输入1xxx,0转人工服务.</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        Flag </span>=<span style="color: #000000;"> True
+        </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> Flag:
+            data </span>= conn.recv(1024<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> data == <span style="color: #800000;">'</span><span style="color: #800000;">exit</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+                Flag </span>=<span style="color: #000000;"> False
+            </span><span style="color: #0000ff;">elif</span> data == <span style="color: #800000;">'</span><span style="color: #800000;">0</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+                conn.sendall(</span><span style="color: #800000;">'</span><span style="color: #800000;">通过可能会被录音.balabala一大推</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                conn.sendall(</span><span style="color: #800000;">'</span><span style="color: #800000;">请重新输入.</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+
+</span><span style="color: #0000ff;">if</span> <span style="color: #800080;">__name__</span> == <span style="color: #800000;">'</span><span style="color: #800000;">__main__</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+    server </span>= SocketServer.ThreadingTCPServer((<span style="color: #800000;">'</span><span style="color: #800000;">127.0.0.1</span><span style="color: #800000;">'</span>,8009<span style="color: #000000;">),MyServer)
+    server.serve_forever()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">服务端</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('028b18a3-8736-41bb-a771-72fd7498ac07')"><img id="code_img_closed_028b18a3-8736-41bb-a771-72fd7498ac07" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_028b18a3-8736-41bb-a771-72fd7498ac07" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('028b18a3-8736-41bb-a771-72fd7498ac07',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_028b18a3-8736-41bb-a771-72fd7498ac07" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> socket
+
+
+ip_port </span>= (<span style="color: #800000;">'</span><span style="color: #800000;">127.0.0.1</span><span style="color: #800000;">'</span>,8009<span style="color: #000000;">)
+sk </span>=<span style="color: #000000;"> socket.socket()
+sk.connect(ip_port)
+sk.settimeout(</span>5<span style="color: #000000;">)
+
+</span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+    data </span>= sk.recv(1024<span style="color: #000000;">)
+    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">receive:</span><span style="color: #800000;">'</span><span style="color: #000000;">,data
+    inp </span>= raw_input(<span style="color: #800000;">'</span><span style="color: #800000;">please input:</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    sk.sendall(inp)
+    </span><span style="color: #0000ff;">if</span> inp == <span style="color: #800000;">'</span><span style="color: #800000;">exit</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">break</span><span style="color: #000000;">
+
+sk.close()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">客户端</span></div>
+<p>源码精简：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> socket
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> threading
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> select
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> process(request, client_address):
+    </span><span style="color: #0000ff;">print</span><span style="color: #000000;"> request,client_address
+    conn </span>=<span style="color: #000000;"> request
+    conn.sendall(</span><span style="color: #800000;">'</span><span style="color: #800000;">欢迎致电 10086，请输入1xxx,0转人工服务.</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    flag </span>=<span style="color: #000000;"> True
+    </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> flag:
+        data </span>= conn.recv(1024<span style="color: #000000;">)
+        </span><span style="color: #0000ff;">if</span> data == <span style="color: #800000;">'</span><span style="color: #800000;">exit</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+            flag </span>=<span style="color: #000000;"> False
+        </span><span style="color: #0000ff;">elif</span> data == <span style="color: #800000;">'</span><span style="color: #800000;">0</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+            conn.sendall(</span><span style="color: #800000;">'</span><span style="color: #800000;">通过可能会被录音.balabala一大推</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            conn.sendall(</span><span style="color: #800000;">'</span><span style="color: #800000;">请重新输入.</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+sk </span>=<span style="color: #000000;"> socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sk.bind((</span><span style="color: #800000;">'</span><span style="color: #800000;">127.0.0.1</span><span style="color: #800000;">'</span>,8002<span style="color: #000000;">))
+sk.listen(</span>5<span style="color: #000000;">)
+
+</span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+    r, w, e </span>= select.select([sk,],[],[],1<span style="color: #000000;">)
+    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">looping</span><span style="color: #800000;">'</span>
+    <span style="color: #0000ff;">if</span> sk <span style="color: #0000ff;">in</span><span style="color: #000000;"> r:
+        </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">get request</span><span style="color: #800000;">'</span><span style="color: #000000;">
+        request, client_address </span>=<span style="color: #000000;"> sk.accept()
+        t </span>= threading.Thread(target=process, args=<span style="color: #000000;">(request, client_address))
+        t.daemon </span>=<span style="color: #000000;"> False
+        t.start()
+
+sk.close()</span></pre>
+</div>
+<p>如精简代码可以看出，SocketServer的ThreadingTCPServer之所以可以同时处理请求得益于 <strong>select</strong> 和 <strong>Threading</strong> 两个东西，其实本质上就是在服务器端为每一个客户端创建一个线程，当前线程用来处理对应客户端的请求，所以，可以支持同时n个客户端链接（长连接）。</p>
+<p><span style="font-size: 18pt;"><strong>ForkingTCPServer</strong></span></p>
+<p>ForkingTCPServer和ThreadingTCPServer的使用和执行流程基本一致，只不过在内部分别为请求者建立 &ldquo;线程&rdquo; &nbsp;和 &ldquo;进程&rdquo;。</p>
+<p>基本使用：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('246878af-b147-4a1d-b64c-416f17b46112')"><img id="code_img_closed_246878af-b147-4a1d-b64c-416f17b46112" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_246878af-b147-4a1d-b64c-416f17b46112" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('246878af-b147-4a1d-b64c-416f17b46112',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_246878af-b147-4a1d-b64c-416f17b46112" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> SocketServer
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> MyServer(SocketServer.BaseRequestHandler):
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> handle(self):
+        </span><span style="color: #008000;">#</span><span style="color: #008000;"> print self.request,self.client_address,self.server</span>
+        conn =<span style="color: #000000;"> self.request
+        conn.sendall(</span><span style="color: #800000;">'</span><span style="color: #800000;">欢迎致电 10086，请输入1xxx,0转人工服务.</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        Flag </span>=<span style="color: #000000;"> True
+        </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> Flag:
+            data </span>= conn.recv(1024<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">if</span> data == <span style="color: #800000;">'</span><span style="color: #800000;">exit</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+                Flag </span>=<span style="color: #000000;"> False
+            </span><span style="color: #0000ff;">elif</span> data == <span style="color: #800000;">'</span><span style="color: #800000;">0</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+                conn.sendall(</span><span style="color: #800000;">'</span><span style="color: #800000;">通过可能会被录音.balabala一大推</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                conn.sendall(</span><span style="color: #800000;">'</span><span style="color: #800000;">请重新输入.</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+
+</span><span style="color: #0000ff;">if</span> <span style="color: #800080;">__name__</span> == <span style="color: #800000;">'</span><span style="color: #800000;">__main__</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+    server </span>= SocketServer.ForkingTCPServer((<span style="color: #800000;">'</span><span style="color: #800000;">127.0.0.1</span><span style="color: #800000;">'</span>,8009<span style="color: #000000;">),MyServer)
+    server.serve_forever()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">服务端</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('d712856f-cb06-4fd4-ba97-3102d0aa83f8')"><img id="code_img_closed_d712856f-cb06-4fd4-ba97-3102d0aa83f8" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_d712856f-cb06-4fd4-ba97-3102d0aa83f8" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('d712856f-cb06-4fd4-ba97-3102d0aa83f8',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_d712856f-cb06-4fd4-ba97-3102d0aa83f8" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> socket
+
+
+ip_port </span>= (<span style="color: #800000;">'</span><span style="color: #800000;">127.0.0.1</span><span style="color: #800000;">'</span>,8009<span style="color: #000000;">)
+sk </span>=<span style="color: #000000;"> socket.socket()
+sk.connect(ip_port)
+sk.settimeout(</span>5<span style="color: #000000;">)
+
+</span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+    data </span>= sk.recv(1024<span style="color: #000000;">)
+    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">receive:</span><span style="color: #800000;">'</span><span style="color: #000000;">,data
+    inp </span>= raw_input(<span style="color: #800000;">'</span><span style="color: #800000;">please input:</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    sk.sendall(inp)
+    </span><span style="color: #0000ff;">if</span> inp == <span style="color: #800000;">'</span><span style="color: #800000;">exit</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">break</span><span style="color: #000000;">
+
+sk.close()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">客户端</span></div>
+<p>以上ForkingTCPServer只是将&nbsp;ThreadingTCPServer 实例中的代码：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">server = SocketServer.ThreadingTCPServer(('127.0.0.1',8009),MyRequestHandler)
+变更为：
+server = SocketServer.ForkingTCPServer(('127.0.0.1',8009),MyRequestHandler)</pre>
+</div>
+<p>SocketServer的ThreadingTCPServer之所以可以同时处理请求得益于&nbsp;<strong>select</strong>&nbsp;和&nbsp;<strong>os.fork</strong>&nbsp;两个东西，其实本质上就是在服务器端为每一个客户端创建一个进程，当前新创建的进程用来处理对应客户端的请求，所以，可以支持同时n个客户端链接（长连接）。</p>
+<p>源码剖析参考 ThreadingTCPServer</p>
+<h3>Twisted</h3>
+<p>Twisted是一个事件驱动的网络框架，其中包含了诸多功能，例如：网络协议、线程、数据库管理、网络操作、电子邮件等。</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201512/425762-20151227041644859-201636592.png" alt="" width="621" height="452" /></p>
+<p><strong><span style="font-size: 14pt;">事件驱动</span></strong></p>
+<p>简而言之，事件驱动分为二个部分：第一，注册事件；第二，触发事件。</p>
+<p>自定义事件驱动框架，命名为：&ldquo;弑君者&rdquo;：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('26b60168-740f-4fa7-859f-860a57d75273')"><img id="code_img_closed_26b60168-740f-4fa7-859f-860a57d75273" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_26b60168-740f-4fa7-859f-860a57d75273" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('26b60168-740f-4fa7-859f-860a57d75273',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_26b60168-740f-4fa7-859f-860a57d75273" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+<span style="color: #008000;">#</span><span style="color: #008000;"> event_drive.py</span>
+<span style="color: #000000;">
+event_list </span>=<span style="color: #000000;"> []
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> run():
+    </span><span style="color: #0000ff;">for</span> event <span style="color: #0000ff;">in</span><span style="color: #000000;"> event_list:
+        obj </span>=<span style="color: #000000;"> event()
+        obj.execute()
+
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> BaseHandler(object):
+    </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+    用户必须继承该类，从而规范所有类的方法（类似于接口的功能）
+    </span><span style="color: #800000;">"""</span>
+    <span style="color: #0000ff;">def</span><span style="color: #000000;"> execute(self):
+        </span><span style="color: #0000ff;">raise</span> Exception(<span style="color: #800000;">'</span><span style="color: #800000;">you must overwrite execute</span><span style="color: #800000;">'</span>)</pre>
+</div>
+<span class="cnblogs_code_collapse">最牛逼的事件驱动框架</span></div>
+<p>程序员使用&ldquo;弑君者框架&rdquo;：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('246ffabd-ae4a-4b35-9624-6c2b01950e79')"><img id="code_img_closed_246ffabd-ae4a-4b35-9624-6c2b01950e79" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_246ffabd-ae4a-4b35-9624-6c2b01950e79" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('246ffabd-ae4a-4b35-9624-6c2b01950e79',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_246ffabd-ae4a-4b35-9624-6c2b01950e79" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+<span style="color: #0000ff;">from</span> source <span style="color: #0000ff;">import</span><span style="color: #000000;"> event_drive
+
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> MyHandler(event_drive.BaseHandler):
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> execute(self):
+        </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">event-drive execute MyHandler</span><span style="color: #800000;">'</span><span style="color: #000000;">
+
+
+event_drive.event_list.append(MyHandler)
+event_drive.run()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<p>如上述代码，事件驱动只不过是框架规定了执行顺序，程序员在使用框架时，可以向原执行顺序中注册&ldquo;事件&rdquo;，从而在框架执行时可以出发已注册的&ldquo;事件&rdquo;。</p>
+<p><strong><span style="font-size: 14pt;">基于事件驱动Socket</span></strong></p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+from twisted.internet import protocol
+from twisted.internet import reactor
+
+class Echo(protocol.Protocol):
+    def dataReceived(self, data):
+        self.transport.write(data)
+
+def main():
+    factory = protocol.ServerFactory()
+    factory.protocol = Echo
+
+    reactor.listenTCP(8000,factory)
+    reactor.run()
+
+if __name__ == '__main__':
+    main()
+</pre>
+</div>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201512/425762-20151227053909609-1479492031.png" alt="" width="854" height="304" /></p>
+<p>程序执行流程：</p>
+<ul>
+<li>运行服务端程序</li>
+<li>创建Protocol的派生类Echo</li>
+<li>创建ServerFactory对象，并将Echo类封装到其protocol字段中</li>
+<li>执行reactor的 listenTCP 方法，内部使用&nbsp;tcp.Port 创建socket server对象，并将该对象添加到了 reactor的set类型的字段 _read 中</li>
+<li>执行reactor的 run 方法，内部执行 while 循环，并通过 select 来监视&nbsp;_read 中文件描述符是否有变化，循环中...</li>
+<li>客户端请求到达</li>
+<li>执行reactor的&nbsp;_doReadOrWrite 方法，其内部通过反射调用 tcp.Port 类的&nbsp;doRead 方法，内部 accept 客户端连接并创建Server对象实例（用于封装客户端socket信息）和&nbsp;创建 Echo 对象实例（用于处理请求）&nbsp;，然后调用 Echo 对象实例的&nbsp;makeConnection 方法，创建连接。</li>
+<li>执行 tcp.Server 类的&nbsp;doRead 方法，读取数据，</li>
+<li>执行 tcp.Server 类的&nbsp;_dataReceived 方法，如果读取数据内容为空（关闭链接），否则，出发 Echo 的&nbsp;dataReceived 方法</li>
+<li>执行&nbsp;Echo 的&nbsp;dataReceived 方法</li>
+</ul>
+<p>从源码可以看出，上述实例本质上使用了事件驱动的方法 和 IO多路复用的机制来进行Socket的处理。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('c2789629-c8df-432d-8acb-328894ebec42')"><img id="code_img_closed_c2789629-c8df-432d-8acb-328894ebec42" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_c2789629-c8df-432d-8acb-328894ebec42" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('c2789629-c8df-432d-8acb-328894ebec42',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_c2789629-c8df-432d-8acb-328894ebec42" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+
+<span style="color: #0000ff;">from</span> twisted.internet <span style="color: #0000ff;">import</span><span style="color: #000000;"> reactor, protocol
+</span><span style="color: #0000ff;">from</span> twisted.web.client <span style="color: #0000ff;">import</span><span style="color: #000000;"> getPage
+</span><span style="color: #0000ff;">from</span> twisted.internet <span style="color: #0000ff;">import</span><span style="color: #000000;"> reactor
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> time
+
+</span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Echo(protocol.Protocol):
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> dataReceived(self, data):
+        deferred1 </span>= getPage(<span style="color: #800000;">'</span><span style="color: #800000;">http://cnblogs.com</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        deferred1.addCallback(self.printContents)
+
+        deferred2 </span>= getPage(<span style="color: #800000;">'</span><span style="color: #800000;">http://baidu.com</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+        deferred2.addCallback(self.printContents)
+
+        </span><span style="color: #0000ff;">for</span> i <span style="color: #0000ff;">in</span> range(2<span style="color: #000000;">):
+            time.sleep(</span>1<span style="color: #000000;">)
+            </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">execute </span><span style="color: #800000;">'</span><span style="color: #000000;">,i
+
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> execute(self,data):
+        self.transport.write(data)
+
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> printContents(self,content):
+        </span><span style="color: #0000ff;">print</span> len(content),content[0:100<span style="color: #000000;">],time.time()
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> main():
+
+    factory </span>=<span style="color: #000000;"> protocol.ServerFactory()
+    factory.protocol </span>=<span style="color: #000000;"> Echo
+
+    reactor.listenTCP(</span>8000<span style="color: #000000;">,factory)
+    reactor.run()
+
+</span><span style="color: #0000ff;">if</span> <span style="color: #800080;">__name__</span> == <span style="color: #800000;">'</span><span style="color: #800000;">__main__</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+    main()</span></pre>
+</div>
+<span class="cnblogs_code_collapse">异步IO操作</span></div>
+<p>更多请见：</p>
+<p>　　https://twistedmatrix.com/trac<br />　　http://twistedmatrix.com/documents/current/api/</p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2015-12-12 10:02</span> <a href='http://www.cnblogs.com/wupeiqi/'>武沛齐</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>) &nbsp;<a href="https://i.cnblogs.com/EditArticles.aspx?postid=5040823" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(5040823);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=133379,cb_entryId=5040823,cb_blogApp=currentBlogApp,cb_blogUserGuid='7208b24d-95c9-e111-aa3f-842b2b196315',cb_entryCreatedDate='2015/12/12 10:02:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2017 武沛齐
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

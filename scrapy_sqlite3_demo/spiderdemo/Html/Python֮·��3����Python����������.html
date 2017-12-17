@@ -1,0 +1,1057 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python之路【第三篇】：Python基础（二） - 武沛齐 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=m_FXmwz3wxZoecUwNEK23PAzc-j9vbX_C6MblJ5ouMc1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue.css?v=jJERBFSojhmgst84aaRDal9S3q1WoO-WcNudmMzGJS81"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/133379.css?v=YSNZANkz7eBKoXq2iHYfghvodkY%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue-mobile.css?v=z0BacpCfWeLlXDCM0C158kTP_DMqMbGBapID4f-QztI1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/wupeiqi/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/wupeiqi/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/wupeiqi/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'wupeiqi', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=CPv0EEqm9L2aCgolHxaZfVYM6J-Sn5az_FJXbjzgr-o1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/wupeiqi/">Mr.Seven</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/wupeiqi/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%AD%A6%E6%B2%9B%E9%BD%90">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/wupeiqi/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/wupeiqi/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-126&nbsp;
+文章-137&nbsp;
+评论-259&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/wupeiqi/articles/4943406.html">Python之路【第三篇】：Python基础（二）</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><h3>内置函数 一</h3>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201511/425762-20151107170723664-951337746.png" alt="" width="697" height="331" /></p>
+<p>详细见python文档，<a href="https://docs.python.org/2/library/functions.html" target="_blank">猛击这里</a></p>
+<h3>文件操作</h3>
+<p><span style="line-height: 1.5;">操作文件时，一般需要经历如下步骤：</span></p>
+<ul>
+<li>打开文件</li>
+<li>操作文件</li>
+</ul>
+<p>一、打开文件</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">文件句柄 = file('文件路径', '模式')</pre>
+</div>
+<p><span style="font-size: 12px;"><em><span style="color: #888888;">注：python中打开文件有两种方式，即：open(...) 和 &nbsp;file(...) ，本质上前者在内部会调用后者来进行文件操作，<strong><span style="color: #ff0000;">推荐使用 open</span></strong>。</span></em></span></p>
+<p>打开文件时，需要指定文件路径和以何等方式打开文件，打开后，即可获取该文件句柄，日后通过此文件句柄对该文件操作。</p>
+<p><span style="font-family: verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.5;">打开文件的模式有：</span></p>
+<ul>
+<li>r，只读模式（默认）。</li>
+<li>w，只写模式。【不可读；不存在则创建；存在则删除内容；】</li>
+<li>a，追加模式。【可读； &nbsp; 不存在则创建；存在则只追加内容；】</li>
+</ul>
+<p>"+" 表示可以同时读写某个文件</p>
+<ul>
+<li>r+，可读写文件。【可读；可写；可追加】</li>
+<li>w+，写读</li>
+<li>a+，同a</li>
+</ul>
+<p>"U"表示在读取时，可以将 \r \n \r\n自动转换成 \n （与 r 或 r+ 模式同使用）</p>
+<ul>
+<li>rU</li>
+<li>r+U</li>
+</ul>
+<p>"b"表示处理二进制文件（如：FTP发送上传ISO镜像文件，linux可忽略，windows处理二进制文件时需标注）</p>
+<ul>
+<li>rb</li>
+<li>wb</li>
+<li>ab</li>
+</ul>
+<p>二、操作操作</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">class file(object):
+ 
+    def close(self): # real signature unknown; restored from __doc__
+        关闭文件
+        """
+        close() -&gt; None or (perhaps) an integer.  Close the file.
+        
+        Sets data attribute .closed to True.  A closed file cannot be used for
+        further I/O operations.  close() may be called more than once without
+        error.  Some kinds of file objects (for example, opened by popen())
+        may return an exit status upon closing.
+        """
+
+    def fileno(self): # real signature unknown; restored from __doc__
+        文件描述符   
+         """
+        fileno() -&gt; integer "file descriptor".
+        
+        This is needed for lower-level file interfaces, such os.read().
+        """
+        return 0     
+
+    def flush(self): # real signature unknown; restored from __doc__
+        刷新文件内部缓冲区
+        """ flush() -&gt; None.  Flush the internal I/O buffer. """
+        pass
+
+
+    def isatty(self): # real signature unknown; restored from __doc__
+        判断文件是否是同意tty设备
+        """ isatty() -&gt; true or false.  True if the file is connected to a tty device. """
+        return False
+
+
+    def next(self): # real signature unknown; restored from __doc__
+        获取下一行数据，不存在，则报错
+        """ x.next() -&gt; the next value, or raise StopIteration """
+        pass
+
+    def read(self, size=None): # real signature unknown; restored from __doc__
+        读取指定字节数据
+        """
+        read([size]) -&gt; read at most size bytes, returned as a string.
+        
+        If the size argument is negative or omitted, read until EOF is reached.
+        Notice that when in non-blocking mode, less data than what was requested
+        may be returned, even if no size parameter was given.
+        """
+        pass
+
+    def readinto(self): # real signature unknown; restored from __doc__
+        读取到缓冲区，不要用，将被遗弃
+        """ readinto() -&gt; Undocumented.  Don't use this; it may go away. """
+        pass
+
+    def readline(self, size=None): # real signature unknown; restored from __doc__
+        仅读取一行数据
+        """
+        readline([size]) -&gt; next line from the file, as a string.
+        
+        Retain newline.  A non-negative size argument limits the maximum
+        number of bytes to return (an incomplete line may be returned then).
+        Return an empty string at EOF.
+        """
+        pass
+
+    def readlines(self, size=None): # real signature unknown; restored from __doc__
+        读取所有数据，并根据换行保存值列表
+        """
+        readlines([size]) -&gt; list of strings, each a line from the file.
+        
+        Call readline() repeatedly and return a list of the lines so read.
+        The optional size argument, if given, is an approximate bound on the
+        total number of bytes in the lines returned.
+        """
+        return []
+
+    def seek(self, offset, whence=None): # real signature unknown; restored from __doc__
+        指定文件中指针位置
+        """
+        seek(offset[, whence]) -&gt; None.  Move to new file position.
+        
+        Argument offset is a byte count.  Optional argument whence defaults to
+        0 (offset from start of file, offset should be &gt;= 0); other values are 1
+        (move relative to current position, positive or negative), and 2 (move
+        relative to end of file, usually negative, although many platforms allow
+        seeking beyond the end of a file).  If the file is opened in text mode,
+        only offsets returned by tell() are legal.  Use of other offsets causes
+        undefined behavior.
+        Note that not all file objects are seekable.
+        """
+        pass
+
+    def tell(self): # real signature unknown; restored from __doc__
+        获取当前指针位置
+        """ tell() -&gt; current file position, an integer (may be a long integer). """
+        pass
+
+    def truncate(self, size=None): # real signature unknown; restored from __doc__
+        截断数据，仅保留指定之前数据
+        """
+        truncate([size]) -&gt; None.  Truncate the file to at most size bytes.
+        
+        Size defaults to the current file position, as returned by tell().
+        """
+        pass
+
+    def write(self, p_str): # real signature unknown; restored from __doc__
+        写内容
+        """
+        write(str) -&gt; None.  Write string str to file.
+        
+        Note that due to buffering, flush() or close() may be needed before
+        the file on disk reflects the data written.
+        """
+        pass
+
+    def writelines(self, sequence_of_strings): # real signature unknown; restored from __doc__
+        将一个字符串列表写入文件
+        """
+        writelines(sequence_of_strings) -&gt; None.  Write the strings to the file.
+        
+        Note that newlines are not added.  The sequence can be any iterable object
+        producing strings. This is equivalent to calling write() for each string.
+        """
+        pass
+
+    def xreadlines(self): # real signature unknown; restored from __doc__
+        可用于逐行读取文件，非全部
+        """
+        xreadlines() -&gt; returns self.
+        
+        For backward compatibility. File objects now include the performance
+        optimizations previously implemented in the xreadlines module.
+        """
+        pass
+</pre>
+</div>
+<p>三、with</p>
+<p>为了避免打开文件后忘记关闭，可以通过管理上下文，即：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">with open('log','r') as f: 
+	
+	...
+</pre>
+</div>
+<p>如此方式，当with代码块执行完毕时，内部会自动关闭并释放文件资源。</p>
+<p>在Python 2.7 后，with又支持同时对多个文件的上下文进行管理，即：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">with open('log1') as obj1, open('log2') as obj2:
+    pass
+</pre>
+</div>
+<p>四、那么问题来了...</p>
+<p>1、如何在线上环境优雅的修改配置文件?</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('f2db8bdd-06f4-4202-97c6-bee23a556bf6')"><img id="code_img_closed_f2db8bdd-06f4-4202-97c6-bee23a556bf6" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_f2db8bdd-06f4-4202-97c6-bee23a556bf6" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('f2db8bdd-06f4-4202-97c6-bee23a556bf6',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_f2db8bdd-06f4-4202-97c6-bee23a556bf6" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">global</span><span style="color: #000000;">       
+        log </span>127.0.0.1<span style="color: #000000;"> local2
+        daemon
+        maxconn </span>256<span style="color: #000000;">
+        log </span>127.0.0.1<span style="color: #000000;"> local2 info
+defaults
+        log </span><span style="color: #0000ff;">global</span><span style="color: #000000;">
+        mode http
+        timeout connect 5000ms
+        timeout client 50000ms
+        timeout server 50000ms
+        option  dontlognull
+
+listen stats :</span>8888<span style="color: #000000;">
+        stats enable
+        stats uri       </span>/<span style="color: #000000;">admin
+        stats auth      admin:</span>1234<span style="color: #000000;">
+
+frontend oldboy.org
+        bind </span>0.0.0.0:80<span style="color: #000000;">
+        option httplog
+        option httpclose
+        option  forwardfor
+        log </span><span style="color: #0000ff;">global</span><span style="color: #000000;">
+        acl www hdr_reg(host) </span>-<span style="color: #000000;">i www.oldboy.org
+        use_backend www.oldboy.org </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> www
+
+backend www.oldboy.org
+        server </span>100.1.7.9 100.1.7.9 weight 20 maxconn 3000</pre>
+</div>
+<span class="cnblogs_code_collapse">原配置文件</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('57c4f855-8e39-43da-94ae-b05d4f6ec5f2')"><img id="code_img_closed_57c4f855-8e39-43da-94ae-b05d4f6ec5f2" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_57c4f855-8e39-43da-94ae-b05d4f6ec5f2" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('57c4f855-8e39-43da-94ae-b05d4f6ec5f2',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_57c4f855-8e39-43da-94ae-b05d4f6ec5f2" class="cnblogs_code_hide">
+<pre>1<span style="color: #000000;">、查
+    输入：www.oldboy.org
+    获取当前backend下的所有记录
+
+</span>2<span style="color: #000000;">、新建
+    输入：
+        arg </span>=<span style="color: #000000;"> {
+            </span><span style="color: #800000;">'</span><span style="color: #800000;">bakend</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">www.oldboy.org</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+            </span><span style="color: #800000;">'</span><span style="color: #800000;">record</span><span style="color: #800000;">'</span><span style="color: #000000;">:{
+                </span><span style="color: #800000;">'</span><span style="color: #800000;">server</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">100.1.7.9</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                </span><span style="color: #800000;">'</span><span style="color: #800000;">weight</span><span style="color: #800000;">'</span>: 20<span style="color: #000000;">,
+                </span><span style="color: #800000;">'</span><span style="color: #800000;">maxconn</span><span style="color: #800000;">'</span>: 30<span style="color: #000000;">
+            }
+        }
+
+</span>3<span style="color: #000000;">、删除
+    输入：
+        arg </span>=<span style="color: #000000;"> {
+            </span><span style="color: #800000;">'</span><span style="color: #800000;">bakend</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">www.oldboy.org</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+            </span><span style="color: #800000;">'</span><span style="color: #800000;">record</span><span style="color: #800000;">'</span><span style="color: #000000;">:{
+                </span><span style="color: #800000;">'</span><span style="color: #800000;">server</span><span style="color: #800000;">'</span>: <span style="color: #800000;">'</span><span style="color: #800000;">100.1.7.9</span><span style="color: #800000;">'</span><span style="color: #000000;">,
+                </span><span style="color: #800000;">'</span><span style="color: #800000;">weight</span><span style="color: #800000;">'</span>: 20<span style="color: #000000;">,
+                </span><span style="color: #800000;">'</span><span style="color: #800000;">maxconn</span><span style="color: #800000;">'</span>: 30<span style="color: #000000;">
+            }
+        }</span></pre>
+</div>
+<span class="cnblogs_code_collapse">需求</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('ac043b32-9729-486d-9363-88e4c0f280c0')"><img id="code_img_closed_ac043b32-9729-486d-9363-88e4c0f280c0" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_ac043b32-9729-486d-9363-88e4c0f280c0" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('ac043b32-9729-486d-9363-88e4c0f280c0',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_ac043b32-9729-486d-9363-88e4c0f280c0" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> -*- coding:utf-8 -*-</span>
+<span style="color: #0000ff;">import</span><span style="color: #000000;"> json
+</span><span style="color: #0000ff;">import</span><span style="color: #000000;"> os
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> fetch(backend):
+    backend_title </span>= <span style="color: #800000;">'</span><span style="color: #800000;">backend %s</span><span style="color: #800000;">'</span> %<span style="color: #000000;"> backend
+    record_list </span>=<span style="color: #000000;"> []
+    with open(</span><span style="color: #800000;">'</span><span style="color: #800000;">ha</span><span style="color: #800000;">'</span><span style="color: #000000;">) as obj:
+        flag </span>=<span style="color: #000000;"> False
+        </span><span style="color: #0000ff;">for</span> line <span style="color: #0000ff;">in</span><span style="color: #000000;"> obj:
+            line </span>=<span style="color: #000000;"> line.strip()
+            </span><span style="color: #0000ff;">if</span> line ==<span style="color: #000000;"> backend_title:
+                flag </span>=<span style="color: #000000;"> True
+                </span><span style="color: #0000ff;">continue</span>
+            <span style="color: #0000ff;">if</span> flag <span style="color: #0000ff;">and</span> line.startswith(<span style="color: #800000;">'</span><span style="color: #800000;">backend</span><span style="color: #800000;">'</span><span style="color: #000000;">):
+                flag </span>=<span style="color: #000000;"> False
+                </span><span style="color: #0000ff;">break</span>
+
+            <span style="color: #0000ff;">if</span> flag <span style="color: #0000ff;">and</span><span style="color: #000000;"> line:
+                record_list.append(line)
+
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> record_list
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> add(dict_info):
+    backend </span>= dict_info.get(<span style="color: #800000;">'</span><span style="color: #800000;">backend</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    record_list </span>=<span style="color: #000000;"> fetch(backend)
+    backend_title </span>= <span style="color: #800000;">"</span><span style="color: #800000;">backend %s</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> backend
+    current_record </span>= <span style="color: #800000;">"</span><span style="color: #800000;">server %s %s weight %d maxconn %d</span><span style="color: #800000;">"</span> % (dict_info[<span style="color: #800000;">'</span><span style="color: #800000;">record</span><span style="color: #800000;">'</span>][<span style="color: #800000;">'</span><span style="color: #800000;">server</span><span style="color: #800000;">'</span>], dict_info[<span style="color: #800000;">'</span><span style="color: #800000;">record</span><span style="color: #800000;">'</span>][<span style="color: #800000;">'</span><span style="color: #800000;">server</span><span style="color: #800000;">'</span>], dict_info[<span style="color: #800000;">'</span><span style="color: #800000;">record</span><span style="color: #800000;">'</span>][<span style="color: #800000;">'</span><span style="color: #800000;">weight</span><span style="color: #800000;">'</span>], dict_info[<span style="color: #800000;">'</span><span style="color: #800000;">record</span><span style="color: #800000;">'</span>][<span style="color: #800000;">'</span><span style="color: #800000;">maxconn</span><span style="color: #800000;">'</span><span style="color: #000000;">])
+    </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> record_list:
+        record_list.append(backend_title)
+        record_list.append(current_record)
+        with open(</span><span style="color: #800000;">'</span><span style="color: #800000;">ha</span><span style="color: #800000;">'</span>) as read_file, open(<span style="color: #800000;">'</span><span style="color: #800000;">ha.new</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">w</span><span style="color: #800000;">'</span><span style="color: #000000;">) as write_file:
+            flag </span>=<span style="color: #000000;"> False
+            </span><span style="color: #0000ff;">for</span> line <span style="color: #0000ff;">in</span><span style="color: #000000;"> read_file:
+                write_file.write(line)
+            </span><span style="color: #0000ff;">for</span> i <span style="color: #0000ff;">in</span><span style="color: #000000;"> record_list:
+                </span><span style="color: #0000ff;">if</span> i.startswith(<span style="color: #800000;">'</span><span style="color: #800000;">backend</span><span style="color: #800000;">'</span><span style="color: #000000;">):
+                    write_file.write(i</span>+<span style="color: #800000;">'</span><span style="color: #800000;">\n</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+                </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                    write_file.write(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s%s\n</span><span style="color: #800000;">"</span> % (8*<span style="color: #800000;">"</span> <span style="color: #800000;">"</span><span style="color: #000000;">, i))
+    </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+        record_list.insert(0, backend_title)
+        </span><span style="color: #0000ff;">if</span> current_record <span style="color: #0000ff;">not</span> <span style="color: #0000ff;">in</span><span style="color: #000000;"> record_list:
+            record_list.append(current_record)
+
+        with open(</span><span style="color: #800000;">'</span><span style="color: #800000;">ha</span><span style="color: #800000;">'</span>) as read_file, open(<span style="color: #800000;">'</span><span style="color: #800000;">ha.new</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">w</span><span style="color: #800000;">'</span><span style="color: #000000;">) as write_file:
+            flag </span>=<span style="color: #000000;"> False
+            has_write </span>=<span style="color: #000000;"> False
+            </span><span style="color: #0000ff;">for</span> line <span style="color: #0000ff;">in</span><span style="color: #000000;"> read_file:
+                line_strip </span>=<span style="color: #000000;"> line.strip()
+                </span><span style="color: #0000ff;">if</span> line_strip ==<span style="color: #000000;"> backend_title:
+                    flag </span>=<span style="color: #000000;"> True
+                    </span><span style="color: #0000ff;">continue</span>
+                <span style="color: #0000ff;">if</span> flag <span style="color: #0000ff;">and</span> line_strip.startswith(<span style="color: #800000;">'</span><span style="color: #800000;">backend</span><span style="color: #800000;">'</span><span style="color: #000000;">):
+                    flag </span>=<span style="color: #000000;"> False
+                </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> flag:
+                    write_file.write(line)
+                </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                    </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> has_write:
+                        </span><span style="color: #0000ff;">for</span> i <span style="color: #0000ff;">in</span><span style="color: #000000;"> record_list:
+                            </span><span style="color: #0000ff;">if</span> i.startswith(<span style="color: #800000;">'</span><span style="color: #800000;">backend</span><span style="color: #800000;">'</span><span style="color: #000000;">):
+                                write_file.write(i</span>+<span style="color: #800000;">'</span><span style="color: #800000;">\n</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+                            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                                write_file.write(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s%s\n</span><span style="color: #800000;">"</span> % (8*<span style="color: #800000;">"</span> <span style="color: #800000;">"</span><span style="color: #000000;">, i))
+                    has_write </span>=<span style="color: #000000;"> True
+    os.rename(</span><span style="color: #800000;">'</span><span style="color: #800000;">ha</span><span style="color: #800000;">'</span>,<span style="color: #800000;">'</span><span style="color: #800000;">ha.bak</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    os.rename(</span><span style="color: #800000;">'</span><span style="color: #800000;">ha.new</span><span style="color: #800000;">'</span>,<span style="color: #800000;">'</span><span style="color: #800000;">ha</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> remove(dict_info):
+    backend </span>= dict_info.get(<span style="color: #800000;">'</span><span style="color: #800000;">backend</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    record_list </span>=<span style="color: #000000;"> fetch(backend)
+    backend_title </span>= <span style="color: #800000;">"</span><span style="color: #800000;">backend %s</span><span style="color: #800000;">"</span> %<span style="color: #000000;"> backend
+    current_record </span>= <span style="color: #800000;">"</span><span style="color: #800000;">server %s %s weight %d maxconn %d</span><span style="color: #800000;">"</span> % (dict_info[<span style="color: #800000;">'</span><span style="color: #800000;">record</span><span style="color: #800000;">'</span>][<span style="color: #800000;">'</span><span style="color: #800000;">server</span><span style="color: #800000;">'</span>], dict_info[<span style="color: #800000;">'</span><span style="color: #800000;">record</span><span style="color: #800000;">'</span>][<span style="color: #800000;">'</span><span style="color: #800000;">server</span><span style="color: #800000;">'</span>], dict_info[<span style="color: #800000;">'</span><span style="color: #800000;">record</span><span style="color: #800000;">'</span>][<span style="color: #800000;">'</span><span style="color: #800000;">weight</span><span style="color: #800000;">'</span>], dict_info[<span style="color: #800000;">'</span><span style="color: #800000;">record</span><span style="color: #800000;">'</span>][<span style="color: #800000;">'</span><span style="color: #800000;">maxconn</span><span style="color: #800000;">'</span><span style="color: #000000;">])
+    </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> record_list:
+        </span><span style="color: #0000ff;">return</span>
+    <span style="color: #0000ff;">else</span><span style="color: #000000;">:
+        </span><span style="color: #0000ff;">if</span> current_record <span style="color: #0000ff;">not</span> <span style="color: #0000ff;">in</span><span style="color: #000000;"> record_list:
+            </span><span style="color: #0000ff;">return</span>
+        <span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            </span><span style="color: #0000ff;">del</span><span style="color: #000000;"> record_list[record_list.index(current_record)]
+            </span><span style="color: #0000ff;">if</span> len(record_list) &gt;<span style="color: #000000;"> 0:
+                record_list.insert(0, backend_title)
+        with open(</span><span style="color: #800000;">'</span><span style="color: #800000;">ha</span><span style="color: #800000;">'</span>) as read_file, open(<span style="color: #800000;">'</span><span style="color: #800000;">ha.new</span><span style="color: #800000;">'</span>, <span style="color: #800000;">'</span><span style="color: #800000;">w</span><span style="color: #800000;">'</span><span style="color: #000000;">) as write_file:
+            flag </span>=<span style="color: #000000;"> False
+            has_write </span>=<span style="color: #000000;"> False
+            </span><span style="color: #0000ff;">for</span> line <span style="color: #0000ff;">in</span><span style="color: #000000;"> read_file:
+                line_strip </span>=<span style="color: #000000;"> line.strip()
+                </span><span style="color: #0000ff;">if</span> line_strip ==<span style="color: #000000;"> backend_title:
+                    flag </span>=<span style="color: #000000;"> True
+                    </span><span style="color: #0000ff;">continue</span>
+                <span style="color: #0000ff;">if</span> flag <span style="color: #0000ff;">and</span> line_strip.startswith(<span style="color: #800000;">'</span><span style="color: #800000;">backend</span><span style="color: #800000;">'</span><span style="color: #000000;">):
+                    flag </span>=<span style="color: #000000;"> False
+                </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> flag:
+                    write_file.write(line)
+                </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                    </span><span style="color: #0000ff;">if</span> <span style="color: #0000ff;">not</span><span style="color: #000000;"> has_write:
+                        </span><span style="color: #0000ff;">for</span> i <span style="color: #0000ff;">in</span><span style="color: #000000;"> record_list:
+                            </span><span style="color: #0000ff;">if</span> i.startswith(<span style="color: #800000;">'</span><span style="color: #800000;">backend</span><span style="color: #800000;">'</span><span style="color: #000000;">):
+                                write_file.write(i</span>+<span style="color: #800000;">'</span><span style="color: #800000;">\n</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+                            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                                write_file.write(</span><span style="color: #800000;">"</span><span style="color: #800000;">%s%s\n</span><span style="color: #800000;">"</span> % (8*<span style="color: #800000;">"</span> <span style="color: #800000;">"</span><span style="color: #000000;">, i))
+                    has_write </span>=<span style="color: #000000;"> True
+    os.rename(</span><span style="color: #800000;">'</span><span style="color: #800000;">ha</span><span style="color: #800000;">'</span>,<span style="color: #800000;">'</span><span style="color: #800000;">ha.bak</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+    os.rename(</span><span style="color: #800000;">'</span><span style="color: #800000;">ha.new</span><span style="color: #800000;">'</span>,<span style="color: #800000;">'</span><span style="color: #800000;">ha</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+</span><span style="color: #0000ff;">if</span> <span style="color: #800080;">__name__</span> == <span style="color: #800000;">'</span><span style="color: #800000;">__main__</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+    </span><span style="color: #800000;">"""</span><span style="color: #800000;">
+    print '1、获取；2、添加；3、删除'
+    num = raw_input('请输入序号：')
+    data = raw_input('请输入内容：')
+    if num == '1':
+        fetch(data)
+    else:
+        dict_data = json.loads(data)
+        if num == '2':
+            add(dict_data)
+        elif num == '3':
+            remove(dict_data)
+        else:
+            pass
+    </span><span style="color: #800000;">"""</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;">data = "www.oldboy.org"</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;">fetch(data)</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;">data = '{"backend": "tettst.oldboy.org","record":{"server": "100.1.7.90","weight": 20,"maxconn": 30}}'</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;">dict_data = json.loads(data)</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;">add(dict_data)</span>
+    <span style="color: #008000;">#</span><span style="color: #008000;">remove(dict_data)</span></pre>
+</div>
+<span class="cnblogs_code_collapse">demo</span></div>
+<p>2、文件处理中xreadlines的内部是如何实现的呢？</p>
+<h3>自定义函数</h3>
+<p>一、背景</p>
+<p>在学习函数之前，一直遵循：面向过程编程，即：根据业务逻辑从上到下实现功能，其往往用一长段代码来实现指定功能，开发过程中最常见的操作就是粘贴复制，也就是将之前实现的代码块复制到现需功能处，如下</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">while True：
+    if cpu利用率 &gt; 90%:
+        #发送邮件提醒
+        连接邮箱服务器
+        发送邮件
+        关闭连接
+ 
+    if 硬盘使用空间 &gt; 90%:
+        #发送邮件提醒
+        连接邮箱服务器
+        发送邮件
+        关闭连接
+ 
+    if 内存占用 &gt; 80%:
+        #发送邮件提醒
+        连接邮箱服务器
+        发送邮件
+        关闭连接
+</pre>
+</div>
+<p>腚眼一看上述代码，if条件语句下的内容可以被提取出来公用，如下：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">def 发送邮件(内容)
+    #发送邮件提醒
+    连接邮箱服务器
+    发送邮件
+    关闭连接
+ 
+while True：
+ 
+    if cpu利用率 &gt; 90%:
+        发送邮件('CPU报警')
+ 
+    if 硬盘使用空间 &gt; 90%:
+        发送邮件('硬盘报警')
+ 
+    if 内存占用 &gt; 80%:
+</pre>
+</div>
+<p>对于上述的两种实现方式，第二次必然比第一次的重用性和可读性要好，其实这就是函数式编程和面向过程编程的区别：</p>
+<ul>
+<li>函数式：将某功能代码封装到函数中，日后便无需重复编写，仅调用函数即可</li>
+<li>面向对象：对函数进行分类和封装，让开发&ldquo;更快更好更强...&rdquo;</li>
+</ul>
+<p><strong>函数式编程最重要的是增强代码的重用性和可读性</strong></p>
+<p>二、 函数的定义和使用</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">def 函数名(参数):
+	
+	...
+	函数体
+	...
+</pre>
+</div>
+<p>函数的定义主要有如下要点：</p>
+<ul>
+<li>def：表示函数的关键字</li>
+<li>函数名：函数的名称，日后根据函数名调用函数</li>
+<li>函数体：函数中进行一系列的逻辑计算，如：发送邮件、计算出 [11,22,38,888,2]中的最大数等...</li>
+<li>参数：为函数体提供数据</li>
+<li>返回值：当函数执行完毕后，可以给调用者返回数据。</li>
+</ul>
+<p>以上要点中，比较重要有参数和返回值：</p>
+<p>1、返回值</p>
+<p>函数是一个功能块，该功能到底执行成功与否，需要通过返回值来告知调用者。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">def 发送短信():
+	
+	发送短信的代码...
+
+	if 发送成功:
+		return True
+	else:
+		return False
+
+
+while True:
+	
+	# 每次执行发送短信函数，都会将返回值自动赋值给result
+	# 之后，可以根据result来写日志，或重发等操作
+
+	result = 发送短信()
+	if result == False:
+		记录日志，短信发送失败...
+</pre>
+</div>
+<p>2、参数</p>
+<p>为什么要有参数？</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('d6b9428e-6aa9-403e-9b24-88d3c9059c40')"><img id="code_img_closed_d6b9428e-6aa9-403e-9b24-88d3c9059c40" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_d6b9428e-6aa9-403e-9b24-88d3c9059c40" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('d6b9428e-6aa9-403e-9b24-88d3c9059c40',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_d6b9428e-6aa9-403e-9b24-88d3c9059c40" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">def</span><span style="color: #000000;"> CPU报警邮件()
+    </span><span style="color: #008000;">#</span><span style="color: #008000;">发送邮件提醒</span>
+<span style="color: #000000;">    连接邮箱服务器
+    发送邮件
+    关闭连接
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> 硬盘报警邮件()
+    </span><span style="color: #008000;">#</span><span style="color: #008000;">发送邮件提醒</span>
+<span style="color: #000000;">    连接邮箱服务器
+    发送邮件
+    关闭连接
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> 内存报警邮件()
+    </span><span style="color: #008000;">#</span><span style="color: #008000;">发送邮件提醒</span>
+<span style="color: #000000;">    连接邮箱服务器
+    发送邮件
+    关闭连接
+ 
+</span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True：
+ 
+    </span><span style="color: #0000ff;">if</span> cpu利用率 &gt; 90%<span style="color: #000000;">:
+        CPU报警邮件（）
+ 
+    </span><span style="color: #0000ff;">if</span> 硬盘使用空间 &gt; 90%<span style="color: #000000;">:
+        硬盘报警邮件（）
+ 
+    </span><span style="color: #0000ff;">if</span> 内存占用 &gt; 80%<span style="color: #000000;">:
+        内存报警邮件（）</span></pre>
+</div>
+<span class="cnblogs_code_collapse">上例，无参数实现</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('c4fa08f9-cac4-457e-be10-518df3720f6a')"><img id="code_img_closed_c4fa08f9-cac4-457e-be10-518df3720f6a" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_c4fa08f9-cac4-457e-be10-518df3720f6a" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('c4fa08f9-cac4-457e-be10-518df3720f6a',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_c4fa08f9-cac4-457e-be10-518df3720f6a" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">def</span><span style="color: #000000;"> 发送邮件(邮件内容)
+
+    </span><span style="color: #008000;">#</span><span style="color: #008000;">发送邮件提醒</span>
+<span style="color: #000000;">    连接邮箱服务器
+    发送邮件
+    关闭连接
+
+ 
+</span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True：
+ 
+    </span><span style="color: #0000ff;">if</span> cpu利用率 &gt; 90%<span style="color: #000000;">:
+        发送邮件(</span><span style="color: #800000;">"</span><span style="color: #800000;">CPU报警了。</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+ 
+    </span><span style="color: #0000ff;">if</span> 硬盘使用空间 &gt; 90%<span style="color: #000000;">:
+        发送邮件(</span><span style="color: #800000;">"</span><span style="color: #800000;">硬盘报警了。</span><span style="color: #800000;">"</span><span style="color: #000000;">)
+ 
+    </span><span style="color: #0000ff;">if</span> 内存占用 &gt; 80%<span style="color: #000000;">:
+        发送邮件(</span><span style="color: #800000;">"</span><span style="color: #800000;">内存报警了。</span><span style="color: #800000;">"</span>)</pre>
+</div>
+<span class="cnblogs_code_collapse">上列，有参数实现</span></div>
+<p>函数的有三中不同的参数：</p>
+<ul>
+<li>普通参数</li>
+<li>默认参数</li>
+<li>动态参数</li>
+</ul>
+<div class="cnblogs_code" onclick="cnblogs_code_show('319f7979-f46d-4ad2-84a5-fc88a7fb6bfb')"><img id="code_img_closed_319f7979-f46d-4ad2-84a5-fc88a7fb6bfb" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_319f7979-f46d-4ad2-84a5-fc88a7fb6bfb" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('319f7979-f46d-4ad2-84a5-fc88a7fb6bfb',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_319f7979-f46d-4ad2-84a5-fc88a7fb6bfb" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;"> ######### 定义函数 ######### </span>
+
+<span style="color: #008000;">#</span><span style="color: #008000;"> name 叫做函数func的形式参数，简称：形参</span>
+<span style="color: #0000ff;">def</span><span style="color: #000000;"> func(name):
+    </span><span style="color: #0000ff;">print</span><span style="color: #000000;"> name
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> ######### 执行函数 ######### </span><span style="color: #008000;">
+#</span><span style="color: #008000;">  'wupeiqi' 叫做函数func的实际参数，简称：实参</span>
+func(<span style="color: #800000;">'</span><span style="color: #800000;">wupeiqi</span><span style="color: #800000;">'</span>)</pre>
+</div>
+<span class="cnblogs_code_collapse">普通参数</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('d4fe1b24-8777-4251-b750-b52d034f37e8')"><img id="code_img_closed_d4fe1b24-8777-4251-b750-b52d034f37e8" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_d4fe1b24-8777-4251-b750-b52d034f37e8" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('d4fe1b24-8777-4251-b750-b52d034f37e8',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_d4fe1b24-8777-4251-b750-b52d034f37e8" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">def</span> func(name, age = 18<span style="color: #000000;">):
+    
+    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">"</span><span style="color: #800000;">%s:%s</span><span style="color: #800000;">"</span> %<span style="color: #000000;">(name,age)
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 指定参数</span>
+func(<span style="color: #800000;">'</span><span style="color: #800000;">wupeiqi</span><span style="color: #800000;">'</span>, 19<span style="color: #000000;">)
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 使用默认参数</span>
+func(<span style="color: #800000;">'</span><span style="color: #800000;">alex</span><span style="color: #800000;">'</span><span style="color: #000000;">)
+
+注：默认参数需要放在参数列表最后</span></pre>
+</div>
+<span class="cnblogs_code_collapse">默认参数</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('9333549b-4574-4a6d-800a-1ace971da21e')"><img id="code_img_closed_9333549b-4574-4a6d-800a-1ace971da21e" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_9333549b-4574-4a6d-800a-1ace971da21e" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('9333549b-4574-4a6d-800a-1ace971da21e',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_9333549b-4574-4a6d-800a-1ace971da21e" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">def</span> func(*<span style="color: #000000;">args):
+
+    </span><span style="color: #0000ff;">print</span><span style="color: #000000;"> args
+
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 执行方式一</span>
+func(11,33,4,4454,5<span style="color: #000000;">)
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 执行方式二</span>
+li = [11,2,2,3,3,4,54<span style="color: #000000;">]
+func(</span>*li)</pre>
+</div>
+<span class="cnblogs_code_collapse">动态参数一</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('127aa929-d004-49ff-8e44-6d25b0b776ac')"><img id="code_img_closed_127aa929-d004-49ff-8e44-6d25b0b776ac" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_127aa929-d004-49ff-8e44-6d25b0b776ac" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('127aa929-d004-49ff-8e44-6d25b0b776ac',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_127aa929-d004-49ff-8e44-6d25b0b776ac" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">def</span> func(**<span style="color: #000000;">kwargs):
+
+    </span><span style="color: #0000ff;">print</span><span style="color: #000000;"> args
+
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 执行方式一</span>
+func(name＝<span style="color: #800000;">'</span><span style="color: #800000;">wupeiqi</span><span style="color: #800000;">'</span>,age=18<span style="color: #000000;">)
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> 执行方式二</span>
+li = {<span style="color: #800000;">'</span><span style="color: #800000;">name</span><span style="color: #800000;">'</span>:<span style="color: #800000;">'</span><span style="color: #800000;">wupeiqi</span><span style="color: #800000;">'</span>, age:18, <span style="color: #800000;">'</span><span style="color: #800000;">gender</span><span style="color: #800000;">'</span>:<span style="color: #800000;">'</span><span style="color: #800000;">male</span><span style="color: #800000;">'</span><span style="color: #000000;">}
+func(</span>**li)</pre>
+</div>
+<span class="cnblogs_code_collapse">动态参数二</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('f6c3df65-3b66-43fa-8d7b-ff0560ce7085')"><img id="code_img_closed_f6c3df65-3b66-43fa-8d7b-ff0560ce7085" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_f6c3df65-3b66-43fa-8d7b-ff0560ce7085" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('f6c3df65-3b66-43fa-8d7b-ff0560ce7085',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_f6c3df65-3b66-43fa-8d7b-ff0560ce7085" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">def</span> func(*args, **<span style="color: #000000;">kwargs):
+
+    </span><span style="color: #0000ff;">print</span><span style="color: #000000;"> args
+    </span><span style="color: #0000ff;">print</span> kwargs</pre>
+</div>
+<span class="cnblogs_code_collapse">动态参数三</span></div>
+<p>扩展：发送邮件实例</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;collapse:true;;gutter:true;">import smtplib
+from email.mime.text import MIMEText
+from email.utils import formataddr
+
+
+msg = MIMEText('邮件内容', 'plain', 'utf-8')
+msg['From'] = formataddr(["武沛齐",'wptawy@126.com'])
+msg['To'] = formataddr(["走人",'424662508@qq.com'])
+msg['Subject'] = "主题"
+
+server = smtplib.SMTP("smtp.126.com", 25)
+server.login("wptawy@126.com", "邮箱密码")
+server.sendmail('wptawy@126.com', ['424662508@qq.com',], msg.as_string())
+server.quit()</pre>
+</div>
+<h3>lambda表达式</h3>
+<p>学习条件运算时，对于简单的 if else 语句，可以使用三元运算来表示，即：</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:bash;gutter:true;"># 普通条件语句
+if 1 == 1:
+    name = 'wupeiqi'
+else:
+    name = 'alex'
+ 
+# 三元运算
+name = 'wupeiqi' if 1 == 1 else 'alex'</pre>
+</div>
+<p>对于简单的函数，也存在一种简便的表示方式，即：lambda表达式</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:bash;gutter:true;"># ###################### 普通函数 ######################
+# 定义函数（普通方式）
+def func(arg):
+    return arg + 1
+ 
+# 执行函数
+result = func(123)
+ 
+# ###################### lambda ######################
+ 
+# 定义函数（lambda表达式）
+my_lambda = lambda arg : arg + 1
+ 
+# 执行函数
+result = my_lambda(123)</pre>
+</div>
+<p>lambda存在意义就是对简单函数的简洁表示</p>
+<h3>内置函数 二</h3>
+<p><span style="font-size: 18px;"><strong>一、map</strong></span></p>
+<p>遍历序列，对序列中每个元素进行操作，最终获取新的序列。</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201511/425762-20151114164016869-1553913346.png" alt="" width="600" height="213" /></p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('585e4138-e57d-4f8f-8bb4-93eab29b7c05')"><img id="code_img_closed_585e4138-e57d-4f8f-8bb4-93eab29b7c05" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_585e4138-e57d-4f8f-8bb4-93eab29b7c05" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('585e4138-e57d-4f8f-8bb4-93eab29b7c05',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_585e4138-e57d-4f8f-8bb4-93eab29b7c05" class="cnblogs_code_hide">
+<pre>li = [11, 22, 33<span style="color: #000000;">]
+
+new_list </span>= map(<span style="color: #0000ff;">lambda</span> a: a + 100, li)</pre>
+</div>
+<span class="cnblogs_code_collapse">每个元素增加100</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('b3c978ce-1efd-4d9f-bb83-3ca734d106ef')"><img id="code_img_closed_b3c978ce-1efd-4d9f-bb83-3ca734d106ef" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_b3c978ce-1efd-4d9f-bb83-3ca734d106ef" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('b3c978ce-1efd-4d9f-bb83-3ca734d106ef',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_b3c978ce-1efd-4d9f-bb83-3ca734d106ef" class="cnblogs_code_hide">
+<pre>li = [11, 22, 33<span style="color: #000000;">]
+sl </span>= [1, 2, 3<span style="color: #000000;">]
+new_list </span>= map(<span style="color: #0000ff;">lambda</span> a, b: a + b, li, sl)</pre>
+</div>
+<span class="cnblogs_code_collapse">两个列表对应元素相加</span></div>
+<p><span style="font-size: 18px;"><strong>二、filter</strong></span></p>
+<p>对于序列中的元素进行筛选，最终获取符合条件的序列</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201511/425762-20151114164107884-344713622.png" alt="" width="606" height="217" /></p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('3b2e3ee3-8224-4570-930d-53692887404b')"><img id="code_img_closed_3b2e3ee3-8224-4570-930d-53692887404b" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_3b2e3ee3-8224-4570-930d-53692887404b" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('3b2e3ee3-8224-4570-930d-53692887404b',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_3b2e3ee3-8224-4570-930d-53692887404b" class="cnblogs_code_hide">
+<pre>li = [11, 22, 33<span style="color: #000000;">]
+
+new_list </span>= filter(<span style="color: #0000ff;">lambda</span> arg: arg &gt; 22<span style="color: #000000;">, li)
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;">filter第一个参数为空，将获取原来序列</span></pre>
+</div>
+<span class="cnblogs_code_collapse">获取列表中大于12的所有元素集合</span></div>
+<p><span style="font-size: 18px;"><strong>三、reduce</strong></span></p>
+<p>对于序列内所有元素进行累计操作</p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201511/425762-20151114164122962-1616737731.png" alt="" width="607" height="231" /></p>
+<p><img src="http://images2015.cnblogs.com/blog/425762/201511/425762-20151114165851556-428838065.png" alt="" width="608" height="306" /></p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('c82dd9eb-eba1-46a5-b054-424452e43503')"><img id="code_img_closed_c82dd9eb-eba1-46a5-b054-424452e43503" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_c82dd9eb-eba1-46a5-b054-424452e43503" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('c82dd9eb-eba1-46a5-b054-424452e43503',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_c82dd9eb-eba1-46a5-b054-424452e43503" class="cnblogs_code_hide">
+<pre>li = [11, 22, 33<span style="color: #000000;">]
+
+result </span>= reduce(<span style="color: #0000ff;">lambda</span> arg1, arg2: arg1 +<span style="color: #000000;"> arg2, li)
+
+</span><span style="color: #008000;">#</span><span style="color: #008000;"> reduce的第一个参数，函数必须要有两个参数</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> reduce的第二个参数，要循环的序列</span><span style="color: #008000;">
+#</span><span style="color: #008000;"> reduce的第三个参数，初始值</span></pre>
+</div>
+<span class="cnblogs_code_collapse">获取序列所有元素的和</span></div>
+<h3>yield生成器</h3>
+<p>1、对比range 和 xrange 的区别</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">&gt;&gt;&gt; print range(10)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+&gt;&gt;&gt; print xrange(10)
+xrange(10)</pre>
+</div>
+<p>如上代码所示，range会在内存中创建所有指定的数字，而xrange不会立即创建，只有在迭代循环时，才去创建每个数组。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('b93cb230-302a-471b-9013-3c1bce98a168')"><img id="code_img_closed_b93cb230-302a-471b-9013-3c1bce98a168" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_b93cb230-302a-471b-9013-3c1bce98a168" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('b93cb230-302a-471b-9013-3c1bce98a168',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_b93cb230-302a-471b-9013-3c1bce98a168" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">def</span><span style="color: #000000;"> nrange(num):
+    temp </span>= -1
+    <span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+        temp </span>= temp + 1
+        <span style="color: #0000ff;">if</span> temp &gt;=<span style="color: #000000;"> num:
+            </span><span style="color: #0000ff;">return</span>
+        <span style="color: #0000ff;">else</span><span style="color: #000000;">:
+            </span><span style="color: #0000ff;">yield</span> temp</pre>
+</div>
+<span class="cnblogs_code_collapse">自定义生成器nrange</span></div>
+<p>2、文件操作的 read 和 xreadlinex 的的区别</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">read会读取所有内容到内存
+xreadlines则只有在循环迭代时才获取
+</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('6a51093f-85cd-4222-8f76-3caddfbc3d78')"><img id="code_img_closed_6a51093f-85cd-4222-8f76-3caddfbc3d78" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_6a51093f-85cd-4222-8f76-3caddfbc3d78" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('6a51093f-85cd-4222-8f76-3caddfbc3d78',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_6a51093f-85cd-4222-8f76-3caddfbc3d78" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">def</span><span style="color: #000000;"> NReadlines():
+    with open(</span><span style="color: #800000;">'</span><span style="color: #800000;">log</span><span style="color: #800000;">'</span>,<span style="color: #800000;">'</span><span style="color: #800000;">r</span><span style="color: #800000;">'</span><span style="color: #000000;">) as f:
+        </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+            line </span>=<span style="color: #000000;"> f.next()
+            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> line:
+                </span><span style="color: #0000ff;">yield</span><span style="color: #000000;"> line
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                </span><span style="color: #0000ff;">return</span>
+
+<span style="color: #0000ff;">for</span> i <span style="color: #0000ff;">in</span><span style="color: #000000;"> NReadlines():
+    </span><span style="color: #0000ff;">print</span> i</pre>
+</div>
+<span class="cnblogs_code_collapse">基于next自定义生成器NReadlines</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('1f99542a-5630-477f-ab46-6e0b61ee5f82')"><img id="code_img_closed_1f99542a-5630-477f-ab46-6e0b61ee5f82" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_1f99542a-5630-477f-ab46-6e0b61ee5f82" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('1f99542a-5630-477f-ab46-6e0b61ee5f82',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_1f99542a-5630-477f-ab46-6e0b61ee5f82" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">def</span><span style="color: #000000;"> NReadlines():
+    with open(</span><span style="color: #800000;">'</span><span style="color: #800000;">log</span><span style="color: #800000;">'</span>,<span style="color: #800000;">'</span><span style="color: #800000;">r</span><span style="color: #800000;">'</span><span style="color: #000000;">) as f:
+        seek </span>=<span style="color: #000000;"> 0
+        </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> True:
+            f.seek(seek)
+            data </span>=<span style="color: #000000;"> f.readline()
+            </span><span style="color: #0000ff;">if</span><span style="color: #000000;"> data:
+                seek </span>=<span style="color: #000000;"> f.tell()
+                </span><span style="color: #0000ff;">yield</span><span style="color: #000000;"> data
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">:
+                </span><span style="color: #0000ff;">return</span>
+
+<span style="color: #0000ff;">for</span> item <span style="color: #0000ff;">in</span><span style="color: #000000;"> NReadlines():
+    </span><span style="color: #0000ff;">print</span> item</pre>
+</div>
+<span class="cnblogs_code_collapse">基于seek和tell自定义生成器NReadlines</span></div>
+<h3>装饰器</h3>
+<p>装饰器是函数，只不过该函数可以具有特殊的含义，装饰器用来装饰函数或类，使用装饰器可以在函数执行前和执行后添加相应操作。</p>
+<div class="cnblogs_Highlighter">
+<pre class="brush:python;gutter:true;">def wrapper(func):
+    def result():
+        print 'before'
+        func()
+        print 'after'
+    return result
+
+@wrapper
+def foo():
+    print 'foo'</pre>
+</div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('c72138ee-9e3f-4359-990a-3e8b6bed73bf')"><img id="code_img_closed_c72138ee-9e3f-4359-990a-3e8b6bed73bf" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_c72138ee-9e3f-4359-990a-3e8b6bed73bf" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('c72138ee-9e3f-4359-990a-3e8b6bed73bf',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_c72138ee-9e3f-4359-990a-3e8b6bed73bf" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">import</span><span style="color: #000000;"> functools
+
+
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> wrapper(func):
+    @functools.wraps(func)
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> wrapper():
+        </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">before</span><span style="color: #800000;">'</span><span style="color: #000000;">
+        func()
+        </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">after</span><span style="color: #800000;">'</span>
+    <span style="color: #0000ff;">return</span><span style="color: #000000;"> wrapper
+
+@wrapper
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> foo():
+    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">foo</span><span style="color: #800000;">'</span></pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('b7f6ec1a-fdda-4038-9289-a45efdd531e8')"><img id="code_img_closed_b7f6ec1a-fdda-4038-9289-a45efdd531e8" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_b7f6ec1a-fdda-4038-9289-a45efdd531e8" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('b7f6ec1a-fdda-4038-9289-a45efdd531e8',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_b7f6ec1a-fdda-4038-9289-a45efdd531e8" class="cnblogs_code_hide">
+<pre><span style="color: #008000;">#</span><span style="color: #008000;">!/usr/bin/env python</span><span style="color: #008000;">
+#</span><span style="color: #008000;">coding:utf-8</span>
+ 
+<span style="color: #0000ff;">def</span><span style="color: #000000;"> Before(request,kargs):
+    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">before</span><span style="color: #800000;">'</span>
+     
+<span style="color: #0000ff;">def</span><span style="color: #000000;"> After(request,kargs):
+    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">after</span><span style="color: #800000;">'</span>
+ 
+ 
+<span style="color: #0000ff;">def</span><span style="color: #000000;"> Filter(before_func,after_func):
+    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> outer(main_func):
+        </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> wrapper(request,kargs):
+             
+            before_result </span>=<span style="color: #000000;"> before_func(request,kargs)
+            </span><span style="color: #0000ff;">if</span>(before_result !=<span style="color: #000000;"> None):
+                </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> before_result;
+             
+            main_result </span>=<span style="color: #000000;"> main_func(request,kargs)
+            </span><span style="color: #0000ff;">if</span>(main_result !=<span style="color: #000000;"> None):
+                </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> main_result;
+             
+            after_result </span>=<span style="color: #000000;"> after_func(request,kargs)
+            </span><span style="color: #0000ff;">if</span>(after_result !=<span style="color: #000000;"> None):
+                </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> after_result;
+             
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> wrapper
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> outer
+     
+@Filter(Before, After)
+</span><span style="color: #0000ff;">def</span><span style="color: #000000;"> Index(request,kargs):
+    </span><span style="color: #0000ff;">print</span> <span style="color: #800000;">'</span><span style="color: #800000;">index</span><span style="color: #800000;">'</span>
+     
+     
+<span style="color: #0000ff;">if</span> <span style="color: #800080;">__name__</span> == <span style="color: #800000;">'</span><span style="color: #800000;">__main__</span><span style="color: #800000;">'</span><span style="color: #000000;">:
+    Index(</span>1,2)</pre>
+</div>
+<span class="cnblogs_code_collapse">View Code</span></div>
+<h3><span style="line-height: 1.5;">冒泡算法</span></h3>
+<p><span style="font-size: 14px; line-height: 1.5;">需求：请按照从小到大对列表&nbsp;[13, 22, 6, 99, 11] 进行排序</span></p>
+<p><span style="font-size: 14px; line-height: 1.5;">思路：相邻两个值进行比较，将较大的值放在右侧，依次比较！</span></p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('d2f9c06c-ebc9-48a5-b186-24215bf488cb')"><img id="code_img_closed_d2f9c06c-ebc9-48a5-b186-24215bf488cb" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_d2f9c06c-ebc9-48a5-b186-24215bf488cb" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('d2f9c06c-ebc9-48a5-b186-24215bf488cb',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_d2f9c06c-ebc9-48a5-b186-24215bf488cb" class="cnblogs_code_hide">
+<pre>li = [13, 22, 6, 99, 11<span style="color: #000000;">]
+
+</span><span style="color: #0000ff;">for</span> m <span style="color: #0000ff;">in</span> range(4):     <span style="color: #008000;">#</span><span style="color: #008000;"> 等价于 #for m in range(len(li)-1):</span>
+    <span style="color: #0000ff;">if</span> li[m]&gt; li[m+1<span style="color: #000000;">]:
+        temp </span>= li[m+1<span style="color: #000000;">]
+        li[m</span>+1] =<span style="color: #000000;"> li[m]
+        li[m] </span>= temp</pre>
+</div>
+<span class="cnblogs_code_collapse">第一步</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('b399bcf4-7050-4a68-ae79-d1d5a922f64a')"><img id="code_img_closed_b399bcf4-7050-4a68-ae79-d1d5a922f64a" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_b399bcf4-7050-4a68-ae79-d1d5a922f64a" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('b399bcf4-7050-4a68-ae79-d1d5a922f64a',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_b399bcf4-7050-4a68-ae79-d1d5a922f64a" class="cnblogs_code_hide">
+<pre>li = [13, 22, 6, 99, 11<span style="color: #000000;">]
+
+</span><span style="color: #0000ff;">for</span> m <span style="color: #0000ff;">in</span> range(4):     <span style="color: #008000;">#</span><span style="color: #008000;"> 等价于 #for m in range(len(li)-1):</span>
+    <span style="color: #0000ff;">if</span> li[m]&gt; li[m+1<span style="color: #000000;">]:
+        temp </span>= li[m+1<span style="color: #000000;">]
+        li[m</span>+1] =<span style="color: #000000;"> li[m]
+        li[m] </span>=<span style="color: #000000;"> temp
+
+</span><span style="color: #0000ff;">for</span> m <span style="color: #0000ff;">in</span> range(3):     <span style="color: #008000;">#</span><span style="color: #008000;"> 等价于 #for m in range(len(li)-2):</span>
+    <span style="color: #0000ff;">if</span> li[m]&gt; li[m+1<span style="color: #000000;">]:
+        temp </span>= li[m+1<span style="color: #000000;">]
+        li[m</span>+1] =<span style="color: #000000;"> li[m]
+        li[m] </span>=<span style="color: #000000;"> temp
+
+</span><span style="color: #0000ff;">for</span> m <span style="color: #0000ff;">in</span> range(2):     <span style="color: #008000;">#</span><span style="color: #008000;"> 等价于 #for m in range(len(li)-3):</span>
+    <span style="color: #0000ff;">if</span> li[m]&gt; li[m+1<span style="color: #000000;">]:
+        temp </span>= li[m+1<span style="color: #000000;">]
+        li[m</span>+1] =<span style="color: #000000;"> li[m]
+        li[m] </span>=<span style="color: #000000;"> temp
+
+</span><span style="color: #0000ff;">for</span> m <span style="color: #0000ff;">in</span> range(1):     <span style="color: #008000;">#</span><span style="color: #008000;"> 等价于 #for m in range(len(li)-4):</span>
+    <span style="color: #0000ff;">if</span> li[m]&gt; li[m+1<span style="color: #000000;">]:
+        temp </span>= li[m+1<span style="color: #000000;">]
+        li[m</span>+1] =<span style="color: #000000;"> li[m]
+        li[m] </span>=<span style="color: #000000;"> temp
+</span><span style="color: #0000ff;">print</span> li</pre>
+</div>
+<span class="cnblogs_code_collapse">第二步</span></div>
+<div class="cnblogs_code" onclick="cnblogs_code_show('551b3431-b0b3-472f-a4a6-b23fab66e2c4')"><img id="code_img_closed_551b3431-b0b3-472f-a4a6-b23fab66e2c4" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_551b3431-b0b3-472f-a4a6-b23fab66e2c4" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('551b3431-b0b3-472f-a4a6-b23fab66e2c4',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_551b3431-b0b3-472f-a4a6-b23fab66e2c4" class="cnblogs_code_hide">
+<pre>li = [13, 22, 6, 99, 11<span style="color: #000000;">]
+
+</span><span style="color: #0000ff;">for</span> i <span style="color: #0000ff;">in</span> range(1,5<span style="color: #000000;">):
+    </span><span style="color: #0000ff;">for</span> m <span style="color: #0000ff;">in</span> range(len(li)-<span style="color: #000000;">i): 
+        </span><span style="color: #0000ff;">if</span> li[m] &gt; li[m+1<span style="color: #000000;">]:
+            temp </span>= li[m+1<span style="color: #000000;">]
+            li[m</span>+1] =<span style="color: #000000;"> li[m]
+            li[m] </span>= temp</pre>
+</div>
+<span class="cnblogs_code_collapse">第三步</span></div>
+<h3><span style="line-height: 1.5;">递归</span></h3>
+<p>利用函数编写如下数列：</p>
+<blockquote>
+<p>斐波那契数列指的是这样一个数列 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233，377，610，987，1597，2584，4181，6765，10946，17711，28657，46368</p>
+</blockquote>
+<div class="cnblogs_code" onclick="cnblogs_code_show('622a9cd2-522a-443d-a6c4-23af51d60939')"><img id="code_img_closed_622a9cd2-522a-443d-a6c4-23af51d60939" class="code_img_closed" src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="" /><img id="code_img_opened_622a9cd2-522a-443d-a6c4-23af51d60939" class="code_img_opened" style="display: none;" onclick="cnblogs_code_hide('622a9cd2-522a-443d-a6c4-23af51d60939',event)" src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="" />
+<div id="cnblogs_code_open_622a9cd2-522a-443d-a6c4-23af51d60939" class="cnblogs_code_hide">
+<pre><span style="color: #0000ff;">def</span><span style="color: #000000;"> func(arg1,arg2):
+    </span><span style="color: #0000ff;">if</span> arg1 ==<span style="color: #000000;"> 0:
+        </span><span style="color: #0000ff;">print</span><span style="color: #000000;"> arg1, arg2
+    arg3 </span>= arg1 +<span style="color: #000000;"> arg2
+    </span><span style="color: #0000ff;">print</span><span style="color: #000000;"> arg3
+    func(arg2, arg3)
+
+func(0,</span>1)</pre>
+</div>
+<span class="cnblogs_code_collapse">demo</span></div>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2015-11-06 18:58</span> <a href='http://www.cnblogs.com/wupeiqi/'>武沛齐</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>) &nbsp;<a href="https://i.cnblogs.com/EditArticles.aspx?postid=4943406" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(4943406);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=133379,cb_entryId=4943406,cb_blogApp=currentBlogApp,cb_blogUserGuid='7208b24d-95c9-e111-aa3f-842b2b196315',cb_entryCreatedDate='2015/11/6 18:58:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2017 武沛齐
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

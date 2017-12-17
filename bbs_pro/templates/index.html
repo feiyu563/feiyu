@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" href="/static/favicon.ico">
+    <title>zjk bbs</title>
+    <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/static/navbar-fixed-top.css" rel="stylesheet">
+    <script src="/static/jquery-3.2.1.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.js"></script>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top center-container-hx">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">抽屉新热榜</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+          	<li class="active center-container-hx"><a href="/">全部</a></li>
+          	{%for category_name in category %}
+	          	{% ifequal now_id category_name.id %}
+		            <li class="active"><a href='/category/{{category_name.id}}'>{{category_name}}</a></li>
+	            {%else%}
+		            <li class=""><a href='/category/{{category_name.id}}'>{{category_name}}</a></li>
+	            {%endifequal%}
+            {%endfor%}
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+			{% if user.is_authenticated %}
+                {{user.username}}
+                
+              	{%else%} 
+                	登陆
+             {% endif %}
+
+				<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/login/">登录</a></li>
+                <li><a href="/logout/">退出</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="main_jk center-container-hx">
+		{%block content%}
+			{% for bbs in bbs_list %}
+				<a href='detail/{{bbs.id}}'>{{ bbs.title }}</a>
+				<br />
+				{{ bbs.summary }}
+				<hr>
+			{%endfor%}
+		{%endblock%}
+      </div>
+    </div> 
+  </body>
+</html>
